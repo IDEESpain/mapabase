@@ -1,4 +1,4 @@
-# MapaBaseIGO
+# MapaBase
 Proyecto: Mapa Base SCN con teselas vectoriales**
 
 Desarrollado por:
