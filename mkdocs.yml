@@ -1,0 +1,52 @@
+site_name: Mapa Base SCN
+site_url: https://cenormasgeograficas.github.io/mapabase/
+site_author: Gonzalo López García @gonzalo_lpgc
+site_description: "Proyecto de Mapa Base XYZ del Sistema Cartográfico Nacional (España): Teselas vectoriales. Comisión Especializada de Normas Geográficas. España"
+repo_url: "https://github.com/cenormasgeograficas/mapabase"
+copyright: "Copyright: <a href='https://scne.es'>Sistema Cartográfico Nacional (España)</a>"
+
+nav:
+- Home: index.md
+- Elementos:
+    - Relación alfabética: elementos/relacion_alfabetica.md
+    - Relación temática: elementos/relacion_tematica.md
+- Niveles:
+    - Escala global (00-06):
+        - Nivel 00 [1:559.082.264]: niveles/nivel_00.md
+        - Nivel 01 [1:279.541.132]: niveles/nivel_01.md
+        - Nivel 02 [1:139.770.566]: niveles/nivel_02.md
+        - Nivel 03 [1:69.885.283]: niveles/nivel_03.md
+        - Nivel 04 [1:34.942.642]: niveles/nivel_04.md
+        - Nivel 05 [1:17.471.321]: niveles/nivel_05.md
+        - Nivel 06 [1:8.735.660]: niveles/nivel_06.md
+    - Escala nacional (07-13):
+        - Nivel 07 [1:4.367.830]: niveles/nivel_07.md
+        - Nivel 08 [1:2.183.915]: niveles/nivel_08.md
+        - Nivel 09 [1:1.091.958]: niveles/nivel_09.md
+        - Nivel 10 [1:545.979]: niveles/nivel_10.md
+        - Nivel 11 [1:272.989]: niveles/nivel_11.md
+        - Nivel 12 [1:136.495]: niveles/nivel_12.md
+        - Nivel 13 [1:68.247]: niveles/nivel_13.md
+    - Escala regional (14-17):
+        - Nivel 14 [1:34.124]: niveles/nivel_14.md
+        - Nivel 15 [1:17.062]: niveles/nivel_15.md
+        - Nivel 16 [1:8.531]: niveles/nivel_16.md
+        - Nivel 17 [1:4.265]: niveles/nivel_17.md
+    - Escala local (18-22):
+        - Nivel 18 [1:2.133]: niveles/nivel_18.md
+        - Nivel 19 [1:1.066]: niveles/nivel_19.md
+        - Nivel 20 [1:533]: niveles/nivel_20.md
+        - Nivel 21 [1:267]: niveles/nivel_21.md
+        - Nivel 22 [1:133]: niveles/nivel_22.md
+- Servicios:
+    - Servicio de teselas: servicios/servicio_de_teselas.md
+    - Visor geográfico: servicios/visor_geografico.md
+theme:
+  name: null
+  custom_dir: cinder
+  colorscheme: github
+  highlightjs: true
+
+markdown_extensions:
+  - admonition
+ 
