@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Proyecto de Mapa Base XYZ del Sistema Cartográfico Nacional (España): Teselas vectoriales. Comisión Especializada de Normas Geográficas. España">
     <meta name="author" content="Gonzalo López García @gonzalo_lpgc">
-    <link rel="canonical" href="https://cenormasgeograficas.github.io/mapabase/elementos/edificio_pol/">
+    <link rel="canonical" href="https://cenormasgeograficas.github.io/mapabase/datos/formato_de_entrega/">
     <link rel="shortcut icon" href="../../img/favicon.ico">
 
     
-    <title>Edificio pol - Mapa Base SCN</title>
+    <title>Formato de entrega - Mapa Base SCN</title>
     
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -81,13 +81,13 @@
                         
                             
 <li >
-    <a href="../relacion_alfabetica/">Relación alfabética</a>
+    <a href="../../elementos/relacion_alfabetica/">Relación alfabética</a>
 </li>
 
                         
                             
 <li >
-    <a href="../relacion_tematica/">Relación temática</a>
+    <a href="../../elementos/relacion_tematica/">Relación temática</a>
 </li>
 
                         
@@ -300,19 +300,19 @@
                 
                 
                 
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Datos <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
 <li >
-    <a href="../../datos/proveedores_de_datos/">Proveedores de datos</a>
+    <a href="../proveedores_de_datos/">Proveedores de datos</a>
 </li>
 
                         
                             
-<li >
-    <a href="../../datos/formato_de_entrega/">Formato de entrega</a>
+<li class="active">
+    <a href="./">Formato de entrega</a>
 </li>
 
                         
@@ -328,8 +328,18 @@
                             <i class="fas fa-search"></i> Search
                         </a>
                     </li>
+                    <li >
+                        <a rel="prev" href="../proveedores_de_datos/">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li class="disabled">
+                        <a rel="next" >
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
                     <li>
-                        <a href="https://github.com/cenormasgeograficas/mapabase/edit/master/docs/elementos/edificio_pol.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                        <a href="https://github.com/cenormasgeograficas/mapabase/edit/master/docs/datos/formato_de_entrega.md"><i class="fab fa-github"></i> Edit on GitHub</a>
                     </li>
             </ul>
         </div>
@@ -341,155 +351,28 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#edificio_pol">edificio_pol</a></li>
-            <li class="second-level"><a href="#geometria">Geometría:</a></li>
-                
-            <li class="second-level"><a href="#atributos-y-dominios-de-valores">Atributos y dominios de valores:</a></li>
-                
-            <li class="second-level"><a href="#asignacion-a-capas">Asignación a capas:</a></li>
-                
+        <li class="first-level active"><a href="#formato-de-entrega">FORMATO DE ENTREGA</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-<h2 id="edificio_pol">edificio_pol</h2>
-<p><br /></p>
-<p>El elemento «edificio_pol» se usa para etiquetar elementos constructivos que tienen el carácter de edificación. La información puede proceder, según el grado cartográfico de detalle, de los registros catastrales mantenidos por la Dirección General del Catastro, y en el caso de Navarra y País Vasco por el Gobierno de Navarra y las Diputaciones de Álava, Vizkaya y Gipuzkoa, de las cartografías topográficas regionales así como de las cartografías topográficas municipales.</p>
-<p>Atributos:</p>
-<h4 id="geometria">Geometría:</h4>
-<p>Polígono</p>
-<h4 id="atributos-y-dominios-de-valores">Atributos y dominios de valores:</h4>
-<table>
-<thead>
-<tr>
-<th>Atributo</th>
-<th>Tipo</th>
-<th>Valor</th>
-<th>Observaciones</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>clase</code></td>
-<td>string</td>
-<td>edificio</td>
-<td>Clase de objeto</td>
-</tr>
-<tr>
-<td><code>proveedor</code></td>
-<td>string</td>
-<td>[codigo_proveedor]</td>
-<td>Proveedor de la información (lista controlada)</td>
-</tr>
-<tr>
-<td><code>tipo</code></td>
-<td>string</td>
-<td></td>
-<td>Tipología del edificio</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>administrativo</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>asistencial</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>educativo</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>generico</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>historico</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>religioso</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>sanitario</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h4 id="asignacion-a-capas">Asignación a capas:</h4>
-<table>
-<thead>
-<tr>
-<th>Filtro</th>
-<th><a href="../../niveles/nivel_00">00</a></th>
-<th><a href="../../niveles/nivel_01">01</a></th>
-<th><a href="../../niveles/nivel_02">02</a></th>
-<th><a href="../../niveles/nivel_03">03</a></th>
-<th><a href="../../niveles/nivel_04">04</a></th>
-<th><a href="../../niveles/nivel_05">05</a></th>
-<th><a href="../../niveles/nivel_06">06</a></th>
-<th><a href="../../niveles/nivel_07">07</a></th>
-<th><a href="../../niveles/nivel_08">08</a></th>
-<th><a href="../../niveles/nivel_09">09</a></th>
-<th><a href="../../niveles/nivel_10">10</a></th>
-<th><a href="../../niveles/nivel_11">11</a></th>
-<th><a href="../../niveles/nivel_12">12</a></th>
-<th><a href="../../niveles/nivel_13">13</a></th>
-<th><a href="../../niveles/nivel_14">14</a></th>
-<th><a href="../../niveles/nivel_15">15</a></th>
-<th><a href="../../niveles/nivel_16">16</a></th>
-<th><a href="../../niveles/nivel_17">17</a></th>
-<th><a href="../../niveles/nivel_18">18</a></th>
-<th><a href="../../niveles/nivel_19">19</a></th>
-<th><a href="../../niveles/nivel_20">20</a></th>
-<th><a href="../../niveles/nivel_21">21</a></th>
-<th><a href="../../niveles/nivel_22">22</a></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>[todos los elementos]</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>x</td>
-<td>x</td>
-<td>x</td>
-<td>x</td>
-<td>x</td>
-<td>x</td>
-<td>x</td>
-</tr>
-</tbody>
-</table></div>
+<h2 id="formato-de-entrega">FORMATO DE ENTREGA</h2>
+<p><br></p>
+<p>Formato de entrega que deben utilizar los proveedores de datos para remitir su información geográfica al proyecto:</p>
+<ul>
+<li>
+<p>La información relativa a cada tipología de elemento deberá estar contenida en un único fichero.</p>
+</li>
+<li>
+<p>El nombre del fichero se corresponderá con el tipo de elemento contenido en el mismo, p. ej. <em>aerodromo_pol.geojson</em></p>
+</li>
+<li>
+<p>El formato del fichero será conforme con la especificación GeoJSON (<a href="https://datatracker.ietf.org/doc/html/rfc7946">RFC 7946</a>).</p>
+</li>
+<li>
+<p>La codificación de caracteres que se debe utilizar para describir la información alfanúmerica asociada a cada objeto geográfico es <a href="https://es.wikipedia.org/wiki/UTF-8">UTF-8 sin BOM</a>.</p>
+</li>
+</ul></div>
         
         
     </div>

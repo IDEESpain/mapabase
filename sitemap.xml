@@ -2,487 +2,497 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cenormasgeograficas.github.io/mapabase/datos/formato_de_entrega/</loc>
+         <lastmod>2022-03-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cenormasgeograficas.github.io/mapabase/datos/proveedores_de_datos/</loc>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/aerodromo_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/aerodromo_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/altimetria_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/altimetria_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/aparcamiento_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/aparcamiento_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/area_servicio_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/area_servicio_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/autopista_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/autovia_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/camino_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/carretera_autonomica_1er_nivel_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/carretera_autonomica_2do_nivel_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/carretera_autonomica_3er_nivel_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/carretera_general_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/carretera_otros_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/carretera_pk_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/comunidad_autonoma_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/conduccion_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/construccion_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/cubierta_vegetal_bosque_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/cubierta_vegetal_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/edificio_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/espacio_natural_protegido_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/estacion_autobus_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/estacion_autobus_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/estacion_ferrocarril_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/estacion_ferrocarril_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/ferrocarril_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/ferrocarril_pk_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/ferrocarril_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/hidrografia_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/hidrografia_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/instalacion_deportiva_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/instalacion_educativa_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/instalacion_energia_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/instalacion_militar_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/instalacion_sanitaria_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/instalacion_telecomunicacion_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/instalacion_tratamiento_aguas_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/instalacion_tratamiento_residuos_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/lamina_agua_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/linea_limite_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/manzana_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/municipio_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/no_disponible/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/nombre_division_administrativa_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/nombre_hidrografia_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/nombre_orografia_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/nombre_poblacion_construccion_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/nombre_transporte_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/nucleo_urbano_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/paso_a_nivel_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/peaje_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/peaje_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/portal_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/provincia_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/puerto_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/puerto_pto/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/relacion_alfabetica/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/relacion_tematica/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/ruta_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/senda_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/tierra_firme_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/via_servicio_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/via_urbana_lin/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/zona_dotacional_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/zona_industrial_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/zona_militar_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/zona_protegida_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/elementos/zona_verde_pol/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_00/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_01/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_02/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_03/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_04/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_05/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_06/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_07/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_08/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_09/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_10/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_11/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_12/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_13/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_14/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_15/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_16/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_17/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_18/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_19/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_20/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_21/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/niveles/nivel_22/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cenormasgeograficas.github.io/mapabase/servicios/servicio_de_teselas/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://cenormasgeograficas.github.io/mapabase/servicios/visor/</loc>
-         <lastmod>2022-02-25</lastmod>
+         <loc>https://cenormasgeograficas.github.io/mapabase/servicios/visor_geografico/</loc>
+         <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
