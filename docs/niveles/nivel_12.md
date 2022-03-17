@@ -39,12 +39,8 @@
 [**tierra_firme_pol**](../../elementos/tierra_firme_pol)  
 <br />
 ### SERVICIOS E INSTALACIONES
-[**zona_industrial_pol**](../../elementos/zona_industrial_pol)  
-`clase`= area_industrial  
-`clase`= poligono_industrial  
-`clase`= zona_industrial  
+[**zona_industrial_pol**](../../elementos/zona_industrial_pol)   
 [**zona_militar_pol**](../../elementos/zona_militar_pol)  
-`clase`= zona_militar  
 <br />
 ### TRANSPORTE Y MOVILIDAD
 [**aerodromo_pol**](../../elementos/aerodromo_pol)  
@@ -60,4 +56,3 @@
 [**puerto_pol**](../../elementos/puerto_pol)  
 [**puerto_pto**](../../elementos/puerto_pto)  
 [**via_servicio_lin**](../../elementos/via_servicio_lin)  
-

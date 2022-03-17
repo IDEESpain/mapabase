@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Proyecto de Mapa Base XYZ del Sistema Cartográfico Nacional (España): Teselas vectoriales. Comisión Especializada de Normas Geográficas. España">
+    <meta name="author" content="Gonzalo López García @gonzalo_lpgc">
+    <link rel="canonical" href="https://cenormasgeograficas.github.io/mapabase/elementos/aerodromo_pto/">
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    
+    <title>Aerodromo pto - Mapa Base SCN</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../css/base.min.css" rel="stylesheet">
+    <link href="../../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            
+              <a class="navbar-brand" href="../..">Mapa Base SCN</a>
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Elementos <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../relacion_alfabetica/">Relación alfabética</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../relacion_tematica/">Relación temática</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Niveles <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Escala global (00-06)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../niveles/nivel_00/">Nivel 00 [1:559.082.264]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_01/">Nivel 01 [1:279.541.132]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_02/">Nivel 02 [1:139.770.566]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_03/">Nivel 03 [1:69.885.283]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_04/">Nivel 04 [1:34.942.642]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_05/">Nivel 05 [1:17.471.321]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_06/">Nivel 06 [1:8.735.660]</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Escala nacional (07-13)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../niveles/nivel_07/">Nivel 07 [1:4.367.830]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_08/">Nivel 08 [1:2.183.915]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_09/">Nivel 09 [1:1.091.958]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_10/">Nivel 10 [1:545.979]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_11/">Nivel 11 [1:272.989]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_12/">Nivel 12 [1:136.495]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_13/">Nivel 13 [1:68.247]</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Escala regional (14-17)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../niveles/nivel_14/">Nivel 14 [1:34.124]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_15/">Nivel 15 [1:17.062]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_16/">Nivel 16 [1:8.531]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_17/">Nivel 17 [1:4.265]</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                            
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Escala local (18-22)</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../niveles/nivel_18/">Nivel 18 [1:2.133]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_19/">Nivel 19 [1:1.066]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_20/">Nivel 20 [1:533]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_21/">Nivel 21 [1:267]</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../niveles/nivel_22/">Nivel 22 [1:133]</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Servicios <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../servicios/servicio_de_teselas/">Servicio de teselas</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../servicios/visor_geografico/">Visor geográfico</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Datos <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../datos/proveedores_de_datos/">Proveedores de datos</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../datos/formato_de_entrega/">Formato de entrega</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/cenormasgeograficas/mapabase/edit/master/docs/elementos/aerodromo_pto.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#aerodromo_pto">aerodromo_pto</a></li>
+            <li class="second-level"><a href="#geometria">Geometría:</a></li>
+                
+            <li class="second-level"><a href="#atributos-y-dominios-de-valores">Atributos y dominios de valores:</a></li>
+                
+            <li class="second-level"><a href="#asignacion-a-capas">Asignación a capas:</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h2 id="aerodromo_pto">aerodromo_pto</h2>
+<p><br /></p>
+<p>El elemento «aerodromo_pto» comprende los objetos geográficos puntuales relativos a las instalaciones y los servicios de aviación civil, militar y recreativa. Los datos pueden provenir de la <em>Información Geográfica de Referencia de Redes de Transporte (IGR-RT)</em> que edita el <a href="https://www.ign.es"><em>Instituto Geográfico Nacional (IGN)</em></a> y distribuye el <a href="https://www.cnig.es"><em>Centro Nacional de Información Geográfica (CNIG)</em></a>, así como de la información geográfica de referencia producida por las Comunidades Autónomas u otras administraciones públicas con competencias cartográficas.</p>
+<h4 id="geometria">Geometría:</h4>
+<p>Punto</p>
+<h4 id="atributos-y-dominios-de-valores">Atributos y dominios de valores:</h4>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Tipo</th>
+<th>Valor</th>
+<th>Observaciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clase</code></td>
+<td>string</td>
+<td></td>
+<td>Clase de objeto</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>aerodromo</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>aerodromo_helipuerto</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>deportivo_recreativo</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>helipuerto</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>hidroaerodromo</td>
+<td></td>
+</tr>
+<tr>
+<td><code>nombre</code></td>
+<td>string</td>
+<td>[nombre]</td>
+<td>Nombre</td>
+</tr>
+<tr>
+<td><code>proveedor</code></td>
+<td>string</td>
+<td>[codigo_proveedor]</td>
+<td>Proveedor de la información (lista controlada)</td>
+</tr>
+<tr>
+<td><code>ref</code></td>
+<td>string</td>
+<td>[designador]</td>
+<td>Referencia</td>
+</tr>
+<tr>
+<td><code>tipo</code></td>
+<td>string</td>
+<td></td>
+<td>Categoría</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>internacional</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>nacional</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>militar</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="asignacion-a-capas">Asignación a capas:</h4>
+<table>
+<thead>
+<tr>
+<th>Filtro</th>
+<th><a href="../../niveles/nivel_00">00</a></th>
+<th><a href="../../niveles/nivel_01">01</a></th>
+<th><a href="../../niveles/nivel_02">02</a></th>
+<th><a href="../../niveles/nivel_03">03</a></th>
+<th><a href="../../niveles/nivel_04">04</a></th>
+<th><a href="../../niveles/nivel_05">05</a></th>
+<th><a href="../../niveles/nivel_06">06</a></th>
+<th><a href="../../niveles/nivel_07">07</a></th>
+<th><a href="../../niveles/nivel_08">08</a></th>
+<th><a href="../../niveles/nivel_09">09</a></th>
+<th><a href="../../niveles/nivel_10">10</a></th>
+<th><a href="../../niveles/nivel_11">11</a></th>
+<th><a href="../../niveles/nivel_12">12</a></th>
+<th><a href="../../niveles/nivel_13">13</a></th>
+<th><a href="../../niveles/nivel_14">14</a></th>
+<th><a href="../../niveles/nivel_15">15</a></th>
+<th><a href="../../niveles/nivel_16">16</a></th>
+<th><a href="../../niveles/nivel_17">17</a></th>
+<th><a href="../../niveles/nivel_18">18</a></th>
+<th><a href="../../niveles/nivel_19">19</a></th>
+<th><a href="../../niveles/nivel_20">20</a></th>
+<th><a href="../../niveles/nivel_21">21</a></th>
+<th><a href="../../niveles/nivel_22">22</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[todos los elementos]</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table></div>
+        
+        
+    </div>
+
+    
+      <footer class="col-md-12 text-center">
+          
+          
+            <hr>
+            <p>
+            <small>Copyright: <a href='https://scne.es'>Sistema Cartográfico Nacional (España)</a></small><br>
+            
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
+
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = "../.."</script>
+    
+    <script src="../../js/base.js"></script>
+    <script src="../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

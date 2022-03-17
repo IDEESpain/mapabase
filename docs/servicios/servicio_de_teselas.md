@@ -16,9 +16,3 @@ Este servicio distribuye para cada uno de los niveles de detalle, los elementos 
 Actualmente el servicio, en fase de pruebas, distribuye teselas vectoriales hasta el nivel de zoom 14, estando previsto incrementar próximamente la oferta de datos para los niveles de mayor detalle.
 </small>
 </div>
-
-
-
-
-
-

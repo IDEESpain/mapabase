@@ -41,6 +41,9 @@ nav:
 - Servicios:
     - Servicio de teselas: servicios/servicio_de_teselas.md
     - Visor geográfico: servicios/visor_geografico.md
+- Datos:
+    - Proveedores de datos: datos/proveedores_de_datos.md
+    - Formato de entrega: datos/formato_de_entrega.md
 theme:
   name: null
   custom_dir: cinder

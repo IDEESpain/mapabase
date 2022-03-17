@@ -8,6 +8,3 @@ Con objeto de ofrecer una respuesta cartográfica, el [*Centro Nacional de Infor
 
 <br />
 El fichero JSON de configuración de estilizados que aplica este visor se puede consultar en: [https://www.ign.es/web/resources/mapa-base-xyz/mapabaserioja_scn_color_CNIG.json](https://www.ign.es/web/resources/mapa-base-xyz/mapabaserioja_scn_color_CNIG.json)
-
-
-
