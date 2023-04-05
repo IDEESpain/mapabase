@@ -1,6 +1,10 @@
 Cambios en el Modelo de datos:
 ------------------------------
 
+### 05/04/2023 zona_verde_pol
+
+* Se unifican los valores «parque» y «jardin» en «parque_jardin» «clase»
+
 ### 05/04/2023 espacio_natural_protegido_pol
 
 * Se añade los valores de Espacios Naturales Protegidos del MITECO en el atributo «clase»
