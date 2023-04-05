@@ -8,11 +8,11 @@
     <meta name="description"
         content="Proyecto de Mapa Base XYZ del Sistema Cartográfico Nacional: Teselas vectoriales. Comisión Especializada de Normas Geográficas. España">
     <meta name="author" content="Gonzalo López García">
-    <link rel="canonical" href="https://example.com/elementos/puerto_pto/">
+    <link rel="canonical" href="https://example.com/elementos/construccion_lin/">
     <link rel="shortcut icon" href="../../img/favicon.ico">
 
 
-    <title>Puerto pto - Mapa Base SCN</title>
+    <title>Construccion pol - Mapa Base SCN</title>
 
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -332,7 +332,7 @@
                     </li>
                     <li>
                         <a
-                            href="https://github.com/cenormasgeograficas/mapabase/edit/master/docs/elementos/puerto_pto.md"><i
+                            href="https://github.com/cenormasgeograficas/mapabase/edit/master/docs/elementos/construccion_lin.md"><i
                                 class="fab fa-github"></i> Edit on GitHub</a>
                     </li>
                 </ul>
@@ -346,7 +346,7 @@
         <div class="col-md-3">
             <div class="bs-sidebar hidden-print affix well" role="complementary">
                 <ul class="nav bs-sidenav">
-                    <li class="first-level active"><a href="#puerto_pto">puerto_pto</a></li>
+                    <li class="first-level active"><a href="#construccion_lin">construccion_lin</a></li>
                     <li class="second-level"><a href="#geometria">Geometría:</a></li>
 
                     <li class="second-level"><a href="#atributos-y-dominios-de-valores">Atributos y dominios de
@@ -359,17 +359,16 @@
         </div>
         <div class="col-md-9" role="main">
 
-            <h2 id="puerto_pto">puerto_pto</h2>
+            <h2 id="construccion_lin">construccion_lin</h2>
             <p><br /></p>
-            <p>El elemento «puerto_pto» comprende los objetos geográficos puntuales de referencia relativos a las
-                instalaciones y los servicios portuarios de cualquier naturaleza. Los datos pueden provenir de la
-                <em>Información Geográfica de Referencia de Redes de Transporte (IGR-RT)</em> que edita el <a
-                    href="https://www.ign.es"><em>Instituto Geográfico Nacional (IGN)</em></a> y distribuye el <a
-                    href="https://www.cnig.es"><em>Centro Nacional de Información Geográfica (CNIG)</em></a>, así como
-                de la información geográfica de referencia producida por las Comunidades Autónomas u otras
-                administraciones públicas con competencias cartográficas.</p>
+            <p>El elemento «construccion_lin» se usa para etiquetar elementos constructivos que no tienen el carácter de
+                edificación. La información puede proceder, según el grado cartográfico de detalle, de los registros
+                catastrales mantenidos por la Dirección General del Catastro, y en el caso de Navarra y País Vasco por
+                el Gobierno de Navarra y las Diputaciones de Álava, Vizkaya y Gipuzkoa, de las cartografías topográficas
+                regionales así como de las cartografías topográficas municipales.</p>
+            <p>Atributos:</p>
             <h4 id="geometria">Geometría:</h4>
-            <p>Punto</p>
+            <p>Polígono</p>
             <h4 id="atributos-y-dominios-de-valores">Atributos y dominios de valores:</h4>
             <table>
                 <thead>
@@ -390,95 +389,128 @@
                     <tr>
                         <td></td>
                         <td></td>
-                        <td>astillero_naval</td>
+                        <td>construccion</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
-                        <td>puerto</td>
+                        <td>construccion_ligera</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
-                        <td>puerto_comercial</td>
+                        <td>escollera</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
-                        <td>puerto_deportivo</td>
+                        <td>muro</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
-                        <td>puerto_industrial</td>
+                        <td>puente</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
-                        <td>puerto_militar</td>
+                        <td>presa</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
-                        <td>puerto_pesquero</td>
+                        <td>muelle</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
-                        <td>puerto_turistico</td>
+                        <td>escollera</td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td><code>nombre</code></td>
-                        <td>string</td>
-                        <td>[denominación_puerto]</td>
-                        <td>Denominación oficial del puerto</td>
+                        <td></td>
+                        <td></td>
+                        <td>pantalán</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>muro_contención</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>muralla</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>cercado</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>puente</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>pasarela</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>acueducto</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>túnel</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>auxiliar_construido</td>
+                        <td>
+                            Otros elementos construidos; su objetivo es servir de relleno 
+                            cartográfico para dar detalle a la cartografía. 
+                            Ejemplos: bordillos, escaleras, obras de fábrica, 
+                            límites de explanadas, toboganes y atracciones de 
+                            grandes dimensiones, etc.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>auxiliar_construido_vial</td>
+                        <td>
+                            Otros elementos construidos de carácter viario que no pertenecen a 
+                            la red de transporte; su objetivo es servir de relleno cartográfico 
+                            para dar detalle a la cartografía. Ejemplos: eje de pistas de competición 
+                            en circuitos, caminos dentro de parques, cementerios y 
+                            otras infraestructuras, etc.
+                        </td>
                     </tr>
                     <tr>
                         <td><code>proveedor</code></td>
                         <td>string</td>
                         <td>[codigo_proveedor]</td>
                         <td>Proveedor de la información (lista controlada)</td>
-                    </tr>
-                    <tr>
-                        <td><code>ref</code></td>
-                        <td>string</td>
-                        <td>[designador]</td>
-                        <td>Referencia</td>
-                    </tr>
-                    <tr>
-                        <td><code>estado</code></td>
-                        <td>string</td>
-                        <td></td>
-                        <td>Situación en que se encuentra el objeto geográfico</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>en_construcción</td>
-                        <td>Se encuentra en obras para un posterior uso</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>en_uso</td>
-                        <td>Se encuentra utilizable o en condiciones constructivas aparentes para ser utilizable</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>fuera_de_servicio</td>
-                        <td>
-                            Para los casos en los que el objeto geográfico se encuentra fuera de servicio, 
-                            o se ha destruido en parte, aunque hay restos visibles
-                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -525,10 +557,10 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>x</td>
-                        <td>x</td>
-                        <td>x</td>
-                        <td>x</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td>x</td>
                         <td>x</td>
                         <td>x</td>

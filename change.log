@@ -1,0 +1,78 @@
+Cambios en el Modelo de datos:
+------------------------------
+
+### 05/04/2023 espacio_natural_protegido_pol
+
+* Se añade los valores de Espacios Naturales Protegidos del MITECO en el atributo «clase»
+
+### 05/04/2023 hidrografia_lin
+
+* Se añade atributo «situación»
+
+### 05/04/2023 nombre_poblacion_construccion_pto
+
+* Se eliminan los valores infraestructura_transporte_terrestre e instalacion_portuaria del atributo «clase»
+
+### 05/04/2023 hidrografia_pol y lamina_agua_pol
+
+* Se añade el atributo «persistencia»
+
+### 05/04/2023 construccion_lin
+
+* Se crea nueva clase de entidad «construccion_lin»
+
+### 05/04/2023 aparcamiento_*
+
+* Se añade en sus respectivos atributos «clase» los siguientes valores: aparcamiento_invernal y aparcamiento_seguro
+
+### 05/04/2023 area_servicio_*
+
+* Se añade en sus respectivos atributos «clase» el valor: area_descanso
+
+### 05/04/2023 aerodromo_pto
+
+* Se modificar el atributo «tipo» y se añade el atributo «uso»
+
+### 05/04/2023 aeródromo_*, autopista_*, autovía_*, carretera_*, estacion_ferrocarril_*, puerto_* y via_urbana_lin
+
+* Se añade nuevo atributo «estado»
+
+### 05/04/2023 servicio_instalacion_pto 
+
+* Se crea la clase de entidad servicio_instalacion_pto
+
+### 04/04/2023 lamina_agua_pol 
+
+* Se mofifican los valores balsa_alberca -> balsa_alberca_estanque  y estanque_piscina -> piscina
+
+### 04/04/2023 Cambio genérico
+
+* Se mofifica la descripción del atributo jerarquía
+
+### 14/03/2023 Edificio_pol
+
+* Se cambia la descripción del a tributo «tipo»
+
+### 14/03/2023 nombres geográficos en general
+
+* Se añade el atributo «jerarquía»
+
+### 14/03/2023 nombre_toponimo_lin
+
+* Se crea nueva clase de entidad «nombre_toponimo_lin»
+
+### 14/03/2023 altimetria_pto
+
+* Se añade el valor «punto_elevado" en el atributo «clase» de la clase de entidad «altimetria_pto»
+
+### 14/03/2023 nombre_hidrografia_pto
+
+* Se eliminan los valores «curso_artificial_agua» y «curso_natural_agua» del atributo «clase»
+
+### 14/03/2023 nombre_orografia_pto
+
+* Se eliminan los valores «espacio_protegido_restante» y «parque_nacional_natural» del atributo «clase»
+
+### 14/03/2023 nombre_orografia_pto
+
+Se crea nueva clase de entidad «nombre_orografia_pto»

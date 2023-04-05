@@ -251,6 +251,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://example.com/elementos/nombre_toponimo_lin/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://example.com/elementos/nombre_poblacion_construccion_pto/</loc>
          <lastmod>2021-09-30</lastmod>
          <changefreq>daily</changefreq>
