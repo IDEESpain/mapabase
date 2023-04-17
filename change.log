@@ -1,6 +1,19 @@
 Cambios en el Modelo de datos:
 ------------------------------
 
+### 17/04/2023 construccion_lin
+
+*  Se eliminan valores repetidos en el atributo «clase»
+
+### 17/04/2023 ferrocarril_lin, ferrocarril_pol
+
+*  Se añade nuevo atributo «estado»
+
+### 17/04/2023 aparcamiento_pol
+
+* Se añade el valor «aparcamiento» en el atributo «clase»
+* Se completan las descripciones en el atributo «clase»
+
 ### 05/04/2023 zona_verde_pol
 
 * Se unifican los valores «parque» y «jardin» en «parque_jardin» «clase»
