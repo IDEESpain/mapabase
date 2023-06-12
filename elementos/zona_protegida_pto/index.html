@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Proyecto de Mapa Base XYZ del Sistema Cartográfico Nacional: Teselas vectoriales. Comisión Especializada de Normas Geográficas. España">
     <meta name="author" content="Gonzalo López García">
-    <link rel="canonical" href="https://example.com/elementos/ruta_lin/">
+    <link rel="canonical" href="https://example.com/elementos/zona_protegida_pol/">
     <link rel="shortcut icon" href="../../img/favicon.ico">
 
     
-    <title>Ruta lin - Mapa Base SCN</title>
+    <title>Zona protegida pto - Mapa Base SCN</title>
     
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -328,7 +328,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/cenormasgeograficas/mapabase/edit/master/docs/elementos/ruta_lin.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                        <a href="https://github.com/cenormasgeograficas/mapabase/edit/master/docs/elementos/zona_protegida_pol.md"><i class="fab fa-github"></i> Edit on GitHub</a>
                     </li>
             </ul>
         </div>
@@ -340,7 +340,7 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#ruta_lin">ruta_lin</a></li>
+        <li class="first-level active"><a href="#zona_protegida_pol">zona_protegida_pto</a></li>
             <li class="second-level"><a href="#geometria">Geometría:</a></li>
                 
             <li class="second-level"><a href="#atributos-y-dominios-de-valores">Atributos y dominios de valores:</a></li>
@@ -351,11 +351,11 @@
 </div></div>
         <div class="col-md-9" role="main">
 
-<h2 id="ruta_lin">ruta_lin</h2>
+<h2 id="zona_protegida_pol">zona_protegida_pto</h2>
 <p><br /></p>
-<p>El elemento «ruta_lin» identifica los elementos lineales que representan los itinerarios correspondientes a las rutas, caminos y senderos de distinta naturaleza independientemente de la tipología del trazado físico sobre el que se apoyan. Dichos datos pueden proceder de la <em>Información Geográfica de Referencia de Redes de Transporte (IGR-RT)</em> que edita el <a href="https://www.ign.es"><em>Instituto Geográfico Nacional (IGN)</em></a> y distribuye el <a href="https://www.cnig.es"><em>Centro Nacional de Información Geográfica (CNIG)</em></a>, que a su vez recoge los datos de la base de datos de direcciones «Cartociudad» gestionada por el IGN, de los proyectos de callejeros mantenidos por algunas administraciones regionales, y de los callejeros municipales.</p>
+<p>El elemento «zona_protegida_pto» incluye los objetos geográficos puntuales que definen las zonas en las que existe un régimen de protección con el fin de preservar elementos de carácter histórico-artístico o arqueológico. No incluye áreas o elementos naturales protegidos, ni zonas protegidas de carácter urbanístico. Se utiliza con efectos de representación a diferentes escalas, o cuando no aplica la inlusión en zona_protegida_pol. Los datos pueden provenir de la información geográfica editada por el <a href="https://www.ign.es"><em>Instituto Geográfico Nacional (IGN)</em></a> y distribuida por el <a href="https://www.cnig.es"><em>Centro Nacional de Información Geográfica (CNIG)</em></a>, así como de la información geográfica de referencia o temática producida por las Comunidades Autónomas u otras administraciones públicas con competencias cartográficas.</p>
 <h4 id="geometria">Geometría:</h4>
-<p>Línea</p>
+<p>Punto</p>
 <h4 id="atributos-y-dominios-de-valores">Atributos y dominios de valores:</h4>
 <table>
 <thead>
@@ -376,74 +376,26 @@
 <tr>
 <td></td>
 <td></td>
-<td>camino_de_santiago</td>
+<td>patrimonio_historico_artistico</td>
 <td></td>
 </tr>
 <tr>
 <td></td>
 <td></td>
-<td>carril_bici</td>
+<td>yacimiento_arqueologico</td>
 <td></td>
 </tr>
 <tr>
 <td></td>
 <td></td>
-<td>ruta</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>ruta_parque_nacional</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>ruta_via_verde</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>sendero_europeo</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>sendero_gran_recorrido</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>sendero_local</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>sendero_pequeño_recorrido</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>sendero_regional</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>sendero_urbano</td>
-<td></td>
+<td>zona_protegida</td>
+<td>Otras zonas protegidas que no se pueden clasificar en el resto de clases</td>
 </tr>
 <tr>
 <td><code>nombre</code></td>
 <td>string</td>
-<td>[tipo_vial]+' '+[denominacion]</td>
-<td>Denominación de la vía urbana</td>
+<td>[nombre]</td>
+<td>Nombre</td>
 </tr>
 <tr>
 <td><code>proveedor</code></td>
@@ -498,8 +450,8 @@
 <td></td>
 <td></td>
 <td></td>
-<td></td>
-<td></td>
+<td>x</td>
+<td>x</td>
 <td>x</td>
 <td>x</td>
 <td>x</td>
