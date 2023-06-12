@@ -1,5 +1,69 @@
 Cambios en el Modelo de datos:
 ------------------------------
+### 12/06/2023 construccion_lin
+
+*  Modificada la descripción de auxiliar_construido y de construccion
+
+### 12/06/2023 estacion_ferrocarril_pol
+
+*  Añadido cambiador al atributo clase
+
+### 12/06/2023 ferrocarril_pol
+
+*  Modificada la descripción
+
+### 12/06/2023 hidrografia_lin
+
+*  Eliminada tilde en hidrografia_lin - subterráneo
+
+### 12/06/2023 instalacion_energia_pol
+
+*  Añadidos valores al atributo clase
+
+### 12/06/2023 lamina_agua_pol
+
+*  Añadido valor vaso_salina al atributo clase
+
+### 12/06/2023 nombre_hidrografia_pto
+
+*  Añadido valor zona_salina al atributo clase 
+
+### 12/06/2023 nombre_orografia_pto
+
+*  Añadidos valores  otros y cueva al atributo clase 
+
+### 12/06/2023 relacion_alfabetica
+
+*  Añadida clase zona_protegida_pto
+
+### 12/06/2023 relacion_tematica
+
+*  Añadida clase zona_protegida_pto
+
+### 12/06/2023 ruta_lin
+
+*  Añadido valor carril_bici en el atributo clase 
+
+### 12/06/2023 servicio_instalación_pto
+
+*  Añadidos valores al atributo clase
+
+### 12/06/2023 zona_dotacional_pol
+
+*  Añadidos valores al atributo clase
+
+### 12/06/2023 zona_industrial_pol
+
+*  Añadido valor explotacion_minera en el atributo clase 
+
+### 12/06/2023 zona_protegida_pol
+
+*  Ampliada la descripción de atributo zona_protegida
+
+### 12/06/2023 zona_protegida_pto
+
+*  Creada la nueva clase, con los mismos atributos de zona_protegida_pol
+
 
 ### 17/04/2023 construccion_lin
 
