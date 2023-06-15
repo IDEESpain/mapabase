@@ -1,5 +1,38 @@
 Cambios en el Modelo de datos:
 ------------------------------
+
+### 15/06/2023 zona_protegida_pto
+
+*  Corregida errata en descripcion 
+
+### 15/06/2023 construccion_lin
+
+*  Corregida errata en descripcion construccion_ligera
+
+### 15/06/2023 construccion_pol
+
+*  Añadido valor refugio en el atributo clase 
+*  Ampliada la descripcion de atributo generico.
+*  Ampliada la descripción de construccion y construccion_ligera.
+
+### 15/06/2023 construccion_pol
+
+*  Ampliada la descripcion de atributo torre.
+
+### 15/06/2023 aparcamiento_pol
+
+*  Eliminada etiqueda code vacias en clase
+
+### 15/06/2023 aparcamiento_pto
+
+*  Añadido valor aparcamiento en el atributo clase 
+*  Añadido descripciones al atributo clase 
+*  Eliminada etiqueda code vacias  en clase
+
+### 15/06/2023 ruta_lin
+
+*  Añadido valor via_pecuaria en el atributo clase 
+
 ### 12/06/2023 construccion_lin
 
 *  Modificada la descripción de auxiliar_construido y de construccion
