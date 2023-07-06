@@ -1,5 +1,8 @@
 Cambios en el Modelo de datos:
 ------------------------------
+### 05/07/2023 ferrocarril_lin
+*  eliminar etiqueta erronea [referencia]
+
 ### 05/07/2023 construccion_pol
 *  Se mejora la descrición de torre
 
