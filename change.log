@@ -1,5 +1,11 @@
 Cambios en el Modelo de datos:
 ------------------------------
+### 05/07/2023 construccion_pol
+*  Se mejora la descrición de torre
+
+### 05/07/2023 Comprobación niveles
+
+*  Se homogeneizan los niveles a los que se muestra la información en las páginas de cada clase / relacion tematica / niveles.
 
 ### 15/06/2023 zona_protegida_pto
 
