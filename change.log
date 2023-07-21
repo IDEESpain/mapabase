@@ -1,5 +1,32 @@
 Cambios en el Modelo de datos:
 ------------------------------
+### 21/07/2023 tierra_firme_pol
+*  Añadido atributo codigo
+
+### 21/07/2023 comunidad_autonoma_pol
+*  Añadido atributo codigo
+
+### 21/07/2023 provincia_pol
+*  Añadido atributo codigo
+
+### 21/07/2023 municipio_pol
+*  Añadido atributo codigo
+
+### 21/07/2023 area_servicio_pol
+*  Eliminada etiqueta <code> vacía
+
+### 21/07/2023 area_servicio_pto
+*  Eliminada etiqueta <code> vacía
+
+### 21/07/2023 portal_pto
+*  Cambiada la comilla simple por comilla doble en el atributo nombre
+
+### 21/07/2023 ruta_lin
+*  Cambiada la comilla simple por comilla doble en el atributo nombre
+
+### 21/07/2023 via_urbana_lin
+*  Cambiada la comilla simple por comilla doble en el atributo nombre
+
 ### 05/07/2023 ferrocarril_lin
 *  eliminar etiqueta erronea [referencia]
 
