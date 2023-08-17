@@ -1,5 +1,14 @@
 Cambios en el Modelo de datos:
 ------------------------------
+### 17/08/2023 nombre_poblacion_construccion_pto
+*  Se añaden los valores  «infraestructura_transporte_terrestre»  e «instalacion_portuaria»  en el atributo «clase»
+
+### 17/08/2023 linea_limite_lin
+*  Se añade el valor «limite_nacional» en el atributo «clase»
+
+### 17/08/2023 nombre_division_administrativa_pto
+*  Se corrige errata en el valor «ciudad_autonoma» del atributo «clase»
+
 ### 21/07/2023 tierra_firme_pol
 *  Añadido atributo codigo
 
