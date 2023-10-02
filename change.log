@@ -1,5 +1,11 @@
 Cambios en el Modelo de datos:
 ------------------------------
+### 02/10/2023
+*  Se añade el valor helipuerto en la clase aerodromo_pol
+
+### 02/10/2023
+*  Se añaden los valores division_administrativa, hidrografia, orografia, poblacion y transporte en la clase nombre_toponimo_lin
+
 ### 17/08/2023 nombre_poblacion_construccion_pto
 *  Se añaden los valores  «infraestructura_transporte_terrestre»  e «instalacion_portuaria»  en el atributo «clase»
 
