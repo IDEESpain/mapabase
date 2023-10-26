@@ -1,0 +1,2612 @@
+{
+  "destination_layers_geojson": "/var/datos/VT_MapaBaseSCN/salidas/geojson_rioja/",
+  "destination_mbtiles": "/var/datos/VT_MapaBaseSCN/salidas/mbtiles_rioja/",
+  "temp_directory": "/tmp/",
+  "project": {
+    "name": "vector-tile-prueba",
+    "description": "Datos del Sistema Cartografico Nacional",
+    "contact_name": "Ana Garcia de Vicuna",
+    "contact_email": "agvicuna@larioja.org"
+  },
+  "setup": {
+    "compress_geojson": "no",
+    "tiling_layers": "yes"
+  },
+  "zoom_levels": [
+    {
+      "level": "0",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        }
+      ],
+      "layers_no_coalesce": [],
+      "layers_with_labels": [],
+      "filter": {}
+    },
+    {
+      "level": "1",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        }
+      ],
+      "layers_no_coalesce": [],
+      "layers_with_labels": [],
+      "filter": {}
+    },
+    {
+      "level": "2",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        }
+      ],
+      "layers_no_coalesce": [],
+      "layers_with_labels": [],
+      "filter": {}
+    },
+    {
+      "level": "3",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        }
+      ],
+      "layers_no_coalesce": [],
+      "layers_with_labels": [
+        {
+          "file": "ngbe_division_administrativa_pto.gz",
+          "name": "ngbe_division_administrativa_rioja"
+        }
+      ],
+      "filter": {
+        "ngbe_division_administrativa_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "comunidad_autonoma"
+          ]
+        ]
+      }
+    },
+    {
+      "level": "4",
+      "process": "yes",
+      "layers": [],
+      "layers_no_coalesce": [
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        }
+      ],
+      "layers_with_labels": [
+        {
+          "file": "ngbe_division_administrativa_pto.gz",
+          "name": "ngbe_division_administrativa_rioja"
+        }
+      ],
+      "filter": {
+        "ngbe_division_administrativa_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "comunidad_autonoma"
+          ]
+        ]
+      }
+    },
+    {
+      "level": "5",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "linea_limite_lin.gz",
+          "name": "linea_limite_rioja"
+        },
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        }
+      ],
+      "layers_no_coalesce": [],
+      "layers_with_labels": [
+        {
+          "file": "ngbe_division_administrativa_pto.gz",
+          "name": "ngbe_division_administrativa_rioja"
+        }
+      ],
+      "filter": {
+        "ngbe_division_administrativa_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "comunidad_autonoma"
+          ]
+        ],
+        "linea_limite_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "limite_autonomico"
+          ]
+        ]
+      }
+    },
+    {
+      "level": "6",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "linea_limite_lin.gz",
+          "name": "linea_limite_rioja"
+        },
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        },
+        {
+          "file": "autovia_lin.gz",
+          "name": "autovia_rioja"
+        },
+        {
+          "file": "autopista_lin.gz",
+          "name": "autopista_rioja"
+        },
+        {
+          "file": "mfe50_pol.gz",
+          "name": "mfe50_rioja"
+        },
+        {
+          "file": "enp_pol.gz",
+          "name": "enp_rioja"
+        }
+      ],
+      "layers_no_coalesce": [],
+      "layers_with_labels": [
+        {
+          "file": "ngbe_division_administrativa_pto.gz",
+          "name": "ngbe_division_administrativa_rioja"
+        },
+        {
+          "file": "ngbe_hidrografia_pto.gz",
+          "name": "ngbe_hidrografia_rioja"
+        },
+        {
+          "file": "etiqueta_mapa_base_pto.gz",
+          "name": "etiqueta_mapa_base_rioja"
+        }
+      ],
+      "filter": {
+        "ngbe_division_administrativa_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "comunidad_autonoma"
+          ],
+          [
+            "==",
+            "clase",
+            "ciudad_estatuto_autonomia"
+          ]
+        ],
+        "enp_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "parque_nacional"
+          ],
+          [
+            "==",
+            "clase",
+            "parque_natural"
+          ],
+          [
+            "==",
+            "clase",
+            "reserva_de_la_biosfera"
+          ]
+        ],
+        "ngbe_hidrografia_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "mar"
+          ]
+        ],
+		  "mfe50_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "arbolado"
+          ],
+          [
+            "==",
+            "clase",
+            "Arbolado"
+          ]
+        ],
+        "linea_limite_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "limite_provincial"
+          ],
+          [
+            "==",
+            "clase",
+            "limite_autonomico"
+          ]
+        ]
+      }
+    },
+    {
+      "level": "7",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "linea_limite_lin.gz",
+          "name": "linea_limite_rioja"
+        },
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        },
+        {
+          "file": "autovia_lin.gz",
+          "name": "autovia_rioja"
+        },
+        {
+          "file": "autopista_lin.gz",
+          "name": "autopista_rioja"
+        },
+        {
+          "file": "carretera_nacional_lin.gz",
+          "name": "carretera_nacional_rioja"
+        },
+        {
+          "file": "carretera_secundaria_lin.gz",
+          "name": "carretera_secundaria_rioja"
+        },
+        {
+          "file": "carretera_terciaria_lin.gz",
+          "name": "carretera_terciaria_rioja"
+        },
+        {
+          "file": "mfe50_pol.gz",
+          "name": "mfe50_rioja"
+        },
+        {
+          "file": "enp_pol.gz",
+          "name": "enp_rioja"
+        },
+        {
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "lamina_agua_pol.gz",
+          "name": "lamina_agua_rioja"
+        }
+      ],
+      "layers_no_coalesce": [],
+      "layers_with_labels": [
+        {
+          "file": "ngbe_division_administrativa_pto.gz",
+          "name": "ngbe_division_administrativa_rioja"
+        },
+        {
+          "file": "ngbe_poblaciones_construcciones_pto.gz",
+          "name": "ngbe_poblaciones_construcciones_rioja"
+        },
+        {
+          "file": "ngbe_hidrografia_pto.gz",
+          "name": "ngbe_hidrografia_rioja"
+        },
+        {
+          "file": "etiqueta_mapa_base_pto.gz",
+          "name": "etiqueta_mapa_base_rioja"
+        }
+      ],
+      "filter": {
+        "ngbe_division_administrativa_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "comunidad_autonoma"
+          ],
+          [
+            "==",
+            "clase",
+            "ciudad_estatuto_autonomia"
+          ]
+        ],
+        "ngbe_poblaciones_construcciones_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "capital_comunidad_autonoma_ciudad"
+          ],
+          [
+            "==",
+            "clase",
+            "capital_municipio"
+          ],
+          [
+            "==",
+            "clase",
+            "capital_provincia"
+          ]
+        ],
+        "ngbe_hidrografia_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "mar"
+          ]
+        ],
+        "mfe50_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "arbolado"
+          ],
+          [
+            "==",
+            "clase",
+            "Arbolado"
+          ]
+        ],
+        "enp_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "parque_nacional"
+          ],
+          [
+            "==",
+            "clase",
+            "parque_natural"
+          ],
+          [
+            "==",
+            "clase",
+            "reserva_de_la_biosfera"
+          ]
+        ],
+        "hidrografia_rioja": [
+          "all",
+          [
+            "<=",
+            "orden",
+            3
+          ],
+          [
+            "==",
+            "clase",
+            "curso_natural"
+          ]
+        ],
+        "lamina_agua_rioja": [
+          "all",
+          [
+            "==",
+            "tipo",
+            "embalse"
+          ]
+        ],
+        "linea_limite_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "limite_provincial"
+          ],
+          [
+            "==",
+            "clase",
+            "limite_autonomico"
+          ]
+        ]
+      }
+    },
+    {
+      "level": "8",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "linea_limite_lin.gz",
+          "name": "linea_limite_rioja"
+        },
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        },
+        {
+          "file": "autovia_lin.gz",
+          "name": "autovia_rioja"
+        },
+        {
+          "file": "autopista_lin.gz",
+          "name": "autopista_rioja"
+        },
+        {
+          "file": "carretera_nacional_lin.gz",
+          "name": "carretera_nacional_rioja"
+        },
+        {
+          "file": "carretera_secundaria_lin.gz",
+          "name": "carretera_secundaria_rioja"
+        },
+        {
+          "file": "carretera_terciaria_lin.gz",
+          "name": "carretera_terciaria_rioja"
+        },
+        {
+          "file": "ferrocarril_lin.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "mfe50_pol.gz",
+          "name": "mfe50_rioja"
+        },
+        {
+          "file": "enp_pol.gz",
+          "name": "enp_rioja"
+        },
+        {
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "lamina_agua_pol.gz",
+          "name": "lamina_agua_rioja"
+        }
+      ],
+      "layers_no_coalesce": [],
+      "layers_with_labels": [
+        {
+          "file": "ngbe_division_administrativa_pto.gz",
+          "name": "ngbe_division_administrativa_rioja"
+        },
+        {
+          "file": "ngbe_poblaciones_construcciones_pto.gz",
+          "name": "ngbe_poblaciones_construcciones_rioja"
+        },
+        {
+          "file": "ngbe_hidrografia_pto.gz",
+          "name": "ngbe_hidrografia_rioja"
+        },
+        {
+          "file": "etiqueta_mapa_base_pto.gz",
+          "name": "etiqueta_mapa_base_rioja"
+        }
+      ],
+      "filter": {
+        "ngbe_division_administrativa_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "comunidad_autonoma"
+          ],
+          [
+            "==",
+            "clase",
+            "ciudad_estatuto_autonomia"
+          ]
+        ],
+        "ngbe_poblaciones_construcciones_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "capital_comunidad_autonoma_ciudad"
+          ],
+          [
+            "==",
+            "clase",
+            "capital_municipio"
+          ],
+          [
+            "==",
+            "clase",
+            "capital_provincia"
+          ]
+        ],
+        "ngbe_hidrografia_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "mar"
+          ]
+        ],
+        "mfe50_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "arbolado"
+          ],
+          [
+            "==",
+            "clase",
+            "Arbolado"
+          ]
+        ],
+        "enp_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "parque_nacional"
+          ],
+          [
+            "==",
+            "clase",
+            "parque_natural"
+          ],
+          [
+            "==",
+            "clase",
+            "reserva_de_la_biosfera"
+          ]
+        ],
+        "hidrografia_rioja": [
+          "all",
+          [
+            "<=",
+            "orden",
+            3
+          ],
+          [
+            "==",
+            "clase",
+            "curso_natural"
+          ]
+        ],
+        "lamina_agua_rioja": [
+          "all",
+          [
+            "==",
+            "tipo",
+            "embalse"
+          ]
+        ],
+        "ferrocarril_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "tren"
+          ]
+        ],
+        "linea_limite_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "limite_provincial"
+          ],
+          [
+            "==",
+            "clase",
+            "limite_autonomico"
+          ]
+        ]
+      }
+    },
+    {
+      "level": "9",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "linea_limite_lin.gz",
+          "name": "linea_limite_rioja"
+        },
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        },
+        {
+          "file": "autovia_lin.gz",
+          "name": "autovia_rioja"
+        },
+        {
+          "file": "autopista_lin.gz",
+          "name": "autopista_rioja"
+        },
+        {
+          "file": "carretera_nacional_lin.gz",
+          "name": "carretera_nacional_rioja"
+        },
+        {
+          "file": "carretera_secundaria_lin.gz",
+          "name": "carretera_secundaria_rioja"
+        },
+        {
+          "file": "carretera_terciaria_lin.gz",
+          "name": "carretera_terciaria_rioja"
+        },
+        {
+          "file": "ferrocarril_lin.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "mfe50_pol.gz",
+          "name": "mfe50_rioja"
+        },
+        {
+          "file": "enp_pol.gz",
+          "name": "enp_rioja"
+        },
+        {
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "lamina_agua_pol.gz",
+          "name": "lamina_agua_rioja"
+        },
+        {
+          "file": "etiqueta_mapa_base_pto.gz",
+          "name": "etiqueta_mapa_base_rioja"
+        }
+      ],
+      "layers_no_coalesce": [],
+      "layers_with_labels": [
+        {
+          "file": "ngbe_division_administrativa_pto.gz",
+          "name": "ngbe_division_administrativa_rioja"
+        },
+        {
+          "file": "ngbe_poblaciones_construcciones_pto.gz",
+          "name": "ngbe_poblaciones_construcciones_rioja"
+        },
+        {
+          "file": "ngbe_hidrografia_pto.gz",
+          "name": "ngbe_hidrografia_rioja"
+        }
+      ],
+      "filter": {
+        "ngbe_division_administrativa_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "comunidad_autonoma"
+          ],
+          [
+            "==",
+            "clase",
+            "ciudad_estatuto_autonomia"
+          ]
+        ],
+        "ngbe_poblaciones_construcciones_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "capital_comunidad_autonoma_ciudad"
+          ],
+          [
+            "==",
+            "clase",
+            "capital_municipio"
+          ],
+          [
+            "==",
+            "clase",
+            "capital_provincia"
+          ]
+        ],
+        "ngbe_hidrografia_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "mar"
+          ]
+        ],
+        "capital_municipio_rioja": [
+          "all",
+          [
+            ">",
+            "poblacion_capital",
+            5000
+          ]
+        ],
+        "mfe50_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "arbolado"
+          ],
+          [
+            "==",
+            "clase",
+            "Arbolado"
+          ]
+        ],
+        "enp_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "parque_nacional"
+          ],
+          [
+            "==",
+            "clase",
+            "parque_natural"
+          ],
+          [
+            "==",
+            "clase",
+            "reserva_de_la_biosfera"
+          ]
+        ],
+        "hidrografia_rioja": [
+          "all",
+          [
+            "<=",
+            "orden",
+            3
+          ],
+          [
+            "==",
+            "clase",
+            "curso_natural"
+          ]
+        ],
+        "lamina_agua_rioja": [
+          "all",
+          [
+            "==",
+            "tipo",
+            "embalse"
+          ]
+        ],
+        "ferrocarril_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "tren"
+          ]
+        ],
+        "linea_limite_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "limite_provincial"
+          ],
+          [
+            "==",
+            "clase",
+            "limite_autonomico"
+          ]
+        ]
+      }
+    },
+    {
+      "level": "10",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "linea_limite_lin.gz",
+          "name": "linea_limite_rioja"
+        },
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        },
+        {
+          "file": "autovia_lin.gz",
+          "name": "autovia_rioja"
+        },
+        {
+          "file": "autopista_lin.gz",
+          "name": "autopista_rioja"
+        },
+        {
+          "file": "carretera_nacional_lin.gz",
+          "name": "carretera_nacional_rioja"
+        },
+        {
+          "file": "carretera_secundaria_lin.gz",
+          "name": "carretera_secundaria_rioja"
+        },
+        {
+          "file": "carretera_terciaria_lin.gz",
+          "name": "carretera_terciaria_rioja"
+        },
+        {
+          "file": "ferrocarril_lin.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "mfe50_pol.gz",
+          "name": "mfe50_rioja"
+        },
+        {
+          "file": "enp_pol.gz",
+          "name": "enp_rioja"
+        },
+        {
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "lamina_agua_pol.gz",
+          "name": "lamina_agua_rioja"
+        },
+        {
+          "file": "nucleo_urbano_pol.gz",
+          "name": "nucleo_urbano_rioja"
+        }
+      ],
+      "layers_no_coalesce": [],
+      "layers_with_labels": [
+        {
+          "file": "ngbe_division_administrativa_pto.gz",
+          "name": "ngbe_division_administrativa_rioja"
+        },
+        {
+          "file": "ngbe_poblaciones_construcciones_pto.gz",
+          "name": "ngbe_poblaciones_construcciones_rioja"
+        },
+        {
+          "file": "ngbe_hidrografia_pto.gz",
+          "name": "ngbe_hidrografia_rioja"
+        },
+        {
+          "file": "etiqueta_mapa_base_pto.gz",
+          "name": "etiqueta_mapa_base_rioja"
+        }
+      ],
+      "filter": {
+        "ngbe_division_administrativa_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "comunidad_autonoma"
+          ],
+          [
+            "==",
+            "clase",
+            "ciudad_estatuto_autonomia"
+          ]
+        ],
+        "ngbe_poblaciones_construcciones_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "capital_comunidad_autonoma_ciudad"
+          ],
+          [
+            "==",
+            "clase",
+            "capital_municipio"
+          ],
+          [
+            "==",
+            "clase",
+            "capital_provincia"
+          ]
+        ],
+        "ngbe_hidrografia_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "mar"
+          ]
+        ],
+        "capital_municipio_rioja": [
+          "all",
+          [
+            ">",
+            "poblacion_capital",
+            3000
+          ]
+        ],
+        "mfe50_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "arbolado"
+          ],
+          [
+            "==",
+            "clase",
+            "Arbolado"
+          ]
+        ],
+        "enp_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "parque_nacional"
+          ],
+          [
+            "==",
+            "clase",
+            "parque_natural"
+          ],
+          [
+            "==",
+            "clase",
+            "reserva_de_la_biosfera"
+          ]
+        ],
+        "hidrografia_rioja": [
+          "all",
+          [
+            "<=",
+            "orden",
+            3
+          ],
+          [
+            "==",
+            "clase",
+            "curso_natural"
+          ]
+        ],
+        "lamina_agua_rioja": [
+          "all",
+          [
+            "==",
+            "tipo",
+            "embalse"
+          ]
+        ],
+        "ferrocarril_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "tren"
+          ]
+        ],
+        "linea_limite_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "limite_provincial"
+          ],
+          [
+            "==",
+            "clase",
+            "limite_autonomico"
+          ],
+          [
+            "==",
+            "clase",
+            "limite_municipal"
+          ]
+        ]
+      }
+    },
+    {
+      "level": "11",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "linea_limite_lin.gz",
+          "name": "linea_limite_rioja"
+        },
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        },
+        {
+          "file": "autovia_lin.gz",
+          "name": "autovia_rioja"
+        },
+        {
+          "file": "autopista_lin.gz",
+          "name": "autopista_rioja"
+        },
+        {
+          "file": "carretera_nacional_lin.gz",
+          "name": "carretera_nacional_rioja"
+        },
+        {
+          "file": "carretera_secundaria_lin.gz",
+          "name": "carretera_secundaria_rioja"
+        },
+        {
+          "file": "carretera_terciaria_lin.gz",
+          "name": "carretera_terciaria_rioja"
+        },
+        {
+          "file": "carretera_otros_lin.gz",
+          "name": "carretera_otros_rioja"
+        },
+        {
+          "file": "camino_lin.gz",
+          "name": "camino_rioja"
+        },
+        {
+          "file": "ferrocarril_lin.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "mfe50_pol.gz",
+          "name": "mfe50_rioja"
+        },
+        {
+          "file": "enp_pol.gz",
+          "name": "enp_rioja"
+        },
+        {
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "lamina_agua_pol.gz",
+          "name": "lamina_agua_rioja"
+        },
+        {
+          "file": "nucleo_urbano_pol.gz",
+          "name": "nucleo_urbano_rioja"
+        }
+      ],
+      "layers_no_coalesce": [],
+      "layers_with_labels": [
+        {
+          "file": "ngbe_division_administrativa_pto.gz",
+          "name": "ngbe_division_administrativa_rioja"
+        },
+        {
+          "file": "ngbe_poblaciones_construcciones_pto.gz",
+          "name": "ngbe_poblaciones_construcciones_rioja"
+        },
+        {
+          "file": "ngbe_hidrografia_pto.gz",
+          "name": "ngbe_hidrografia_rioja"
+        },
+        {
+          "file": "etiqueta_mapa_base_pto.gz",
+          "name": "etiqueta_mapa_base_rioja"
+        }
+      ],
+      "filter": {
+        "ngbe_division_administrativa_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "comunidad_autonoma"
+          ],
+          [
+            "==",
+            "clase",
+            "ciudad_estatuto_autonomia"
+          ]
+        ],
+        "ngbe_poblaciones_construcciones_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "capital_comunidad_autonoma_ciudad"
+          ],
+          [
+            "==",
+            "clase",
+            "capital_municipio"
+          ],
+          [
+            "==",
+            "clase",
+            "capital_provincia"
+          ]
+        ],
+        "ngbe_hidrografia_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "mar"
+          ]
+        ],
+        "capital_municipio_rioja": [
+          "all",
+          [
+            ">",
+            "poblacion_capital",
+            3000
+          ]
+        ],
+        "mfe50_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "arbolado"
+          ],
+          [
+            "==",
+            "clase",
+            "Arbolado"
+          ]
+        ],
+        "enp_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "parque_nacional"
+          ],
+          [
+            "==",
+            "clase",
+            "parque_natural"
+          ],
+          [
+            "==",
+            "clase",
+            "reserva_de_la_biosfera"
+          ]
+        ],
+        "hidrografia_rioja": [
+          "all",
+          [
+            "<=",
+            "orden",
+            3
+          ],
+          [
+            "==",
+            "clase",
+            "curso_natural"
+          ]
+        ],
+        "lamina_agua_rioja": [
+          "all",
+          [
+            "==",
+            "tipo",
+            "embalse"
+          ]
+        ],
+        "ferrocarril_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "tren"
+          ]
+        ],
+        "linea_limite_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "limite_provincial"
+          ],
+          [
+            "==",
+            "clase",
+            "limite_autonomico"
+          ],
+          [
+            "==",
+            "clase",
+            "limite_municipal"
+          ]
+        ]
+      }
+    },
+  {
+      "level": "12",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "aerodromo_pol.gz",
+          "name": "aerodromo_rioja"
+        },
+        {
+          "file": "autopista_lin.gz",
+          "name": "autopista_rioja"
+        },
+        {
+          "file": "autovia_lin.gz",
+          "name": "autovia_rioja"
+        },
+        {
+          "file": "carretera_nacional_lin.gz",
+          "name": "carretera_nacional_rioja"
+        },
+        {
+          "file": "carretera_secundaria_lin.gz",
+          "name": "carretera_secundaria_rioja"
+        },
+        {
+          "file": "carretera_terciaria_lin.gz",
+          "name": "carretera_terciaria_rioja"
+        },
+        {
+          "file": "carretera_otros_lin.gz",
+          "name": "carretera_otros_rioja"
+        },
+        {
+          "file": "camino_lin.gz",
+          "name": "camino_rioja"
+        },
+        {
+          "file": "enp_pol.gz",
+          "name": "enp_rioja"
+        },
+        {
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "lamina_agua_pol.gz",
+          "name": "lamina_agua_rioja"
+        },
+        {
+          "file": "linea_limite_lin.gz",
+          "name": "linea_limite_rioja"
+        },
+         {
+          "file": "ferrocarril_lin.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "mfe50_pol.gz",
+          "name": "mfe50_rioja"
+        },
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        },
+        {
+          "file": "nucleo_urbano_pol.gz",
+          "name": "nucleo_urbano_rioja"
+        },
+        {
+          "file": "instalacion_deportiva_pol.gz",
+          "name": "instalacion_deportiva_rioja"
+        },
+        {
+          "file": "instalacion_educativa_pol.gz",
+          "name": "instalacion_educativa_rioja"
+        },
+        {
+          "file": "instalacion_energia_electrica_pol.gz",
+          "name": "instalacion_energia_electrica_rioja"
+        },
+        {
+          "file": "instalacion_militar_pol.gz",
+          "name": "instalacion_militar_rioja"
+        },
+        {
+          "file": "instalacion_sanitaria_pol.gz",
+          "name": "instalacion_sanitaria_rioja"
+        },
+        {
+          "file": "instalacion_telecomunicaciones_medicion_pol.gz",
+          "name": "instalacion_telecomunicaciones_medicion_rioja"
+        },
+        {
+          "file": "instalacion_tratamiento_aguas_pol.gz",
+          "name": "instalacion_tratamiento_aguas_rioja"
+        },
+        {
+          "file": "parque_jardin_pol.gz",
+          "name": "parque_jardin_rioja"
+        },
+        {
+          "file": "recinto_industrial_pol.gz",
+          "name": "recinto_industrial_rioja"
+        }
+      ],
+      "layers_no_coalesce": [],
+      "layers_with_labels": [
+        {
+          "file": "ngbe_division_administrativa_pto.gz",
+          "name": "ngbe_division_administrativa_rioja"
+        },
+        {
+          "file": "ngbe_poblaciones_construcciones_pto.gz",
+          "name": "ngbe_poblaciones_construcciones_rioja"
+        },
+        {
+          "file": "etiqueta_mapa_base_pto.gz",
+          "name": "etiqueta_mapa_base_rioja"
+        }
+      ],
+      "filter": {
+        "ngbe_division_administrativa_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "comunidad_autonoma"
+          ],
+          [
+            "==",
+            "clase",
+            "ciudad_estatuto_autonomia"
+          ]
+        ],
+        "ngbe_poblaciones_construcciones_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "capital_comunidad_autonoma_ciudad"
+          ],
+          [
+            "==",
+            "clase",
+            "capital_municipio"
+          ],
+          [
+            "==",
+            "clase",
+            "capital_provincia"
+          ]
+        ],
+        "ngbe_hidrografia_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "mar"
+          ]
+        ],
+        "mfe50_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "arbolado"
+          ],
+          [
+            "==",
+            "clase",
+            "Arbolado"
+          ]
+        ],
+        "enp_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "parque_nacional"
+          ],
+          [
+            "==",
+            "clase",
+            "parque_natural"
+          ],
+          [
+            "==",
+            "clase",
+            "reserva_de_la_biosfera"
+          ]
+        ],
+        "hidrografia_rioja": [
+          "all",
+          [
+            "<=",
+            "orden",
+            5
+          ],
+          [
+            "==",
+            "clase",
+            "curso_natural"
+          ]
+        ],
+        "lamina_agua_rioja": [
+          "all",
+          [
+            "==",
+            "tipo",
+            "embalse"
+          ]
+        ],
+        "linea_limite_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "limite_provincial"
+          ],
+          [
+            "==",
+            "clase",
+            "limite_autonomico"
+          ],
+          [
+            "==",
+            "clase",
+            "limite_municipal"
+          ]
+        ]
+      }
+    },
+  {
+      "level": "13",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "aerodromo_pol.gz",
+          "name": "aerodromo_rioja"
+        },
+        {
+          "file": "autopista_lin.gz",
+          "name": "autopista_rioja"
+        },
+        {
+          "file": "autovia_lin.gz",
+          "name": "autovia_rioja"
+        },
+        {
+          "file": "camino_lin.gz",
+          "name": "camino_rioja"
+        },
+        {
+          "file": "carretera_nacional_lin.gz",
+          "name": "carretera_nacional_rioja"
+        },
+        {
+          "file": "carretera_otros_lin.gz",
+          "name": "carretera_otros_rioja"
+        },
+        {
+          "file": "carretera_secundaria_lin.gz",
+          "name": "carretera_secundaria_rioja"
+        },
+        {
+          "file": "carretera_terciaria_lin.gz",
+          "name": "carretera_terciaria_rioja"
+        },
+        {
+          "file": "enp_pol.gz",
+          "name": "enp_rioja"
+        },
+        {
+          "file": "ferrocarril_lin.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "ferrocarril_pk_pto.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "hidrografia_pol.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "lamina_agua_pol.gz",
+          "name": "lamina_agua_rioja"
+        },
+        {
+          "file": "linea_limite_lin.gz",
+          "name": "linea_limite_rioja"
+        },
+        {
+          "file": "mfe50_pol.gz",
+          "name": "mfe50_rioja"
+        },
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        },
+        {
+          "file": "nucleo_urbano_pol.gz",
+          "name": "nucleo_urbano_rioja"
+        },
+        {
+          "file": "instalacion_deportiva_pol.gz",
+          "name": "instalacion_deportiva_rioja"
+        },
+        {
+          "file": "instalacion_educativa_pol.gz",
+          "name": "instalacion_educativa_rioja"
+        },
+        {
+          "file": "instalacion_energia_electrica_pol.gz",
+          "name": "instalacion_energia_electrica_rioja"
+        },
+        {
+          "file": "instalacion_militar_pol.gz",
+          "name": "instalacion_militar_rioja"
+        },
+        {
+          "file": "instalacion_sanitaria_pol.gz",
+          "name": "instalacion_sanitaria_rioja"
+        },
+        {
+          "file": "instalacion_telecomunicaciones_medicion_pol.gz",
+          "name": "instalacion_telecomunicaciones_medicion_rioja"
+        },
+        {
+          "file": "instalacion_tratamiento_aguas_pol.gz",
+          "name": "instalacion_tratamiento_aguas_rioja"
+        },
+        {
+          "file": "parque_jardin_pol.gz",
+          "name": "parque_jardin_rioja"
+        },
+        {
+          "file": "recinto_industrial_pol.gz",
+          "name": "recinto_industrial_rioja"
+        }
+      ],
+      "layers_no_coalesce": [],
+      "layers_with_labels": [
+		{
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "ngbe_division_administrativa_pto.gz",
+          "name": "ngbe_division_administrativa_rioja"
+        },
+        {
+          "file": "ngbe_hidrografia_pto.gz",
+          "name": "ngbe_hidrografia_rioja"
+        },
+        {
+          "file": "ngbe_orografia_pto.gz",
+          "name": "ngbe_orografia_rioja"
+        },
+        {
+          "file": "ngbe_poblaciones_construcciones_pto.gz",
+          "name": "ngbe_poblaciones_construcciones_rioja"
+        },
+        {
+          "file": "via_urbana_lin.gz",
+          "name": "via_urbana_rioja"
+        },
+        {
+          "file": "etiqueta_mapa_base_pto.gz",
+          "name": "etiqueta_mapa_base_rioja"
+        }
+      ],
+      "filter": {
+        "ngbe_division_administrativa_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "comunidad_autonoma"
+          ],
+          [
+            "==",
+            "clase",
+            "ciudad_estatuto_autonomia"
+          ]
+        ],
+        "ngbe_poblaciones_construcciones_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "capital_comunidad_autonoma_ciudad"
+          ],
+          [
+            "==",
+            "clase",
+            "capital_municipio"
+          ],
+          [
+            "==",
+            "clase",
+            "entidad_singular"
+          ],
+          [
+            "==",
+            "clase",
+            "capital_provincia"
+          ]
+        ],
+        "ngbe_hidrografia_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "mar"
+          ]
+        ],
+        "mfe50_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "arbolado"
+          ],
+          [
+            "==",
+            "clase",
+            "Arbolado"
+          ]
+        ],
+        "enp_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "parque_nacional"
+          ],
+          [
+            "==",
+            "clase",
+            "parque_natural"
+          ],
+          [
+            "==",
+            "clase",
+            "reserva_de_la_biosfera"
+          ]
+        ],
+        "hidrografia_rioja": [
+          "all",
+          [
+            "<=",
+            "orden",
+            5
+          ],
+          [
+            "==",
+            "clase",
+            "curso_natural"
+          ]
+        ],
+        "lamina_agua_rioja": [
+          "all",
+          [
+            "==",
+            "tipo",
+            "embalse"
+          ]
+        ],
+        "ferrocarril_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "tren"
+          ]
+        ],
+        "linea_limite_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "limite_provincial"
+          ],
+          [
+            "==",
+            "clase",
+            "limite_autonomico"
+          ],
+          [
+            "==",
+            "clase",
+            "limite_municipal"
+          ]
+        ]
+      }
+    },
+
+   {
+      "level": "14",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "aerodromo_pol.gz",
+          "name": "aerodromo_rioja"
+        },
+        {
+          "file": "autopista_lin.gz",
+          "name": "autopista_rioja"
+        },
+        {
+          "file": "autovia_lin.gz",
+          "name": "autovia_rioja"
+        },
+        {
+          "file": "camino_lin.gz",
+          "name": "camino_rioja"
+        },
+        {
+          "file": "carretera_nacional_lin.gz",
+          "name": "carretera_nacional_rioja"
+        },
+        {
+          "file": "carretera_otros_lin.gz",
+          "name": "carretera_otros_rioja"
+        },
+        {
+          "file": "carretera_secundaria_lin.gz",
+          "name": "carretera_secundaria_rioja"
+        },
+        {
+          "file": "carretera_terciaria_lin.gz",
+          "name": "carretera_terciaria_rioja"
+        },
+        {
+          "file": "enp_pol.gz",
+          "name": "enp_rioja"
+        },
+        {
+          "file": "ferrocarril_lin.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "ferrocarril_pk_pto.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "hidrografia_pol.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "lamina_agua_pol.gz",
+          "name": "lamina_agua_rioja"
+        },
+        {
+          "file": "linea_limite_lin.gz",
+          "name": "linea_limite_rioja"
+        },
+        {
+          "file": "mfe50_pol.gz",
+          "name": "mfe50_rioja"
+        },
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        },
+        {
+          "file": "instalacion_deportiva_pol.gz",
+          "name": "instalacion_deportiva_rioja"
+        },
+        {
+          "file": "instalacion_educativa_pol.gz",
+          "name": "instalacion_educativa_rioja"
+        },
+        {
+          "file": "instalacion_energia_electrica_pol.gz",
+          "name": "instalacion_energia_electrica_rioja"
+        },
+        {
+          "file": "instalacion_militar_pol.gz",
+          "name": "instalacion_militar_rioja"
+        },
+        {
+          "file": "instalacion_sanitaria_pol.gz",
+          "name": "instalacion_sanitaria_rioja"
+        },
+        {
+          "file": "instalacion_telecomunicaciones_medicion_pol.gz",
+          "name": "instalacion_telecomunicaciones_medicion_rioja"
+        },
+        {
+          "file": "instalacion_tratamiento_aguas_pol.gz",
+          "name": "instalacion_tratamiento_aguas_rioja"
+        },
+        {
+          "file": "parque_jardin_pol.gz",
+          "name": "parque_jardin_rioja"
+        },
+        {
+          "file": "recinto_industrial_pol.gz",
+          "name": "recinto_industrial_rioja"
+        },
+        {
+          "file": "nucleo_urbano_pol.gz",
+          "name": "nucleo_urbano_rioja"
+        }
+      ],
+      "layers_no_coalesce": [],
+      "layers_with_labels": [
+		{
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "ngbe_division_administrativa_pto.gz",
+          "name": "ngbe_division_administrativa_rioja"
+        },
+        {
+          "file": "ngbe_hidrografia_pto.gz",
+          "name": "ngbe_hidrografia_rioja"
+        },
+        {
+          "file": "ngbe_orografia_pto.gz",
+          "name": "ngbe_orografia_rioja"
+        },
+        {
+          "file": "ngbe_poblaciones_construcciones_pto.gz",
+          "name": "ngbe_poblaciones_construcciones_rioja"
+        },
+        {
+          "file": "via_urbana_lin.gz",
+          "name": "via_urbana_rioja"
+        },
+        {
+          "file": "etiqueta_mapa_base_pto.gz",
+          "name": "etiqueta_mapa_base_rioja"
+        }
+      ],
+      "filter": {
+        "ngbe_division_administrativa_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "comunidad_autonoma"
+          ],
+          [
+            "==",
+            "clase",
+            "ciudad_estatuto_autonomia"
+          ]
+        ],
+        "ngbe_poblaciones_construcciones_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "capital_comunidad_autonoma_ciudad"
+          ],
+          [
+            "==",
+            "clase",
+            "capital_municipio"
+          ],
+          [
+            "==",
+            "clase",
+            "entidad_singular"
+          ],
+          [
+            "==",
+            "clase",
+            "capital_provincia"
+          ]
+        ],
+        "ngbe_hidrografia_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "mar"
+          ]
+        ],
+        "mfe50_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "arbolado"
+          ],
+          [
+            "==",
+            "clase",
+            "Arbolado"
+          ]
+        ],
+        "enp_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "parque_nacional"
+          ],
+          [
+            "==",
+            "clase",
+            "parque_natural"
+          ],
+          [
+            "==",
+            "clase",
+            "reserva_de_la_biosfera"
+          ]
+        ],
+        "hidrografia_rioja": [
+          "all",
+          [
+            "<=",
+            "orden",
+            5
+          ],
+          [
+            "==",
+            "clase",
+            "curso_natural"
+          ]
+        ],
+        "lamina_agua_rioja": [
+          "all",
+          [
+            "==",
+            "tipo",
+            "embalse"
+          ]
+        ],
+        "ferrocarril_rioja": [
+          "all",
+          [
+            "==",
+            "clase",
+            "tren"
+          ]
+        ],
+        "linea_limite_rioja": [
+          "any",
+          [
+            "==",
+            "clase",
+            "limite_provincial"
+          ],
+          [
+            "==",
+            "clase",
+            "limite_autonomico"
+          ],
+          [
+            "==",
+            "clase",
+            "limite_municipal"
+          ]
+        ]
+      }
+    },
+   {
+      "level": "15",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "aerodromo_pol.gz",
+          "name": "aerodromo_rioja"
+        },
+        {
+          "file": "autopista_lin.gz",
+          "name": "autopista_rioja"
+        },
+        {
+          "file": "autovia_lin.gz",
+          "name": "autovia_rioja"
+        },
+        {
+          "file": "camino_lin.gz",
+          "name": "camino_rioja"
+        },
+        {
+          "file": "carretera_nacional_lin.gz",
+          "name": "carretera_nacional_rioja"
+        },
+        {
+          "file": "carretera_otros_lin.gz",
+          "name": "carretera_otros_rioja"
+        },
+        {
+          "file": "carretera_secundaria_lin.gz",
+          "name": "carretera_secundaria_rioja"
+        },
+        {
+          "file": "carretera_terciaria_lin.gz",
+          "name": "carretera_terciaria_rioja"
+        },
+        {
+          "file": "enp_pol.gz",
+          "name": "enp_rioja"
+        },
+        {
+          "file": "ferrocarril_lin.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "ferrocarril_pk_pto.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "hidrografia_pol.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "lamina_agua_pol.gz",
+          "name": "lamina_agua_rioja"
+        },
+        {
+          "file": "linea_limite_lin.gz",
+          "name": "linea_limite_rioja"
+        },
+        {
+          "file": "mfe50_pol.gz",
+          "name": "mfe50_rioja"
+        },
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        },
+        {
+          "file": "nucleo_urbano_pol.gz",
+          "name": "nucleo_urbano_rioja"
+        },
+        {
+          "file": "instalacion_deportiva_pol.gz",
+          "name": "instalacion_deportiva_rioja"
+        },
+        {
+          "file": "instalacion_educativa_pol.gz",
+          "name": "instalacion_educativa_rioja"
+        },
+        {
+          "file": "instalacion_energia_electrica_pol.gz",
+          "name": "instalacion_energia_electrica_rioja"
+        },
+        {
+          "file": "instalacion_militar_pol.gz",
+          "name": "instalacion_militar_rioja"
+        },
+        {
+          "file": "instalacion_sanitaria_pol.gz",
+          "name": "instalacion_sanitaria_rioja"
+        },
+        {
+          "file": "instalacion_telecomunicaciones_medicion_pol.gz",
+          "name": "instalacion_telecomunicaciones_medicion_rioja"
+        },
+        {
+          "file": "instalacion_tratamiento_aguas_pol.gz",
+          "name": "instalacion_tratamiento_aguas_rioja"
+        },
+        {
+          "file": "parque_jardin_pol.gz",
+          "name": "parque_jardin_rioja"
+        },
+        {
+          "file": "recinto_industrial_pol.gz",
+          "name": "recinto_industrial_rioja"
+        }
+      ],
+      "layers_no_coalesce": [],
+      "layers_with_labels": [
+		{
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "ngbe_division_administrativa_pto.gz",
+          "name": "ngbe_division_administrativa_rioja"
+        },
+        {
+          "file": "ngbe_hidrografia_pto.gz",
+          "name": "ngbe_hidrografia_rioja"
+        },
+        {
+          "file": "ngbe_orografia_pto.gz",
+          "name": "ngbe_orografia_rioja"
+        },
+        {
+          "file": "ngbe_poblaciones_construcciones_pto.gz",
+          "name": "ngbe_poblaciones_construcciones_rioja"
+        },
+        {
+          "file": "via_urbana_lin.gz",
+          "name": "via_urbana_rioja"
+        },
+        {
+          "file": "etiqueta_mapa_base_pto.gz",
+          "name": "etiqueta_mapa_base_rioja"
+        }
+      ],
+      "filter": {}
+    },
+    {
+      "level": "16",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "aerodromo_pol.gz",
+          "name": "aerodromo_rioja"
+        },
+        {
+          "file": "autopista_lin.gz",
+          "name": "autopista_rioja"
+        },
+        {
+          "file": "autovia_lin.gz",
+          "name": "autovia_rioja"
+        },
+        {
+          "file": "camino_lin.gz",
+          "name": "camino_rioja"
+        },
+        {
+          "file": "carretera_nacional_lin.gz",
+          "name": "carretera_nacional_rioja"
+        },
+        {
+          "file": "carretera_otros_lin.gz",
+          "name": "carretera_otros_rioja"
+        },
+        {
+          "file": "carretera_secundaria_lin.gz",
+          "name": "carretera_secundaria_rioja"
+        },
+        {
+          "file": "carretera_terciaria_lin.gz",
+          "name": "carretera_terciaria_rioja"
+        },
+        {
+          "file": "enp_pol.gz",
+          "name": "enp_rioja"
+        },
+        {
+          "file": "ferrocarril_lin.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "ferrocarril_pk_pto.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "hidrografia_pol.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "lamina_agua_pol.gz",
+          "name": "lamina_agua_rioja"
+        },
+        {
+          "file": "linea_limite_lin.gz",
+          "name": "linea_limite_rioja"
+        },
+        {
+          "file": "mfe50_pol.gz",
+          "name": "mfe50_rioja"
+        },
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        },
+        {
+          "file": "nucleo_urbano_pol.gz",
+          "name": "nucleo_urbano_rioja"
+        },
+        {
+          "file": "instalacion_deportiva_pol.gz",
+          "name": "instalacion_deportiva_rioja"
+        },
+        {
+          "file": "instalacion_educativa_pol.gz",
+          "name": "instalacion_educativa_rioja"
+        },
+        {
+          "file": "instalacion_energia_electrica_pol.gz",
+          "name": "instalacion_energia_electrica_rioja"
+        },
+        {
+          "file": "instalacion_militar_pol.gz",
+          "name": "instalacion_militar_rioja"
+        },
+        {
+          "file": "instalacion_sanitaria_pol.gz",
+          "name": "instalacion_sanitaria_rioja"
+        },
+        {
+          "file": "instalacion_telecomunicaciones_medicion_pol.gz",
+          "name": "instalacion_telecomunicaciones_medicion_rioja"
+        },
+        {
+          "file": "instalacion_tratamiento_aguas_pol.gz",
+          "name": "instalacion_tratamiento_aguas_rioja"
+        },
+        {
+          "file": "parque_jardin_pol.gz",
+          "name": "parque_jardin_rioja"
+        },
+        {
+          "file": "recinto_industrial_pol.gz",
+          "name": "recinto_industrial_rioja"
+        }
+      ],
+      "layers_no_coalesce": [        
+		{
+          "file": "edificio_pol.gz",
+          "name": "edificio_rioja"
+        }
+		],
+      "layers_with_labels": [
+		{
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "ngbe_division_administrativa_pto.gz",
+          "name": "ngbe_division_administrativa_rioja"
+        },
+        {
+          "file": "ngbe_hidrografia_pto.gz",
+          "name": "ngbe_hidrografia_rioja"
+        },
+        {
+          "file": "ngbe_orografia_pto.gz",
+          "name": "ngbe_orografia_rioja"
+        },
+        {
+          "file": "ngbe_poblaciones_construcciones_pto.gz",
+          "name": "ngbe_poblaciones_construcciones_rioja"
+        },
+        {
+          "file": "via_urbana_lin.gz",
+          "name": "via_urbana_rioja"
+        },
+        {
+          "file": "etiqueta_mapa_base_pto.gz",
+          "name": "etiqueta_mapa_base_rioja"
+        }
+      ],
+      "filter": {}
+    },
+    {
+      "level": "17",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "aerodromo_pol.gz",
+          "name": "aerodromo_rioja"
+        },
+        {
+          "file": "autopista_lin.gz",
+          "name": "autopista_rioja"
+        },
+        {
+          "file": "autovia_lin.gz",
+          "name": "autovia_rioja"
+        },
+        {
+          "file": "camino_lin.gz",
+          "name": "camino_rioja"
+        },
+        {
+          "file": "carretera_nacional_lin.gz",
+          "name": "carretera_nacional_rioja"
+        },
+        {
+          "file": "carretera_otros_lin.gz",
+          "name": "carretera_otros_rioja"
+        },
+        {
+          "file": "carretera_secundaria_lin.gz",
+          "name": "carretera_secundaria_rioja"
+        },
+        {
+          "file": "carretera_terciaria_lin.gz",
+          "name": "carretera_terciaria_rioja"
+        },
+        {
+          "file": "enp_pol.gz",
+          "name": "enp_rioja"
+        },
+        {
+          "file": "ferrocarril_lin.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "ferrocarril_pk_pto.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "hidrografia_pol.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "lamina_agua_pol.gz",
+          "name": "lamina_agua_rioja"
+        },
+        {
+          "file": "linea_limite_lin.gz",
+          "name": "linea_limite_rioja"
+        },
+        {
+          "file": "mfe50_pol.gz",
+          "name": "mfe50_rioja"
+        },
+        {
+          "file": "portal_pto.gz",
+          "name": "portal_rioja"
+        },
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        },
+        {
+          "file": "nucleo_urbano_pol.gz",
+          "name": "nucleo_urbano_rioja"
+        },
+        {
+          "file": "instalacion_deportiva_pol.gz",
+          "name": "instalacion_deportiva_rioja"
+        },
+        {
+          "file": "instalacion_educativa_pol.gz",
+          "name": "instalacion_educativa_rioja"
+        },
+        {
+          "file": "instalacion_energia_electrica_pol.gz",
+          "name": "instalacion_energia_electrica_rioja"
+        },
+        {
+          "file": "instalacion_militar_pol.gz",
+          "name": "instalacion_militar_rioja"
+        },
+        {
+          "file": "instalacion_sanitaria_pol.gz",
+          "name": "instalacion_sanitaria_rioja"
+        },
+        {
+          "file": "instalacion_telecomunicaciones_medicion_pol.gz",
+          "name": "instalacion_telecomunicaciones_medicion_rioja"
+        },
+        {
+          "file": "instalacion_tratamiento_aguas_pol.gz",
+          "name": "instalacion_tratamiento_aguas_rioja"
+        },
+        {
+          "file": "parque_jardin_pol.gz",
+          "name": "parque_jardin_rioja"
+        },
+        {
+          "file": "recinto_industrial_pol.gz",
+          "name": "recinto_industrial_rioja"
+        }
+      ],
+      "layers_no_coalesce": [        
+		{
+          "file": "edificio_pol.gz",
+          "name": "edificio_rioja"
+        }
+		],
+      "layers_with_labels": [
+		{
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "ngbe_division_administrativa_pto.gz",
+          "name": "ngbe_division_administrativa_rioja"
+        },
+        {
+          "file": "ngbe_hidrografia_pto.gz",
+          "name": "ngbe_hidrografia_rioja"
+        },
+        {
+          "file": "ngbe_orografia_pto.gz",
+          "name": "ngbe_orografia_rioja"
+        },
+        {
+          "file": "ngbe_poblaciones_construcciones_pto.gz",
+          "name": "ngbe_poblaciones_construcciones_rioja"
+        },
+        {
+          "file": "via_urbana_lin.gz",
+          "name": "via_urbana_rioja"
+        },
+        {
+          "file": "etiqueta_mapa_base_pto.gz",
+          "name": "etiqueta_mapa_base_rioja"
+        }
+      ],
+      "filter": {}
+    },
+    {
+      "level": "18",
+      "process": "yes",
+      "layers": [
+        {
+          "file": "aerodromo_pol.gz",
+          "name": "aerodromo_rioja"
+        },
+        {
+          "file": "autopista_lin.gz",
+          "name": "autopista_rioja"
+        },
+        {
+          "file": "autovia_lin.gz",
+          "name": "autovia_rioja"
+        },
+        {
+          "file": "camino_lin.gz",
+          "name": "camino_rioja"
+        },
+        {
+          "file": "carretera_nacional_lin.gz",
+          "name": "carretera_nacional_rioja"
+        },
+        {
+          "file": "carretera_otros_lin.gz",
+          "name": "carretera_otros_rioja"
+        },
+        {
+          "file": "carretera_secundaria_lin.gz",
+          "name": "carretera_secundaria_rioja"
+        },
+        {
+          "file": "carretera_terciaria_lin.gz",
+          "name": "carretera_terciaria_rioja"
+        },
+        {
+          "file": "enp_pol.gz",
+          "name": "enp_rioja"
+        },
+        {
+          "file": "ferrocarril_lin.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "ferrocarril_pk_pto.gz",
+          "name": "ferrocarril_rioja"
+        },
+        {
+          "file": "hidrografia_pol.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "lamina_agua_pol.gz",
+          "name": "lamina_agua_rioja"
+        },
+        {
+          "file": "linea_limite_lin.gz",
+          "name": "linea_limite_rioja"
+        },
+        {
+          "file": "mfe50_pol.gz",
+          "name": "mfe50_rioja"
+        },
+        {
+          "file": "portal_pto.gz",
+          "name": "portal_rioja"
+        },
+        {
+          "file": "tierra_firme_pol.gz",
+          "name": "tierra_firme_rioja"
+        },
+        {
+          "file": "nucleo_urbano_pol.gz",
+          "name": "nucleo_urbano_rioja"
+        },
+        {
+          "file": "instalacion_deportiva_pol.gz",
+          "name": "instalacion_deportiva_rioja"
+        },
+        {
+          "file": "instalacion_educativa_pol.gz",
+          "name": "instalacion_educativa_rioja"
+        },
+        {
+          "file": "instalacion_energia_electrica_pol.gz",
+          "name": "instalacion_energia_electrica_rioja"
+        },
+        {
+          "file": "instalacion_militar_pol.gz",
+          "name": "instalacion_militar_rioja"
+        },
+        {
+          "file": "instalacion_sanitaria_pol.gz",
+          "name": "instalacion_sanitaria_rioja"
+        },
+        {
+          "file": "instalacion_telecomunicaciones_medicion_pol.gz",
+          "name": "instalacion_telecomunicaciones_medicion_rioja"
+        },
+        {
+          "file": "instalacion_tratamiento_aguas_pol.gz",
+          "name": "instalacion_tratamiento_aguas_rioja"
+        },
+        {
+          "file": "parque_jardin_pol.gz",
+          "name": "parque_jardin_rioja"
+        },
+        {
+          "file": "recinto_industrial_pol.gz",
+          "name": "recinto_industrial_rioja"
+        }
+      ],
+      "layers_no_coalesce": [        
+		{
+          "file": "edificio_pol.gz",
+          "name": "edificio_rioja"
+        }
+		],
+      "layers_with_labels": [
+		{
+          "file": "hidrografia_lin.gz",
+          "name": "hidrografia_rioja"
+        },
+        {
+          "file": "ngbe_division_administrativa_pto.gz",
+          "name": "ngbe_division_administrativa_rioja"
+        },
+        {
+          "file": "ngbe_hidrografia_pto.gz",
+          "name": "ngbe_hidrografia_rioja"
+        },
+        {
+          "file": "ngbe_orografia_pto.gz",
+          "name": "ngbe_orografia_rioja"
+        },
+        {
+          "file": "ngbe_poblaciones_construcciones_pto.gz",
+          "name": "ngbe_poblaciones_construcciones_rioja"
+        },
+        {
+          "file": "via_urbana_lin.gz",
+          "name": "via_urbana_rioja"
+        },
+        {
+          "file": "etiqueta_mapa_base_pto.gz",
+          "name": "etiqueta_mapa_base_rioja"
+        }
+      ],
+      "filter": {}
+    }
+  ]
+}

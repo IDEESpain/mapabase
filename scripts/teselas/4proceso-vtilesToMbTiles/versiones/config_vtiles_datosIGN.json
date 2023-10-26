@@ -1,0 +1,4018 @@
+{
+    "input_vrt": "/var/MVT_MapaBaseXYZ/DatosProcesados/productores/nacional/00/",
+    "gz_folder": "/var/MVT_MapaBaseXYZ/DatosProcesados/generados/nacional/gz_datosIGN/",
+    "destination_mbtiles": "/var/MVT_MapaBaseXYZ/niveles/",
+    "destination_folder": "/var/MVT_MapaBaseXYZ/teselas/",
+    "temp_directory": "/var/MVT_MapaBaseXYZ/tmp/",
+    "project": {
+        "name": "vector-tile-prueba",
+        "description": "Datos del Sistema Cartografico Nacional",
+        "contact_name": "A^2",
+        "contact_email": "aurelio.aragon@cnig.es"
+    },
+    "setup": {
+        "compress_geojson": "yes",
+        "tiling_layers": "yes",
+        "to_folder": "yes",
+        "move_to_final_folder": "no",
+        "join_json": "no"
+    },
+    "zoom_levels": [
+        {
+            "level": 0,
+            "process": "yes",
+            "layers": [
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                }
+            ],
+            "layers_no_coalesce": [],
+            "layers_with_labels": [],
+            "filter": {}
+        },
+        {
+            "level": 1,
+            "process": "yes",
+            "layers": [
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                }
+            ],
+            "layers_no_coalesce": [],
+            "layers_with_labels": [],
+            "filter": {}
+        },
+        {
+            "level": 2,
+            "process": "yes",
+            "layers": [
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                }
+            ],
+            "layers_no_coalesce": [],
+            "layers_with_labels": [],
+            "filter": {}
+        },
+        {
+            "level": 3,
+            "process": "yes",
+            "layers": [
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                }
+            ],
+            "layers_no_coalesce": [],
+            "layers_with_labels": [],
+            "filter": {
+                "nombre_division_administrativa_pto": [
+                    "all",
+                    [
+                        "==",
+                        "clase",
+                        "nacion"
+                    ]
+                ]
+            }
+        },
+        {
+            "level": 4,
+            "process": "yes",
+            "layers": [
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                }
+            ],
+            "layers_no_coalesce": [],
+            "layers_with_labels": [],
+            "filter": {
+                "nombre_division_administrativa_pto": [
+                    "all",
+                    [
+                        "==",
+                        "clase",
+                        "nacion"
+                    ]
+                ]
+            }
+        },
+        {
+            "level": 5,
+            "process": "yes",
+            "layers": [
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                }
+            ],
+            "layers_no_coalesce": [],
+            "layers_with_labels": [],
+            "filter": {
+                "linea_limite_lin": [
+                    "all",
+                    [
+                        "==",
+                        "clase",
+                        "limite_autonomico"
+                    ]
+                ],
+                "nombre_division_administrativa_pto": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "ciudad_autonoma"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "comunidad_autonoma"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "nacion"
+                    ]
+                ]
+            }
+        },
+        {
+            "level": 6,
+            "process": "yes",
+            "layers": [
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                }
+            ],
+            "layers_no_coalesce": [],
+            "layers_with_labels": [],
+            "filter": {
+                "linea_limite_lin": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "limite_autonomico"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "ciudad_autonoma"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "comunidad_autonoma"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "nacion"
+                    ]
+                ]
+            }
+        },
+        {
+            "level": 7,
+            "process": "yes",
+            "layers": [
+                {
+                    "file": "cubierta_vegetal_bosque_pol.gz",
+                    "name": "cubierta_vegetal_bosque_pol"
+                },
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "provincia_pol.gz",
+                    "name": "provincia_pol"
+                },
+                {
+                    "file": "espacio_natural_protegido_pol.gz",
+                    "name": "espacio_natural_protegido_pol"
+                },
+                {
+                    "file": "hidrografia_lin.gz",
+                    "name": "hidrografia_lin"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "nombre_hidrografia_pto.gz",
+                    "name": "nombre_hidrografia_pto"
+                },
+                {
+                    "file": "nombre_poblacion_construccion_pto.gz",
+                    "name": "nombre_poblacion_construccion_pto"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                },
+                {
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
+                {
+                    "file": "ferrocarril_lin.gz",
+                    "name": "ferrocarril_lin"
+                }
+            ],
+            "layers_no_coalesce": [],
+            "layers_with_labels": [],
+            "filter": {
+                "linea_limite_lin": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "limite_autonomico"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "limite_provincial"
+                    ]
+                ],
+                "provincia_pol": [
+                    "all",
+                    [
+                        "==",
+                        "clase",
+                        "provincia"
+                    ]
+                ],
+                "espacio_natural_protegido_pol": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "parque_nacional"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "reserva_de_la_biosfera"
+                    ]
+                ],
+                "hidrografia_lin": [
+                    "all"
+                ],
+                "nombre_division_administrativa_pto": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "ciudad_autonoma"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "comunidad_autonoma"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "nacion"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "provincia"
+                    ]
+                ],
+                "nombre_hidrografia_pto": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "mar"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "isla"
+                    ]
+                ],
+                "nombre_poblacion_construccion_pto": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "capital_comunidad_autonoma_ciudad_autonoma"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "capital_estado"
+                    ]
+                ],
+                "ferrocarril_lin": [
+                    "all",
+                    [
+                        "==",
+                        "clase",
+                        "tren"
+                    ]
+                ]
+            }
+        },
+        {
+            "level": 8,
+            "process": "yes",
+            "layers": [
+                {
+                    "file": "cubierta_vegetal_bosque_pol.gz",
+                    "name": "cubierta_vegetal_bosque_pol"
+                },
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "provincia_pol.gz",
+                    "name": "provincia_pol"
+                },
+                {
+                    "file": "espacio_natural_protegido_pol.gz",
+                    "name": "espacio_natural_protegido_pol"
+                },
+                {
+                    "file": "hidrografia_lin.gz",
+                    "name": "hidrografia_lin"
+                },
+                {
+                    "file": "lamina_agua_pol.gz",
+                    "name": "lamina_agua_pol"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "nombre_hidrografia_pto.gz",
+                    "name": "nombre_hidrografia_pto"
+                },
+                {
+                    "file": "nombre_poblacion_construccion_pto.gz",
+                    "name": "nombre_poblacion_construccion_pto"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                },
+                {
+                    "file": "carretera_autonomica_1er_nivel_lin.gz",
+                    "name": "carretera_autonomica_1er_nivel_lin"
+                },
+                {
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
+                {
+                    "file": "ferrocarril_lin.gz",
+                    "name": "ferrocarril_lin"
+                }
+            ],
+            "layers_no_coalesce": [],
+            "layers_with_labels": [],
+            "filter": {
+                "linea_limite_lin": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "limite_autonomico"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "limite_provincial"
+                    ]
+                ],
+                "espacio_natural_protegido_pol": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "parque_nacional"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "reserva_de_la_biosfera"
+                    ]
+                ],
+                "hidrografia_lin": [
+                    "all"
+                ],
+                "lamina_agua_pol": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "embalse"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "marisma"
+                    ]
+                ],
+                "nombre_division_administrativa_pto": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "ciudad_autonoma"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "comunidad_autonoma"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "nacion"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "provincia"
+                    ]
+                ],
+                "nombre_hidrografia_pto": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "isla"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "mar"
+                    ]
+                ],
+                "nombre_poblacion_construccion_pto": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "capital_comunidad_autonoma_ciudad_autonoma"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "capital_estado"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "capital_provincia"
+                    ]
+                ],
+                "ferrocarril_lin": [
+                    "all",
+                    [
+                        "==",
+                        "clase",
+                        "tren"
+                    ]
+                ]
+            }
+        },
+        {
+            "level": 9,
+            "process": "yes",
+            "layers": [
+                {
+                    "file": "cubierta_vegetal_bosque_pol.gz",
+                    "name": "cubierta_vegetal_bosque_pol"
+                },
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "municipio_pol.gz",
+                    "name": "municipio_pol"
+                },
+                {
+                    "file": "provincia_pol.gz",
+                    "name": "provincia_pol"
+                },
+                {
+                    "file": "espacio_natural_protegido_pol.gz",
+                    "name": "espacio_natural_protegido_pol"
+                },
+                {
+                    "file": "hidrografia_lin.gz",
+                    "name": "hidrografia_lin"
+                },
+                {
+                    "file": "hidrografia_pol.gz",
+                    "name": "hidrografia_pol"
+                },
+                {
+                    "file": "lamina_agua_pol.gz",
+                    "name": "lamina_agua_pol"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "nombre_hidrografia_pto.gz",
+                    "name": "nombre_hidrografia_pto"
+                },
+                {
+                    "file": "nombre_poblacion_construccion_pto.gz",
+                    "name": "nombre_poblacion_construccion_pto"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                },
+                {
+                    "file": "carretera_autonomica_1er_nivel_lin.gz",
+                    "name": "carretera_autonomica_1er_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_2do_nivel_lin.gz",
+                    "name": "carretera_autonomica_2do_nivel_lin"
+                },
+                {
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
+                {
+                    "file": "ferrocarril_lin.gz",
+                    "name": "ferrocarril_lin"
+                }
+            ],
+            "layers_no_coalesce": [],
+            "layers_with_labels": [],
+            "filter": {
+                "espacio_natural_protegido_pol": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "humedal_protegido"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "parque_nacional"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "parque_natural"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "reserva_de_la_biosfera"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "zona_de_especial_conservacion_de_importancia_comunitaria"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "zona_de_importancia_comunitaria_lic"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "zona_de_la_red_ecologica_europea_natura_2000"
+                    ]
+                ],
+                "hidrografia_lin": [
+                    "all"
+                ],
+                "lamina_agua_pol": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "embalse"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "marisma"
+                    ]
+                ],
+                "nombre_division_administrativa_pto": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "ciudad_autonoma"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "comunidad_autonoma"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "municipio"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "nacion"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "provincia"
+                    ]
+                ],
+                "nombre_hidrografia_pto": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "isla"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "mar"
+                    ]
+                ],
+                "nombre_poblacion_construccion_pto": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "capital_comunidad_autonoma_ciudad_autonoma"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "capital_estado"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "capital_municipio"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "capital_provincia"
+                    ]
+                ],
+                "ferrocarril_lin": [
+                    "all",
+                    [
+                        "==",
+                        "clase",
+                        "tren"
+                    ]
+                ]
+            }
+        },
+        {
+            "level": 10,
+            "process": "yes",
+            "layers": [
+                {
+                    "file": "cubierta_vegetal_bosque_pol.gz",
+                    "name": "cubierta_vegetal_bosque_pol"
+                },
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "municipio_pol.gz",
+                    "name": "municipio_pol"
+                },
+                {
+                    "file": "nucleo_urbano_pol.gz",
+                    "name": "nucleo_urbano_pol"
+                },
+                {
+                    "file": "provincia_pol.gz",
+                    "name": "provincia_pol"
+                },
+                {
+                    "file": "espacio_natural_protegido_pol.gz",
+                    "name": "espacio_natural_protegido_pol"
+                },
+                {
+                    "file": "hidrografia_lin.gz",
+                    "name": "hidrografia_lin"
+                },
+                {
+                    "file": "hidrografia_pol.gz",
+                    "name": "hidrografia_pol"
+                },
+                {
+                    "file": "lamina_agua_pol.gz",
+                    "name": "lamina_agua_pol"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "nombre_hidrografia_pto.gz",
+                    "name": "nombre_hidrografia_pto"
+                },
+                {
+                    "file": "nombre_poblacion_construccion_pto.gz",
+                    "name": "nombre_poblacion_construccion_pto"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "aerodromo_pto.gz",
+                    "name": "aerodromo_pto"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                },
+                {
+                    "file": "carretera_autonomica_1er_nivel_lin.gz",
+                    "name": "carretera_autonomica_1er_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_2do_nivel_lin.gz",
+                    "name": "carretera_autonomica_2do_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_3er_nivel_lin.gz",
+                    "name": "carretera_autonomica_3er_nivel_lin"
+                },
+                {
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
+                {
+                    "file": "ferrocarril_lin.gz",
+                    "name": "ferrocarril_lin"
+                },
+                {
+                    "file": "puerto_pto.gz",
+                    "name": "puerto_pto"
+                }
+            ],
+            "layers_no_coalesce": [],
+            "layers_with_labels": [],
+            "filter": {
+                "espacio_natural_protegido_pol": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "humedal_protegido"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "parque_nacional"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "parque_natural"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "reserva_de_la_biosfera"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "zona_de_especial_conservacion_de_importancia_comunitaria"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "zona_de_importancia_comunitaria_lic"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "zona_de_la_red_ecologica_europea_natura_2000"
+                    ]
+                ],
+                "lamina_agua_pol": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "embalse"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "marisma"
+                    ]
+                ],
+                "nombre_hidrografia_pto": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "embalse"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "entrante_costero_estrecho_maritimo"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "isla"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "mar"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "saliente_costero"
+                    ]
+                ],
+                "ferrocarril_lin": [
+                    "all",
+                    [
+                        "==",
+                        "clase",
+                        "tren"
+                    ]
+                ]
+            }
+        },
+        {
+            "level": 11,
+            "process": "yes",
+            "layers": [
+                {
+                    "file": "cubierta_vegetal_bosque_pol.gz",
+                    "name": "cubierta_vegetal_bosque_pol"
+                },
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "municipio_pol.gz",
+                    "name": "municipio_pol"
+                },
+                {
+                    "file": "nucleo_urbano_pol.gz",
+                    "name": "nucleo_urbano_pol"
+                },
+                {
+                    "file": "provincia_pol.gz",
+                    "name": "provincia_pol"
+                },
+                {
+                    "file": "espacio_natural_protegido_pol.gz",
+                    "name": "espacio_natural_protegido_pol"
+                },
+                {
+                    "file": "hidrografia_lin.gz",
+                    "name": "hidrografia_lin"
+                },
+                {
+                    "file": "hidrografia_pol.gz",
+                    "name": "hidrografia_pol"
+                },
+                {
+                    "file": "lamina_agua_pol.gz",
+                    "name": "lamina_agua_pol"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "nombre_hidrografia_pto.gz",
+                    "name": "nombre_hidrografia_pto"
+                },
+                {
+                    "file": "nombre_poblacion_construccion_pto.gz",
+                    "name": "nombre_poblacion_construccion_pto"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "aerodromo_pto.gz",
+                    "name": "aerodromo_pto"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                },
+                {
+                    "file": "carretera_autonomica_1er_nivel_lin.gz",
+                    "name": "carretera_autonomica_1er_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_2do_nivel_lin.gz",
+                    "name": "carretera_autonomica_2do_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_3er_nivel_lin.gz",
+                    "name": "carretera_autonomica_3er_nivel_lin"
+                },
+                {
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
+                {
+                    "file": "carretera_otros_lin.gz",
+                    "name": "carretera_otros_lin"
+                },
+                {
+                    "file": "ferrocarril_lin.gz",
+                    "name": "ferrocarril_lin"
+                },
+                {
+                    "file": "puerto_pto.gz",
+                    "name": "puerto_pto"
+                }
+            ],
+            "layers_no_coalesce": [],
+            "layers_with_labels": [],
+            "filter": {
+                "lamina_agua_pol": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "embalse"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "marisma"
+                    ]
+                ],
+                "ferrocarril_lin": [
+                    "all",
+                    [
+                        "==",
+                        "clase",
+                        "tren"
+                    ]
+                ]
+            }
+        },
+        {
+            "level": 12,
+            "process": "yes",
+            "layers": [
+                {
+                    "file": "cubierta_vegetal_bosque_pol.gz",
+                    "name": "cubierta_vegetal_bosque_pol"
+                },
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "municipio_pol.gz",
+                    "name": "municipio_pol"
+                },
+                {
+                    "file": "nucleo_urbano_pol.gz",
+                    "name": "nucleo_urbano_pol"
+                },
+                {
+                    "file": "provincia_pol.gz",
+                    "name": "provincia_pol"
+                },
+                {
+                    "file": "manzana_pol.gz",
+                    "name": "manzana_pol"
+                },
+                {
+                    "file": "espacio_natural_protegido_pol.gz",
+                    "name": "espacio_natural_protegido_pol"
+                },
+                {
+                    "file": "zona_protegida_pol.gz",
+                    "name": "zona_protegida_pol"
+                },
+                {
+                    "file": "hidrografia_lin.gz",
+                    "name": "hidrografia_lin"
+                },
+                {
+                    "file": "hidrografia_pol.gz",
+                    "name": "hidrografia_pol"
+                },
+                {
+                    "file": "lamina_agua_pol.gz",
+                    "name": "lamina_agua_pol"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "nombre_hidrografia_pto.gz",
+                    "name": "nombre_hidrografia_pto"
+                },
+                {
+                    "file": "nombre_orografia_pto.gz",
+                    "name": "nombre_orografia_pto"
+                },
+                {
+                    "file": "nombre_poblacion_construccion_pto.gz",
+                    "name": "nombre_poblacion_construccion_pto"
+                },
+                {
+                    "file": "altimetria_lin.gz",
+                    "name": "altimetria_lin"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "zona_industrial_pol.gz",
+                    "name": "zona_industrial_pol"
+                },
+                {
+                    "file": "zona_militar_pol.gz",
+                    "name": "zona_militar_pol"
+                },
+                {
+                    "file": "aerodromo_pol.gz",
+                    "name": "aerodromo_pol"
+                },
+                {
+                    "file": "aerodromo_pto.gz",
+                    "name": "aerodromo_pto"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                },
+                {
+                    "file": "carretera_autonomica_1er_nivel_lin.gz",
+                    "name": "carretera_autonomica_1er_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_2do_nivel_lin.gz",
+                    "name": "carretera_autonomica_2do_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_3er_nivel_lin.gz",
+                    "name": "carretera_autonomica_3er_nivel_lin"
+                },
+                {
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
+                {
+                    "file": "carretera_otros_lin.gz",
+                    "name": "carretera_otros_lin"
+                },
+                {
+                    "file": "ferrocarril_lin.gz",
+                    "name": "ferrocarril_lin"
+                },
+                {
+                    "file": "puerto_pol.gz",
+                    "name": "puerto_pol"
+                },
+                {
+                    "file": "puerto_pto.gz",
+                    "name": "puerto_pto"
+                },
+                {
+                    "file": "via_servicio_lin.gz",
+                    "name": "via_servicio_lin"
+                }
+            ],
+            "layers_no_coalesce": [],
+            "layers_with_labels": [],
+            "filter": {
+                "lamina_agua_pol": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "balsa_alberca"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "embalse"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "lago"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "marisma"
+                    ]
+                ],
+                "altimetria_lin": [
+                    "all",
+                    [
+                        "==",
+                        "altitud",
+                        "[m\u00faltiplo de 50]"
+                    ]
+                ],
+                "zona_industrial_pol": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "area_industrial"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "poligono_industrial"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "zona_industrial"
+                    ]
+                ],
+                "zona_militar_pol": [
+                    "all",
+                    [
+                        "==",
+                        "clase",
+                        "zona_militar"
+                    ]
+                ]
+            }
+        },
+        {
+            "level": 13,
+            "process": "yes",
+            "layers": [
+                {
+                    "file": "cubierta_vegetal_pol.gz",
+                    "name": "cubierta_vegetal_pol"
+                },
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "municipio_pol.gz",
+                    "name": "municipio_pol"
+                },
+                {
+                    "file": "nucleo_urbano_pol.gz",
+                    "name": "nucleo_urbano_pol"
+                },
+                {
+                    "file": "provincia_pol.gz",
+                    "name": "provincia_pol"
+                },
+                {
+                    "file": "manzana_pol.gz",
+                    "name": "manzana_pol"
+                },
+                {
+                    "file": "espacio_natural_protegido_pol.gz",
+                    "name": "espacio_natural_protegido_pol"
+                },
+                {
+                    "file": "zona_protegida_pol.gz",
+                    "name": "zona_protegida_pol"
+                },
+                {
+                    "file": "hidrografia_lin.gz",
+                    "name": "hidrografia_lin"
+                },
+                {
+                    "file": "hidrografia_pol.gz",
+                    "name": "hidrografia_pol"
+                },
+                {
+                    "file": "lamina_agua_pol.gz",
+                    "name": "lamina_agua_pol"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "nombre_hidrografia_pto.gz",
+                    "name": "nombre_hidrografia_pto"
+                },
+                {
+                    "file": "nombre_orografia_pto.gz",
+                    "name": "nombre_orografia_pto"
+                },
+                {
+                    "file": "nombre_poblacion_construccion_pto.gz",
+                    "name": "nombre_poblacion_construccion_pto"
+                },
+                {
+                    "file": "nombre_transporte_pto.gz",
+                    "name": "nombre_transporte_pto"
+                },
+                {
+                    "file": "altimetria_lin.gz",
+                    "name": "altimetria_lin"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "zona_dotacional_pol.gz",
+                    "name": "zona_dotacional_pol"
+                },
+                {
+                    "file": "zona_industrial_pol.gz",
+                    "name": "zona_industrial_pol"
+                },
+                {
+                    "file": "zona_militar_pol.gz",
+                    "name": "zona_militar_pol"
+                },
+                {
+                    "file": "zona_verde_pol.gz",
+                    "name": "zona_verde_pol"
+                },
+                {
+                    "file": "aerodromo_pol.gz",
+                    "name": "aerodromo_pol"
+                },
+                {
+                    "file": "aerodromo_pto.gz",
+                    "name": "aerodromo_pto"
+                },
+                {
+                    "file": "aparcamiento_pto.gz",
+                    "name": "aparcamiento_pto"
+                },
+                {
+                    "file": "area_servicio_pto.gz",
+                    "name": "area_servicio_pto"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                },
+                {
+                    "file": "camino_lin.gz",
+                    "name": "camino_lin"
+                },
+                {
+                    "file": "carretera_autonomica_1er_nivel_lin.gz",
+                    "name": "carretera_autonomica_1er_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_2do_nivel_lin.gz",
+                    "name": "carretera_autonomica_2do_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_3er_nivel_lin.gz",
+                    "name": "carretera_autonomica_3er_nivel_lin"
+                },
+                {
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
+                {
+                    "file": "carretera_otros_lin.gz",
+                    "name": "carretera_otros_lin"
+                },
+                {
+                    "file": "estacion_autobus_pto.gz",
+                    "name": "estacion_autobus_pto"
+                },
+                {
+                    "file": "estacion_ferrocarril_pto.gz",
+                    "name": "estacion_ferrocarril_pto"
+                },
+                {
+                    "file": "ferrocarril_lin.gz",
+                    "name": "ferrocarril_lin"
+                },
+                {
+                    "file": "ferrocarril_pol.gz",
+                    "name": "ferrocarril_pol"
+                },
+                {
+                    "file": "peaje_pto.gz",
+                    "name": "peaje_pto"
+                },
+                {
+                    "file": "puerto_pol.gz",
+                    "name": "puerto_pol"
+                },
+                {
+                    "file": "puerto_pto.gz",
+                    "name": "puerto_pto"
+                },
+                {
+                    "file": "via_servicio_lin.gz",
+                    "name": "via_servicio_lin"
+                },
+                {
+                    "file": "via_urbana_lin.gz",
+                    "name": "via_urbana_lin"
+                }
+            ],
+            "layers_no_coalesce": [],
+            "layers_with_labels": [],
+            "filter": {
+                "cubierta_vegetal_pol": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "bosque_coniferas"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "bosque_frondosas"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "bosque mixto"
+                    ]
+                ],
+                "lamina_agua_pol": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "balsa_alberca"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "embalse"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "lago"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "marisma"
+                    ]
+                ],
+                "altimetria_lin": [
+                    "all",
+                    [
+                        "==",
+                        "altitud",
+                        "[m\u00faltiplo de 25]"
+                    ]
+                ]
+            }
+        },
+        {
+            "level": 14,
+            "process": "yes",
+            "layers": [
+                {
+                    "file": "cubierta_vegetal_pol.gz",
+                    "name": "cubierta_vegetal_pol"
+                },
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "municipio_pol.gz",
+                    "name": "municipio_pol"
+                },
+                {
+                    "file": "nucleo_urbano_pol.gz",
+                    "name": "nucleo_urbano_pol"
+                },
+                {
+                    "file": "provincia_pol.gz",
+                    "name": "provincia_pol"
+                },
+                {
+                    "file": "manzana_pol.gz",
+                    "name": "manzana_pol"
+                },
+                {
+                    "file": "espacio_natural_protegido_pol.gz",
+                    "name": "espacio_natural_protegido_pol"
+                },
+                {
+                    "file": "zona_protegida_pol.gz",
+                    "name": "zona_protegida_pol"
+                },
+                {
+                    "file": "hidrografia_lin.gz",
+                    "name": "hidrografia_lin"
+                },
+                {
+                    "file": "hidrografia_pol.gz",
+                    "name": "hidrografia_pol"
+                },
+                {
+                    "file": "lamina_agua_pol.gz",
+                    "name": "lamina_agua_pol"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "nombre_hidrografia_pto.gz",
+                    "name": "nombre_hidrografia_pto"
+                },
+                {
+                    "file": "nombre_orografia_pto.gz",
+                    "name": "nombre_orografia_pto"
+                },
+                {
+                    "file": "nombre_poblacion_construccion_pto.gz",
+                    "name": "nombre_poblacion_construccion_pto"
+                },
+                {
+                    "file": "nombre_transporte_pto.gz",
+                    "name": "nombre_transporte_pto"
+                },
+                {
+                    "file": "altimetria_lin.gz",
+                    "name": "altimetria_lin"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "conduccion_lin.gz",
+                    "name": "conduccion_lin"
+                },
+                {
+                    "file": "instalacion_deportiva_pol.gz",
+                    "name": "instalacion_deportiva_pol"
+                },
+                {
+                    "file": "instalacion_educativa_pol.gz",
+                    "name": "instalacion_educativa_pol"
+                },
+                {
+                    "file": "instalacion_energia_pol.gz",
+                    "name": "instalacion_energia_pol"
+                },
+                {
+                    "file": "instalacion_militar_pol.gz",
+                    "name": "instalacion_militar_pol"
+                },
+                {
+                    "file": "instalacion_sanitaria_pol.gz",
+                    "name": "instalacion_sanitaria_pol"
+                },
+                {
+                    "file": "instalacion_telecomunicacion_pol.gz",
+                    "name": "instalacion_telecomunicacion_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_aguas_pol.gz",
+                    "name": "instalacion_tratamiento_aguas_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_residuos_pol.gz",
+                    "name": "instalacion_tratamiento_residuos_pol"
+                },
+                {
+                    "file": "zona_dotacional_pol.gz",
+                    "name": "zona_dotacional_pol"
+                },
+                {
+                    "file": "zona_industrial_pol.gz",
+                    "name": "zona_industrial_pol"
+                },
+                {
+                    "file": "zona_militar_pol.gz",
+                    "name": "zona_militar_pol"
+                },
+                {
+                    "file": "zona_verde_pol.gz",
+                    "name": "zona_verde_pol"
+                },
+                {
+                    "file": "aerodromo_pol.gz",
+                    "name": "aerodromo_pol"
+                },
+                {
+                    "file": "aerodromo_pto.gz",
+                    "name": "aerodromo_pto"
+                },
+                {
+                    "file": "aparcamiento_pol.gz",
+                    "name": "aparcamiento_pol"
+                },
+                {
+                    "file": "aparcamiento_pto.gz",
+                    "name": "aparcamiento_pto"
+                },
+                {
+                    "file": "area_servicio_pol.gz",
+                    "name": "area_servicio_pol"
+                },
+                {
+                    "file": "area_servicio_pto.gz",
+                    "name": "area_servicio_pto"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                },
+                {
+                    "file": "camino_lin.gz",
+                    "name": "camino_lin"
+                },
+                {
+                    "file": "carretera_autonomica_1er_nivel_lin.gz",
+                    "name": "carretera_autonomica_1er_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_2do_nivel_lin.gz",
+                    "name": "carretera_autonomica_2do_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_3er_nivel_lin.gz",
+                    "name": "carretera_autonomica_3er_nivel_lin"
+                },
+                {
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
+                {
+                    "file": "carretera_otros_lin.gz",
+                    "name": "carretera_otros_lin"
+                },
+                {
+                    "file": "estacion_autobus_pol.gz",
+                    "name": "estacion_autobus_pol"
+                },
+                {
+                    "file": "estacion_autobus_pto.gz",
+                    "name": "estacion_autobus_pto"
+                },
+                {
+                    "file": "estacion_ferrocarril_pol.gz",
+                    "name": "estacion_ferrocarril_pol"
+                },
+                {
+                    "file": "estacion_ferrocarril_pto.gz",
+                    "name": "estacion_ferrocarril_pto"
+                },
+                {
+                    "file": "ferrocarril_lin.gz",
+                    "name": "ferrocarril_lin"
+                },
+                {
+                    "file": "ferrocarril_pol.gz",
+                    "name": "ferrocarril_pol"
+                },
+                {
+                    "file": "peaje_pol.gz",
+                    "name": "peaje_pol"
+                },
+                {
+                    "file": "peaje_pto.gz",
+                    "name": "peaje_pto"
+                },
+                {
+                    "file": "paso_a_nivel_pto.gz",
+                    "name": "paso_a_nivel_pto"
+                },
+                {
+                    "file": "puerto_pol.gz",
+                    "name": "puerto_pol"
+                },
+                {
+                    "file": "puerto_pto.gz",
+                    "name": "puerto_pto"
+                },
+                {
+                    "file": "ruta_lin.gz",
+                    "name": "ruta_lin"
+                },
+                {
+                    "file": "senda_lin.gz",
+                    "name": "senda_lin"
+                },
+                {
+                    "file": "via_servicio_lin.gz",
+                    "name": "via_servicio_lin"
+                },
+                {
+                    "file": "via_urbana_lin.gz",
+                    "name": "via_urbana_lin"
+                }
+            ],
+            "layers_no_coalesce": [],
+            "layers_with_labels": [],
+            "filter": {
+                "cubierta_vegetal_pol": [
+                    "any",
+                    [
+                        "==",
+                        "clase",
+                        "bosque_coniferas"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "bosque_frondosas"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "bosque mixto"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "balsa_alberca"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "embalse"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "lago"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "marisma"
+                    ],
+                    [
+                        "==",
+                        "altitud",
+                        "[m\u00faltiplo de 5]"
+                    ]
+                ]
+            }
+        },
+        {
+            "level": 15,
+            "process": "no",
+            "layers": [
+                {
+                    "file": "cubierta_vegetal_pol.gz",
+                    "name": "cubierta_vegetal_pol"
+                },
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "municipio_pol.gz",
+                    "name": "municipio_pol"
+                },
+                {
+                    "file": "nucleo_urbano_pol.gz",
+                    "name": "nucleo_urbano_pol"
+                },
+                {
+                    "file": "provincia_pol.gz",
+                    "name": "provincia_pol"
+                },
+                {
+                    "file": "manzana_pol.gz",
+                    "name": "manzana_pol"
+                },
+                {
+                    "file": "espacio_natural_protegido_pol.gz",
+                    "name": "espacio_natural_protegido_pol"
+                },
+                {
+                    "file": "zona_protegida_pol.gz",
+                    "name": "zona_protegida_pol"
+                },
+                {
+                    "file": "hidrografia_lin.gz",
+                    "name": "hidrografia_lin"
+                },
+                {
+                    "file": "hidrografia_pol.gz",
+                    "name": "hidrografia_pol"
+                },
+                {
+                    "file": "lamina_agua_pol.gz",
+                    "name": "lamina_agua_pol"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "nombre_hidrografia_pto.gz",
+                    "name": "nombre_hidrografia_pto"
+                },
+                {
+                    "file": "nombre_orografia_pto.gz",
+                    "name": "nombre_orografia_pto"
+                },
+                {
+                    "file": "nombre_poblacion_construccion_pto.gz",
+                    "name": "nombre_poblacion_construccion_pto"
+                },
+                {
+                    "file": "nombre_transporte_pto.gz",
+                    "name": "nombre_transporte_pto"
+                },
+                {
+                    "file": "altimetria_lin.gz",
+                    "name": "altimetria_lin"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "conduccion_lin.gz",
+                    "name": "conduccion_lin"
+                },
+                {
+                    "file": "instalacion_deportiva_pol.gz",
+                    "name": "instalacion_deportiva_pol"
+                },
+                {
+                    "file": "instalacion_educativa_pol.gz",
+                    "name": "instalacion_educativa_pol"
+                },
+                {
+                    "file": "instalacion_energia_pol.gz",
+                    "name": "instalacion_energia_pol"
+                },
+                {
+                    "file": "instalacion_militar_pol.gz",
+                    "name": "instalacion_militar_pol"
+                },
+                {
+                    "file": "instalacion_sanitaria_pol.gz",
+                    "name": "instalacion_sanitaria_pol"
+                },
+                {
+                    "file": "instalacion_telecomunicacion_pol.gz",
+                    "name": "instalacion_telecomunicacion_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_aguas_pol.gz",
+                    "name": "instalacion_tratamiento_aguas_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_residuos_pol.gz",
+                    "name": "instalacion_tratamiento_residuos_pol"
+                },
+                {
+                    "file": "zona_dotacional_pol.gz",
+                    "name": "zona_dotacional_pol"
+                },
+                {
+                    "file": "zona_industrial_pol.gz",
+                    "name": "zona_industrial_pol"
+                },
+                {
+                    "file": "zona_militar_pol.gz",
+                    "name": "zona_militar_pol"
+                },
+                {
+                    "file": "zona_verde_pol.gz",
+                    "name": "zona_verde_pol"
+                },
+                {
+                    "file": "aerodromo_pol.gz",
+                    "name": "aerodromo_pol"
+                },
+                {
+                    "file": "aerodromo_pto.gz",
+                    "name": "aerodromo_pto"
+                },
+                {
+                    "file": "aparcamiento_pol.gz",
+                    "name": "aparcamiento_pol"
+                },
+                {
+                    "file": "aparcamiento_pto.gz",
+                    "name": "aparcamiento_pto"
+                },
+                {
+                    "file": "area_servicio_pol.gz",
+                    "name": "area_servicio_pol"
+                },
+                {
+                    "file": "area_servicio_pto.gz",
+                    "name": "area_servicio_pto"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                },
+                {
+                    "file": "camino_lin.gz",
+                    "name": "camino_lin"
+                },
+                {
+                    "file": "carretera_autonomica_1er_nivel_lin.gz",
+                    "name": "carretera_autonomica_1er_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_2do_nivel_lin.gz",
+                    "name": "carretera_autonomica_2do_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_3er_nivel_lin.gz",
+                    "name": "carretera_autonomica_3er_nivel_lin"
+                },
+                {
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
+                {
+                    "file": "carretera_otros_lin.gz",
+                    "name": "carretera_otros_lin"
+                },
+                {
+                    "file": "carretera_pk_pto.gz",
+                    "name": "carretera_pk_pto"
+                },
+                {
+                    "file": "estacion_autobus_pol.gz",
+                    "name": "estacion_autobus_pol"
+                },
+                {
+                    "file": "estacion_autobus_pto.gz",
+                    "name": "estacion_autobus_pto"
+                },
+                {
+                    "file": "estacion_ferrocarril_pol.gz",
+                    "name": "estacion_ferrocarril_pol"
+                },
+                {
+                    "file": "estacion_ferrocarril_pto.gz",
+                    "name": "estacion_ferrocarril_pto"
+                },
+                {
+                    "file": "ferrocarril_lin.gz",
+                    "name": "ferrocarril_lin"
+                },
+                {
+                    "file": "ferrocarril_pk_pto.gz",
+                    "name": "ferrocarril_pk_pto"
+                },
+                {
+                    "file": "ferrocarril_pol.gz",
+                    "name": "ferrocarril_pol"
+                },
+                {
+                    "file": "peaje_pol.gz",
+                    "name": "peaje_pol"
+                },
+                {
+                    "file": "peaje_pto.gz",
+                    "name": "peaje_pto"
+                },
+                {
+                    "file": "paso_a_nivel_pto.gz",
+                    "name": "paso_a_nivel_pto"
+                },
+                {
+                    "file": "puerto_pol.gz",
+                    "name": "puerto_pol"
+                },
+                {
+                    "file": "puerto_pto.gz",
+                    "name": "puerto_pto"
+                },
+                {
+                    "file": "ruta_lin.gz",
+                    "name": "ruta_lin"
+                },
+                {
+                    "file": "senda_lin.gz",
+                    "name": "senda_lin"
+                },
+                {
+                    "file": "via_servicio_lin.gz",
+                    "name": "via_servicio_lin"
+                },
+                {
+                    "file": "via_urbana_lin.gz",
+                    "name": "via_urbana_lin"
+                }
+            ],
+            "layers_no_coalesce": [],
+            "layers_with_labels": [],
+            "filter": {}
+        },
+        {
+            "level": 16,
+            "process": "no",
+            "layers": [
+                {
+                    "file": "cubierta_vegetal_pol.gz",
+                    "name": "cubierta_vegetal_pol"
+                },
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "municipio_pol.gz",
+                    "name": "municipio_pol"
+                },
+                {
+                    "file": "nucleo_urbano_pol.gz",
+                    "name": "nucleo_urbano_pol"
+                },
+                {
+                    "file": "provincia_pol.gz",
+                    "name": "provincia_pol"
+                },
+                {
+                    "file": "construccion_pol.gz",
+                    "name": "construccion_pol"
+                },
+                {
+                    "file": "edificio_pol.gz",
+                    "name": "edificio_pol"
+                },
+                {
+                    "file": "manzana_pol.gz",
+                    "name": "manzana_pol"
+                },
+                {
+                    "file": "espacio_natural_protegido_pol.gz",
+                    "name": "espacio_natural_protegido_pol"
+                },
+                {
+                    "file": "zona_protegida_pol.gz",
+                    "name": "zona_protegida_pol"
+                },
+                {
+                    "file": "hidrografia_lin.gz",
+                    "name": "hidrografia_lin"
+                },
+                {
+                    "file": "hidrografia_pol.gz",
+                    "name": "hidrografia_pol"
+                },
+                {
+                    "file": "lamina_agua_pol.gz",
+                    "name": "lamina_agua_pol"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "nombre_hidrografia_pto.gz",
+                    "name": "nombre_hidrografia_pto"
+                },
+                {
+                    "file": "nombre_orografia_pto.gz",
+                    "name": "nombre_orografia_pto"
+                },
+                {
+                    "file": "nombre_poblacion_construccion_pto.gz",
+                    "name": "nombre_poblacion_construccion_pto"
+                },
+                {
+                    "file": "nombre_transporte_pto.gz",
+                    "name": "nombre_transporte_pto"
+                },
+                {
+                    "file": "altimetria_lin.gz",
+                    "name": "altimetria_lin"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "conduccion_lin.gz",
+                    "name": "conduccion_lin"
+                },
+                {
+                    "file": "instalacion_deportiva_pol.gz",
+                    "name": "instalacion_deportiva_pol"
+                },
+                {
+                    "file": "instalacion_educativa_pol.gz",
+                    "name": "instalacion_educativa_pol"
+                },
+                {
+                    "file": "instalacion_energia_pol.gz",
+                    "name": "instalacion_energia_pol"
+                },
+                {
+                    "file": "instalacion_militar_pol.gz",
+                    "name": "instalacion_militar_pol"
+                },
+                {
+                    "file": "instalacion_sanitaria_pol.gz",
+                    "name": "instalacion_sanitaria_pol"
+                },
+                {
+                    "file": "instalacion_telecomunicacion_pol.gz",
+                    "name": "instalacion_telecomunicacion_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_aguas_pol.gz",
+                    "name": "instalacion_tratamiento_aguas_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_residuos_pol.gz",
+                    "name": "instalacion_tratamiento_residuos_pol"
+                },
+                {
+                    "file": "zona_dotacional_pol.gz",
+                    "name": "zona_dotacional_pol"
+                },
+                {
+                    "file": "zona_industrial_pol.gz",
+                    "name": "zona_industrial_pol"
+                },
+                {
+                    "file": "zona_militar_pol.gz",
+                    "name": "zona_militar_pol"
+                },
+                {
+                    "file": "zona_verde_pol.gz",
+                    "name": "zona_verde_pol"
+                },
+                {
+                    "file": "aerodromo_pol.gz",
+                    "name": "aerodromo_pol"
+                },
+                {
+                    "file": "aerodromo_pto.gz",
+                    "name": "aerodromo_pto"
+                },
+                {
+                    "file": "aparcamiento_pol.gz",
+                    "name": "aparcamiento_pol"
+                },
+                {
+                    "file": "aparcamiento_pto.gz",
+                    "name": "aparcamiento_pto"
+                },
+                {
+                    "file": "area_servicio_pol.gz",
+                    "name": "area_servicio_pol"
+                },
+                {
+                    "file": "area_servicio_pto.gz",
+                    "name": "area_servicio_pto"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                },
+                {
+                    "file": "camino_lin.gz",
+                    "name": "camino_lin"
+                },
+                {
+                    "file": "carretera_autonomica_1er_nivel_lin.gz",
+                    "name": "carretera_autonomica_1er_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_2do_nivel_lin.gz",
+                    "name": "carretera_autonomica_2do_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_3er_nivel_lin.gz",
+                    "name": "carretera_autonomica_3er_nivel_lin"
+                },
+                {
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
+                {
+                    "file": "carretera_otros_lin.gz",
+                    "name": "carretera_otros_lin"
+                },
+                {
+                    "file": "carretera_pk_pto.gz",
+                    "name": "carretera_pk_pto"
+                },
+                {
+                    "file": "estacion_autobus_pol.gz",
+                    "name": "estacion_autobus_pol"
+                },
+                {
+                    "file": "estacion_autobus_pto.gz",
+                    "name": "estacion_autobus_pto"
+                },
+                {
+                    "file": "estacion_ferrocarril_pol.gz",
+                    "name": "estacion_ferrocarril_pol"
+                },
+                {
+                    "file": "estacion_ferrocarril_pto.gz",
+                    "name": "estacion_ferrocarril_pto"
+                },
+                {
+                    "file": "ferrocarril_lin.gz",
+                    "name": "ferrocarril_lin"
+                },
+                {
+                    "file": "ferrocarril_pk_pto.gz",
+                    "name": "ferrocarril_pk_pto"
+                },
+                {
+                    "file": "ferrocarril_pol.gz",
+                    "name": "ferrocarril_pol"
+                },
+                {
+                    "file": "peaje_pol.gz",
+                    "name": "peaje_pol"
+                },
+                {
+                    "file": "peaje_pto.gz",
+                    "name": "peaje_pto"
+                },
+                {
+                    "file": "paso_a_nivel_pto.gz",
+                    "name": "paso_a_nivel_pto"
+                },
+                {
+                    "file": "puerto_pol.gz",
+                    "name": "puerto_pol"
+                },
+                {
+                    "file": "puerto_pto.gz",
+                    "name": "puerto_pto"
+                },
+                {
+                    "file": "ruta_lin.gz",
+                    "name": "ruta_lin"
+                },
+                {
+                    "file": "senda_lin.gz",
+                    "name": "senda_lin"
+                },
+                {
+                    "file": "via_servicio_lin.gz",
+                    "name": "via_servicio_lin"
+                },
+                {
+                    "file": "via_urbana_lin.gz",
+                    "name": "via_urbana_lin"
+                }
+            ],
+            "layers_no_coalesce": [
+                {
+                    "file": "edificio_pol.gz",
+                    "name": "edificio_pol"
+                }
+            ],
+            "layers_with_labels": [],
+            "filter": {}
+        },
+        {
+            "level": 17,
+            "process": "no",
+            "layers": [
+                {
+                    "file": "cubierta_vegetal_pol.gz",
+                    "name": "cubierta_vegetal_pol"
+                },
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "municipio_pol.gz",
+                    "name": "municipio_pol"
+                },
+                {
+                    "file": "nucleo_urbano_pol.gz",
+                    "name": "nucleo_urbano_pol"
+                },
+                {
+                    "file": "provincia_pol.gz",
+                    "name": "provincia_pol"
+                },
+                {
+                    "file": "construccion_pol.gz",
+                    "name": "construccion_pol"
+                },
+                {
+                    "file": "manzana_pol.gz",
+                    "name": "manzana_pol"
+                },
+                {
+                    "file": "espacio_natural_protegido_pol.gz",
+                    "name": "espacio_natural_protegido_pol"
+                },
+                {
+                    "file": "zona_protegida_pol.gz",
+                    "name": "zona_protegida_pol"
+                },
+                {
+                    "file": "hidrografia_lin.gz",
+                    "name": "hidrografia_lin"
+                },
+                {
+                    "file": "hidrografia_pol.gz",
+                    "name": "hidrografia_pol"
+                },
+                {
+                    "file": "lamina_agua_pol.gz",
+                    "name": "lamina_agua_pol"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "nombre_hidrografia_pto.gz",
+                    "name": "nombre_hidrografia_pto"
+                },
+                {
+                    "file": "nombre_orografia_pto.gz",
+                    "name": "nombre_orografia_pto"
+                },
+                {
+                    "file": "nombre_poblacion_construccion_pto.gz",
+                    "name": "nombre_poblacion_construccion_pto"
+                },
+                {
+                    "file": "nombre_transporte_pto.gz",
+                    "name": "nombre_transporte_pto"
+                },
+                {
+                    "file": "altimetria_lin.gz",
+                    "name": "altimetria_lin"
+                },
+                {
+                    "file": "altimetria_pto.gz",
+                    "name": "altimetria_pto"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "conduccion_lin.gz",
+                    "name": "conduccion_lin"
+                },
+                {
+                    "file": "instalacion_deportiva_pol.gz",
+                    "name": "instalacion_deportiva_pol"
+                },
+                {
+                    "file": "instalacion_educativa_pol.gz",
+                    "name": "instalacion_educativa_pol"
+                },
+                {
+                    "file": "instalacion_energia_pol.gz",
+                    "name": "instalacion_energia_pol"
+                },
+                {
+                    "file": "instalacion_militar_pol.gz",
+                    "name": "instalacion_militar_pol"
+                },
+                {
+                    "file": "instalacion_sanitaria_pol.gz",
+                    "name": "instalacion_sanitaria_pol"
+                },
+                {
+                    "file": "instalacion_telecomunicacion_pol.gz",
+                    "name": "instalacion_telecomunicacion_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_aguas_pol.gz",
+                    "name": "instalacion_tratamiento_aguas_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_residuos_pol.gz",
+                    "name": "instalacion_tratamiento_residuos_pol"
+                },
+                {
+                    "file": "zona_dotacional_pol.gz",
+                    "name": "zona_dotacional_pol"
+                },
+                {
+                    "file": "zona_industrial_pol.gz",
+                    "name": "zona_industrial_pol"
+                },
+                {
+                    "file": "zona_militar_pol.gz",
+                    "name": "zona_militar_pol"
+                },
+                {
+                    "file": "zona_verde_pol.gz",
+                    "name": "zona_verde_pol"
+                },
+                {
+                    "file": "aerodromo_pol.gz",
+                    "name": "aerodromo_pol"
+                },
+                {
+                    "file": "aerodromo_pto.gz",
+                    "name": "aerodromo_pto"
+                },
+                {
+                    "file": "aparcamiento_pol.gz",
+                    "name": "aparcamiento_pol"
+                },
+                {
+                    "file": "aparcamiento_pto.gz",
+                    "name": "aparcamiento_pto"
+                },
+                {
+                    "file": "area_servicio_pol.gz",
+                    "name": "area_servicio_pol"
+                },
+                {
+                    "file": "area_servicio_pto.gz",
+                    "name": "area_servicio_pto"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                },
+                {
+                    "file": "camino_lin.gz",
+                    "name": "camino_lin"
+                },
+                {
+                    "file": "carretera_autonomica_1er_nivel_lin.gz",
+                    "name": "carretera_autonomica_1er_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_2do_nivel_lin.gz",
+                    "name": "carretera_autonomica_2do_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_3er_nivel_lin.gz",
+                    "name": "carretera_autonomica_3er_nivel_lin"
+                },
+                {
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
+                {
+                    "file": "carretera_otros_lin.gz",
+                    "name": "carretera_otros_lin"
+                },
+                {
+                    "file": "carretera_pk_pto.gz",
+                    "name": "carretera_pk_pto"
+                },
+                {
+                    "file": "estacion_autobus_pol.gz",
+                    "name": "estacion_autobus_pol"
+                },
+                {
+                    "file": "estacion_autobus_pto.gz",
+                    "name": "estacion_autobus_pto"
+                },
+                {
+                    "file": "estacion_ferrocarril_pol.gz",
+                    "name": "estacion_ferrocarril_pol"
+                },
+                {
+                    "file": "estacion_ferrocarril_pto.gz",
+                    "name": "estacion_ferrocarril_pto"
+                },
+                {
+                    "file": "ferrocarril_lin.gz",
+                    "name": "ferrocarril_lin"
+                },
+                {
+                    "file": "ferrocarril_pk_pto.gz",
+                    "name": "ferrocarril_pk_pto"
+                },
+                {
+                    "file": "ferrocarril_pol.gz",
+                    "name": "ferrocarril_pol"
+                },
+                {
+                    "file": "peaje_pol.gz",
+                    "name": "peaje_pol"
+                },
+                {
+                    "file": "peaje_pto.gz",
+                    "name": "peaje_pto"
+                },
+                {
+                    "file": "paso_a_nivel_pto.gz",
+                    "name": "paso_a_nivel_pto"
+                },
+                {
+                    "file": "puerto_pol.gz",
+                    "name": "puerto_pol"
+                },
+                {
+                    "file": "puerto_pto.gz",
+                    "name": "puerto_pto"
+                },
+                {
+                    "file": "ruta_lin.gz",
+                    "name": "ruta_lin"
+                },
+                {
+                    "file": "senda_lin.gz",
+                    "name": "senda_lin"
+                },
+                {
+                    "file": "via_servicio_lin.gz",
+                    "name": "via_servicio_lin"
+                },
+                {
+                    "file": "via_urbana_lin.gz",
+                    "name": "via_urbana_lin"
+                }
+            ],
+            "layers_no_coalesce": [
+                {
+                    "file": "edificio_pol.gz",
+                    "name": "edificio_pol"
+                }
+            ],
+            "layers_with_labels": [],
+            "filter": {}
+        },
+        {
+            "level": 18,
+            "process": "no",
+            "layers": [
+                {
+                    "file": "cubierta_vegetal_pol.gz",
+                    "name": "cubierta_vegetal_pol"
+                },
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "municipio_pol.gz",
+                    "name": "municipio_pol"
+                },
+                {
+                    "file": "nucleo_urbano_pol.gz",
+                    "name": "nucleo_urbano_pol"
+                },
+                {
+                    "file": "provincia_pol.gz",
+                    "name": "provincia_pol"
+                },
+                {
+                    "file": "construccion_pol.gz",
+                    "name": "construccion_pol"
+                },
+                {
+                    "file": "manzana_pol.gz",
+                    "name": "manzana_pol"
+                },
+                {
+                    "file": "portal_pto.gz",
+                    "name": "portal_pto"
+                },
+                {
+                    "file": "espacio_natural_protegido_pol.gz",
+                    "name": "espacio_natural_protegido_pol"
+                },
+                {
+                    "file": "zona_protegida_pol.gz",
+                    "name": "zona_protegida_pol"
+                },
+                {
+                    "file": "hidrografia_lin.gz",
+                    "name": "hidrografia_lin"
+                },
+                {
+                    "file": "hidrografia_pol.gz",
+                    "name": "hidrografia_pol"
+                },
+                {
+                    "file": "lamina_agua_pol.gz",
+                    "name": "lamina_agua_pol"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "nombre_hidrografia_pto.gz",
+                    "name": "nombre_hidrografia_pto"
+                },
+                {
+                    "file": "nombre_orografia_pto.gz",
+                    "name": "nombre_orografia_pto"
+                },
+                {
+                    "file": "nombre_poblacion_construccion_pto.gz",
+                    "name": "nombre_poblacion_construccion_pto"
+                },
+                {
+                    "file": "nombre_transporte_pto.gz",
+                    "name": "nombre_transporte_pto"
+                },
+                {
+                    "file": "altimetria_lin.gz",
+                    "name": "altimetria_lin"
+                },
+                {
+                    "file": "altimetria_pto.gz",
+                    "name": "altimetria_pto"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "conduccion_lin.gz",
+                    "name": "conduccion_lin"
+                },
+                {
+                    "file": "instalacion_deportiva_pol.gz",
+                    "name": "instalacion_deportiva_pol"
+                },
+                {
+                    "file": "instalacion_educativa_pol.gz",
+                    "name": "instalacion_educativa_pol"
+                },
+                {
+                    "file": "instalacion_energia_pol.gz",
+                    "name": "instalacion_energia_pol"
+                },
+                {
+                    "file": "instalacion_militar_pol.gz",
+                    "name": "instalacion_militar_pol"
+                },
+                {
+                    "file": "instalacion_sanitaria_pol.gz",
+                    "name": "instalacion_sanitaria_pol"
+                },
+                {
+                    "file": "instalacion_telecomunicacion_pol.gz",
+                    "name": "instalacion_telecomunicacion_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_aguas_pol.gz",
+                    "name": "instalacion_tratamiento_aguas_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_residuos_pol.gz",
+                    "name": "instalacion_tratamiento_residuos_pol"
+                },
+                {
+                    "file": "zona_dotacional_pol.gz",
+                    "name": "zona_dotacional_pol"
+                },
+                {
+                    "file": "zona_industrial_pol.gz",
+                    "name": "zona_industrial_pol"
+                },
+                {
+                    "file": "zona_militar_pol.gz",
+                    "name": "zona_militar_pol"
+                },
+                {
+                    "file": "zona_verde_pol.gz",
+                    "name": "zona_verde_pol"
+                },
+                {
+                    "file": "aerodromo_pol.gz",
+                    "name": "aerodromo_pol"
+                },
+                {
+                    "file": "aerodromo_pto.gz",
+                    "name": "aerodromo_pto"
+                },
+                {
+                    "file": "aparcamiento_pol.gz",
+                    "name": "aparcamiento_pol"
+                },
+                {
+                    "file": "aparcamiento_pto.gz",
+                    "name": "aparcamiento_pto"
+                },
+                {
+                    "file": "area_servicio_pol.gz",
+                    "name": "area_servicio_pol"
+                },
+                {
+                    "file": "area_servicio_pto.gz",
+                    "name": "area_servicio_pto"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                },
+                {
+                    "file": "camino_lin.gz",
+                    "name": "camino_lin"
+                },
+                {
+                    "file": "carretera_autonomica_1er_nivel_lin.gz",
+                    "name": "carretera_autonomica_1er_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_2do_nivel_lin.gz",
+                    "name": "carretera_autonomica_2do_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_3er_nivel_lin.gz",
+                    "name": "carretera_autonomica_3er_nivel_lin"
+                },
+                {
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
+                {
+                    "file": "carretera_otros_lin.gz",
+                    "name": "carretera_otros_lin"
+                },
+                {
+                    "file": "carretera_pk_pto.gz",
+                    "name": "carretera_pk_pto"
+                },
+                {
+                    "file": "estacion_autobus_pol.gz",
+                    "name": "estacion_autobus_pol"
+                },
+                {
+                    "file": "estacion_autobus_pto.gz",
+                    "name": "estacion_autobus_pto"
+                },
+                {
+                    "file": "estacion_ferrocarril_pol.gz",
+                    "name": "estacion_ferrocarril_pol"
+                },
+                {
+                    "file": "estacion_ferrocarril_pto.gz",
+                    "name": "estacion_ferrocarril_pto"
+                },
+                {
+                    "file": "ferrocarril_lin.gz",
+                    "name": "ferrocarril_lin"
+                },
+                {
+                    "file": "ferrocarril_pk_pto.gz",
+                    "name": "ferrocarril_pk_pto"
+                },
+                {
+                    "file": "ferrocarril_pol.gz",
+                    "name": "ferrocarril_pol"
+                },
+                {
+                    "file": "peaje_pol.gz",
+                    "name": "peaje_pol"
+                },
+                {
+                    "file": "peaje_pto.gz",
+                    "name": "peaje_pto"
+                },
+                {
+                    "file": "paso_a_nivel_pto.gz",
+                    "name": "paso_a_nivel_pto"
+                },
+                {
+                    "file": "puerto_pol.gz",
+                    "name": "puerto_pol"
+                },
+                {
+                    "file": "puerto_pto.gz",
+                    "name": "puerto_pto"
+                },
+                {
+                    "file": "ruta_lin.gz",
+                    "name": "ruta_lin"
+                },
+                {
+                    "file": "senda_lin.gz",
+                    "name": "senda_lin"
+                },
+                {
+                    "file": "via_servicio_lin.gz",
+                    "name": "via_servicio_lin"
+                },
+                {
+                    "file": "via_urbana_lin.gz",
+                    "name": "via_urbana_lin"
+                }
+            ],
+            "layers_no_coalesce": [
+                {
+                    "file": "edificio_pol.gz",
+                    "name": "edificio_pol"
+                }
+            ],
+            "layers_with_labels": [],
+            "filter": {}
+        },
+        {
+            "level": 19,
+            "process": "no",
+            "layers": [
+                {
+                    "file": "cubierta_vegetal_pol.gz",
+                    "name": "cubierta_vegetal_pol"
+                },
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "municipio_pol.gz",
+                    "name": "municipio_pol"
+                },
+                {
+                    "file": "nucleo_urbano_pol.gz",
+                    "name": "nucleo_urbano_pol"
+                },
+                {
+                    "file": "provincia_pol.gz",
+                    "name": "provincia_pol"
+                },
+                {
+                    "file": "construccion_pol.gz",
+                    "name": "construccion_pol"
+                },
+                {
+                    "file": "manzana_pol.gz",
+                    "name": "manzana_pol"
+                },
+                {
+                    "file": "portal_pto.gz",
+                    "name": "portal_pto"
+                },
+                {
+                    "file": "espacio_natural_protegido_pol.gz",
+                    "name": "espacio_natural_protegido_pol"
+                },
+                {
+                    "file": "zona_protegida_pol.gz",
+                    "name": "zona_protegida_pol"
+                },
+                {
+                    "file": "hidrografia_lin.gz",
+                    "name": "hidrografia_lin"
+                },
+                {
+                    "file": "hidrografia_pol.gz",
+                    "name": "hidrografia_pol"
+                },
+                {
+                    "file": "lamina_agua_pol.gz",
+                    "name": "lamina_agua_pol"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "nombre_hidrografia_pto.gz",
+                    "name": "nombre_hidrografia_pto"
+                },
+                {
+                    "file": "nombre_orografia_pto.gz",
+                    "name": "nombre_orografia_pto"
+                },
+                {
+                    "file": "nombre_poblacion_construccion_pto.gz",
+                    "name": "nombre_poblacion_construccion_pto"
+                },
+                {
+                    "file": "nombre_transporte_pto.gz",
+                    "name": "nombre_transporte_pto"
+                },
+                {
+                    "file": "altimetria_lin.gz",
+                    "name": "altimetria_lin"
+                },
+                {
+                    "file": "altimetria_pto.gz",
+                    "name": "altimetria_pto"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "conduccion_lin.gz",
+                    "name": "conduccion_lin"
+                },
+                {
+                    "file": "instalacion_deportiva_pol.gz",
+                    "name": "instalacion_deportiva_pol"
+                },
+                {
+                    "file": "instalacion_educativa_pol.gz",
+                    "name": "instalacion_educativa_pol"
+                },
+                {
+                    "file": "instalacion_energia_pol.gz",
+                    "name": "instalacion_energia_pol"
+                },
+                {
+                    "file": "instalacion_militar_pol.gz",
+                    "name": "instalacion_militar_pol"
+                },
+                {
+                    "file": "instalacion_sanitaria_pol.gz",
+                    "name": "instalacion_sanitaria_pol"
+                },
+                {
+                    "file": "instalacion_telecomunicacion_pol.gz",
+                    "name": "instalacion_telecomunicacion_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_aguas_pol.gz",
+                    "name": "instalacion_tratamiento_aguas_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_residuos_pol.gz",
+                    "name": "instalacion_tratamiento_residuos_pol"
+                },
+                {
+                    "file": "zona_dotacional_pol.gz",
+                    "name": "zona_dotacional_pol"
+                },
+                {
+                    "file": "zona_industrial_pol.gz",
+                    "name": "zona_industrial_pol"
+                },
+                {
+                    "file": "zona_militar_pol.gz",
+                    "name": "zona_militar_pol"
+                },
+                {
+                    "file": "zona_verde_pol.gz",
+                    "name": "zona_verde_pol"
+                },
+                {
+                    "file": "aerodromo_pol.gz",
+                    "name": "aerodromo_pol"
+                },
+                {
+                    "file": "aerodromo_pto.gz",
+                    "name": "aerodromo_pto"
+                },
+                {
+                    "file": "aparcamiento_pol.gz",
+                    "name": "aparcamiento_pol"
+                },
+                {
+                    "file": "aparcamiento_pto.gz",
+                    "name": "aparcamiento_pto"
+                },
+                {
+                    "file": "area_servicio_pol.gz",
+                    "name": "area_servicio_pol"
+                },
+                {
+                    "file": "area_servicio_pto.gz",
+                    "name": "area_servicio_pto"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                },
+                {
+                    "file": "camino_lin.gz",
+                    "name": "camino_lin"
+                },
+                {
+                    "file": "carretera_autonomica_1er_nivel_lin.gz",
+                    "name": "carretera_autonomica_1er_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_2do_nivel_lin.gz",
+                    "name": "carretera_autonomica_2do_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_3er_nivel_lin.gz",
+                    "name": "carretera_autonomica_3er_nivel_lin"
+                },
+                {
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
+                {
+                    "file": "carretera_otros_lin.gz",
+                    "name": "carretera_otros_lin"
+                },
+                {
+                    "file": "carretera_pk_pto.gz",
+                    "name": "carretera_pk_pto"
+                },
+                {
+                    "file": "estacion_autobus_pol.gz",
+                    "name": "estacion_autobus_pol"
+                },
+                {
+                    "file": "estacion_autobus_pto.gz",
+                    "name": "estacion_autobus_pto"
+                },
+                {
+                    "file": "estacion_ferrocarril_pol.gz",
+                    "name": "estacion_ferrocarril_pol"
+                },
+                {
+                    "file": "estacion_ferrocarril_pto.gz",
+                    "name": "estacion_ferrocarril_pto"
+                },
+                {
+                    "file": "ferrocarril_lin.gz",
+                    "name": "ferrocarril_lin"
+                },
+                {
+                    "file": "ferrocarril_pk_pto.gz",
+                    "name": "ferrocarril_pk_pto"
+                },
+                {
+                    "file": "ferrocarril_pol.gz",
+                    "name": "ferrocarril_pol"
+                },
+                {
+                    "file": "peaje_pol.gz",
+                    "name": "peaje_pol"
+                },
+                {
+                    "file": "peaje_pto.gz",
+                    "name": "peaje_pto"
+                },
+                {
+                    "file": "paso_a_nivel_pto.gz",
+                    "name": "paso_a_nivel_pto"
+                },
+                {
+                    "file": "puerto_pol.gz",
+                    "name": "puerto_pol"
+                },
+                {
+                    "file": "puerto_pto.gz",
+                    "name": "puerto_pto"
+                },
+                {
+                    "file": "ruta_lin.gz",
+                    "name": "ruta_lin"
+                },
+                {
+                    "file": "senda_lin.gz",
+                    "name": "senda_lin"
+                },
+                {
+                    "file": "via_servicio_lin.gz",
+                    "name": "via_servicio_lin"
+                },
+                {
+                    "file": "via_urbana_lin.gz",
+                    "name": "via_urbana_lin"
+                }
+            ],
+            "layers_no_coalesce": [
+                {
+                    "file": "edificio_pol.gz",
+                    "name": "edificio_pol"
+                }
+            ],
+            "layers_with_labels": [],
+            "filter": {}
+        },
+        {
+            "level": 20,
+            "process": "no",
+            "layers": [
+                {
+                    "file": "cubierta_vegetal_pol.gz",
+                    "name": "cubierta_vegetal_pol"
+                },
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "municipio_pol.gz",
+                    "name": "municipio_pol"
+                },
+                {
+                    "file": "nucleo_urbano_pol.gz",
+                    "name": "nucleo_urbano_pol"
+                },
+                {
+                    "file": "provincia_pol.gz",
+                    "name": "provincia_pol"
+                },
+                {
+                    "file": "construccion_pol.gz",
+                    "name": "construccion_pol"
+                },
+                {
+                    "file": "manzana_pol.gz",
+                    "name": "manzana_pol"
+                },
+                {
+                    "file": "portal_pto.gz",
+                    "name": "portal_pto"
+                },
+                {
+                    "file": "espacio_natural_protegido_pol.gz",
+                    "name": "espacio_natural_protegido_pol"
+                },
+                {
+                    "file": "zona_protegida_pol.gz",
+                    "name": "zona_protegida_pol"
+                },
+                {
+                    "file": "hidrografia_lin.gz",
+                    "name": "hidrografia_lin"
+                },
+                {
+                    "file": "hidrografia_pol.gz",
+                    "name": "hidrografia_pol"
+                },
+                {
+                    "file": "lamina_agua_pol.gz",
+                    "name": "lamina_agua_pol"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "nombre_hidrografia_pto.gz",
+                    "name": "nombre_hidrografia_pto"
+                },
+                {
+                    "file": "nombre_orografia_pto.gz",
+                    "name": "nombre_orografia_pto"
+                },
+                {
+                    "file": "nombre_poblacion_construccion_pto.gz",
+                    "name": "nombre_poblacion_construccion_pto"
+                },
+                {
+                    "file": "nombre_transporte_pto.gz",
+                    "name": "nombre_transporte_pto"
+                },
+                {
+                    "file": "altimetria_lin.gz",
+                    "name": "altimetria_lin"
+                },
+                {
+                    "file": "altimetria_pto.gz",
+                    "name": "altimetria_pto"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "conduccion_lin.gz",
+                    "name": "conduccion_lin"
+                },
+                {
+                    "file": "instalacion_deportiva_pol.gz",
+                    "name": "instalacion_deportiva_pol"
+                },
+                {
+                    "file": "instalacion_educativa_pol.gz",
+                    "name": "instalacion_educativa_pol"
+                },
+                {
+                    "file": "instalacion_energia_pol.gz",
+                    "name": "instalacion_energia_pol"
+                },
+                {
+                    "file": "instalacion_militar_pol.gz",
+                    "name": "instalacion_militar_pol"
+                },
+                {
+                    "file": "instalacion_sanitaria_pol.gz",
+                    "name": "instalacion_sanitaria_pol"
+                },
+                {
+                    "file": "instalacion_telecomunicacion_pol.gz",
+                    "name": "instalacion_telecomunicacion_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_aguas_pol.gz",
+                    "name": "instalacion_tratamiento_aguas_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_residuos_pol.gz",
+                    "name": "instalacion_tratamiento_residuos_pol"
+                },
+                {
+                    "file": "zona_dotacional_pol.gz",
+                    "name": "zona_dotacional_pol"
+                },
+                {
+                    "file": "zona_industrial_pol.gz",
+                    "name": "zona_industrial_pol"
+                },
+                {
+                    "file": "zona_militar_pol.gz",
+                    "name": "zona_militar_pol"
+                },
+                {
+                    "file": "zona_verde_pol.gz",
+                    "name": "zona_verde_pol"
+                },
+                {
+                    "file": "aerodromo_pol.gz",
+                    "name": "aerodromo_pol"
+                },
+                {
+                    "file": "aerodromo_pto.gz",
+                    "name": "aerodromo_pto"
+                },
+                {
+                    "file": "aparcamiento_pol.gz",
+                    "name": "aparcamiento_pol"
+                },
+                {
+                    "file": "aparcamiento_pto.gz",
+                    "name": "aparcamiento_pto"
+                },
+                {
+                    "file": "area_servicio_pol.gz",
+                    "name": "area_servicio_pol"
+                },
+                {
+                    "file": "area_servicio_pto.gz",
+                    "name": "area_servicio_pto"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                },
+                {
+                    "file": "camino_lin.gz",
+                    "name": "camino_lin"
+                },
+                {
+                    "file": "carretera_autonomica_1er_nivel_lin.gz",
+                    "name": "carretera_autonomica_1er_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_2do_nivel_lin.gz",
+                    "name": "carretera_autonomica_2do_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_3er_nivel_lin.gz",
+                    "name": "carretera_autonomica_3er_nivel_lin"
+                },
+                {
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
+                {
+                    "file": "carretera_otros_lin.gz",
+                    "name": "carretera_otros_lin"
+                },
+                {
+                    "file": "carretera_pk_pto.gz",
+                    "name": "carretera_pk_pto"
+                },
+                {
+                    "file": "estacion_autobus_pol.gz",
+                    "name": "estacion_autobus_pol"
+                },
+                {
+                    "file": "estacion_autobus_pto.gz",
+                    "name": "estacion_autobus_pto"
+                },
+                {
+                    "file": "estacion_ferrocarril_pol.gz",
+                    "name": "estacion_ferrocarril_pol"
+                },
+                {
+                    "file": "estacion_ferrocarril_pto.gz",
+                    "name": "estacion_ferrocarril_pto"
+                },
+                {
+                    "file": "ferrocarril_lin.gz",
+                    "name": "ferrocarril_lin"
+                },
+                {
+                    "file": "ferrocarril_pk_pto.gz",
+                    "name": "ferrocarril_pk_pto"
+                },
+                {
+                    "file": "ferrocarril_pol.gz",
+                    "name": "ferrocarril_pol"
+                },
+                {
+                    "file": "peaje_pol.gz",
+                    "name": "peaje_pol"
+                },
+                {
+                    "file": "peaje_pto.gz",
+                    "name": "peaje_pto"
+                },
+                {
+                    "file": "paso_a_nivel_pto.gz",
+                    "name": "paso_a_nivel_pto"
+                },
+                {
+                    "file": "puerto_pol.gz",
+                    "name": "puerto_pol"
+                },
+                {
+                    "file": "puerto_pto.gz",
+                    "name": "puerto_pto"
+                },
+                {
+                    "file": "ruta_lin.gz",
+                    "name": "ruta_lin"
+                },
+                {
+                    "file": "senda_lin.gz",
+                    "name": "senda_lin"
+                },
+                {
+                    "file": "via_servicio_lin.gz",
+                    "name": "via_servicio_lin"
+                },
+                {
+                    "file": "via_urbana_lin.gz",
+                    "name": "via_urbana_lin"
+                }
+            ],
+            "layers_no_coalesce": [
+                {
+                    "file": "edificio_pol.gz",
+                    "name": "edificio_pol"
+                }
+            ],
+            "layers_with_labels": [],
+            "filter": {}
+        },
+        {
+            "level": 21,
+            "process": "no",
+            "layers": [
+                {
+                    "file": "cubierta_vegetal_pol.gz",
+                    "name": "cubierta_vegetal_pol"
+                },
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "municipio_pol.gz",
+                    "name": "municipio_pol"
+                },
+                {
+                    "file": "nucleo_urbano_pol.gz",
+                    "name": "nucleo_urbano_pol"
+                },
+                {
+                    "file": "provincia_pol.gz",
+                    "name": "provincia_pol"
+                },
+                {
+                    "file": "construccion_pol.gz",
+                    "name": "construccion_pol"
+                },
+                {
+                    "file": "manzana_pol.gz",
+                    "name": "manzana_pol"
+                },
+                {
+                    "file": "portal_pto.gz",
+                    "name": "portal_pto"
+                },
+                {
+                    "file": "espacio_natural_protegido_pol.gz",
+                    "name": "espacio_natural_protegido_pol"
+                },
+                {
+                    "file": "zona_protegida_pol.gz",
+                    "name": "zona_protegida_pol"
+                },
+                {
+                    "file": "hidrografia_lin.gz",
+                    "name": "hidrografia_lin"
+                },
+                {
+                    "file": "hidrografia_pol.gz",
+                    "name": "hidrografia_pol"
+                },
+                {
+                    "file": "lamina_agua_pol.gz",
+                    "name": "lamina_agua_pol"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "nombre_hidrografia_pto.gz",
+                    "name": "nombre_hidrografia_pto"
+                },
+                {
+                    "file": "nombre_orografia_pto.gz",
+                    "name": "nombre_orografia_pto"
+                },
+                {
+                    "file": "nombre_poblacion_construccion_pto.gz",
+                    "name": "nombre_poblacion_construccion_pto"
+                },
+                {
+                    "file": "nombre_transporte_pto.gz",
+                    "name": "nombre_transporte_pto"
+                },
+                {
+                    "file": "altimetria_lin.gz",
+                    "name": "altimetria_lin"
+                },
+                {
+                    "file": "altimetria_pto.gz",
+                    "name": "altimetria_pto"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "conduccion_lin.gz",
+                    "name": "conduccion_lin"
+                },
+                {
+                    "file": "instalacion_deportiva_pol.gz",
+                    "name": "instalacion_deportiva_pol"
+                },
+                {
+                    "file": "instalacion_educativa_pol.gz",
+                    "name": "instalacion_educativa_pol"
+                },
+                {
+                    "file": "instalacion_energia_pol.gz",
+                    "name": "instalacion_energia_pol"
+                },
+                {
+                    "file": "instalacion_militar_pol.gz",
+                    "name": "instalacion_militar_pol"
+                },
+                {
+                    "file": "instalacion_sanitaria_pol.gz",
+                    "name": "instalacion_sanitaria_pol"
+                },
+                {
+                    "file": "instalacion_telecomunicacion_pol.gz",
+                    "name": "instalacion_telecomunicacion_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_aguas_pol.gz",
+                    "name": "instalacion_tratamiento_aguas_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_residuos_pol.gz",
+                    "name": "instalacion_tratamiento_residuos_pol"
+                },
+                {
+                    "file": "zona_dotacional_pol.gz",
+                    "name": "zona_dotacional_pol"
+                },
+                {
+                    "file": "zona_industrial_pol.gz",
+                    "name": "zona_industrial_pol"
+                },
+                {
+                    "file": "zona_militar_pol.gz",
+                    "name": "zona_militar_pol"
+                },
+                {
+                    "file": "zona_verde_pol.gz",
+                    "name": "zona_verde_pol"
+                },
+                {
+                    "file": "aerodromo_pol.gz",
+                    "name": "aerodromo_pol"
+                },
+                {
+                    "file": "aerodromo_pto.gz",
+                    "name": "aerodromo_pto"
+                },
+                {
+                    "file": "aparcamiento_pol.gz",
+                    "name": "aparcamiento_pol"
+                },
+                {
+                    "file": "aparcamiento_pto.gz",
+                    "name": "aparcamiento_pto"
+                },
+                {
+                    "file": "area_servicio_pol.gz",
+                    "name": "area_servicio_pol"
+                },
+                {
+                    "file": "area_servicio_pto.gz",
+                    "name": "area_servicio_pto"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                },
+                {
+                    "file": "camino_lin.gz",
+                    "name": "camino_lin"
+                },
+                {
+                    "file": "carretera_autonomica_1er_nivel_lin.gz",
+                    "name": "carretera_autonomica_1er_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_2do_nivel_lin.gz",
+                    "name": "carretera_autonomica_2do_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_3er_nivel_lin.gz",
+                    "name": "carretera_autonomica_3er_nivel_lin"
+                },
+                {
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
+                {
+                    "file": "carretera_otros_lin.gz",
+                    "name": "carretera_otros_lin"
+                },
+                {
+                    "file": "carretera_pk_pto.gz",
+                    "name": "carretera_pk_pto"
+                },
+                {
+                    "file": "estacion_autobus_pol.gz",
+                    "name": "estacion_autobus_pol"
+                },
+                {
+                    "file": "estacion_autobus_pto.gz",
+                    "name": "estacion_autobus_pto"
+                },
+                {
+                    "file": "estacion_ferrocarril_pol.gz",
+                    "name": "estacion_ferrocarril_pol"
+                },
+                {
+                    "file": "estacion_ferrocarril_pto.gz",
+                    "name": "estacion_ferrocarril_pto"
+                },
+                {
+                    "file": "ferrocarril_lin.gz",
+                    "name": "ferrocarril_lin"
+                },
+                {
+                    "file": "ferrocarril_pk_pto.gz",
+                    "name": "ferrocarril_pk_pto"
+                },
+                {
+                    "file": "ferrocarril_pol.gz",
+                    "name": "ferrocarril_pol"
+                },
+                {
+                    "file": "peaje_pol.gz",
+                    "name": "peaje_pol"
+                },
+                {
+                    "file": "peaje_pto.gz",
+                    "name": "peaje_pto"
+                },
+                {
+                    "file": "paso_a_nivel_pto.gz",
+                    "name": "paso_a_nivel_pto"
+                },
+                {
+                    "file": "puerto_pol.gz",
+                    "name": "puerto_pol"
+                },
+                {
+                    "file": "puerto_pto.gz",
+                    "name": "puerto_pto"
+                },
+                {
+                    "file": "ruta_lin.gz",
+                    "name": "ruta_lin"
+                },
+                {
+                    "file": "senda_lin.gz",
+                    "name": "senda_lin"
+                },
+                {
+                    "file": "via_servicio_lin.gz",
+                    "name": "via_servicio_lin"
+                },
+                {
+                    "file": "via_urbana_lin.gz",
+                    "name": "via_urbana_lin"
+                }
+            ],
+            "layers_no_coalesce": [
+                {
+                    "file": "edificio_pol.gz",
+                    "name": "edificio_pol"
+                }
+            ],
+            "layers_with_labels": [],
+            "filter": {}
+        },
+        {
+            "level": 22,
+            "process": "no",
+            "layers": [
+                {
+                    "file": "cubierta_vegetal_pol.gz",
+                    "name": "cubierta_vegetal_pol"
+                },
+                {
+                    "file": "comunidad_autonoma_pol.gz",
+                    "name": "comunidad_autonoma_pol"
+                },
+                {
+                    "file": "linea_limite_lin.gz",
+                    "name": "linea_limite_lin"
+                },
+                {
+                    "file": "municipio_pol.gz",
+                    "name": "municipio_pol"
+                },
+                {
+                    "file": "nucleo_urbano_pol.gz",
+                    "name": "nucleo_urbano_pol"
+                },
+                {
+                    "file": "provincia_pol.gz",
+                    "name": "provincia_pol"
+                },
+                {
+                    "file": "construccion_pol.gz",
+                    "name": "construccion_pol"
+                },
+                {
+                    "file": "manzana_pol.gz",
+                    "name": "manzana_pol"
+                },
+                {
+                    "file": "portal_pto.gz",
+                    "name": "portal_pto"
+                },
+                {
+                    "file": "espacio_natural_protegido_pol.gz",
+                    "name": "espacio_natural_protegido_pol"
+                },
+                {
+                    "file": "zona_protegida_pol.gz",
+                    "name": "zona_protegida_pol"
+                },
+                {
+                    "file": "hidrografia_lin.gz",
+                    "name": "hidrografia_lin"
+                },
+                {
+                    "file": "hidrografia_pol.gz",
+                    "name": "hidrografia_pol"
+                },
+                {
+                    "file": "lamina_agua_pol.gz",
+                    "name": "lamina_agua_pol"
+                },
+                {
+                    "file": "nombre_division_administrativa_pto.gz",
+                    "name": "nombre_division_administrativa_pto"
+                },
+                {
+                    "file": "nombre_hidrografia_pto.gz",
+                    "name": "nombre_hidrografia_pto"
+                },
+                {
+                    "file": "nombre_orografia_pto.gz",
+                    "name": "nombre_orografia_pto"
+                },
+                {
+                    "file": "nombre_poblacion_construccion_pto.gz",
+                    "name": "nombre_poblacion_construccion_pto"
+                },
+                {
+                    "file": "nombre_transporte_pto.gz",
+                    "name": "nombre_transporte_pto"
+                },
+                {
+                    "file": "altimetria_lin.gz",
+                    "name": "altimetria_lin"
+                },
+                {
+                    "file": "altimetria_pto.gz",
+                    "name": "altimetria_pto"
+                },
+                {
+                    "file": "tierra_firme_pol.gz",
+                    "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "conduccion_lin.gz",
+                    "name": "conduccion_lin"
+                },
+                {
+                    "file": "instalacion_deportiva_pol.gz",
+                    "name": "instalacion_deportiva_pol"
+                },
+                {
+                    "file": "instalacion_educativa_pol.gz",
+                    "name": "instalacion_educativa_pol"
+                },
+                {
+                    "file": "instalacion_energia_pol.gz",
+                    "name": "instalacion_energia_pol"
+                },
+                {
+                    "file": "instalacion_militar_pol.gz",
+                    "name": "instalacion_militar_pol"
+                },
+                {
+                    "file": "instalacion_sanitaria_pol.gz",
+                    "name": "instalacion_sanitaria_pol"
+                },
+                {
+                    "file": "instalacion_telecomunicacion_pol.gz",
+                    "name": "instalacion_telecomunicacion_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_aguas_pol.gz",
+                    "name": "instalacion_tratamiento_aguas_pol"
+                },
+                {
+                    "file": "instalacion_tratamiento_residuos_pol.gz",
+                    "name": "instalacion_tratamiento_residuos_pol"
+                },
+                {
+                    "file": "zona_dotacional_pol.gz",
+                    "name": "zona_dotacional_pol"
+                },
+                {
+                    "file": "zona_industrial_pol.gz",
+                    "name": "zona_industrial_pol"
+                },
+                {
+                    "file": "zona_militar_pol.gz",
+                    "name": "zona_militar_pol"
+                },
+                {
+                    "file": "zona_verde_pol.gz",
+                    "name": "zona_verde_pol"
+                },
+                {
+                    "file": "aerodromo_pol.gz",
+                    "name": "aerodromo_pol"
+                },
+                {
+                    "file": "aerodromo_pto.gz",
+                    "name": "aerodromo_pto"
+                },
+                {
+                    "file": "aparcamiento_pol.gz",
+                    "name": "aparcamiento_pol"
+                },
+                {
+                    "file": "aparcamiento_pto.gz",
+                    "name": "aparcamiento_pto"
+                },
+                {
+                    "file": "area_servicio_pol.gz",
+                    "name": "area_servicio_pol"
+                },
+                {
+                    "file": "area_servicio_pto.gz",
+                    "name": "area_servicio_pto"
+                },
+                {
+                    "file": "autopista_lin.gz",
+                    "name": "autopista_lin"
+                },
+                {
+                    "file": "autovia_lin.gz",
+                    "name": "autovia_lin"
+                },
+                {
+                    "file": "camino_lin.gz",
+                    "name": "camino_lin"
+                },
+                {
+                    "file": "carretera_autonomica_1er_nivel_lin.gz",
+                    "name": "carretera_autonomica_1er_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_2do_nivel_lin.gz",
+                    "name": "carretera_autonomica_2do_nivel_lin"
+                },
+                {
+                    "file": "carretera_autonomica_3er_nivel_lin.gz",
+                    "name": "carretera_autonomica_3er_nivel_lin"
+                },
+                {
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
+                {
+                    "file": "carretera_otros_lin.gz",
+                    "name": "carretera_otros_lin"
+                },
+                {
+                    "file": "carretera_pk_pto.gz",
+                    "name": "carretera_pk_pto"
+                },
+                {
+                    "file": "estacion_autobus_pol.gz",
+                    "name": "estacion_autobus_pol"
+                },
+                {
+                    "file": "estacion_autobus_pto.gz",
+                    "name": "estacion_autobus_pto"
+                },
+                {
+                    "file": "estacion_ferrocarril_pol.gz",
+                    "name": "estacion_ferrocarril_pol"
+                },
+                {
+                    "file": "estacion_ferrocarril_pto.gz",
+                    "name": "estacion_ferrocarril_pto"
+                },
+                {
+                    "file": "ferrocarril_lin.gz",
+                    "name": "ferrocarril_lin"
+                },
+                {
+                    "file": "ferrocarril_pk_pto.gz",
+                    "name": "ferrocarril_pk_pto"
+                },
+                {
+                    "file": "ferrocarril_pol.gz",
+                    "name": "ferrocarril_pol"
+                },
+                {
+                    "file": "peaje_pol.gz",
+                    "name": "peaje_pol"
+                },
+                {
+                    "file": "peaje_pto.gz",
+                    "name": "peaje_pto"
+                },
+                {
+                    "file": "paso_a_nivel_pto.gz",
+                    "name": "paso_a_nivel_pto"
+                },
+                {
+                    "file": "puerto_pol.gz",
+                    "name": "puerto_pol"
+                },
+                {
+                    "file": "puerto_pto.gz",
+                    "name": "puerto_pto"
+                },
+                {
+                    "file": "ruta_lin.gz",
+                    "name": "ruta_lin"
+                },
+                {
+                    "file": "senda_lin.gz",
+                    "name": "senda_lin"
+                },
+                {
+                    "file": "via_servicio_lin.gz",
+                    "name": "via_servicio_lin"
+                },
+                {
+                    "file": "via_urbana_lin.gz",
+                    "name": "via_urbana_lin"
+                }
+            ],
+            "layers_no_coalesce": [
+                {
+                    "file": "edificio_pol.gz",
+                    "name": "edificio_pol"
+                }
+            ],
+            "layers_with_labels": [],
+            "filter": {}
+        }
+    ]
+}

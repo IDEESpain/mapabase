@@ -1,0 +1,5 @@
+2023-01-02 08:25:10,521 MainThread  INFO       [2023-01-02 08:25:10] 
+2023-01-02 08:25:10,521 MainThread  INFO       --> Compress layers GeoJSON to NDJson.GZ
+2023-01-02 09:07:01,476 MainThread  INFO       --> Tiling layers with Tippecanoe
+2023-01-02 15:48:30,479 MainThread  INFO       --> MBtiles --> PBF folder
+2023-01-03 02:17:01,310 MainThread  INFO       Moving pbfs folder

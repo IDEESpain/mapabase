@@ -1,0 +1,22 @@
+{
+    "lib_path":"../lib/",
+    "path_generados_municipios":"../../../../generados/municipios/",
+    "num_threads":-1,
+    "logs_path":"../logs/",
+    "aux_comunidades_file":"../lib/aux_comunidad_autonoma_pol.fgb",
+    "aux_municipios_file":"../lib/aux_municipio_pol.fgb",
+    "setup": {
+        "compress_geojson": "yes",
+        "tiling_layers": "yes",
+        "to_folder": "yes",
+        "move_to_final_folder": "yes",
+        "join_json": "no"
+    },
+    "input_vrt": "/var/MVT_MapaBaseXYZ/DatosProcesados/productores/nacional/00/",
+    "gz_folder": "/var/MVT_MapaBaseXYZ/DatosProcesados/generados/nacional/gz_datosIGN/",
+    "destination_mbtiles": "/var/MVT_MapaBaseXYZ/niveles/",
+    "destination_folder": "/var/MVT_MapaBaseXYZ/teselas/",
+    "temp_directory": "/var/MVT_MapaBaseXYZ/tmp/",
+    "lista_municipios":[],
+    "lista_comunidades":[]
+}

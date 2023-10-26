@@ -1,0 +1,580 @@
+{
+  "overpass_db": "/home/vagrant/geodata/db",
+  "destination_layers_osm": "/home/vagrant/geodata/layers-osm-overpass/",
+  "destination_layers_geojson": "/home/vagrant/geodata/layers-geojson-overpass/",
+  "destination_layers_pbf": "/home/vagrant/geodata/layers-pbf-overpass/",
+  "destination_mbtiles": "/home/vagrant/mbtiles-osm-scne/",
+  "querys_directory": "/home/vagrant/geodata/querys-overpass",
+  "gdal_ini_directory": "/home/vagrant/geodata/gdal-ini-overpass",
+  "temp_directory": "/tmp/",
+  "project": {
+    "name": "planet-extracts-with-overpass",
+    "description": "OSM data mining with Overpass API",
+    "contact_name": "Pablo Martinez",
+    "contact_email": "pmperez@larioja.org"
+  },
+  "setup": {
+    "download_db": "no",
+    "download_land_polygons": "no",
+    "query_layers_osm": "no",
+    "export_layers_osm": "no - opcion eliminada - de OSM pasan directamente a PBF",
+    "export_layers_geojson": "no",
+    "tiling_layers": "yes"
+  },
+  "zoom_levels": [{
+      "level": "0",
+      "process": "yes",
+      "layers": [{
+          "file": "land_polygons_simplified.geojson",
+          "name": "tierra_firme_pol"
+        }
+      ],
+      "filter": {}
+    }, {
+      "level": "1",
+      "process": "yes",
+      "layers": [{
+          "file": "land_polygons_simplified.geojson",
+          "name": "tierra_firme_pol"
+        }
+      ],
+      "filter": {}
+    }, {
+      "level": "2",
+      "process": "yes",
+      "layers": [{
+          "file": "land_polygons_simplified.geojson",
+          "name": "tierra_firme_pol"
+        }
+      ],
+
+      "filter": {}
+    }, {
+      "level": "3",
+      "process": "yes",
+      "layers": [{
+          "file": "land_polygons_simplified.geojson",
+          "name": "tierra_firme_pol"
+        }
+      ],
+      "layers_with_labels": [{
+          "file": "place_country_node_points.gz",
+          "name": "nombre_division_administrativa_pto_nacion"
+        }
+      ],
+      "filter": {}
+    }, {
+      "level": "4",
+      "process": "yes",
+      "layers": [{
+          "file": "land_polygons_simplified.geojson",
+          "name": "tierra_firme_pol"
+        }
+      ],
+      "layers_with_labels": [{
+          "file": "place_country_node_points.gz",
+          "name": "nombre_division_administrativa_pto_nacion"
+        }
+      ],
+      "filter": {}
+    }, {
+      "level": "5",
+      "process": "yes",
+      "layers": [{
+          "file": "admin_level_2_wayrel_lines.gz",
+          "name": "linea_limite_lin_pais"
+        }, {
+          "file": "admin_level_4_wayrel_lines.gz",
+          "name": "linea_limite_lin_limite_autonomico"
+        }, {
+          "file": "land_polygons_simplified.geojson",
+          "name": "tierra_firme_pol"
+        }
+      ],
+      "layers_with_labels": [{
+          "file": "place_country_node_points.gz",
+          "name": "nombre_division_administrativa_pto_nacion"
+        }
+      ],
+      "filter": {}
+    }, {
+      "level": "6",
+      "process": "yes",
+      "layers": [{
+          "file": "admin_level_2_wayrel_lines.gz",
+          "name": "linea_limite_lin_pais"
+        }, {
+          "file": "admin_level_4_wayrel_lines.gz",
+          "name": "linea_limite_lin_limite_autonomico"
+        }, {
+          "file": "highway_motorway_wayrel_lines.gz",
+          "name": "autopista_lin"
+        }, {
+          "file": "land_polygons_simplified.geojson",
+          "name": "tierra_firme_pol"
+        }
+      ],
+      "layers_with_labels": [{
+          "file": "place_country_node_points.gz",
+          "name": "nombre_division_administrativa_pto_nacion"
+        }
+      ],
+      "filter": {}
+    }, {
+      "level": "7",
+      "process": "yes",
+      "layers": [{
+          "file": "admin_level_2_wayrel_lines.gz",
+          "name": "linea_limite_lin_pais"
+        }, {
+          "file": "admin_level_4_wayrel_lines.gz",
+          "name": "linea_limite_lin_limite_autonomico"
+        }, {
+          "file": "highway_motorway_wayrel_lines.gz",
+          "name": "autopista_lin"
+        }, {
+          "file": "highway_trunk_wayrel_lines.gz",
+          "name": "carretera_general_lin"
+        }, {
+          "file": "land_polygons_simplified.geojson",
+          "name": "tierra_firme_pol"
+        }, {
+          "file": "landcover_landuse_wayrel_multipolygon.gz, landcover_natural_wayrel_multipolygon.gz",
+          "name": "cubierta_vegetal_bosque_pol"
+        }, {
+          "file": "waterway_river_wayrel_lines.gz",
+          "name": "hidrografia_lin"
+        }
+      ],
+      "layers_with_labels": [{
+          "file": "place_city_node_points.gz",
+          "name": "nombre_poblacion_construccion_pto"
+        }, {
+          "file": "place_country_node_points.gz",
+          "name": "nombre_division_administrativa_pto_nacion"
+        }, {
+          "file": "place_state_node_points.gz",
+          "name": "nombre_division_administrativa_pto_comunidad_autonoma"
+        }
+      ],
+      "filter": {
+        "cubierta_vegetal_bosque_pol": ["any", ["==", "landuse", "forest"], ["==", "natural", "wood"]]
+      }
+    }, {
+      "level": "8",
+      "process": "yes",
+      "layers": [{
+          "file": "admin_level_2_wayrel_lines.gz",
+          "name": "linea_limite_lin_pais"
+        }, {
+          "file": "admin_level_4_wayrel_lines.gz",
+          "name": "linea_limite_lin_limite_autonomico"
+        }, {
+          "file": "highway_motorway_wayrel_lines.gz",
+          "name": "autopista_lin"
+        }, {
+          "file": "highway_primary_wayrel_lines.gz",
+          "name": "carretera_autonomica_1er_nivel_lin"
+        }, {
+          "file": "highway_trunk_wayrel_lines.gz",
+          "name": "carretera_general_lin"
+        }, {
+          "file": "land_polygons_simplified.geojson",
+          "name": "tierra_firme_pol"
+        }, {
+          "file": "landcover_landuse_wayrel_multipolygon.gz, landcover_natural_wayrel_multipolygon.gz",
+          "name": "cubierta_vegetal_bosque_pol"
+        }, {
+          "file": "water_lake_wayrel_multipolygon.gz",
+          "name": "lamina_agua_pol"
+        }, {
+          "file": "waterway_river_wayrel_lines.gz",
+          "name": "hidrografia_lin"
+        }
+      ],
+      "layers_with_labels": [{
+          "file": "place_city_node_points.gz",
+          "name": "nombre_poblacion_construccion_pto"
+        }, {
+          "file": "place_country_node_points.gz",
+          "name": "nombre_division_administrativa_pto_nacion"
+        }, {
+          "file": "place_state_node_points.gz",
+          "name": "nombre_division_administrativa_pto_provincia"
+        }
+      ],
+      "filter": {
+        "cubierta_vegetal_bosque_pol": ["any", ["==", "landuse", "forest"], ["==", "natural", "wood"]]
+      }
+    }, {
+      "level": "9",
+      "process": "yes",
+      "layers": [{
+          "file": "admin_level_2_wayrel_lines.gz",
+          "name": "linea_limite_lin_pais"
+        }, {
+          "file": "admin_level_4_wayrel_lines.gz",
+          "name": "linea_limite_lin_limite_autonomico"
+        }, {
+          "file": "highway_motorway_wayrel_lines.gz",
+          "name": "autopista_lin"
+        }, {
+          "file": "highway_primary_wayrel_lines.gz",
+          "name": "carretera_autonomica_1er_nivel_lin"
+        }, {
+          "file": "highway_trunk_wayrel_lines.gz",
+          "name": "carretera_general_lin"
+        }, {
+          "file": "land_polygons_simplified.geojson",
+          "name": "tierra_firme_pol"
+        }, {
+          "file": "landcover_landuse_wayrel_multipolygon.gz, landcover_leisure_wayrel_multipolygon.gz, landcover_natural_wayrel_multipolygon.gz",
+          "name": "cubierta_vegetal_bosque_pol"
+        }, {
+          "file": "natural_water_wayrel_multipolygon.gz, water_canal_wayrel_multipolygon.gz, water_lagoon_wayrel_multipolygon.gz, water_lake_wayrel_multipolygon.gz, water_oxbow_wayrel_multipolygon.gz, water_reservoir_wayrel_multipolygon.gz, water_river_wayrel_multipolygon.gz, waterway_riverbank_wayrel_multipolygon.gz, waterway_river_wayrel_multipolygon.gz",
+          "name": "lamina_agua_pol"
+        }, {
+          "file": "water_canal_wayrel_lines.gz, water_lagoon_wayrel_lines.gz, water_lake_wayrel_lines.gz, water_oxbow_wayrel_lines.gz, water_reservoir_wayrel_lines.gz, water_river_wayrel_lines.gz, waterway_riverbank_wayrel_lines.gz, waterway_river_wayrel_lines.gz",
+          "name": "hidrografia_lin"
+        }
+      ],
+      "layers_with_labels": [{
+          "file": "place_city_node_points.gz, place_town_node_points",
+          "name": "nombre_poblacion_construccion_pto"
+        }, {
+          "file": "place_country_node_points.gz",
+          "name": "nombre_division_administrativa_pto_nacion"
+        }, {
+          "file": "place_state_node_points.gz",
+          "name": "nombre_division_administrativa_pto_provincia"
+        }
+      ],
+      "filter": {}
+    }, {
+      "level": "10",
+      "process": "yes",
+      "layers": [{
+          "file": "admin_level_2_wayrel_lines.gz",
+          "name": "linea_limite_lin_pais"
+        }, {
+          "file": "admin_level_4_wayrel_lines.gz",
+          "name": "linea_limite_lin_limite_autonomico"
+        }, {
+          "file": "highway_motorway_wayrel_lines.gz",
+          "name": "autopista_lin"
+        }, {
+          "file": "highway_primary_wayrel_lines.gz",
+          "name": "carretera_autonomica_1er_nivel_lin"
+        }, {
+          "file": "highway_trunk_wayrel_lines.gz",
+          "name": "carretera_general_lin"
+        }, {
+          "file": "land_polygons.geojson",
+          "name": "tierra_firme_pol"
+        }, {
+          "file": "landcover_landuse_wayrel_multipolygon.gz, landcover_leisure_wayrel_multipolygon.gz, landcover_natural_wayrel_multipolygon.gz",
+          "name": "cubierta_vegetal_bosque_pol"
+        }, {
+          "file": "railway_rail_wayrel_lines.gz",
+          "name": "ferrocarril_lin"
+        }, {
+          "file": "natural_water_wayrel_multipolygon.gz, water_canal_wayrel_multipolygon.gz, water_lagoon_wayrel_multipolygon.gz, water_lake_wayrel_multipolygon.gz, water_oxbow_wayrel_multipolygon.gz, water_reservoir_wayrel_multipolygon.gz, water_river_wayrel_multipolygon.gz, waterway_riverbank_wayrel_multipolygon.gz, waterway_river_wayrel_multipolygon.gz",
+          "name": "lamina_agua_pol"
+        }, {
+          "file": "water_canal_wayrel_lines.gz, water_lagoon_wayrel_lines.gz, water_lake_wayrel_lines.gz, water_oxbow_wayrel_lines.gz, water_reservoir_wayrel_lines.gz, water_river_wayrel_lines.gz, waterway_riverbank_wayrel_lines.gz, waterway_river_wayrel_lines.gz",
+          "name": "hidrografia_lin"
+        }
+      ],
+      "layers_with_labels": [{
+          "file": "place_city_node_points.gz, place_town_node_points",
+          "name": "nombre_poblacion_construccion_pto"
+        }, {
+          "file": "place_country_node_points.gz",
+          "name": "nombre_division_administrativa_pto_nacion"
+        }, {
+          "file": "place_state_node_points.gz",
+          "name": "nombre_division_administrativa_pto_provincia"
+        }
+      ],
+      "filter": {}
+    }, {
+      "level": "11",
+      "process": "yes",
+      "layers": [{
+          "file": "admin_level_2_wayrel_lines.gz",
+          "name": "linea_limite_lin_pais"
+        }, {
+          "file": "admin_level_4_wayrel_lines.gz",
+          "name": "linea_limite_lin_limite_autonomico"
+        }, {
+          "file": "highway_motorway_wayrel_lines.gz",
+          "name": "autopista_lin"
+        }, {
+          "file": "highway_primary_wayrel_lines.gz",
+          "name": "carretera_autonomica_1er_nivel_lin"
+        }, {
+          "file": "highway_secondary_wayrel_lines.gz",
+          "name": "carretera_autonomica_2do_nivel_lin"
+        }, {
+          "file": "highway_trunk_wayrel_lines.gz",
+          "name": "carretera_nacional_osm"
+        }, {
+          "file": "highway_trunk_wayrel_multipolygon.gz",
+          "name": "carretera_general_lin"
+        }, {
+          "file": "land_polygons.geojson",
+          "name": "tierra_firme_pol"
+        }, {
+          "file": "landcover_landuse_wayrel_multipolygon.gz, landcover_leisure_wayrel_multipolygon.gz, landcover_natural_wayrel_multipolygon.gz",
+          "name": "cubierta_vegetal_bosque_pol"
+        }, {
+          "file": "railway_rail_wayrel_lines.gz",
+          "name": "ferrocarril_lin"
+        }, {
+          "file": "natural_water_wayrel_multipolygon.gz, water_canal_wayrel_multipolygon.gz, water_lagoon_wayrel_multipolygon.gz, water_lake_wayrel_multipolygon.gz, water_oxbow_wayrel_multipolygon.gz, water_reservoir_wayrel_multipolygon.gz, water_river_wayrel_multipolygon.gz, waterway_riverbank_wayrel_multipolygon.gz, waterway_river_wayrel_multipolygon.gz",
+          "name": "lamina_agua_pol"
+        }, {
+          "file": "water_canal_wayrel_lines.gz, water_lagoon_wayrel_lines.gz, water_lake_wayrel_lines.gz, water_oxbow_wayrel_lines.gz, water_reservoir_wayrel_lines.gz, water_river_wayrel_lines.gz, waterway_riverbank_wayrel_lines.gz, waterway_river_wayrel_lines.gz",
+          "name": "hidrografia_lin"
+        }
+      ],
+      "layers_with_labels": [{
+          "file": "place_city_node_points.gz, place_town_node_points",
+          "name": "nombre_poblacion_construccion_pto"
+        }, {
+          "file": "place_country_node_points.gz",
+          "name": "nombre_division_administrativa_pto_nacion"
+        }, {
+          "file": "place_state_node_points.gz",
+          "name": "nombre_division_administrativa_pto_provincia"
+        }
+      ],
+      "filter": {}
+    }, {
+      "level": "12",
+      "process": "yes",
+      "layers": [{
+          "file": "admin_level_2_wayrel_lines.gz",
+          "name": "linea_limite_lin_pais"
+        }, {
+          "file": "admin_level_4_wayrel_lines.gz",
+          "name": "linea_limite_lin_limite_autonomico"
+        }, {
+          "file": "highway_motorway_wayrel_lines.gz",
+          "name": "autopista_lin"
+        }, {
+          "file": "highway_primary_wayrel_lines.gz",
+          "name": "carretera_autonomica_1er_nivel_lin"
+        }, {
+          "file": "highway_secondary_wayrel_lines.gz",
+          "name": "carretera_autonomica_2do_nivel_lin"
+        }, {
+          "file": "highway_trunk_wayrel_lines.gz",
+          "name": "carretera_nacional_osm"
+        }, {
+          "file": "highway_trunk_wayrel_multipolygon.gz",
+          "name": "carretera_general_lin"
+        }, {
+          "file": "land_polygons.geojson",
+          "name": "tierra_firme_pol"
+        }, {
+          "file": "landcover_landuse_wayrel_multipolygon.gz, landcover_leisure_wayrel_multipolygon.gz, landcover_natural_wayrel_multipolygon.gz",
+          "name": "cubierta_vegetal_bosque_pol"
+        }, {
+          "file": "railway_rail_wayrel_lines.gz",
+          "name": "ferrocarril_lin"
+        }, {
+          "file": "natural_water_wayrel_multipolygon.gz, water_canal_wayrel_multipolygon.gz, water_lagoon_wayrel_multipolygon.gz, water_lake_wayrel_multipolygon.gz, water_oxbow_wayrel_multipolygon.gz, water_reservoir_wayrel_multipolygon.gz, water_river_wayrel_multipolygon.gz, waterway_riverbank_wayrel_multipolygon.gz, waterway_river_wayrel_multipolygon.gz",
+          "name": "lamina_agua_pol"
+        }, {
+          "file": "water_canal_wayrel_lines.gz, water_lagoon_wayrel_lines.gz, water_lake_wayrel_lines.gz, water_oxbow_wayrel_lines.gz, water_reservoir_wayrel_lines.gz, water_river_wayrel_lines.gz, waterway_riverbank_wayrel_lines.gz, waterway_river_wayrel_lines.gz",
+          "name": "hidrografia_lin"
+        }
+      ],
+      "layers_with_labels": [{
+          "file": "place_city_node_points.gz, place_town_node_points",
+          "name": "nombre_poblacion_construccion_pto"
+        }, {
+          "file": "place_country_node_points.gz",
+          "name": "nombre_division_administrativa_pto_nacion"
+        }, {
+          "file": "place_state_node_points.gz",
+          "name": "nombre_division_administrativa_pto_provincia"
+        }
+      ],
+      "filter": {}
+    }, {
+      "level": "13",
+      "process": "yes",
+      "layers": [{
+          "file": "admin_level_2_wayrel_lines.gz",
+          "name": "linea_limite_lin_pais"
+        }, {
+          "file": "admin_level_4_wayrel_lines.gz",
+          "name": "linea_limite_lin_limite_autonomico"
+        }, {
+          "file": "aeroway_aerodrome_node_points.gz",
+          "name": "aerodromo_pto"
+        }, {
+          "file": "aeroway_aerodrome_wayrel_multipolygon.gz, aeroway_apron_wayrel_multipolygon.gz, aeroway_runway_wayrel_multipolygon.gz, aeroway_taxiway_wayrel_multipolygon.gz, aeroway_terminal_wayrel_multipolygon.gz",
+          "name": "aerodromo_pol"
+        }, {
+          "file": "boundary_protected_area_wayrel_multipolygon.gz",
+          "name": "zona_protegida_pol"
+        }, {
+          "file": "highway_motorway_wayrel_lines.gz",
+          "name": "autopista_lin"
+        }, {
+          "file": "highway_pedestrian_wayrel_lines.gz, highway_residential_wayrel_lines.gz",
+          "name": "via_urbana_lin"
+        }, {
+          "file": "highway_primary_wayrel_lines.gz",
+          "name": "carretera_autonomica_1er_nivel_lin"
+        }, {
+          "file": "highway_secondary_wayrel_lines.gz",
+          "name": "carretera_autonomica_2do_nivel_lin"
+        }, {
+          "file": "highway_service_wayrel_lines.gz",
+          "name": "via_servicio_osm"
+        }, {
+          "file": "highway_service_wayrel_multipolygon.gz",
+          "name": "via_servicio_lin"
+        }, {
+          "file": "highway_tertiary_wayrel_lines.gz",
+          "name": "carretera_autonomica_3er_nivel_lin"
+        }, {
+          "file": "highway_track_wayrel_lines.gz",
+          "name": "camino_lin"
+        }, {
+          "file": "highway_trunk_wayrel_lines.gz",
+          "name": "carretera_general_lin"
+        }, {
+          "file": "land_polygons.geojson",
+          "name": "tierra_firme_pol"
+        }, {
+          "file": "landuse_commercial_wayrel_multipolygon.gz, landuse_residential_wayrel_multipolygon.gz",
+          "name": "zona_dotacional_pol"
+        }, {
+          "file": "landuse_industrial_wayrel_multipolygon.gz",
+          "name": "zona_industrial_pol"
+        }, {
+          "file": "landcover_landuse_wayrel_multipolygon.gz, landcover_leisure_wayrel_multipolygon.gz, landcover_natural_wayrel_multipolygon.gz",
+          "name": "cubierta_vegetal_bosque_pol"
+        }, {
+          "file": "natural_water_wayrel_multipolygon.gz",
+          "name": "lamina_agua_pol"
+        }, {
+          "file": "railway_platform_wayrel_lines.gz, railway_rail_wayrel_lines.gz, railway_tram_wayrel_lines.gz",
+          "name": "ferrocarril_lin"
+        }, {
+          "file": "railway_platform_wayrel_multipolygon.gz, railway_rail_wayrel_multipolygon.gz, railway_tram_wayrel_multipolygon.gz",
+          "name": "ferrocarril_pol"
+        }, {
+          "file": "natural_water_wayrel_multipolygon.gz, water_canal_wayrel_multipolygon.gz, water_lagoon_wayrel_multipolygon.gz, water_lake_wayrel_multipolygon.gz, water_oxbow_wayrel_multipolygon.gz, water_reservoir_wayrel_multipolygon.gz, water_river_wayrel_multipolygon.gz, waterway_riverbank_wayrel_multipolygon.gz, waterway_river_wayrel_multipolygon.gz",
+          "name": "lamina_agua_pol"
+        }, {
+          "file": "water_canal_wayrel_lines.gz, water_lagoon_wayrel_lines.gz, water_lake_wayrel_lines.gz, water_oxbow_wayrel_lines.gz, water_reservoir_wayrel_lines.gz, water_river_wayrel_lines.gz, waterway_riverbank_wayrel_lines.gz, waterway_river_wayrel_lines.gz",
+          "name": "hidrografia_lin"
+        }
+      ],
+      "layers_with_labels": [{
+          "file": "place_city_node_points.gz, place_town_node_points, place_hamlet_node_points, place_village_node_points.gz",
+          "name": "nombre_poblacion_construccion_pto"
+        }, {
+          "file": "place_country_node_points.gz",
+          "name": "nombre_division_administrativa_pto_nacion"
+        }, {
+          "file": "place_state_node_points.gz",
+          "name": "nombre_division_administrativa_pto_provincia"
+        }
+      ],
+      "filter": {}
+    }, {
+      "level": "14",
+      "process": "yes",
+      "layers": [{
+          "file": "admin_level_2_wayrel_lines.gz",
+          "name": "linea_limite_lin_pais"
+        }, {
+          "file": "admin_level_4_wayrel_lines.gz",
+          "name": "linea_limite_lin_limite_autonomico"
+        }, {
+          "file": "aeroway_aerodrome_node_points.gz",
+          "name": "aerodromo_pto"
+        }, {
+          "file": "aeroway_aerodrome_wayrel_multipolygon.gz, aeroway_apron_wayrel_multipolygon.gz, aeroway_runway_wayrel_multipolygon.gz, aeroway_taxiway_wayrel_multipolygon.gz, aeroway_terminal_wayrel_multipolygon.gz",
+          "name": "aerodromo_pol"
+        }, {
+          "file": "boundary_protected_area_wayrel_multipolygon.gz",
+          "name": "zona_protegida_pol"
+        }, {
+          "file": "highway_motorway_wayrel_lines.gz",
+          "name": "autopista_lin"
+        }, {
+          "file": "highway_pedestrian_wayrel_lines.gz, highway_residential_wayrel_lines.gz",
+          "name": "via_urbana_lin"
+        }, {
+          "file": "highway_primary_wayrel_lines.gz",
+          "name": "carretera_autonomica_1er_nivel_lin"
+        }, {
+          "file": "highway_secondary_wayrel_lines.gz",
+          "name": "carretera_autonomica_2do_nivel_lin"
+        }, {
+          "file": "highway_service_wayrel_lines.gz",
+          "name": "via_servicio_osm"
+        }, {
+          "file": "highway_service_wayrel_multipolygon.gz",
+          "name": "via_servicio_lin"
+        }, {
+          "file": "highway_tertiary_wayrel_lines.gz",
+          "name": "carretera_autonomica_3er_nivel_lin"
+        }, {
+          "file": "highway_track_wayrel_lines.gz",
+          "name": "camino_lin"
+        }, {
+          "file": "highway_trunk_wayrel_lines.gz",
+          "name": "carretera_general_lin"
+        }, {
+          "file": "land_polygons.geojson",
+          "name": "tierra_firme_pol"
+        }, {
+          "file": "landuse_commercial_wayrel_multipolygon.gz, landuse_residential_wayrel_multipolygon.gz",
+          "name": "zona_dotacional_pol"
+        }, {
+          "file": "landuse_industrial_wayrel_multipolygon.gz",
+          "name": "zona_industrial_pol"
+        }, {
+          "file": "landcover_landuse_wayrel_multipolygon.gz, landcover_leisure_wayrel_multipolygon.gz, landcover_natural_wayrel_multipolygon.gz",
+          "name": "cubierta_vegetal_bosque_pol"
+        }, {
+          "file": "natural_water_wayrel_multipolygon.gz",
+          "name": "lamina_agua_pol"
+        }, {
+          "file": "railway_platform_wayrel_lines.gz, railway_rail_wayrel_lines.gz, railway_tram_wayrel_lines.gz",
+          "name": "ferrocarril_lin"
+        }, {
+          "file": "railway_platform_wayrel_multipolygon.gz, railway_rail_wayrel_multipolygon.gz, railway_tram_wayrel_multipolygon.gz",
+          "name": "ferrocarril_pol"
+        }, {
+          "file": "natural_water_wayrel_multipolygon.gz, water_canal_wayrel_multipolygon.gz, water_lagoon_wayrel_multipolygon.gz, water_lake_wayrel_multipolygon.gz, water_oxbow_wayrel_multipolygon.gz, water_reservoir_wayrel_multipolygon.gz, water_river_wayrel_multipolygon.gz, waterway_riverbank_wayrel_multipolygon.gz, waterway_river_wayrel_multipolygon.gz",
+          "name": "lamina_agua_pol"
+        }, {
+          "file": "water_canal_wayrel_lines.gz, water_lagoon_wayrel_lines.gz, water_lake_wayrel_lines.gz, water_oxbow_wayrel_lines.gz, water_reservoir_wayrel_lines.gz, water_river_wayrel_lines.gz, waterway_riverbank_wayrel_lines.gz, waterway_river_wayrel_lines.gz",
+          "name": "hidrografia_lin"
+        }
+      ],
+      "layers_with_labels": [{
+          "file": "place_city_node_points.gz, place_town_node_points.gz, place_hamlet_node_points.gz, place_village_node_points.gz",
+          "name": "nombre_poblacion_construccion_pto"
+        }, {
+          "file": "place_country_node_points.gz",
+          "name": "nombre_division_administrativa_pto_nacion"
+        }, {
+          "file": "place_state_node_points.gz",
+          "name": "nombre_division_administrativa_pto_provincia"
+        }
+      ],
+      "filter": {}
+    }
+  ]
+}
