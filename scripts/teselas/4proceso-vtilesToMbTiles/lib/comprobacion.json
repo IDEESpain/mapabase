@@ -1,0 +1,1137 @@
+{
+    "aerodromo_pol": {
+        "clase": [
+            "aerodromo",
+            "area_estacionamiento",
+            "calle_rodaje",
+            "pista_aterrizaje"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "ref": [
+            "*"
+        ]
+    },
+    "aerodromo_pto": {
+        "clase": [
+            "aerodromo",
+            "aerodromo_helipuerto",
+            "deportivo_recreativo",
+            "helipuerto",
+            "hidroaerodromo"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "ref": [
+            "*"
+        ],
+        "tipo": [
+            "internacional",
+            "nacional",
+            "militar"
+        ]
+    },
+    "altimetria_lin": {
+        "altitud": [
+            "*"
+        ],
+        "clase": [
+            "curva_nivel",
+            "curva_nivel_depresion"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "altimetria_pto": {
+        "altitud": [
+            "*"
+        ],
+        "clase": [
+            "punto_acotado"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "aparcamiento_pol": {
+        "clase": [
+            "aparcamiento"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "aparcamiento_pto": {
+        "clase": [
+            "aparcamiento"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "area_servicio_pol": {
+        "clase": [
+            "area_servicio"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "area_servicio_pto": {
+        "clase": [
+            "area_servicio"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "autopista_lin": {
+        "clase": [
+            "autopista",
+            "autopista_enlace"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "puente": [
+            "T",
+            "F"
+        ],
+        "ref": [
+            "*"
+        ],
+        "tunel": [
+            "T",
+            "F"
+        ]
+    },
+    "autovia_lin": {
+        "clase": [
+            "autovia",
+            "autovia_enlace"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "puente": [
+            "T",
+            "F"
+        ],
+        "ref": [
+            "*"
+        ],
+        "tunel": [
+            "T",
+            "F"
+        ]
+    },
+    "camino_lin": {
+        "clase": [
+            "camino"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "puente": [
+            "T",
+            "F"
+        ],
+        "ref": [
+            "*"
+        ],
+        "tunel": [
+            "T",
+            "F"
+        ]
+    },
+    "carretera_autonomica_1er_nivel_lin": {
+        "clase": [
+            "carretera",
+            "carretera_enlace"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "puente": [
+            "T",
+            "F"
+        ],
+        "ref": [
+            "*"
+        ],
+        "tunel": [
+            "T",
+            "F"
+        ]
+    },
+    "carretera_autonomica_2do_nivel_lin": {
+        "clase": [
+            "carretera",
+            "carretera_enlace"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "puente": [
+            "T",
+            "F"
+        ],
+        "ref": [
+            "*"
+        ],
+        "tunel": [
+            "T",
+            "F"
+        ]
+    },
+    "carretera_autonomica_3er_nivel_lin": {
+        "clase": [
+            "carretera",
+            "carretera_enlace"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "puente": [
+            "T",
+            "F"
+        ],
+        "ref": [
+            "*"
+        ],
+        "tunel": [
+            "T",
+            "F"
+        ]
+    },
+    "carretera_general_lin": {
+        "clase": [
+            "carretera",
+            "carretera_enlace"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "puente": [
+            "T",
+            "F"
+        ],
+        "ref": [
+            "*"
+        ],
+        "tunel": [
+            "T",
+            "F"
+        ]
+    },
+    "carretera_otros_lin": {
+        "clase": [
+            "carretera",
+            "carretera_enlace"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "puente": [
+            "T",
+            "F"
+        ],
+        "ref": [
+            "*"
+        ],
+        "tunel": [
+            "T",
+            "F"
+        ]
+    },
+    "carretera_pk_pto": {
+        "clase": [
+            "pk_carretera"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "ref": [
+            "*"
+        ]
+    },
+    "comunidad_autonoma_pol": {
+        "clase": [
+            "comunidad_autonoma"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "conduccion_lin": {
+        "clase": [
+            "conduccion",
+            "conduccion_agua",
+            "conduccion_comunicacion",
+            "conduccion_energia",
+            "conduccion_gas",
+            "conduccion_combustible",
+            "conduccion_saneamiento"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "construccion_pol": {
+        "clase": [
+            "construccion",
+            "construccion_ligera",
+            "deposito",
+            "escollera",
+            "muro",
+            "puente",
+            "presa",
+            "torre"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "cubierta_vegetal_bosque_pol": {
+        "clase": [
+            "bosque_arbolado"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "cubierta_vegetal_pol": {
+        "clase": [
+            "asentamiento_agricola_y_huerta",
+            "bosque_coniferas",
+            "bosque_frondosas",
+            "bosque_mixto",
+            "combinacion_cultivos",
+            "combinacion_cultivos_con_vegetacion",
+            "combinacion_cultivos_leñosos",
+            "combinacion_vegetacion",
+            "cultivo_herbaceo",
+            "frutal_citrico",
+            "frutal_no_citrico",
+            "glaciar_nieve_perpetua",
+            "marisma",
+            "matorral",
+            "olivar",
+            "otros_cultivos_leñosos",
+            "pastizal_herbazal",
+            "playa_duna_arenal",
+            "prado",
+            "roquedo",
+            "salina",
+            "suelo_desnudo",
+            "temporalmente_desarbolado_por_incendios",
+            "turbera",
+            "viñedo",
+            "zona_humeda_pantanosa"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "edificio_pol": {
+        "clase": [
+            "edificio"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "tipo": [
+            "administrativo",
+            "asistencial",
+            "educativo",
+            "generico",
+            "historico",
+            "religioso",
+            "sanitario"
+        ]
+    },
+    "espacio_natural_protegido_pol": {
+        "clase": [
+            "arbol_singular",
+            "area_marina_protegida",
+            "area_natural_singular",
+            "area_natural_recreativa",
+            "area_privada_de_interes_ecologico",
+            "biotopo_protegido",
+            "corredor_ecologico_y_de_biodiversidad",
+            "corredores_ecoculturales",
+            "cuevas",
+            "enclave_natural",
+            "humedal_protegido",
+            "lugar_de_interes_cientifico",
+            "microrreserva",
+            "monumento_natural",
+            "monumento_natural_de_interes_nacional",
+            "paisaje_protegido",
+            "paraje_natural",
+            "paraje_natural_de_interes_nacional",
+            "paraje_natural_municipal",
+            "paraje_pintoresco",
+            "parque_nacional",
+            "parque_natural",
+            "parque_periurbano",
+            "parque_periurbano_de_conservacion_y_ocio",
+            "parque_regional",
+            "parque_rural",
+            "plan_especial_de_proteccion",
+            "refugio_de_fauna",
+            "reserva_de_la_biosfera",
+            "reserva_fluvial",
+            "reserva_natural",
+            "reserva_natural_concertada",
+            "reserva_natural_de_fauna_salvaje",
+            "reserva_natural_dirigida",
+            "reserva_natural_especial",
+            "reserva_natural_integral",
+            "reserva_natural_parcial",
+            "sitio_de_interes_cientifico",
+            "sitio_natural_de_interes_nacional",
+            "zona_de_especial_conservacion_de_importancia_comunitaria",
+            "zona_de_especial_proteccion_de_los_valores_naturales",
+            "zona_de_importancia_comunitaria_lic",
+            "zona_de_interes_regional",
+            "zona_de_la_red_ecologica_europea_natura_2000",
+            "zona_humeda"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "estacion_autobus_pol": {
+        "clase": [
+            "estacion_autobus"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "estacion_autobus_pto": {
+        "clase": [
+            "estacion_autobus"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "estacion_ferrocarril_pol": {
+        "clase": [
+            "apartadero",
+            "apartadero-cargadero",
+            "apeadero",
+            "apeadero-cargadero",
+            "cargadero",
+            "edificio_estacion",
+            "estacion_ferrocarril",
+            "paso_a_nivel"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "estacion_ferrocarril_pto": {
+        "clase": [
+            "estacion_ferrocarril"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "ferrocarril_lin": {
+        "clase": [
+            "cremallera",
+            "funicular",
+            "metro",
+            "tranvia",
+            "tren",
+            "tren_ligero"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "puente": [
+            "T",
+            "F"
+        ],
+        "tipo_tramo": [
+            "otro",
+            "playa_de_vias",
+            "troncal"
+        ],
+        "tunel": [
+            "T",
+            "F"
+        ]
+    },
+    "ferrocarril_pk_pto": {
+        "clase": [
+            "pk_ferrocarril"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "ref": [
+            "*"
+        ]
+    },
+    "ferrocarril_pol": {
+        "clase": [
+            "elemento_infraestructura",
+            "perimetro_infraestructura"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "hidrografia_lin": {
+        "clase": [
+            "acequia",
+            "canal",
+            "curso_natural",
+            "tranvia",
+            "tuberia"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "orden": [
+            "primero",
+            "quinto_sexto",
+            "segundo",
+            "tercero_cuarto",
+            "otro"
+        ],
+        "persistencia": [
+            "estacional",
+            "esporadico",
+            "permanente",
+            "otro"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "hidrografia_pol": {
+        "clase": [
+            "curso_artificial",
+            "curso_natural"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "instalacion_deportiva_pol": {
+        "clase": [
+            "zona_deportival",
+            "campo_futbol",
+            "instalacion_deportiva",
+            "pista_deportiva",
+            "campo_golf",
+            "circuito",
+            "estacion_invernal"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "instalacion_educativa_pol": {
+        "clase": [
+            "instalacion_educativa"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "instalacion_energia_pol": {
+        "clase": [
+            "instalacion_energia"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "instalacion_militar_pol": {
+        "clase": [
+            "instalacion_militar"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "instalacion_sanitaria_pol": {
+        "clase": [
+            "instalacion_sanitaria"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "instalacion_telecomunicacion_pol": {
+        "clase": [
+            "instalacion_telecomunicacion"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "instalacion_tratamiento_aguas_pol": {
+        "clase": [
+            "instalacion_tratamiento_aguas"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "instalacion_tratamiento_residuos_pol": {
+        "clase": [
+            "instalacion_tratamiento_residuos"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "lamina_agua_pol": {
+        "clase": [
+            "abrevadero",
+            "balsa_alberca",
+            "embalse",
+            "estanque_piscina",
+            "lago",
+            "lamina_agua",
+            "marisma",
+            "zona_humeda"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "linea_limite_lin": {
+        "clase": [
+            "limite_autonomico",
+            "limite_provincial",
+            "limite_municipal"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "ref": [
+            "*"
+        ]
+    },
+    "manzana_pol": {
+        "clase": [
+            "manzana"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "municipio_pol": {
+        "clase": [
+            "municipio"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "nombre_division_administrativa_pto": {
+        "clase": [
+            "ambito_inferior_a_municipio",
+            "ciudad_autonomia",
+            "comarca_administrativa",
+            "comunidad_autonoma",
+            "isla_administrativa",
+            "jurisdiccion",
+            "municipio",
+            "nacion",
+            "provincia"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "nombre_alt": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "nombre_hidrografia_pto": {
+        "clase": [
+            "curso_artificial_agua",
+            "curso_natural_agua",
+            "embalse",
+            "entrante_costero_estrecho_maritimo",
+            "glaciar",
+            "hidronimo_puntual",
+            "isla",
+            "mar",
+            "masa_agua",
+            "otro_relieve_costero",
+            "playa",
+            "relieve_submarino",
+            "saliente_costero"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "nombre_alt": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "nombre_orografia_pto": {
+        "clase": [
+            "alineacion_montañosa",
+            "comarca_geografica",
+            "depresion",
+            "espacio_protegido_restante",
+            "llanura",
+            "montaña",
+            "paisaje",
+            "paraje",
+            "parque_nacional_natural",
+            "paso_montaña",
+            "vertiente"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "nombre_alt": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "nombre_poblacion_construccion_pto": {
+        "clase": [
+            "barrio",
+            "capital_comunidad_autonoma_ciudad_autonoma",
+            "capital_eatim",
+            "capital_estado",
+            "capital_municipio",
+            "capital_provincia",
+            "construccion_instalacion_abierta",
+            "distrito_municipal",
+            "eatim",
+            "edificacion",
+            "entidad_colectiva",
+            "entidad_menor_poblacion",
+            "entidad_singular",
+            "entidad_singular_INE",
+            "hito_demarcacion_territorial",
+            "hito_via_comunicacion",
+            "infraestructura_transporte_terrestre",
+            "instalacion_portuaria",
+            "nucleo_poblacion",
+            "otra_entidad_menor_poblacion",
+            "vertice_geodesico"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "nombre_alt": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "nombre_transporte_pto": {
+        "clase": [
+            "aerodromo",
+            "aeropuerto",
+            "camino_via_pecuaria",
+            "carretera",
+            "ferrocarril",
+            "infraestructura_transporte_terrestre",
+            "instalacion_portuaria",
+            "pista_aviacion_helipuerto",
+            "puerto",
+            "via_maritima",
+            "via_urbana"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "nombre_alt": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "nucleo_urbano_pol": {
+        "clase": [
+            "nucleo_urbano"
+        ],
+        "cod_ine": [
+            "*"
+        ],
+        "municipio": [
+            "*"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "paso_a_nivel_pto": {
+        "clase": [
+            "paso_a_nivel"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "peaje_pol": {
+        "clase": [
+            "peaje"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "peaje_pto": {
+        "clase": [
+            "peaje"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "portal_pto": {
+        "clase": [
+            "portal"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "ref": [
+            "*"
+        ]
+    },
+    "provincia_pol": {
+        "clase": [
+            "provincia"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "puerto_pol": {
+        "clase": [
+            "acceso",
+            "muelle",
+            "puerto",
+            "transito_mercancias",
+            "transito_pasajeros"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "puerto_pto": {
+        "clase": [
+            "astillero_naval",
+            "puerto",
+            "puerto_comercial",
+            "puerto_deportivo",
+            "puerto_industrial",
+            "puerto_militar",
+            "puerto_pesquero",
+            "puerto_turistico"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "ref": [
+            "*"
+        ]
+    },
+    "ruta_lin": {
+        "clase": [
+            "camino_de_santiago",
+            "ruta",
+            "ruta_parque_nacional",
+            "ruta_via_verde",
+            "sendero_europeo",
+            "sendero_gran_recorrido",
+            "sendero_local",
+            "sendero_pequeño_recorrido",
+            "sendero_regional",
+            "sendero_urbano"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "senda_lin": {
+        "clase": [
+            "senda"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "tierra_firme_pol": {
+        "clase": [
+            "tierra_firme"
+        ],
+        "nombre": [
+            "España"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "ref": [
+            "*"
+        ]
+    },
+    "via_servicio_lin": {
+        "clase": [
+            "via_servicio",
+            "via_servicio_enlace"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "puente": [
+            "T",
+            "F"
+        ],
+        "ref": [
+            "*"
+        ],
+        "tunel": [
+            "T",
+            "F"
+        ]
+    },
+    "via_urbana_lin": {
+        "clase": [
+            "via_urbana",
+            "via_urbana_enlace"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ],
+        "puente": [
+            "T",
+            "F"
+        ],
+        "ref": [
+            "*"
+        ],
+        "tunel": [
+            "T",
+            "F"
+        ]
+    },
+    "zona_dotacional_pol": {
+        "clase": [
+            "zona_dotacional"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "zona_industrial_pol": {
+        "clase": [
+            "area_industrial",
+            "poligono_industrial",
+            "zona_industrial"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "zona_militar_pol": {
+        "clase": [
+            "zona_militar"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "zona_protegida_pol": {
+        "clase": [
+            "patrimonio_historico_artistico",
+            "yacimiento_arqueologico",
+            "zona_protegida"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    },
+    "zona_verde_pol": {
+        "clase": [
+            "jardin",
+            "parque",
+            "terreno_natural",
+            "zona_verdel"
+        ],
+        "nombre": [
+            "*"
+        ],
+        "proveedor": [
+            "*"
+        ]
+    }
+}

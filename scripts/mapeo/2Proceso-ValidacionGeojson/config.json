@@ -1,0 +1,8 @@
+{
+    "geojson_folder_path":"./salida_geojsons_andalucia/",
+    "fgb_folder_path": "./salida_geojsons_andalucia/fgb/",
+    "git_carpeta_mapabase_gh_pages" : "./mapabase",
+    "JSON_comprobacion" : "./lib/comprobacion.json",
+    "JSON_config_Tippecanoe" : "./lib/config_vtiles.json",
+    "fgb_temp_folder" : "./salida_geojsons_andalucia/fgb_temp/"
+}
