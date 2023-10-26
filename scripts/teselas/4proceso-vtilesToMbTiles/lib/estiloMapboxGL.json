@@ -1,0 +1,864 @@
+{
+    "version": 8,
+    "name": "Capa base mapboxGL",
+    "metadata": {
+        "compress_geojson": "no",
+        "tiling_layers": "yes"
+    },
+    "sources": {
+        "fuenteCNIG": {
+            "type": "vector",
+            "tiles": [
+                "http://10.67.33.105:8085/vt/{z}/{x}/{y}.pbf"
+            ],
+            "minZoom": 0,
+            "maxZoom": 22
+        }
+    },
+    "sprite": "http://10.67.33.105:8085/sprite/sprite",
+    "glyphs": "http://10.67.33.105:8085/font/{fontstack}/{range}.pbf",
+    "layers": [
+        {
+            "id": "fondo",
+            "type": "background",
+            "paint": {
+                "background-color": "rgba(135, 186, 190, 1)"
+            }
+        },
+        {
+            "id": "aerodromo_pol",
+            "type": "fill",
+            "paint": {
+                "fill-color": "rgba(92,232,225, 0.7)",
+                "fill-outline-color": "rgba(215,60,6, 0.7)"
+            },
+            "source-layer": "aerodromo_pol",
+            "source": "fuenteCNIG"
+        },
+        {
+            "id": "aparcamiento_pol",
+            "type": "fill",
+            "source-layer": "aparcamiento_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(17,156,52, 0.7)",
+                "fill-outline-color": "rgba(209,203,240, 0.7)"
+            }
+        },
+        {
+            "id": "area_servicio_pol",
+            "type": "fill",
+            "source-layer": "area_servicio_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(202,83,254, 0.7)",
+                "fill-outline-color": "rgba(199,184,152, 0.7)"
+            }
+        },
+        {
+            "id": "comunidad_autonoma_pol",
+            "type": "fill",
+            "source-layer": "comunidad_autonoma_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(139,22,160, 0.7)",
+                "fill-outline-color": "rgba(226,208,40, 0.7)"
+            }
+        },
+        {
+            "id": "construccion_pol",
+            "type": "fill",
+            "source-layer": "construccion_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(133,184,79, 0.7)",
+                "fill-outline-color": "rgba(228,186,182, 0.7)"
+            }
+        },
+        {
+            "id": "cubierta_vegetal_bosque_pol",
+            "type": "fill",
+            "source-layer": "cubierta_vegetal_bosque_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(246,232,144, 0.7)",
+                "fill-outline-color": "rgba(135,233,13, 0.7)"
+            }
+        },
+        {
+            "id": "cubierta_vegetal_pol",
+            "type": "fill",
+            "source-layer": "cubierta_vegetal_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(221,111,94, 0.7)",
+                "fill-outline-color": "rgba(35,98,228, 0.7)"
+            }
+        },
+        {
+            "id": "edificio_pol",
+            "type": "fill",
+            "source-layer": "edificio_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(168,37,105, 0.7)",
+                "fill-outline-color": "rgba(26,184,76, 0.7)"
+            }
+        },
+        {
+            "id": "espacio_natural_protegido_pol",
+            "type": "fill",
+            "source-layer": "espacio_natural_protegido_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(170,65,134, 0.7)",
+                "fill-outline-color": "rgba(22,90,236, 0.7)"
+            }
+        },
+        {
+            "id": "estacion_autobus_pol",
+            "type": "fill",
+            "source-layer": "estacion_autobus_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(29,24,168, 0.7)",
+                "fill-outline-color": "rgba(6,197,106, 0.7)"
+            }
+        },
+        {
+            "id": "estacion_ferrocarril_pol",
+            "type": "fill",
+            "source-layer": "estacion_ferrocarril_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(138,80,35, 0.7)",
+                "fill-outline-color": "rgba(176,85,172, 0.7)"
+            }
+        },
+        {
+            "id": "ferrocarril_pol",
+            "type": "fill",
+            "source-layer": "ferrocarril_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(97,94,123, 0.7)",
+                "fill-outline-color": "rgba(86,254,249, 0.7)"
+            }
+        },
+        {
+            "id": "hidrografia_pol",
+            "type": "fill",
+            "source-layer": "hidrografia_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(152,97,36, 0.7)",
+                "fill-outline-color": "rgba(108,49,36, 0.7)"
+            }
+        },
+        {
+            "id": "instalacion_deportiva_pol",
+            "type": "fill",
+            "source-layer": "instalacion_deportiva_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(164,5,65, 0.7)",
+                "fill-outline-color": "rgba(18,209,253, 0.7)"
+            }
+        },
+        {
+            "id": "instalacion_educativa_pol",
+            "type": "fill",
+            "source-layer": "instalacion_educativa_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(72,198,122, 0.7)",
+                "fill-outline-color": "rgba(6,245,32, 0.7)"
+            }
+        },
+        {
+            "id": "instalacion_energia_pol",
+            "type": "fill",
+            "source-layer": "instalacion_energia_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(115,1,165, 0.7)",
+                "fill-outline-color": "rgba(34,253,8, 0.7)"
+            }
+        },
+        {
+            "id": "instalacion_militar_pol",
+            "type": "fill",
+            "source-layer": "instalacion_militar_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(154,99,163, 0.7)",
+                "fill-outline-color": "rgba(47,117,206, 0.7)"
+            }
+        },
+        {
+            "id": "instalacion_sanitaria_pol",
+            "type": "fill",
+            "source-layer": "instalacion_sanitaria_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(158,29,232, 0.7)",
+                "fill-outline-color": "rgba(139,218,177, 0.7)"
+            }
+        },
+        {
+            "id": "instalacion_telecomunicacion_pol",
+            "type": "fill",
+            "source-layer": "instalacion_telecomunicacion_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(149,217,186, 0.7)",
+                "fill-outline-color": "rgba(165,199,217, 0.7)"
+            }
+        },
+        {
+            "id": "instalacion_tratamiento_aguas_pol",
+            "type": "fill",
+            "source-layer": "instalacion_tratamiento_aguas_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(205,196,95, 0.7)",
+                "fill-outline-color": "rgba(129,167,20, 0.7)"
+            }
+        },
+        {
+            "id": "instalacion_tratamiento_residuos_pol",
+            "type": "fill",
+            "source-layer": "instalacion_tratamiento_residuos_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(45,248,229, 0.7)",
+                "fill-outline-color": "rgba(76,76,42, 0.7)"
+            }
+        },
+        {
+            "id": "lamina_agua_pol",
+            "type": "fill",
+            "source-layer": "lamina_agua_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(226,167,236, 0.7)",
+                "fill-outline-color": "rgba(245,215,5, 0.7)"
+            }
+        },
+        {
+            "id": "manzana_pol",
+            "type": "fill",
+            "source-layer": "manzana_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(55,249,144, 0.7)",
+                "fill-outline-color": "rgba(63,203,102, 0.7)"
+            }
+        },
+        {
+            "id": "municipio_pol",
+            "type": "fill",
+            "source-layer": "municipio_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(166,69,91, 0.7)",
+                "fill-outline-color": "rgba(255,161,200, 0.7)"
+            }
+        },
+        {
+            "id": "nucleo_urbano_pol",
+            "type": "fill",
+            "source-layer": "nucleo_urbano_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(241,158,180, 0.7)",
+                "fill-outline-color": "rgba(241,199,253, 0.7)"
+            }
+        },
+        {
+            "id": "peaje_pol",
+            "type": "fill",
+            "source-layer": "peaje_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(45,248,156, 0.7)",
+                "fill-outline-color": "rgba(16,74,102, 0.7)"
+            }
+        },
+        {
+            "id": "provincia_pol",
+            "type": "fill",
+            "source-layer": "provincia_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(232,116,131, 0.7)",
+                "fill-outline-color": "rgba(80,186,202, 0.7)"
+            }
+        },
+        {
+            "id": "puerto_pol",
+            "type": "fill",
+            "source-layer": "puerto_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(243,25,89, 0.7)",
+                "fill-outline-color": "rgba(146,85,34, 0.7)"
+            }
+        },
+        {
+            "id": "tierra_firme_pol",
+            "type": "fill",
+            "source-layer": "tierra_firme_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(151,82,148, 0.7)",
+                "fill-outline-color": "rgba(88,231,246, 0.7)"
+            }
+        },
+        {
+            "id": "zona_dotacional_pol",
+            "type": "fill",
+            "source-layer": "zona_dotacional_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(155,54,106, 0.7)",
+                "fill-outline-color": "rgba(26,113,168, 0.7)"
+            }
+        },
+        {
+            "id": "zona_industrial_pol",
+            "type": "fill",
+            "source-layer": "zona_industrial_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(69,134,235, 0.7)",
+                "fill-outline-color": "rgba(54,66,148, 0.7)"
+            }
+        },
+        {
+            "id": "zona_militar_pol",
+            "type": "fill",
+            "source-layer": "zona_militar_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(226,187,93, 0.7)",
+                "fill-outline-color": "rgba(179,67,128, 0.7)"
+            }
+        },
+        {
+            "id": "zona_protegida_pol",
+            "type": "fill",
+            "source-layer": "zona_protegida_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(45,218,115, 0.7)",
+                "fill-outline-color": "rgba(199,125,159, 0.7)"
+            }
+        },
+        {
+            "id": "zona_verde_pol",
+            "type": "fill",
+            "source-layer": "zona_verde_pol",
+            "source": "fuenteCNIG",
+            "paint": {
+                "fill-color": "rgba(84,124,202, 0.7)",
+                "fill-outline-color": "rgba(42,221,217, 0.7)"
+            }
+        },
+        {
+            "id": "altimetria_lin",
+            "type": "line",
+            "source-layer": "altimetria_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(153,238,142, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "autopista_lin",
+            "type": "line",
+            "source-layer": "autopista_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(239,190,46, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "autovia_lin",
+            "type": "line",
+            "source-layer": "autovia_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(219,236,61, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "camino_lin",
+            "type": "line",
+            "source-layer": "camino_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(161,80,87, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "carretera_autonomica_1er_nivel_lin",
+            "type": "line",
+            "source-layer": "carretera_autonomica_1er_nivel_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(231,82,121, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "carretera_autonomica_2do_nivel_lin",
+            "type": "line",
+            "source-layer": "carretera_autonomica_2do_nivel_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(107,145,81, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "carretera_autonomica_3er_nivel_lin",
+            "type": "line",
+            "source-layer": "carretera_autonomica_3er_nivel_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(204,38,195, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "carretera_general_lin",
+            "type": "line",
+            "source-layer": "carretera_general_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(86,173,203, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "carretera_otros_lin",
+            "type": "line",
+            "source-layer": "carretera_otros_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(114,194,251, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "conduccion_lin",
+            "type": "line",
+            "source-layer": "conduccion_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(74,53,58, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "ferrocarril_lin",
+            "type": "line",
+            "source-layer": "ferrocarril_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(31,159,151, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "hidrografia_lin",
+            "type": "line",
+            "source-layer": "hidrografia_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(128,20,235, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "linea_limite_lin",
+            "type": "line",
+            "source-layer": "linea_limite_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(228,102,17, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "ruta_lin",
+            "type": "line",
+            "source-layer": "ruta_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(118,158,178, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "senda_lin",
+            "type": "line",
+            "source-layer": "senda_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(18,113,209, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "via_servicio_lin",
+            "type": "line",
+            "source-layer": "via_servicio_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(205,150,75, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "via_urbana_lin",
+            "type": "line",
+            "source-layer": "via_urbana_lin",
+            "source": "fuenteCNIG",
+            "paint": {
+                "line-color": "rgba(147,10,17, 1)",
+                "line-width": 2,
+                "line-opacity": 1
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "aerodromo_pto",
+            "type": "circle",
+            "source-layer": "aerodromo_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(194,159,29, 1)",
+                "circle-stroke-color": "rgba(107,233,225, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "altimetria_pto",
+            "type": "circle",
+            "source-layer": "altimetria_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(179,237,56, 1)",
+                "circle-stroke-color": "rgba(65,199,46, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "aparcamiento_pto",
+            "type": "circle",
+            "source-layer": "aparcamiento_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(29,23,93, 1)",
+                "circle-stroke-color": "rgba(87,189,96, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "area_servicio_pto",
+            "type": "circle",
+            "source-layer": "area_servicio_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(196,100,173, 1)",
+                "circle-stroke-color": "rgba(122,21,196, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "carretera_pk_pto",
+            "type": "circle",
+            "source-layer": "carretera_pk_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(129,184,252, 1)",
+                "circle-stroke-color": "rgba(17,240,98, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "estacion_autobus_pto",
+            "type": "circle",
+            "source-layer": "estacion_autobus_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(210,144,130, 1)",
+                "circle-stroke-color": "rgba(173,8,62, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "estacion_ferrocarril_pto",
+            "type": "circle",
+            "source-layer": "estacion_ferrocarril_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(6,107,227, 1)",
+                "circle-stroke-color": "rgba(208,101,249, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "ferrocarril_pk_pto",
+            "type": "circle",
+            "source-layer": "ferrocarril_pk_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(149,195,42, 1)",
+                "circle-stroke-color": "rgba(220,219,254, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "nombre_division_administrativa_pto",
+            "type": "circle",
+            "source-layer": "nombre_division_administrativa_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(29,105,40, 1)",
+                "circle-stroke-color": "rgba(53,124,252, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "nombre_hidrografia_pto",
+            "type": "circle",
+            "source-layer": "nombre_hidrografia_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(86,169,20, 1)",
+                "circle-stroke-color": "rgba(136,227,8, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "nombre_orografia_pto",
+            "type": "circle",
+            "source-layer": "nombre_orografia_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(135,38,47, 1)",
+                "circle-stroke-color": "rgba(214,9,118, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "nombre_poblacion_construccion_pto",
+            "type": "circle",
+            "source-layer": "nombre_poblacion_construccion_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(6,160,79, 1)",
+                "circle-stroke-color": "rgba(7,214,138, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "nombre_transporte_pto",
+            "type": "circle",
+            "source-layer": "nombre_transporte_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(14,22,138, 1)",
+                "circle-stroke-color": "rgba(225,27,149, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "paso_a_nivel_pto",
+            "type": "circle",
+            "source-layer": "paso_a_nivel_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(154,40,61, 1)",
+                "circle-stroke-color": "rgba(250,75,69, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "peaje_pto",
+            "type": "circle",
+            "source-layer": "peaje_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(250,212,203, 1)",
+                "circle-stroke-color": "rgba(179,251,20, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "portal_pto",
+            "type": "circle",
+            "source-layer": "portal_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(146,169,175, 1)",
+                "circle-stroke-color": "rgba(23,60,14, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        },
+        {
+            "id": "puerto_pto",
+            "type": "circle",
+            "source-layer": "puerto_pto",
+            "source": "fuenteCNIG",
+            "paint": {
+                "circle-color": "rgba(154,253,49, 1)",
+                "circle-stroke-color": "rgba(218,144,153, 1)",
+                "circle-stroke-width": 2,
+                "circle-radius": 6
+            },
+            "layout": {
+                "visibility": "visible"
+            }
+        }
+    ],
+    "id": "adwe687dsf",
+    "owner": "CNIG"
+}

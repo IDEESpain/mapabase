@@ -1,0 +1,21 @@
+{
+    "lib_path":"../lib/",
+    "elementos_file":"matriz_elementos.xlsx",
+    "municipios_file":"municipios.xlsx",
+    "path_productores_municipios":"/var/MVT_MapaBaseXYZ/DatosProcesados/productores/municipios/",
+    "path_productores_com_aut":"/var/MVT_MapaBaseXYZ/DatosProcesados/productores/com_aut/",
+    "path_productores_nacional":"/var/MVT_MapaBaseXYZ/DatosProcesados/productores/nacional/",
+    "path_generados_municipios":"/var/MVT_MapaBaseXYZ/DatosProcesados/generados/municipios/",
+    "path_generados_com_aut":"/var/MVT_MapaBaseXYZ/DatosProcesados/generados/com_aut/",
+    "path_generados_nacional":"/var/MVT_MapaBaseXYZ/DatosProcesados/generados/nacional/",
+    "buffer":0.00000000001,
+    "path_from_inside_generados_to_productores":"../../productores/",
+    "path_from_inside_generados_com_aut_to_generados_municipios":"../../municipios/",
+    "path_from_inside_generados_nacional_to_generados_com_aut":"../../com_aut/",
+    "num_threads":5,
+    "logs_path":"../logs/",
+    "aux_municipios_file":"../lib/aux_municipio_pol.fgb",
+    "cod_comunidades":[],
+    "config_proceso_4":"../../4proceso-vtilesToMbTiles"
+
+}
