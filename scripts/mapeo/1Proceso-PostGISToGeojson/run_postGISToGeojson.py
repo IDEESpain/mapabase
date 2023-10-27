@@ -6,7 +6,7 @@ if __name__ == '__main__':
     path_jsonConex = '/var/proyectos/mapaBaseXYZ/input_geojson/0vt-procesos/1Proceso-PostGISToGeojson/lib/conex.json'
     path_hojaCalculoMApeo = '/var/proyectos/mapaBaseXYZ/input_geojson/1CNIG/CNIG_ToGeojoson.ods'
     path_carpetaSalida = '/var/proyectos/mapaBaseXYZ/input_geojson/1CNIG/1Geojson'
-    proveedor = 'CNIG'
+    proveedor = 'cnig'
     
     # # # # Se llama a la clase con los parámetros de la ejecución
     ProcesoMapeo = mapeo_PG_GJSON(path_jsonConex,path_hojaCalculoMApeo,path_carpetaSalida,proveedor)
@@ -31,10 +31,11 @@ if __name__ == '__main__':
     
     # # # # Renombrar geojson si ha dado error el proceso
     ProcesoMapeo.renombrarSiError = True
-    
+
+    # Se comenta para evitar la pérdida de información.
     # # # # Paginar sentencia SQL
-    ProcesoMapeo.paginarSentenciaSQL = True
-    ProcesoMapeo.limiteCantidad = 500000
+    # ProcesoMapeo.paginarSentenciaSQL = True
+    # ProcesoMapeo.limiteCantidad = 500000
     
     # # # # Partir geojsons para luego fusionarlos al final
     ProcesoMapeo.partirGeojson = True
