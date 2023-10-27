@@ -9,8 +9,9 @@ En las primeras líneas se configuran los parámetros:
     
     path_carpetaSalida = '/1CNIG/1Geojson' #ruta a la carpeta para los datos de salida
     
-    proveedor = 'cnig' #Consultar el código en https://ideespain.github.io/mapabase/datos/proveedores_de_datos/
+    proveedor = 'cnig' 
     
+Consultar el código de proveedor en https://ideespain.github.io/mapabase/datos/proveedores_de_datos/
 
 # Datos de entrada proceso .ods Proveedores de datos
 
