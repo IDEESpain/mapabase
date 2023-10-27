@@ -5,7 +5,7 @@ En las primeras líneas se configuran los parámetros:
 
     path_jsonConex = '/lib/conex.json' #ruta al fichero con las conexiones a la BBDD
     
-    path_hojaCalculoMApeo = '/1CNIG/CNIG_ToGeojoson.ods' #ruta al fichero con las conexiones a la BBDD
+    path_hojaCalculoMApeo = '/1CNIG/CNIG_ToGeojoson.ods' #ruta al fichero con el mapeo del modelo
     
     path_carpetaSalida = '/1CNIG/1Geojson' #ruta a la carpeta para los datos de salida
     
