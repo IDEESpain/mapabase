@@ -72,3 +72,11 @@ Actualizada en: https://ideespain.github.io/mapabase/elementos/relacion_tematica
 
 # ./lib/conex.json
 Identificar las fuentes de datos que se utilizan en el archivo .ods de entrada.
+
+# run_generar_sql.py
+Script que genera una base de datos vacía con la estructura del modelo a partir la página web del modelo. Al rodar el script, recorre la web y se genera, cada tabla y campos correspondientes. Se proporciona como alternativa al .ods para transformación de modelos. Puede ser útil a algunos productores que les resulte más sencillo exportar de su modelo de datos al modelo de datos XYZ a través de tabla en lugar del .ods de mapeo.
+
+
+# requirements.txt
+Listado de librerías necesarias para el funcionamiento de los scripts tanto del proceso 1 y 2, como 3 y 4.
+
