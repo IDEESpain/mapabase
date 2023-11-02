@@ -29,7 +29,7 @@ class transformar:
         # for vrt in listaVRTCreados:
         def VRT2FGB(vrt):
           print(vrt)
-          command_line = "ogr2ogr -f FlatGeobuf -nlt PROMOTE_TO_MULTI " + path_carpetaFGB_destino +  vrt.split(".")[0] + ".fgb"+ " " + path_carpetaFGB_origen  + vrt
+          command_line = "ogr2ogr -skipfailures -f FlatGeobuf -nlt PROMOTE_TO_MULTI " + path_carpetaFGB_destino +  vrt.split(".")[0] + ".fgb"+ " " + path_carpetaFGB_origen  + vrt
           print(command_line)
           # args = shlex.split(command_line)
           os.system(command_line)
@@ -45,7 +45,7 @@ class transformar:
         # for gjson in listaGeojsonCreados:
         def gjson2FGB(gjson):
           print(gjson)
-          command_line = "ogr2ogr -f FlatGeobuf -nlt PROMOTE_TO_MULTI " + path_carpetaSalida +  gjson.split(".")[0] + "_"+gjson.split("_")[-1] + ".fgb"+ " " + self.path_carpetaEntrada  + gjson
+          command_line = "ogr2ogr -skipfailures -f FlatGeobuf -nlt PROMOTE_TO_MULTI " + path_carpetaSalida +  gjson.split(".")[0] + "_"+gjson.split("_")[-1] + ".fgb"+ " " + self.path_carpetaEntrada  + gjson
           print(command_line)
           # args = shlex.split(command_line)
           os.system(command_line)
