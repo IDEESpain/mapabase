@@ -1,13 +1,16 @@
 Cambios en el Modelo de datos:
 ------------------------------
-### 20/11/2023
-*  Se añaden los valores compuerta y transporte_suspendido en la clase construccion_lin
+### 20/11/2023 construccion_lin
+*  Se añaden los valores «compuerta» y «transporte_suspendido»
+*  Se añade descripción para los valores compuerta y transporte_suspendido
 
-### 20/11/2023
-*  Se añaden los valores cascada, sifon_sumidero y surgencia en la clase nombre_hidrografia_pto
+### 20/11/2023 nombre_hidrografia_lin
+*  Se añaden los valores «cascada», «sifon_sumidero» y «surgencia»
+*  Se añade descripción para los valores sifon_sumidero y surgencia
 
-### 20/11/2023
-*  Se añaden los valores captacion, castillo_fortaleza, estacion_bombeo, instalacion_religiosa y torre_transporte en la clase servicio_instalacion_pto
+### 20/11/2023 servicio_instalacion_pto
+*  Se añaden los valores «captacion», «castillo_fortaleza», «estacion_bombeo», «instalacion_religiosa» y «torre_transporte»
+*  Se añade descripción para los valores captacion, estacion_bombeo y torre_transporte
 
 ### 02/10/2023
 *  Se añade el valor helipuerto en la clase aerodromo_pol
