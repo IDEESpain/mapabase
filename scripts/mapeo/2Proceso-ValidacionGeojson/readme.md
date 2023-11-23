@@ -1,5 +1,7 @@
 
-*run_crearJSONValidacion.py* -  Crea el archivo .json (/lib/comprobacion.json) desde la web (github mapabase) a partir del html. Si hay cambios en el modelo se tiene que volver a lanzar. Si no ha habido cambios en el modelo se puede utilizar el archivo (/lib/comprobacion.json) anterior.
+*run_crearJSONValidacion.py* -  Crea el archivo .json (/lib/comprobacion.json) desde la web (github mapabase) a partir del html (ver Nota). Si hay cambios en el modelo se tiene que volver a lanzar. Si no ha habido cambios en el modelo se puede utilizar el archivo (/lib/comprobacion.json) anterior.
+
+Nota - En el código del script, la variable llamada ProcesoControlCalidad.git_carpeta_mapabase_gh_pages, indica la ruta del repositorio mapabase que tengas en el ordenador desde el que se va a lanzar el script. Utiliza la rama en la que esté ese repositorio, no va a utilizar automáticamente gh_pages desde la web. Por ejemplo, si en ese repositorio indicado está la rama desarrollo utilizará desarrollo.
 
 *config.json* - configuración de rutas y archivos
 Para ejecutar el proceso, se necesitará configurar en primer lugar el archivo config.json dónde se van a parametrizar los valores necesarios para la ejecución del proceso. Parámetros obligatorios:
