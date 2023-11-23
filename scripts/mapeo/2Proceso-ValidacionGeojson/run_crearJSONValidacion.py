@@ -15,8 +15,8 @@ ProcesoControlCalidad.verbose = True
 
 # # # # Pasar de repositorio e GIT a JSON
 start_time = time.time()
-ProcesoControlCalidad.git_carpeta_mapabase_gh_pages = './mapabase'
-ProcesoControlCalidad.JSON_comprobacion = './lib/comprobacion.json'
+ProcesoControlCalidad.git_carpeta_mapabase_gh_pages = var_dict["git_carpeta_mapabase_gh_pages"]
+ProcesoControlCalidad.JSON_comprobacion = var_dict["JSON_comprobacion"]
 ProcesoControlCalidad.elementosAJSON()
 
 # # # # Pasar a JSON para proceso Tippecanoe
