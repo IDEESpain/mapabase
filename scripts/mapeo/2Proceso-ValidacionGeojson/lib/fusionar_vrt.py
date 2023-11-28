@@ -81,11 +81,7 @@ class fusionar_vrt:
         n = text_file.write(xml)
         text_file.close()
         print('--------------------')
-        # exit()
-        # command_line = "ogr2ogr -f GeoJSONSeq " + fichero_ndjson_zip + " " + fichero_geojson
-        # print(command_line)
-        # args = shlex.split(command_line)
-        # subprocess.call(args)
+
         return 0
 
     def has_numbers(self,inputString):
@@ -143,11 +139,7 @@ class fusionar_vrt:
         n = text_file.write(xml)
         text_file.close()
         print('--------------------')
-        # exit()
-        # command_line = "ogr2ogr -f GeoJSONSeq " + fichero_ndjson_zip + " " + fichero_geojson
-        # print(command_line)
-        # args = shlex.split(command_line)
-        # subprocess.call(args)
+
         return 0
 
     def fgb_n_2VRT(self,path_carpeta_fgb=None):
@@ -155,20 +147,22 @@ class fusionar_vrt:
         if path_carpeta_fgb is None:
             path_carpeta_fgb=self.path_carpetaEntrada
         jsonElementos = {}
-        listaGeojsonCreados = [x for x in os.listdir(path_carpeta_fgb) if "fgb" in x and self.has_numbers(x) == True ]
+
+        #listaGeojsonCreados = [x for x in os.listdir(path_carpeta_fgb) if "fgb" in x and self.has_numbers(x) == True ]
+        listaGeojsonCreados = [x for x in os.listdir(path_carpeta_fgb) if "fgb" in x ]
 
         xml = """
               <OGRVRTDataSource>
                 <OGRVRTUnionLayer name="unionLayer">
               """
-        nombreCapa = ""
-        gjsonAnterior = ''
-        for e in sorted(listaGeojsonCreados):
-            nombreCapa = '_'.join(e.split('.')[0].split('_')[0:-1])
-            # print(nombreCapa)
 
-            if self.has_numbers(e) == False:
-                continue
+        gjsonAnterior = ''
+        nombreCapa = ''
+        for e in sorted(listaGeojsonCreados):
+            if self.has_numbers(e):
+                nombreCapa = '_'.join(e.split('.')[0].split('_')[0:-1])
+            else:   
+                nombreCapa = e.replace(".fgb", "")
 
             if nombreCapa  == gjsonAnterior:
                 xml = xml + """
@@ -182,7 +176,6 @@ class fusionar_vrt:
                         </OGRVRTDataSource>
                             """
                 xml = xml.replace("unionLayer",gjsonAnterior)
-                # print(xml)
                 text_file = open(path_carpeta_fgb+gjsonAnterior+".vrt", "w")
                 n = text_file.write(xml)
                 text_file.close()
@@ -204,21 +197,15 @@ class fusionar_vrt:
                         </OGRVRTDataSource>
                     """
         xml = xml.replace("unionLayer",nombreCapa )
-        # print(xml)
         text_file = open(path_carpeta_fgb+gjsonAnterior+".vrt", "w")
         n = text_file.write(xml)
         text_file.close()
         print('--------------------')
-        # exit()
-        # command_line = "ogr2ogr -f GeoJSONSeq " + fichero_ndjson_zip + " " + fichero_geojson
-        # print(command_line)
-        # args = shlex.split(command_line)
-        # subprocess.call(args)
+     
         return 0
 
     def deleteTempFiles(self, path_carpetaTempFGB):
         command_line = "rm -rf " + path_carpetaTempFGB
         print(command_line)
-        # args = shlex.split(command_line)
         os.system(command_line)
 
