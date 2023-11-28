@@ -1,5 +1,5 @@
 from logging import raiseExceptions
-import  os, time, os, json, sys, codecs, gc
+import  os, time, os, json, sys, codecs, gc, re
 from datetime import datetime
 
 import warnings
@@ -13,6 +13,8 @@ class transformar:
         self.verbose = False
         self.nNucleos = 6
 
+    def has_numbers(self,inputString):
+      return bool(re.search(r'\d+$', inputString))
                        
     def transformarVRT(self,path_carpetaFGB_origen=None,path_carpetaFGB_destino=None):
         if path_carpetaFGB_origen==None:
@@ -45,7 +47,11 @@ class transformar:
         # for gjson in listaGeojsonCreados:
         def gjson2FGB(gjson):
           print(gjson)
-          command_line = "ogr2ogr -skipfailures -f FlatGeobuf -nlt PROMOTE_TO_MULTI " + path_carpetaSalida +  gjson.split(".")[0] + "_"+gjson.split("_")[-1] + ".fgb"+ " " + self.path_carpetaEntrada  + gjson
+          if(self.has_numbers(gjson.replace(".geojson",""))):
+            command_line = "ogr2ogr -skipfailures -f FlatGeobuf -nlt PROMOTE_TO_MULTI " + path_carpetaSalida +  gjson.split(".")[0] + "_"+gjson.split("_")[-1] + ".fgb"+ " " + self.path_carpetaEntrada  + gjson
+          else:
+            command_line = "ogr2ogr -skipfailures -f FlatGeobuf -nlt PROMOTE_TO_MULTI " + path_carpetaSalida +  gjson.split(".")[0] + ".fgb"+ " " + self.path_carpetaEntrada  + gjson
+
           print(command_line)
           # args = shlex.split(command_line)
           os.system(command_line)
