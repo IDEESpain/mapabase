@@ -48,9 +48,9 @@ class transformar:
         def gjson2FGB(gjson):
           print(gjson)
           if(self.has_numbers(gjson.replace(".geojson",""))):
-            command_line = "ogr2ogr -f FlatGeobuf -nlt PROMOTE_TO_MULTI " + path_carpetaSalida +  gjson.split(".")[0] + "_"+gjson.split("_")[-1] + ".fgb"+ " " + self.path_carpetaEntrada  + gjson
+            command_line = "ogr2ogr -skipfailures -f FlatGeobuf -nlt PROMOTE_TO_MULTI " + path_carpetaSalida +  gjson.split(".")[0] + "_"+gjson.split("_")[-1] + ".fgb"+ " " + self.path_carpetaEntrada  + gjson
           else:
-            command_line = "ogr2ogr -f FlatGeobuf -nlt PROMOTE_TO_MULTI " + path_carpetaSalida +  gjson.split(".")[0] + ".fgb"+ " " + self.path_carpetaEntrada  + gjson
+            command_line = "ogr2ogr -skipfailures -f FlatGeobuf -nlt PROMOTE_TO_MULTI " + path_carpetaSalida +  gjson.split(".")[0] + ".fgb"+ " " + self.path_carpetaEntrada  + gjson
 
           print(command_line)
           # args = shlex.split(command_line)
