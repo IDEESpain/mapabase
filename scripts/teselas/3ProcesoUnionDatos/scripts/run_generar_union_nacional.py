@@ -57,11 +57,15 @@ def generarClaseNacional(clase):
         #escribimos el vrt de recorte
         write_vrt(vrt,"00",clase,is_recorte=True,carpeta="path_generados_nacional_com_aut")
 
-        cmd=f"ogr2ogr -skipfailures -f \"FlatGeobuf\" -nln {clase} -dialect sqlite -sql \"select distinct ST_MakeValid(geometry),* from {clase}\" {var_dict['path_generados_nacional_com_aut']}00/{clase}.fgb {var_dict['path_generados_nacional_com_aut']}00/{clase}_recorte.vrt >/dev/null 2>&1"
+        cmd=f"ogr2ogr -skipfailures -f \"FlatGeobuf\" -nln {clase} -dialect sqlite -sql \"select distinct geometry,* from {clase}\" {var_dict['path_generados_nacional_com_aut']}00/{clase}.fgb {var_dict['path_generados_nacional_com_aut']}00/{clase}_recorte.vrt >/dev/null 2>&1"
 
 
         #Ejecutamos el comando ogr2ogr para generar el geojson
-        os.system(cmd)
+        try:
+            os.system(cmd)
+        except Exception as e:
+            print(f"Se produjo una excepción: {e}")
+            
 
         #escribimos el vrt que hace referencia al geojson municipal
         vrt_text=f"""
