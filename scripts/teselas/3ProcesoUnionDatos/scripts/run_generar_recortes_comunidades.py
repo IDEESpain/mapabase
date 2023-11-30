@@ -127,6 +127,8 @@ def generarComunidad(index, row):
 
     comunidad = str(row["cod_com_aut"]).zfill(2)
     mascara_comunidad = mascara_comunidades[mascara_comunidades["codigo"].str[2:4] == comunidad]
+    mascara_comunidad['geometry'] = mascara_comunidad['geometry'].buffer(var_dict["buffer"])
+    mascara_comunidad=mascara_comunidad.explode(index_parts=False)
     mascara_comunidad.to_file(f"{var_dict['path_generados_comunidades_recorte']}{comunidad}/{comunidad}.fgb", driver='FlatGeobuf' ,crs="EPSG:4258")
     coordinates = mascara_comunidad["geometry"].apply(lambda x: wkt.dumps(x))
     #mascara_comunidad = generarLimite(cod=comunidad, modo="comunidades")
@@ -146,7 +148,7 @@ def generarComunidad(index, row):
             i += 1
         
         if nivel_encontrado:
-            print("encontrado ", i, nivel, comunidad, cod)
+            print(f"Encontrada la clase {clase} a nivel {nivel} para la comunidad {comunidad}")
           
             if i == 1:
                 path_to_vrt = nivel_encontrado[0]
@@ -177,7 +179,7 @@ def generarComunidad(index, row):
 
                 
                 else:
-                    cmd = f"ogr2ogr -nln {clase} -f \"FlatGeobuf\" -nlt PROMOTE_TO_MULTI -clipsrc {var_dict['path_generados_comunidades_recorte']}{cod}/{cod}.fgb  {var_dict['path_generados_comunidades_recorte']}{cod}/{clase}.fgb {var_dict['path_generados_comunidades_recorte']}{cod}/{clase}_recorte.vrt >{var_dict['path_generados_comunidades_recorte']}{cod}/{cod}.txt 2>&1"
+                    cmd = f"ogr2ogr -nln {clase} -f \"FlatGeobuf\" -nlt PROMOTE_TO_MULTI -clipsrc {var_dict['path_generados_comunidades_recorte']}{cod}/{cod}.fgb  {var_dict['path_generados_comunidades_recorte']}{cod}/{clase}.fgb {var_dict['path_productores_nacional']}00/{clase}.fgb >{var_dict['path_generados_comunidades_recorte']}{cod}/{cod}.txt 2>&1"
 
 
                 # Ejecutamos el comando ogr2ogr para generar el flatgeobuf
