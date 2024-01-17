@@ -341,7 +341,7 @@ class control_calidad_GJSON:
                 if i_n == 0:
                     atrNuevo = atributosConValoresNoDominio[i_n]
                 if i_n +1 == len(valoresNoDominio):
-                    listaValores.append(valoresNoDominio[i_n])
+                    listaValores.append(str(valoresNoDominio[i_n]))
                     archivoLOG.write(" Atributo donde existen discrepancias : {} \n".format( atrNuevo ) )
                     archivoLOG.write("     {} \n".format(sorted(listaValores) ) )
                     archivoLOG.write(" \n")
@@ -351,7 +351,7 @@ class control_calidad_GJSON:
                     atrNuevo = atributosConValoresNoDominio[i_n]
                     listaValores= []
                 else:
-                    listaValores.append(valoresNoDominio[i_n])
+                    listaValores.append(str(valoresNoDominio[i_n]))
         ahora = datetime.now()
         archivoLOG.write(" # Fin: {}  // tiempo de ejecución total: {} min \n".format( ahora.strftime("%m/%d/%Y, %H:%M:%S"), (time.time() - start_time_total)/60) )      
         archivoLOG.close() 
