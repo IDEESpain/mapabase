@@ -502,7 +502,13 @@ config = json.load(f_config)
 
 if(config["update"] == "municipios" or config["update"] == "comunidades" or config["update"] == "bbox"):
     print(f"Actualizando teselas de territorios por ", config["update"])
-    
+    process = ProcessIGO()
+    setup = process.get_setup()
+    print(process.get_time())
+    # Exporting Layers to GeoJSON
+    if setup['compress_geojson'] == 'yes':
+        print('--> Compress layers GeoJSON to NDJson.GZ')
+        process.compress_geojson()
     lista_comunidades = config["lista_comunidades"]
     lista_municipios = config["lista_municipios"]
 
@@ -554,10 +560,13 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
 
         return left, bottom, right, top
 
-    def get_tiles(left, bottom, right, top):
+    def get_tiles(left, bottom, right, top, var_dict):
         # me.Bbox(left,bottom,right,top)
-        zooms = [x for x in range(17)]
-    
+        if is_comunidades:
+            zooms = [x for x in range(var_dict["min_zoom_comunidades"],var_dict["max_zoom_comunidades"] + 1)]
+        else:
+            zooms = [x for x in range(var_dict["min_zoom_municipios"],var_dict["max_zoom_municipios"] + 1)]
+            
         tiles = me.tiles(left, bottom, right, top, zooms)
         tiles_matrix = [(t.x, t.y, t.z) for t in tiles]
 
@@ -608,7 +617,8 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
 
         return layer_dict_by_zoom
 
-    def generate_tiles_tippecanoe(tiles_df, layer_dict_by_zoom):
+   
+    def generate_tiles_tippecanoe(tiles_df, layer_dict_by_zoom, bbox):
 
         # preconfigurar
 
@@ -620,31 +630,36 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
 
         min_level_comunidades = config["min_zoom_comunidades"]
         max_level_comunidades = config["max_zoom_comunidades"]
+        minlon, minlat, maxlon, maxlat = bbox
 
-        # print(layer_dict_by_zoom)
+        for z in config_vtiles["zoom_levels"]:
 
-        for t in tiles_df.itertuples():
+            # def teselacion(z):
+            if z['process'] == 'no':
+                continue
+                # return
 
-            if t.z >= min_level_ign and t.z <= max_level_ign:
+            if z['level'] >= min_level_ign and z['level'] <= max_level_ign:
                 origen = config["gz_folder_IGN"]
-            elif t.z >= min_level_comunidades and t.z <= max_level_comunidades:
+            elif z['level'] >= min_level_comunidades and z['level'] <= max_level_comunidades:
                 origen = config["gz_folder_comunidades"]
             else:
                 origen = config["gz_folder_municipios"]
 
+            zoom = z['level']
             layers = ["--named-layer="+layer[:-3]+":"+origen +
-                      layer for layer in layer_dict_by_zoom[t.z]["layers"]]
+                      layer for layer in layer_dict_by_zoom[zoom]["layers"]]
             layers_no_coalesce = ["--named-layer="+layer[:-3]+":"+origen +
-                                  layer for layer in layer_dict_by_zoom[t.z]["layers_no_coalesce"]]
+                                  layer for layer in layer_dict_by_zoom[zoom]["layers_no_coalesce"]]
             layers_with_labels = ["--named-layer="+layer[:-3]+":"+origen +
-                                  layer for layer in layer_dict_by_zoom[t.z]["layers_with_labels"]]
-            filter_attr = json.dumps(layer_dict_by_zoom[t.z]["filter"])
+                                  layer for layer in layer_dict_by_zoom[zoom]["layers_with_labels"]]
+            filter_attr = json.dumps(layer_dict_by_zoom[zoom]["filter"])
             
             layers = " ".join(layers)
 
-            command_line = f"tippecanoe --force -P -o " + destination_mbtiles+"CNIG_" + str(t.z) + "_"+str(t.x)+"_"+str(t.y)+"_layers.mbtiles " + \
+            command_line = f"tippecanoe --force -P -o " + destination_mbtiles+"CNIG_" + str(zoom) + "_"+str(int(round(minlon, 3) * 1000))+"_"+str(int(round(minlat, 3) * 1000))+"_layers.mbtiles " + \
                 layers + \
-                " -z " + str(t.z) + " -Z " + str(t.z) + \
+                " -z " + str(zoom) + " -Z " + str(zoom) + \
                 " -j '" + str(filter_attr) + "'" + \
                 " --buffer=44" + \
                 " -t " + tmp + "" + \
@@ -655,35 +670,36 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
                 " --convert-stringified-ids-to-numbers" + \
                 " --attribute-type=population:int" + \
                 " --attribute-type=sqkm:int -pC" +\
-                " -R "+str(t.z)+"/"+str(t.x)+"/"+str(t.y)
+                " --clip-bounding-box="+str(minlon)+","+str(minlat)+","+ str(maxlon)+","+ str(maxlat)
 
-            # print(command_line)
+            print(command_line)
             args = shlex.split(command_line)
             subprocess.call(args)
 
             if len(layers_no_coalesce) > 0:
-                command_line = f"tippecanoe --force -P -o " + str(destination_mbtiles) +"CNIG_" + str(t.z) + "_"+str(t.x)+"_"+str(t.y)+"_layers_no_coalesce.mbtiles " + \
+                command_line = f"tippecanoe --force -P -o " + str(destination_mbtiles) +"CNIG_" + str(zoom) + "_"+str(int(round(minlon, 3) * 1000))+"_"+str(int(round(minlat, 3) * 1000))+"_layers_no_coalesce.mbtiles " + \
                     str(layers_no_coalesce) + \
-                    " -z " + str(t.z) + " -Z " + str(t.z) + \
+                    " -z " + str(zoom) + " -Z " + str(zoom) + \
                     " -j '" + str(filter_attr) + "'" + \
                     " --buffer=44" + \
                     " -t " + tmp + "" + \
                     " --reorder" + \
                     " --no-feature-limit" + \
                     " --no-tile-size-limit" + \
+                    " --drop-densest-as-needed" + \
                     " --convert-stringified-ids-to-numbers" + \
                     " --attribute-type=population:int" + \
                     " --attribute-type=sqkm:int -pC" +\
-                    " -R "+str(t.z)+"/"+str(t.x)+"/"+str(t.y)
+                    " --clip-bounding-box="+str(minlon)+","+str(minlat)+","+ str(maxlon)+","+ str(maxlat)
 
                 args = shlex.split(command_line)
                 subprocess.call(args)
 
             if len(layers_with_labels) > 0:
 
-                command_line = f"tippecanoe --force -P -o " + destination_mbtiles+"CNIG_" + str(t.z) + "_"+str(t.x)+"_"+str(t.y)+"_layers_with_labels.mbtiles " + \
+                command_line = f"tippecanoe --force -P -o " + destination_mbtiles+"CNIG_" + str(zoom) + "_"+str(int(round(minlon, 3) * 1000))+"_"+str(int(round(minlat, 3) * 1000))+"_layers_with_labels.mbtiles " + \
                     layers_with_labels + \
-                    " -z " + str(t.z) + " -Z " + str(t.z) + \
+                    " -z " + str(zoom) + " -Z " + str(zoom) + \
                     " -j '" + str(filter_attr) + "'" + \
                     " --buffer=127" + \
                     " -t " + tmp + "" + \
@@ -692,32 +708,50 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
                     " --convert-stringified-ids-to-numbers" + \
                     " --attribute-type=population:int" + \
                     " --attribute-type=sqkm:int -pC" +\
-                    " -R "+str(t.z)+"/"+str(t.x)+"/"+str(t.y)
+                    " --clip-bounding-box="+str(minlon)+","+str(minlat)+","+ str(maxlon)+","+ str(maxlat)
 
                 args = shlex.split(command_line)
                 subprocess.call(args)
 
     def grouped_mbtiles_by_zoom(mbtiles_path):
         try:
-            mbtiles_files_dict = {i: {"CNIG": f.split("_")[0], "zoom": f.split("_")[1], "x": f.split("_")[2], "y": f.split("_")[3], "layer_type": f.split(
-                "_")[4].split(".")[0], "file_type": "."+f.split("_")[4].split(".")[1]} for i, f in enumerate(os.listdir(mbtiles_path)) if f[-8:] == ".mbtiles"}
-            print(mbtiles_files_dict)
+
+            mbtiles_files_dict = {}
+            for i, f in enumerate(os.listdir(mbtiles_path)):
+                zoom = f.split("_")[1].replace(".mbtiles", "")
+                if config_vtiles["zoom_levels"][int(zoom)]["process"] == "no":
+                    continue
+              
+                try:
+                    layer_type = "_".join(f.split("_")[4:]).replace(".mbtiles","")
+                    mbtiles_files_dict[i] = {"CNIG": f.split("_")[0],
+                                            "zoom": f.split("_")[1],
+                                            "x": f.split("_")[2],
+                                            "y": f.split("_")[3],
+                                            "layer_type": layer_type,
+                                            "file_type": ".mbtiles"} 
+                                        
+                except:
+                    continue
+
             df_mbtiles_files = pd.DataFrame.from_dict(
                 mbtiles_files_dict, orient="index").sort_values(["zoom", "x", "y"])
 
             grouped_by_zoom = df_mbtiles_files.groupby("zoom")
-        except:
+        except Exception as e:
+            print(e)
             return ""
         return grouped_by_zoom
 
     def tile_join():
+        print("Joining tiles")
         path_mbtiles = config["destination_mbtiles"]
         grouped = grouped_mbtiles_by_zoom(path_mbtiles)
         files_to_delete = []
 
         files_to_pbf = []
-
         for zoom, group in grouped:
+            print("Joinin z "+ zoom)
             command_line = "tile-join -pk -pC --force -o " + \
                 path_mbtiles+"CNIG_" + zoom + ".mbtiles "
 
@@ -741,15 +775,17 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
 
     def mb_util_tiles(files_to_pbf):
 
-        dest_folder = config["destination_folder"]
-
+        dest_folder = config["temp_directory"]
+        
         for file in files_to_pbf:
+        
+            print(dest_folder+file.split("/")[-1].replace("CNIG_","").split(".")[0]+"/")
             command_line = "mb-util " + \
                 " --image_format=pbf " + \
                 file + " " +\
-                dest_folder+file.split("_")[1].split(".")[0]+"/"
+                dest_folder+file.split("/")[-1].replace("CNIG_","").split(".")[0]+"/"
 
-            # print(command_line)
+            print(command_line)
             args = shlex.split(command_line)
             subprocess.call(args)
 
@@ -759,13 +795,21 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
 
     if is_bbox:
 
-        tiles_df = get_tiles(left, bottom, right, top)
+        tiles_df = get_tiles(left, bottom, right, top, config)
 
         layer_dict_by_zoom = parse_json_v_tiles()
+        
+        bbox = left, bottom, right, top
 
-        files_to_pbf = generate_tiles_tippecanoe(tiles_df, layer_dict_by_zoom)
+        generate_tiles_tippecanoe(tiles_df, layer_dict_by_zoom, bbox)
 
         files_to_pbf = tile_join()
+
+        mb_util_tiles(files_to_pbf)
+
+        if setup['move_to_final_folder'] == 'yes':
+            print('Moving pbfs folder')
+            process.move_temp_files()
 
     else:
 
@@ -775,13 +819,20 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
 
             left, bottom, right, top = get_bbox(territorio)
 
-            tiles_df = get_tiles(left, bottom, right, top)
+            tiles_df = get_tiles(left, bottom, right, top, config)
 
             layer_dict_by_zoom = parse_json_v_tiles()
 
-            files_to_pbf = generate_tiles_tippecanoe(tiles_df, layer_dict_by_zoom)
+            generate_tiles_tippecanoe(tiles_df, layer_dict_by_zoom, get_bbox(territorio))
 
             files_to_pbf = tile_join()
+
+            mb_util_tiles(files_to_pbf)
+
+            if setup['move_to_final_folder'] == 'yes':
+                print('Moving pbfs folder')
+                process.move_temp_files()
+
 
 else:
 
