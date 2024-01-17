@@ -16,13 +16,8 @@ ProcesoControlCalidad.verbose = True
 # ProcesoControlCalidad.elementosAJSON()
 
 
+# # # # Lanzar proceso
 start_time = time.time()
-
-#transformar los n geojson en un vrt
-ProcesoFusion = fusionar_vrt(path_carpetaSalidaGJSON)
-ProcesoFusion.gjson2VRT()
-
-#hacemos la validación a partir de ese vrt
 ProcesoControlCalidad.JSON_comprobacion = './lib/comprobacion.json'
 ProcesoControlCalidad.procesoControlCalidad()
 
