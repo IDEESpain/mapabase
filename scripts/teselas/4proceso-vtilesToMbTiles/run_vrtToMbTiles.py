@@ -677,8 +677,9 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
             subprocess.call(args)
 
             if len(layers_no_coalesce) > 0:
+                layers_nc = " ".join(layers_no_coalesce)
                 command_line = f"tippecanoe --force -P -o " + str(destination_mbtiles) +"CNIG_" + str(zoom) + "_"+str(int(round(minlon, 3) * 1000))+"_"+str(int(round(minlat, 3) * 1000))+"_layers_no_coalesce.mbtiles " + \
-                    str(layers_no_coalesce) + \
+                    layers_nc + \
                     " -z " + str(zoom) + " -Z " + str(zoom) + \
                     " -j '" + str(filter_attr) + "'" + \
                     " --buffer=44" + \
@@ -696,9 +697,9 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
                 subprocess.call(args)
 
             if len(layers_with_labels) > 0:
-
+                layers_wl = " ".join(layers_with_labels)
                 command_line = f"tippecanoe --force -P -o " + destination_mbtiles+"CNIG_" + str(zoom) + "_"+str(int(round(minlon, 3) * 1000))+"_"+str(int(round(minlat, 3) * 1000))+"_layers_with_labels.mbtiles " + \
-                    layers_with_labels + \
+                    layers_wl + \
                     " -z " + str(zoom) + " -Z " + str(zoom) + \
                     " -j '" + str(filter_attr) + "'" + \
                     " --buffer=127" + \
