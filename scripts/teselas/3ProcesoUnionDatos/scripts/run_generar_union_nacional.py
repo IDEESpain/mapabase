@@ -57,35 +57,16 @@ def generarClaseNacional(clase):
         #escribimos el vrt de recorte
         write_vrt(vrt,"00",clase,is_recorte=True,carpeta="path_generados_nacional_com_aut")
 
-        # PROBAR NUEVA FORMA DE GENERAR UNIÓN NACIONAL!!
-        
-        # Lista de archivos FGB que deseas unir
-        archivos_fgb = []
-        for c in lista_comunidades_presentes:
-            cod = c[0]
-            archivo = str(var_dict['path_generados_comunidades_com_aut']) + str(cod)+ "/"+clase +".fgb"
-            archivos_fgb.append(archivo)
-            
-        # Nombre del archivo de salida
-        archivo_salida = f"{var_dict['path_generados_nacional_com_aut']}00/{clase}.fgb"
-        gdf_total = gpd.GeoDataFrame()
-        for archivo in archivos_fgb:
-           print(f"Leyendo {archivo}")
-           gdf_comunidad = gpd.read_file(archivo)
-           gdf_total = gpd.GeoDataFrame( pd.concat( [gdf_total,gdf_comunidad], ignore_index=True) )
-        print(f"Guardando fichero {archivo_salida}")
-        gdf_total.to_file(archivo_salida , driver="FlatGeobuf",crs="EPSG:4258")   
-        
-        # ANTIGUO CÓDIGO POR SI FUNCIONA PEOR LO DE ARRIBA!!
-        
-        # cmd=f"ogr2ogr -skipfailures -f \"FlatGeobuf\" -nln {clase} -dialect sqlite -sql \"select distinct geometry,* from {clase}\" {var_dict['path_generados_nacional_com_aut']}00/{clase}.fgb {var_dict['path_generados_nacional_com_aut']}00/{clase}_recorte.vrt >/dev/null 2>&1"
+
+                
+        cmd=f"ogr2ogr -skipfailures -f \"FlatGeobuf\" -nln {clase} -dialect sqlite -sql \"select geometry,* from {clase}\" {var_dict['path_generados_nacional_com_aut']}00/{clase}.fgb {var_dict['path_generados_nacional_com_aut']}00/{clase}_recorte.vrt >/dev/null 2>&1"
 
 
-        # #Ejecutamos el comando ogr2ogr para generar el geojson
-        # try:
-        #     os.system(cmd)
-        # except Exception as e:
-        #     print(f"Se produjo una excepción: {e}")
+        #Ejecutamos el comando ogr2ogr para generar el geojson
+        try:
+            os.system(cmd)
+        except Exception as e:
+            print(f"Se produjo una excepción: {e}")
             
 
         #escribimos el vrt que hace referencia al geojson municipal
