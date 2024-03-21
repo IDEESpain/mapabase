@@ -1,0 +1,520 @@
+{
+  "nombre_hidrografia_pto-cascada": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 0,
+    "y": 0
+  },
+  "servicio_instalacion_pto-simbolo-torre_electrica_2": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 50,
+    "y": 0
+  },
+  "servicio_instalacion_pto-simbolo-cementerio": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 100,
+    "y": 0
+  },
+  "area_servicio_pto-simbolo-servicio": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 150,
+    "y": 0
+  },
+  "peaje_pto-simbolo": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 200,
+    "y": 0
+  },
+  "servicio_instalacion_pto-simbolo-museo": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 250,
+    "y": 0
+  },
+  "servicio_instalacion_pto-simbolo-parque": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 300,
+    "y": 0
+  },
+  "servicio_instalacion_pto-simbolo-estacion_bombeo": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 350,
+    "y": 0
+  },
+  "servicio_instalacion_pto-simbolo-centro_penitenciario": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 0,
+    "y": 50
+  },
+  "carretera_general_lin-simbolo": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 50,
+    "y": 50
+  },
+  "servicio_instalacion_pto-simbolo-jardin": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 100,
+    "y": 50
+  },
+  "aerodromo_pto-simbolo-helipuerto": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 150,
+    "y": 50
+  },
+  "matricula_blanco": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 200,
+    "y": 50
+  },
+  "servicio_instalacion_pto-simbolo-instalacion_militar": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 250,
+    "y": 50
+  },
+  "servicio_instalacion_pto-simbolo-castillo_fortaleza": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 300,
+    "y": 50
+  },
+  "autovia_lin-simbolo": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 350,
+    "y": 50
+  },
+  "servicio_instalacion_pto-simbolo-captacion": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 0,
+    "y": 100
+  },
+  "servicio_instalacion_pto-simbolo-monumento": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 50,
+    "y": 100
+  },
+  "servicio_instalacion_pto-simbolo-pista_deportiva": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 100,
+    "y": 100
+  },
+  "servicio_instalacion_pto-simbolo-piscifactor\u00eda": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 150,
+    "y": 100
+  },
+  "servicio_instalacion_pto-simbolo-instalacion_tratamiento_residuos": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 200,
+    "y": 100
+  },
+  "aerodromo_pto-simbolo-aerodromo": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 250,
+    "y": 100
+  },
+  "servicio_instalacion_pto-simbolo-parque_tecnologico": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 300,
+    "y": 100
+  },
+  "servicio_instalacion_pto-simbolo-faro": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 350,
+    "y": 100
+  },
+  "servicio_instalacion_pto-simbolo-centro_interpretacion": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 0,
+    "y": 150
+  },
+  "servicio_instalacion_pto-simbolo-orden_publico_seguridad": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 50,
+    "y": 150
+  },
+  "servicio_instalacion_pto-simbolo-terreno_natural": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 100,
+    "y": 150
+  },
+  "servicio_instalacion_pto-simbolo-instalacion_energia": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 150,
+    "y": 150
+  },
+  "servicio_instalacion_pto-simbolo-zona_verde": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 200,
+    "y": 150
+  },
+  "servicio_instalacion_pto-simbolo-circuito": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 250,
+    "y": 150
+  },
+  "servicio_instalacion_pto-simbolo-emergencias": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 300,
+    "y": 150
+  },
+  "aerodromo_pto-simbolo-hidroaerodromo": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 350,
+    "y": 150
+  },
+  "paso_a_nivel_pto-simbolo": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 0,
+    "y": 200
+  },
+  "servicio_instalacion_pto-simbolo-zona_industrial": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 50,
+    "y": 200
+  },
+  "carretera_autonomica_1er_nivel_lin-simbolo": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 100,
+    "y": 200
+  },
+  "servicio_instalacion_pto-simbolo-estacion_invernal": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 150,
+    "y": 200
+  },
+  "zona_protegida_pto-zona-protegida": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 200,
+    "y": 200
+  },
+  "servicio_instalacion_pto-simbolo-instalacion_religiosa": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 250,
+    "y": 200
+  },
+  "aparcamiento_pto-simbolo-invernal": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 300,
+    "y": 200
+  },
+  "servicio_instalacion_pto-simbolo-teatro_auditorio": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 350,
+    "y": 200
+  },
+  "servicio_instalacion_pto-simbolo-torre_electrica": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 0,
+    "y": 250
+  },
+  "aparcamiento_pto-simbolo-seguro": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 50,
+    "y": 250
+  },
+  "servicio_instalacion_pto-simbolo-otros_servicios_instalaciones": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 100,
+    "y": 250
+  },
+  "servicio_instalacion_pto-simbolo-instalacion_educativa": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 150,
+    "y": 250
+  },
+  "estacion_ferrocarril_pto-simbolo": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 200,
+    "y": 250
+  },
+  "estacion_autobus_pto-simbolo": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 250,
+    "y": 250
+  },
+  "conduccion_lin-energia": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 300,
+    "y": 250
+  },
+  "servicio_instalacion_pto-simbolo-zona_recreativa": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 350,
+    "y": 250
+  },
+  "aparcamiento_pto-simbolo": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 0,
+    "y": 300
+  },
+  "carretera_autonomica_3er_nivel_lin-simbolo": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 50,
+    "y": 300
+  },
+  "puerto_pto-simbolo": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 100,
+    "y": 300
+  },
+  "aerodromo_pto-simbolo-deportivo_recreativo": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 150,
+    "y": 300
+  },
+  "servicio_instalacion_pto-simbolo-zona_comercial": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 200,
+    "y": 300
+  },
+  "servicio_instalacion_pto-simbolo-instalacion_tratamiento_aguas": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 250,
+    "y": 300
+  },
+  "aerodromo_pto-simbolo-aerodromo_helipuerto": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 300,
+    "y": 300
+  },
+  "servicio_instalacion_pto-simbolo-aerogenerador": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 350,
+    "y": 300
+  },
+  "servicio_instalacion_pto-simbolo-campo_futbol": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 0,
+    "y": 350
+  },
+  "servicio_instalacion_pto-simbolo-zona_dotacional": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 50,
+    "y": 350
+  },
+  "carretera_autonomica_2do_nivel_lin-simbolo": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 100,
+    "y": 350
+  },
+  "servicio_instalacion_pto-simbolo-instalacion_telecomunicacion": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 150,
+    "y": 350
+  },
+  "servicio_instalacion_pto-simbolo-instalacion_deportiva": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 200,
+    "y": 350
+  },
+  "servicio_instalacion_pto-simbolo-torre_transporte": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 250,
+    "y": 350
+  },
+  "zona_protegida_pto-patrimonio_historico_artistico": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 300,
+    "y": 350
+  },
+  "servicio_instalacion_pto-simbolo-parque_tematico_ocio": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 350,
+    "y": 350
+  },
+  "servicio_instalacion_pto-simbolo-poligono_industrial": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 0,
+    "y": 400
+  },
+  "servicio_instalacion_pto-simbolo-instalacion_sanitaria": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 50,
+    "y": 400
+  },
+  "servicio_instalacion_pto-simbolo-campo_golf": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 100,
+    "y": 400
+  },
+  "servicio_instalacion_pto-simbolo-ayuntamiento": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 150,
+    "y": 400
+  },
+  "servicio_instalacion_pto-simbolo-camping": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 200,
+    "y": 400
+  },
+  "servicio_instalacion_pto-simbolo-explotacion_minera": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 250,
+    "y": 400
+  },
+  "servicio_instalacion_pto-simbolo-antena": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 300,
+    "y": 400
+  },
+  "area_servicio_pto-simbolo-descanso": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 350,
+    "y": 400
+  },
+  "zona_protegida_pto-yacimiento_arqueologico": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 0,
+    "y": 450
+  },
+  "servicio_instalacion_pto-simbolo-recinto_ferial": {
+    "height": 50,
+    "pixelRatio": 1,
+    "width": 50,
+    "x": 50,
+    "y": 450
+  }
+}
