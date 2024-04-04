@@ -1,5 +1,9 @@
 Cambios en el Modelo de datos:
 ------------------------------
+### 04/04/2024 servicio_instalacion_pto
+*  Se añaden los valores catedral, ermita, iglesia, convento, mezquita, sinagoga y templo (anteriormente incluidas en instalacion_religiosa)
+*  Se añade el valor fuente_ornamental (anteriormente incluida en monumento)
+
 ### 20/11/2023 construccion_lin
 *  Se añaden los valores «compuerta» y «transporte_suspendido»
 *  Se añade descripción para los valores compuerta y transporte_suspendido
