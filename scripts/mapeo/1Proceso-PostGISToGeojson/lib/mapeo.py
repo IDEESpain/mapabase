@@ -512,7 +512,7 @@ class mapeo_PG_GJSON:
                                             if m.replace("'","").isspace() == False:
                                                 for i_n, n in enumerate(listaAtributosConcatena):
                                                     if m.replace(" ","") == n.replace(" ",""):
-                                                        valorAtributoConcatenado = valorAtributoConcatenado + str(listaValoresConcatena[i_n]).replace(" ","")
+                                                        valorAtributoConcatenado = valorAtributoConcatenado + str(listaValoresConcatena[i_n])
                                             else:
                                                 i_ori = 0
                                                 i_final = 0
