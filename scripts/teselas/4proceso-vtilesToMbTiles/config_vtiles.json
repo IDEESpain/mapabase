@@ -25,6 +25,14 @@
                 {
                     "file": "tierra_firme_pol.gz",
                     "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "contexto_territorios_pol.gz",
+                    "name": "contexto_territorios_pol"
+                },
+                {
+                    "file": "contexto_territorios_lin.gz",
+                    "name": "contexto_territorios_lin"
                 }
             ],
             "layers_no_coalesce": [],
@@ -38,6 +46,14 @@
                 {
                     "file": "tierra_firme_pol.gz",
                     "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "contexto_territorios_pol.gz",
+                    "name": "contexto_territorios_pol"
+                },
+                {
+                    "file": "contexto_territorios_lin.gz",
+                    "name": "contexto_territorios_lin"
                 }
             ],
             "layers_no_coalesce": [],
@@ -51,6 +67,14 @@
                 {
                     "file": "tierra_firme_pol.gz",
                     "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "contexto_territorios_pol.gz",
+                    "name": "contexto_territorios_pol"
+                },
+                {
+                    "file": "contexto_territorios_lin.gz",
+                    "name": "contexto_territorios_lin"
                 }
             ],
             "layers_no_coalesce": [],
@@ -68,6 +92,54 @@
                 {
                     "file": "tierra_firme_pol.gz",
                     "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "contexto_carreteras_lin.gz",
+                    "name": "contexto_carreteras_lin"
+                },
+                {
+                    "file": "contexto_ferrocarril_lin.gz",
+                    "name": "contexto_ferrocarril_lin"
+                },
+                {
+                    "file": "contexto_hidrografia_lin.gz",
+                    "name": "contexto_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_lamina_agua_pol.gz",
+                    "name": "contexto_lamina_agua_pol"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_lin.gz",
+                    "name": "contexto_nombre_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_pol.gz",
+                    "name": "contexto_nombre_hidrografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_lin.gz",
+                    "name": "contexto_nombre_orografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pol.gz",
+                    "name": "contexto_nombre_orografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pto.gz",
+                    "name": "contexto_nombre_orografia_pto"
+                },
+                {
+                    "file": "contexto_nombre_poblacion_pto.gz",
+                    "name": "contexto_nombre_poblacion_pto"
+                },
+                {
+                    "file": "contexto_territorios_lin.gz",
+                    "name": "contexto_territorios_lin"
+                },
+                {
+                    "file": "contexto_territorios_pol.gz",
+                    "name": "contexto_territorios_pol"
                 }
             ],
             "layers_no_coalesce": [],
@@ -94,6 +166,54 @@
                 {
                     "file": "tierra_firme_pol.gz",
                     "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "contexto_carreteras_lin.gz",
+                    "name": "contexto_carreteras_lin"
+                },
+                {
+                    "file": "contexto_ferrocarril_lin.gz",
+                    "name": "contexto_ferrocarril_lin"
+                },
+                {
+                    "file": "contexto_hidrografia_lin.gz",
+                    "name": "contexto_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_lamina_agua_pol.gz",
+                    "name": "contexto_lamina_agua_pol"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_lin.gz",
+                    "name": "contexto_nombre_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_pol.gz",
+                    "name": "contexto_nombre_hidrografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_lin.gz",
+                    "name": "contexto_nombre_orografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pol.gz",
+                    "name": "contexto_nombre_orografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pto.gz",
+                    "name": "contexto_nombre_orografia_pto"
+                },
+                {
+                    "file": "contexto_nombre_poblacion_pto.gz",
+                    "name": "contexto_nombre_poblacion_pto"
+                },
+                {
+                    "file": "contexto_territorios_lin.gz",
+                    "name": "contexto_territorios_lin"
+                },
+                {
+                    "file": "contexto_territorios_pol.gz",
+                    "name": "contexto_territorios_pol"
                 }
             ],
             "layers_no_coalesce": [],
@@ -132,6 +252,54 @@
                 {
                     "file": "tierra_firme_pol.gz",
                     "name": "tierra_firme_pol"
+                },
+                {
+                    "file": "contexto_carreteras_lin.gz",
+                    "name": "contexto_carreteras_lin"
+                },
+                {
+                    "file": "contexto_ferrocarril_lin.gz",
+                    "name": "contexto_ferrocarril_lin"
+                },
+                {
+                    "file": "contexto_hidrografia_lin.gz",
+                    "name": "contexto_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_lamina_agua_pol.gz",
+                    "name": "contexto_lamina_agua_pol"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_lin.gz",
+                    "name": "contexto_nombre_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_pol.gz",
+                    "name": "contexto_nombre_hidrografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_lin.gz",
+                    "name": "contexto_nombre_orografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pol.gz",
+                    "name": "contexto_nombre_orografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pto.gz",
+                    "name": "contexto_nombre_orografia_pto"
+                },
+                {
+                    "file": "contexto_nombre_poblacion_pto.gz",
+                    "name": "contexto_nombre_poblacion_pto"
+                },
+                {
+                    "file": "contexto_territorios_lin.gz",
+                    "name": "contexto_territorios_lin"
+                },
+                {
+                    "file": "contexto_territorios_pol.gz",
+                    "name": "contexto_territorios_pol"
                 }
             ],
             "layers_no_coalesce": [],
@@ -196,6 +364,54 @@
                 {
                     "file": "autovia_lin.gz",
                     "name": "autovia_lin"
+                },
+                {
+                    "file": "contexto_carreteras_lin.gz",
+                    "name": "contexto_carreteras_lin"
+                },
+                {
+                    "file": "contexto_ferrocarril_lin.gz",
+                    "name": "contexto_ferrocarril_lin"
+                },
+                {
+                    "file": "contexto_hidrografia_lin.gz",
+                    "name": "contexto_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_lamina_agua_pol.gz",
+                    "name": "contexto_lamina_agua_pol"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_lin.gz",
+                    "name": "contexto_nombre_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_pol.gz",
+                    "name": "contexto_nombre_hidrografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_lin.gz",
+                    "name": "contexto_nombre_orografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pol.gz",
+                    "name": "contexto_nombre_orografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pto.gz",
+                    "name": "contexto_nombre_orografia_pto"
+                },
+                {
+                    "file": "contexto_nombre_poblacion_pto.gz",
+                    "name": "contexto_nombre_poblacion_pto"
+                },
+                {
+                    "file": "contexto_territorios_lin.gz",
+                    "name": "contexto_territorios_lin"
+                },
+                {
+                    "file": "contexto_territorios_pol.gz",
+                    "name": "contexto_territorios_pol"
                 }
             ],
             "layers_no_coalesce": [],
@@ -313,6 +529,54 @@
                 {
                     "file": "ferrocarril_lin.gz",
                     "name": "ferrocarril_lin"
+                },
+                {
+                    "file": "contexto_carreteras_lin.gz",
+                    "name": "contexto_carreteras_lin"
+                },
+                {
+                    "file": "contexto_ferrocarril_lin.gz",
+                    "name": "contexto_ferrocarril_lin"
+                },
+                {
+                    "file": "contexto_hidrografia_lin.gz",
+                    "name": "contexto_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_lamina_agua_pol.gz",
+                    "name": "contexto_lamina_agua_pol"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_lin.gz",
+                    "name": "contexto_nombre_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_pol.gz",
+                    "name": "contexto_nombre_hidrografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_lin.gz",
+                    "name": "contexto_nombre_orografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pol.gz",
+                    "name": "contexto_nombre_orografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pto.gz",
+                    "name": "contexto_nombre_orografia_pto"
+                },
+                {
+                    "file": "contexto_nombre_poblacion_pto.gz",
+                    "name": "contexto_nombre_poblacion_pto"
+                },
+                {
+                    "file": "contexto_territorios_lin.gz",
+                    "name": "contexto_territorios_lin"
+                },
+                {
+                    "file": "contexto_territorios_pol.gz",
+                    "name": "contexto_territorios_pol"
                 }
             ],
             "layers_no_coalesce": [],
@@ -489,6 +753,54 @@
                 {
                     "file": "ferrocarril_lin.gz",
                     "name": "ferrocarril_lin"
+                },
+                {
+                    "file": "contexto_carreteras_lin.gz",
+                    "name": "contexto_carreteras_lin"
+                },
+                {
+                    "file": "contexto_ferrocarril_lin.gz",
+                    "name": "contexto_ferrocarril_lin"
+                },
+                {
+                    "file": "contexto_hidrografia_lin.gz",
+                    "name": "contexto_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_lamina_agua_pol.gz",
+                    "name": "contexto_lamina_agua_pol"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_lin.gz",
+                    "name": "contexto_nombre_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_pol.gz",
+                    "name": "contexto_nombre_hidrografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_lin.gz",
+                    "name": "contexto_nombre_orografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pol.gz",
+                    "name": "contexto_nombre_orografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pto.gz",
+                    "name": "contexto_nombre_orografia_pto"
+                },
+                {
+                    "file": "contexto_nombre_poblacion_pto.gz",
+                    "name": "contexto_nombre_poblacion_pto"
+                },
+                {
+                    "file": "contexto_territorios_lin.gz",
+                    "name": "contexto_territorios_lin"
+                },
+                {
+                    "file": "contexto_territorios_pol.gz",
+                    "name": "contexto_territorios_pol"
                 }
             ],
             "layers_no_coalesce": [],
@@ -732,6 +1044,54 @@
                 {
                     "file": "ferrocarril_lin.gz",
                     "name": "ferrocarril_lin"
+                },
+                {
+                    "file": "contexto_carreteras_lin.gz",
+                    "name": "contexto_carreteras_lin"
+                },
+                {
+                    "file": "contexto_ferrocarril_lin.gz",
+                    "name": "contexto_ferrocarril_lin"
+                },
+                {
+                    "file": "contexto_hidrografia_lin.gz",
+                    "name": "contexto_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_lamina_agua_pol.gz",
+                    "name": "contexto_lamina_agua_pol"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_lin.gz",
+                    "name": "contexto_nombre_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_pol.gz",
+                    "name": "contexto_nombre_hidrografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_lin.gz",
+                    "name": "contexto_nombre_orografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pol.gz",
+                    "name": "contexto_nombre_orografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pto.gz",
+                    "name": "contexto_nombre_orografia_pto"
+                },
+                {
+                    "file": "contexto_nombre_poblacion_pto.gz",
+                    "name": "contexto_nombre_poblacion_pto"
+                },
+                {
+                    "file": "contexto_territorios_lin.gz",
+                    "name": "contexto_territorios_lin"
+                },
+                {
+                    "file": "contexto_territorios_pol.gz",
+                    "name": "contexto_territorios_pol"
                 }
             ],
             "layers_no_coalesce": [],
@@ -1013,6 +1373,54 @@
                 {
                     "file": "puerto_pto.gz",
                     "name": "puerto_pto"
+                },
+                {
+                    "file": "contexto_carreteras_lin.gz",
+                    "name": "contexto_carreteras_lin"
+                },
+                {
+                    "file": "contexto_ferrocarril_lin.gz",
+                    "name": "contexto_ferrocarril_lin"
+                },
+                {
+                    "file": "contexto_hidrografia_lin.gz",
+                    "name": "contexto_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_lamina_agua_pol.gz",
+                    "name": "contexto_lamina_agua_pol"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_lin.gz",
+                    "name": "contexto_nombre_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_pol.gz",
+                    "name": "contexto_nombre_hidrografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_lin.gz",
+                    "name": "contexto_nombre_orografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pol.gz",
+                    "name": "contexto_nombre_orografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pto.gz",
+                    "name": "contexto_nombre_orografia_pto"
+                },
+                {
+                    "file": "contexto_nombre_poblacion_pto.gz",
+                    "name": "contexto_nombre_poblacion_pto"
+                },
+                {
+                    "file": "contexto_territorios_lin.gz",
+                    "name": "contexto_territorios_lin"
+                },
+                {
+                    "file": "contexto_territorios_pol.gz",
+                    "name": "contexto_territorios_pol"
                 }
             ],
             "layers_no_coalesce": [],
@@ -1259,6 +1667,54 @@
                 {
                     "file": "puerto_pto.gz",
                     "name": "puerto_pto"
+                },
+                {
+                    "file": "contexto_carreteras_lin.gz",
+                    "name": "contexto_carreteras_lin"
+                },
+                {
+                    "file": "contexto_ferrocarril_lin.gz",
+                    "name": "contexto_ferrocarril_lin"
+                },
+                {
+                    "file": "contexto_hidrografia_lin.gz",
+                    "name": "contexto_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_lamina_agua_pol.gz",
+                    "name": "contexto_lamina_agua_pol"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_lin.gz",
+                    "name": "contexto_nombre_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_pol.gz",
+                    "name": "contexto_nombre_hidrografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_lin.gz",
+                    "name": "contexto_nombre_orografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pol.gz",
+                    "name": "contexto_nombre_orografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pto.gz",
+                    "name": "contexto_nombre_orografia_pto"
+                },
+                {
+                    "file": "contexto_nombre_poblacion_pto.gz",
+                    "name": "contexto_nombre_poblacion_pto"
+                },
+                {
+                    "file": "contexto_territorios_lin.gz",
+                    "name": "contexto_territorios_lin"
+                },
+                {
+                    "file": "contexto_territorios_pol.gz",
+                    "name": "contexto_territorios_pol"
                 }
             ],
             "layers_no_coalesce": [],
@@ -1475,6 +1931,54 @@
                 {
                     "file": "zona_protegida_pto.gz",
                     "name": "zona_protegida_pto"
+                },
+                {
+                    "file": "contexto_carreteras_lin.gz",
+                    "name": "contexto_carreteras_lin"
+                },
+                {
+                    "file": "contexto_ferrocarril_lin.gz",
+                    "name": "contexto_ferrocarril_lin"
+                },
+                {
+                    "file": "contexto_hidrografia_lin.gz",
+                    "name": "contexto_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_lamina_agua_pol.gz",
+                    "name": "contexto_lamina_agua_pol"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_lin.gz",
+                    "name": "contexto_nombre_hidrografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_hidrografia_pol.gz",
+                    "name": "contexto_nombre_hidrografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_lin.gz",
+                    "name": "contexto_nombre_orografia_lin"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pol.gz",
+                    "name": "contexto_nombre_orografia_pol"
+                },
+                {
+                    "file": "contexto_nombre_orografia_pto.gz",
+                    "name": "contexto_nombre_orografia_pto"
+                },
+                {
+                    "file": "contexto_nombre_poblacion_pto.gz",
+                    "name": "contexto_nombre_poblacion_pto"
+                },
+                {
+                    "file": "contexto_territorios_lin.gz",
+                    "name": "contexto_territorios_lin"
+                },
+                {
+                    "file": "contexto_territorios_pol.gz",
+                    "name": "contexto_territorios_pol"
                 }
             ],
             "layers_no_coalesce": [],
