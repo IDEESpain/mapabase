@@ -372,9 +372,38 @@
 <li>
 <p>La codificación de caracteres que se debe utilizar para describir la información alfanúmerica asociada a cada objeto geográfico es <a href="https://es.wikipedia.org/wiki/UTF-8">UTF-8 sin BOM</a>.</p>
 </li>
-</ul></div>
-        
-        
+</ul>
+<br>
+<p><b>Recomendaciones para la incorporación de datos al modelo</b></p>
+<p>El modelo de datos del Mapa Base se organiza en áreas temáticas que albergan información de diferentes elementos geográficos relativos a estas.</p>
+<p>Dentro de los elementos geográficos, de manera generalizada, se identifica un atributo que suele ser nombre que se emplea para mostrar las etiquetas de estos en el mapa.</p>
+<p>Por tanto, se recomienda ser muy cuidadosos a la hora de informar estos atributos y en la medida de las posibilidades considerar las siguientes pautas:</p>
+<ul>
+    <li><p>
+        Si no se dispone de información sobre el nombre del elemento geográfico es preferible que se reporte como cadena vacía ("") en el json que contiene los objetos y sus atributos, en lugar de emplear valores por defecto como "nulo", "desconocido", "9999" o similares.
+    </p></li>
+    <li><p>
+        Si el nombre no es significativo (o propio) y/o coincide con la clase en la que se aloja, también es preferible que se reporte como cadena vacía ("")
+    </p></li>    
+    <li><p>
+        Las clases nombre_* dentro del área temática de los Nombres Geográficos están diseñadas para albergar en ellas información de nombres de elementos que, por alguna razón, no hayan sido incluidos dentro de su área temática concreta. Permitiendo generar para estos objetos etiquetas que se puedan mostrar en el Mapa Base. Por tanto, se debe tener en consideración a la hora de reportar estos objetos que: 
+        <ul>
+            <li><p>
+                Antes de incluir un objeto en nombres geográficos, es recomendable comprobar si tiene cabida en una categoría más concreta que permita una representación del mismo más ajustada.
+            </p></li>
+            <li><p>
+                No se reporten nombres de objetos geográficos que ya han sido reportados en otros elementos dotados de geometría, ya que esta información ya estaría almacenada en el atributo nombre de dicho objeto.
+            </p></li>
+            <li><p>
+                No se reporten nombres geográficos que ya estén incluidos en otros nombres geográficos.
+            </p></li>
+            <li><p>
+                El atributo jerarquía de las tablas de nombres geográficos se empleará para establecer subtipos dentro de objetos de la misma clase. Estos subtipos estarán enfocados en la representación categorizada de los topónimos.
+            </p></li>
+        </ul>
+    </p></li>
+</ul>
+</div>
     </div>
 
     
