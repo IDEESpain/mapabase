@@ -1,17 +1,4 @@
-# run_postGISToGeojson.py
-Script que exporta los datos desde las fuentes originales a .json
 
-En las primeras líneas se configuran los parámetros:
-
-    path_jsonConex = '/lib/conex.json' #ruta al fichero con las conexiones a la BBDD
-    
-    path_hojaCalculoMApeo = '/1CNIG/CNIG_ToGeojoson.ods' #ruta al fichero con el mapeo del modelo
-    
-    path_carpetaSalida = '/1CNIG/1Geojson' #ruta a la carpeta para los datos de salida
-    
-    proveedor = 'cnig' 
-    
-Consultar el código de proveedor en https://ideespain.github.io/mapabase/datos/proveedores_de_datos/
 
 # Datos de entrada proceso .ods Proveedores de datos
 
@@ -70,6 +57,21 @@ Listado de las bases de datos utilizadas en el mapeo. Como referencia.
 Listado de todos los elementos geográficos y niveles del modelo. Como referencia.
 
 Actualizada en: https://ideespain.github.io/mapabase/elementos/relacion_tematica/
+
+# run_postGISToGeojson.py
+Script que exporta los datos desde las fuentes originales a .json
+
+En las primeras líneas se configuran los parámetros:
+
+    path_jsonConex = '/lib/conex.json' #ruta al fichero con las conexiones a la BBDD
+    
+    path_hojaCalculoMApeo = '/1CNIG/CNIG_ToGeojoson.ods' #ruta al fichero con el mapeo del modelo
+    
+    path_carpetaSalida = '/1CNIG/1Geojson' #ruta a la carpeta para los datos de salida
+    
+    proveedor = 'cnig' 
+    
+Consultar el código de proveedor en https://ideespain.github.io/mapabase/datos/proveedores_de_datos/
 
 # ./lib/conex.json
 Identificar las fuentes de datos que se utilizan en el archivo .ods de entrada.
