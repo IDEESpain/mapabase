@@ -1,3 +1,5 @@
+
+
 # Datos de entrada proceso .ods Proveedores de datos
 
 Los datos de entrada al proceso se indican en el fichero de entrada: CNIG_ToGeojson.ods
@@ -73,6 +75,7 @@ En las primeras líneas se configuran los parámetros:
     
 Consultar el código de proveedor en https://ideespain.github.io/mapabase/datos/proveedores_de_datos/
 
+
 _Errores controlados:_
 
 _run_postGISToGeojson.py <class 'MemoryError'> mapeo.py 410_
@@ -97,6 +100,7 @@ Descomentar estas líneas y bajar a 50.000:
 - Volver a lanzar sólo con las capas que han dado el error. Hasta ahora han dado el error: altimetria_lin, edificios_pol, cubierta_vegetal_pol . Es un error de memoria, por lo que depende de la máquina en la que se lance el proceso.
 
 - Al terminar volver a poner el script a 500.000 y comentar las líneas de paginación para el siguiente proceso.
+
 
 
 # ./lib/conex.json
