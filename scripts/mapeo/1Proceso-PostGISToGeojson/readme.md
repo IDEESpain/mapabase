@@ -8,6 +8,8 @@ Cada nuevo proveedor tendrá que crear su propio archivo .ods (CNIG_ToGeojson.od
 
 Este Excel es el fichero que se utilizó en la versión 0 del MapaBaseXYZ. Para el mapeado inicial se utilizaron diferentes bases de datos, en función de la facilidad de acceso, mapeado y disponibilidad en el momento de crear las teselas.
 
+De forma alternativa, algunos proveedores pueden preferir realizar una transformación de BBDD para realizar el mapeo en lugar de utilizar el fichero .ods. Se ofrece un script _run_generar_sql.py_ (ver más adelante en esta página) para crear una BBDD vacía con la estructura del modelo. A partir de esa estructura del modelo se tendrá que realizar igualmente la correspondencia entre datos del proveedor y modelo XYZ.
+
 ***Hoja ProcesoToGeojson***
 
 Mapeo de los datos de entrada al proceso de generación de los geojson de teselas vectoriales.
@@ -72,6 +74,34 @@ En las primeras líneas se configuran los parámetros:
     proveedor = 'cnig' 
     
 Consultar el código de proveedor en https://ideespain.github.io/mapabase/datos/proveedores_de_datos/
+
+
+_Errores controlados:_
+
+_run_postGISToGeojson.py <class 'MemoryError'> mapeo.py 410_
+
+- Si da error de memoria hay que bajar el número de elementos que se utilizan, de 500.000 (por defecto) a uno más bajo, por ejemplo: 50.000. Todo va a depender de la capacidad de la máquina desde la que se lanza.
+
+En https://github.com/IDEESpain/mapabase/blob/gh-pages/scripts/mapeo/1Proceso-PostGISToGeojson/run_postGISToGeojson.py
+
+Cambiar partirClaseEntidadCantidad a 50.000:
+
+    ProcesoMapeo.partirClaseEntidadCantidad = 50000
+
+Descomentar estas líneas y bajar a 50.000:
+
+
+    # # Se comenta para evitar la pérdida de información.
+    # # Paginar sentencia SQL
+    # ProcesoMapeo.paginarSentenciaSQL = True
+    # ProcesoMapeo.limiteCantidad = 500000
+
+
+- Volver a lanzar sólo con las capas que han dado el error. Hasta ahora han dado el error: altimetria_lin, edificios_pol, cubierta_vegetal_pol . Es un error de memoria, por lo que depende de la máquina en la que se lance el proceso.
+
+- Al terminar volver a poner el script a 500.000 y comentar las líneas de paginación para el siguiente proceso.
+
+
 
 # ./lib/conex.json
 Identificar las fuentes de datos que se utilizan en el archivo .ods de entrada.
