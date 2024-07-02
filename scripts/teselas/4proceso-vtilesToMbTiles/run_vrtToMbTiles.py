@@ -1,4 +1,5 @@
 import json
+import math
 import os
 import signal
 import shlex
@@ -161,7 +162,9 @@ class ProcessIGO:
 
             output_mbtiles = self.config["destination_mbtiles"]
             temp = self.config["temp_directory"]
-
+            if not os.path.exists(temp):
+                os.makedirs(temp)
+                print(f'Creada carpeta temp: {temp}')
             # Nivel de zoom
             zoom = str(z["level"])
 
@@ -248,7 +251,7 @@ class ProcessIGO:
                       self.get_time() +
                       "---> Tiling layers, zoom " + zoom +
                       BColors.ENDC)
-                command_line = "tippecanoe -P -o " + output_mbtiles+"CNIG_" + zoom + "_layers.mbtiles " + \
+                command_line = "tippecanoe -o " + output_mbtiles+"CNIG_" + zoom + "_layers.mbtiles " + \
                     layers + \
                     " -j '" + filter_attr + "'" + \
                     " -z " + zoom + " -Z " + zoom + \
@@ -331,16 +334,78 @@ class ProcessIGO:
         temp_path = self.config["temp_directory"]
         father_dest_path = self.config["destination_folder"]
         temp_path_children = os.listdir(temp_path)
+        
+        # def mover_nivel(i, temp_path, temp_path_children, father_dest_path):
+        #     cnig_folder_path = temp_path+temp_path_children[i] + '/'
+        #     shutil.copytree(cnig_folder_path, father_dest_path,
+        #                     dirs_exist_ok=True)
+        # Parallel(n_jobs=12, require='sharedmem')(delayed(mover_nivel)(
+        #     i, temp_path, temp_path_children, father_dest_path) for i in range(len(temp_path_children)))
 
-        def mover_nivel(i, temp_path, temp_path_children, father_dest_path):
-            cnig_folder_path = temp_path+temp_path_children[i] + '/'
-            shutil.copytree(cnig_folder_path, father_dest_path,
-                            dirs_exist_ok=True)
 
-        # TODO PARAMETRIZAR Y TRATAR DE HACERLO POR LAS X
-        Parallel(n_jobs=6, require='sharedmem')(delayed(mover_nivel)(
-            i, temp_path, temp_path_children, father_dest_path) for i in range(len(temp_path_children)))
+        def mover_archivos_pbf(origen, destino):
+            for dirpath, dirnames, filenames in os.walk(origen):
+                for file in filenames:
+                        # Construir la ruta completa del archivo origen
+                        origen_completo = os.path.join(dirpath, file)
+                        
+                        # Construir la ruta destino manteniendo la estructura
+                        # Obtiene la subruta relativa desde el directorio base de origen
+                        subruta_relativa = os.path.relpath(dirpath, origen)
+                        subruta_relativa = "/".join(subruta_relativa.split("/")[1:])
+                        if file.endswith('.json'):
+                            print("dirpath: " + dirpath)
+                            print("subruta" + subruta_relativa)
+                            if "CNIG" in dirpath:
+                                subruta_relativa= (dirpath.split("/")[-1].split("_")[1]+ "/"+ subruta_relativa)
+                            else:
+                                subruta_relativa= (dirpath.split("/")[-1]+ "/"+ subruta_relativa)
+                        print("SUBRUTA FINAL: "+ subruta_relativa)
+                        # Construir la ruta completa del destino
+                        destino_completo = os.path.join(destino, subruta_relativa, file)
+                    
+                        # Crear los directorios destino si no existen
+                        os.makedirs(os.path.dirname(destino_completo), exist_ok=True)
+                        
+                        # Mover el archivo al destino
+                        shutil.move(origen_completo, destino_completo)
+                        print(f'Movido: {origen_completo} -> {destino_completo}')
+        
+        mover_archivos_pbf(temp_path, father_dest_path)
 
+        def limpiar_carpeta(ruta_carpeta):
+            """
+            Elimina todo el contenido (archivos y subdirectorios) de la carpeta especificada.
+            
+            Parámetros:
+            - ruta_carpeta: Ruta absoluta o relativa de la carpeta a limpiar.
+            """
+            try:
+                for nombre_archivo in os.listdir(ruta_carpeta):
+                    ruta_completa = os.path.join(ruta_carpeta, nombre_archivo)
+                    if os.path.isfile(ruta_completa):
+                        os.remove(ruta_completa)
+                    elif os.path.isdir(ruta_completa):
+                        shutil.rmtree(ruta_completa)
+                print(f"Contenido de '{ruta_carpeta}' eliminado correctamente.")
+            except Exception as e:
+                print(f"Error al limpiar '{ruta_carpeta}': {e}")
+
+        def eliminar_carpetas_vacias(directorio):
+            # Recorre el directorio desde las subcarpetas más profundas hacia arriba
+            for dirpath, dirnames, filenames in os.walk(directorio, topdown=False):
+                # Si una carpeta está vacía, se elimina
+                if not dirnames and not filenames:
+                    os.rmdir(dirpath)
+                    print(f'Eliminada carpeta vacía: {dirpath}')
+                try:
+                    os.rmdir(dirpath)
+                    print(f'Eliminada carpeta: {dirpath}')
+                except OSError as e:
+                    continue
+
+        eliminar_carpetas_vacias(temp_path)
+        limpiar_carpeta(config["destination_mbtiles"])
     # Método para combinar los JSON de metadatos
 
     def combine_json(self):
@@ -562,11 +627,16 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
 
     def get_tiles(left, bottom, right, top, var_dict):
         # me.Bbox(left,bottom,right,top)
-        if is_comunidades:
-            zooms = [x for x in range(var_dict["min_zoom_comunidades"],var_dict["max_zoom_comunidades"] + 1)]
-        else:
-            zooms = [x for x in range(var_dict["min_zoom_municipios"],var_dict["max_zoom_municipios"] + 1)]
-            
+        # if is_comunidades:
+        #     zooms = [x for x in range(var_dict["min_zoom_comunidades"],var_dict["max_zoom_comunidades"] + 1)]
+        # else:
+        #     zooms = [x for x in range(var_dict["min_zoom_municipios"],var_dict["max_zoom_municipios"] + 1)]
+        zooms = []
+        for z in config_vtiles["zoom_levels"]:
+            if z['process'] == 'yes':
+                zooms.append(z["level"])
+        print("Zooms: ")
+        print(zooms)
         tiles = me.tiles(left, bottom, right, top, zooms)
         tiles_matrix = [(t.x, t.y, t.z) for t in tiles]
 
@@ -617,7 +687,68 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
 
         return layer_dict_by_zoom
 
-   
+    # def expand_bbox_to_cover_tiles(bbox, zoom):
+    #     """
+    #     Expande un bbox para incluir la totalidad de los tiles que intersectan con él.
+
+    #     :param bbox: Tuple con el bbox en formato (min_lon, min_lat, max_lon, max_lat) en EPSG:4326.
+    #     :param zoom: Nivel de zoom de los tiles.
+    #     :return: Tuple con el nuevo bbox en formato (min_lon, min_lat, max_lon, max_lat) en EPSG:4326.
+    #     """
+    #     min_lon, min_lat, max_lon, max_lat = bbox
+
+    #     # Convertir el bbox a tiles
+    #     top_left_tile = me.tile(min_lon, max_lat, zoom)
+    #     bottom_right_tile = me.tile(max_lon, min_lat, zoom)
+
+    #     # Obtener las coordenadas de los tiles
+    #     top_left_bounds = me.bounds(top_left_tile)
+    #     bottom_right_bounds = me.bounds(bottom_right_tile)
+
+    #     # Crear un nuevo bbox que incluye los bounds de los tiles
+    #     new_min_lon = top_left_bounds.west
+    #     new_max_lat = top_left_bounds.north
+    #     new_max_lon = bottom_right_bounds.east
+    #     new_min_lat = bottom_right_bounds.south
+    #     print("Min lon: "+ str(new_min_lon))
+    #     print("Max lat: "+ str(new_max_lat))
+    #     print("Max lon: "+ str(new_max_lon))
+    #     print("Min lat: "+ str(new_min_lat))
+    #     return new_min_lon, new_min_lat, new_max_lon, new_max_lat
+    
+    def expand_bbox_to_cover_tiles(bbox, zoom_level):
+        # Función para calcular el tamaño de un tile en grados de latitud y longitud
+        def tile_size(zoom):
+            return 360.0 / (2 ** zoom)
+
+        # Función para calcular las coordenadas de un tile a partir de su índice x, y
+        def tile_to_coords(x, y, zoom):
+            size = tile_size(zoom)
+            min_lon = -180.0 + x * size
+            max_lon = min_lon + size
+            max_lat = 90.0 - y * size
+            min_lat = max_lat - size
+            return (min_lon, min_lat, max_lon, max_lat)
+
+        # Función para obtener el índice x, y del tile que contiene una coordenada dada
+        def coords_to_tile(lon, lat, zoom):
+            size = tile_size(zoom)
+            x = math.floor((lon + 180.0) / size)
+            y = math.floor((90.0 - lat) / size)
+            return (x, y)
+
+        # Expandimos el bbox para asegurarnos de que contenga todos los tiles
+        min_lon, min_lat, max_lon, max_lat = bbox
+        start_tile_x, start_tile_y = coords_to_tile(min_lon, max_lat, zoom_level)
+        end_tile_x, end_tile_y = coords_to_tile(max_lon, min_lat, zoom_level)
+
+        # Obtenemos las coordenadas de los extremos de los tiles
+        expanded_min_lon, expanded_min_lat, _, _ = tile_to_coords(start_tile_x, start_tile_y, zoom_level)
+        _, _, expanded_max_lon, expanded_max_lat = tile_to_coords(end_tile_x, end_tile_y, zoom_level)
+
+        expanded_bbox = (expanded_min_lon, expanded_min_lat, expanded_max_lon, expanded_max_lat)
+        return expanded_bbox
+
     def generate_tiles_tippecanoe(tiles_df, layer_dict_by_zoom, bbox):
 
         # preconfigurar
@@ -630,14 +761,18 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
 
         min_level_comunidades = config["min_zoom_comunidades"]
         max_level_comunidades = config["max_zoom_comunidades"]
-        minlon, minlat, maxlon, maxlat = bbox
+        
 
+        if not os.path.exists(tmp):
+            os.makedirs(tmp)
+            print(f'Creada carpeta temp: {tmp}')
         for z in config_vtiles["zoom_levels"]:
 
             # def teselacion(z):
             if z['process'] == 'no':
                 continue
                 # return
+            minlon, minlat, maxlon, maxlat = bbox #expand_bbox_to_cover_tiles(bbox, z['level'] )
 
             if z['level'] >= min_level_ign and z['level'] <= max_level_ign:
                 origen = config["gz_folder_IGN"]
@@ -657,9 +792,9 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
             
             layers = " ".join(layers)
 
-            command_line = f"tippecanoe --force -P -o " + destination_mbtiles+"CNIG_" + str(zoom) + "_"+str(int(round(minlon, 3) * 1000))+"_"+str(int(round(minlat, 3) * 1000))+"_layers.mbtiles " + \
+            command_line = f"tippecanoe --force -o " + destination_mbtiles+"CNIG_" + str(zoom) + "_"+str(int(round(minlon, 3) * 1000))+"_"+str(int(round(minlat, 3) * 1000))+"_layers.mbtiles " + \
                 layers + \
-                " -z " + str(zoom) + " -Z " + str(zoom) + \
+                " -z" + str(zoom) + " -Z" + str(zoom) + \
                 " -j '" + str(filter_attr) + "'" + \
                 " --buffer=44" + \
                 " -t " + tmp + "" + \
@@ -678,9 +813,9 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
 
             if len(layers_no_coalesce) > 0:
                 layers_nc = " ".join(layers_no_coalesce)
-                command_line = f"tippecanoe --force -P -o " + str(destination_mbtiles) +"CNIG_" + str(zoom) + "_"+str(int(round(minlon, 3) * 1000))+"_"+str(int(round(minlat, 3) * 1000))+"_layers_no_coalesce.mbtiles " + \
+                command_line = f"tippecanoe --force -o " + str(destination_mbtiles) +"CNIG_" + str(zoom) + "_"+str(int(round(minlon, 3) * 1000))+"_"+str(int(round(minlat, 3) * 1000))+"_layers_no_coalesce.mbtiles " + \
                     layers_nc + \
-                    " -z " + str(zoom) + " -Z " + str(zoom) + \
+                    " -z" + str(zoom) + " -Z" + str(zoom) + \
                     " -j '" + str(filter_attr) + "'" + \
                     " --buffer=44" + \
                     " -t " + tmp + "" + \
@@ -698,9 +833,9 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
 
             if len(layers_with_labels) > 0:
                 layers_wl = " ".join(layers_with_labels)
-                command_line = f"tippecanoe --force -P -o " + destination_mbtiles+"CNIG_" + str(zoom) + "_"+str(int(round(minlon, 3) * 1000))+"_"+str(int(round(minlat, 3) * 1000))+"_layers_with_labels.mbtiles " + \
+                command_line = f"tippecanoe --force  -o " + destination_mbtiles+"CNIG_" + str(zoom) + "_"+str(int(round(minlon, 3) * 1000))+"_"+str(int(round(minlat, 3) * 1000))+"_layers_with_labels.mbtiles " + \
                     layers_wl + \
-                    " -z " + str(zoom) + " -Z " + str(zoom) + \
+                    " -z" + str(zoom) + " -Z" + str(zoom) + \
                     " -j '" + str(filter_attr) + "'" + \
                     " --buffer=127" + \
                     " -t " + tmp + "" + \
@@ -799,14 +934,17 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
         tiles_df = get_tiles(left, bottom, right, top, config)
 
         layer_dict_by_zoom = parse_json_v_tiles()
-        
+
         bbox = left, bottom, right, top
+        if setup['tiling_layers'] == 'yes':
+            log.info('--> Tiling layers with Tippecanoe')
+            generate_tiles_tippecanoe(tiles_df, layer_dict_by_zoom, bbox)
+            files_to_pbf = tile_join()
 
-        generate_tiles_tippecanoe(tiles_df, layer_dict_by_zoom, bbox)
-
-        files_to_pbf = tile_join()
-
-        mb_util_tiles(files_to_pbf)
+        # MBtiles --> PBF folder
+        if setup['to_folder'] == 'yes':
+            log.info('--> MBtiles --> PBF folder')
+            mb_util_tiles(files_to_pbf)
 
         if setup['move_to_final_folder'] == 'yes':
             print('Moving pbfs folder')
@@ -819,16 +957,21 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
             territorio = get_territorio(is_comunidades, config, codigo)
 
             left, bottom, right, top = get_bbox(territorio)
-
+            print("BBOX:")
+            print(left, bottom, right, top)
             tiles_df = get_tiles(left, bottom, right, top, config)
 
             layer_dict_by_zoom = parse_json_v_tiles()
+            
+            if setup['tiling_layers'] == 'yes':
+                log.info('--> Tiling layers with Tippecanoe')
+                generate_tiles_tippecanoe(tiles_df, layer_dict_by_zoom, get_bbox(territorio))
+                files_to_pbf = tile_join()
 
-            generate_tiles_tippecanoe(tiles_df, layer_dict_by_zoom, get_bbox(territorio))
-
-            files_to_pbf = tile_join()
-
-            mb_util_tiles(files_to_pbf)
+            # MBtiles --> PBF folder
+            if setup['to_folder'] == 'yes':
+                log.info('--> MBtiles --> PBF folder')
+                mb_util_tiles(files_to_pbf)
 
             if setup['move_to_final_folder'] == 'yes':
                 print('Moving pbfs folder')
@@ -860,15 +1003,15 @@ else:
         log.info('--> MBtiles --> PBF folder')
         process.MBtiles2Folder()
 
-    # MBtiles --> PBF folder
-    if setup['move_to_final_folder'] == 'yes':
-        log.info('Moving pbfs folder')
-        process.move_temp_files()
-
     # m jsons -> 1 json
     if setup['join_json'] == 'yes':
         log.info('Joining all json in 1')
         process.combine_json()
+
+    # MBtiles --> PBF folder
+    if setup['move_to_final_folder'] == 'yes':
+        log.info('Moving pbfs folder')
+        process.move_temp_files()
 
     print(BColors.OKGREEN +
           "[" + datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S') + "] " +
