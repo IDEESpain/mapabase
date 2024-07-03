@@ -13,7 +13,7 @@ import shutil
 import geopandas as gpd
 import mercantile as me
 import pandas as pd
-
+from shapely.geometry import box
 
 
 import warnings
@@ -190,7 +190,7 @@ class ProcessIGO:
                                output_mbtiles+"CNIG_" + zoom + "_layers_with_labels.mbtiles " + \
                                layers_with_labels + \
                                " -j '" + filter_attr + "'" + \
-                               " -z " + zoom + " -Z " + zoom + \
+                               " -z" + zoom + " -Z" + zoom + \
                                " --no-feature-limit" + \
                                " --force" + \
                                " --no-tile-size-limit" + \
@@ -220,7 +220,7 @@ class ProcessIGO:
                                output_mbtiles+"CNIG_" + zoom + "_layers_no_coalesce.mbtiles " + \
                                layers_no_coalesce + \
                                " -j '" + filter_attr + "'" + \
-                               " -z " + zoom + " -Z " + zoom + \
+                               " -z" + zoom + " -Z" + zoom + \
                                " --buffer=44" + \
                                " -t " + temp + \
                                " --reorder" + \
@@ -254,7 +254,7 @@ class ProcessIGO:
                 command_line = "tippecanoe -o " + output_mbtiles+"CNIG_" + zoom + "_layers.mbtiles " + \
                     layers + \
                     " -j '" + filter_attr + "'" + \
-                    " -z " + zoom + " -Z " + zoom + \
+                    " -z" + zoom + " -Z" + zoom + \
                     " --buffer=44" + \
                     " -t " + temp + \
                     " --coalesce" + \
@@ -655,7 +655,7 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
         total_tiles_matrix = tiles_matrix
 
         total_tiles_matrix_set = set(total_tiles_matrix)
-
+        
         total_tiles_matrix_set_sorted_by_zoom = sorted(
             total_tiles_matrix_set, key=lambda tup: tup[2])
 
@@ -687,35 +687,52 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
 
         return layer_dict_by_zoom
 
-    # def expand_bbox_to_cover_tiles(bbox, zoom):
-    #     """
-    #     Expande un bbox para incluir la totalidad de los tiles que intersectan con él.
 
-    #     :param bbox: Tuple con el bbox en formato (min_lon, min_lat, max_lon, max_lat) en EPSG:4326.
-    #     :param zoom: Nivel de zoom de los tiles.
-    #     :return: Tuple con el nuevo bbox en formato (min_lon, min_lat, max_lon, max_lat) en EPSG:4326.
-    #     """
-    #     min_lon, min_lat, max_lon, max_lat = bbox
 
-    #     # Convertir el bbox a tiles
-    #     top_left_tile = me.tile(min_lon, max_lat, zoom)
-    #     bottom_right_tile = me.tile(max_lon, min_lat, zoom)
 
-    #     # Obtener las coordenadas de los tiles
-    #     top_left_bounds = me.bounds(top_left_tile)
-    #     bottom_right_bounds = me.bounds(bottom_right_tile)
 
-    #     # Crear un nuevo bbox que incluye los bounds de los tiles
-    #     new_min_lon = top_left_bounds.west
-    #     new_max_lat = top_left_bounds.north
-    #     new_max_lon = bottom_right_bounds.east
-    #     new_min_lat = bottom_right_bounds.south
-    #     print("Min lon: "+ str(new_min_lon))
-    #     print("Max lat: "+ str(new_max_lat))
-    #     print("Max lon: "+ str(new_max_lon))
-    #     print("Min lat: "+ str(new_min_lat))
-    #     return new_min_lon, new_min_lat, new_max_lon, new_max_lat
-    
+    def latlon_to_tile(lat, lon, zoom):
+        """
+        Convierte coordenadas geográficas (latitud y longitud) a coordenadas de tesela (tile) en un nivel de zoom específico.
+        """
+        lat_rad = math.radians(lat)
+        n = 2.0 ** zoom
+        x_tile = int((lon + 180.0) / 360.0 * n)
+        y_tile = int((1.0 - math.log(math.tan(lat_rad) + (1 / math.cos(lat_rad))) / math.pi) / 2.0 * n)
+        return (x_tile, y_tile)
+
+    def tile_to_latlon(x_tile, y_tile, zoom):
+        """
+        Convierte coordenadas de tesela (tile) a coordenadas geográficas (latitud y longitud) en un nivel de zoom específico.
+        """
+        n = 2.0 ** zoom
+        lon = x_tile / n * 360.0 - 180.0
+        lat_rad = math.atan(math.sinh(math.pi * (1 - 2 * y_tile / n)))
+        lat = math.degrees(lat_rad)
+        return (lat, lon)
+
+    def expand_bbox_to_include_tiles(bbox, zoom):
+        """
+        Expande el bbox para incluir completamente las teselas que intersectan con él en un nivel de zoom específico.
+        """
+        # Convertir el bbox a coordenadas de tesela
+        bminlon, bminlat, bmaxlon, bmaxlat = bbox
+        min_tile = latlon_to_tile(bminlat, bminlon, zoom)
+        max_tile = latlon_to_tile(bmaxlat, bmaxlon, zoom)
+
+        # Calcular el nuevo bbox que incluye completamente las teselas
+        min_lat, min_lon = tile_to_latlon(min_tile[0], min_tile[1] + 1, zoom)
+        max_lat, max_lon = tile_to_latlon(max_tile[0] + 1, max_tile[1], zoom)
+
+        # Asegurarse de que las coordenadas estén dentro de los límites válidos
+        min_lat = max(min_lat, -85.05112878)  # Límite de latitud mínima en Web Mercator
+        max_lat = min(max_lat, 85.05112878)   # Límite de latitud máxima en Web Mercator
+        min_lon = max(min_lon, -180.0)        # Límite de longitud mínima
+        max_lon = min(max_lon, 180.0)         # Límite de longitud máxima
+        return min_lon,min_lat,max_lon,max_lat
+
+
+        
     def expand_bbox_to_cover_tiles(bbox, zoom_level):
         # Función para calcular el tamaño de un tile en grados de latitud y longitud
         def tile_size(zoom):
@@ -748,6 +765,14 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
 
         expanded_bbox = (expanded_min_lon, expanded_min_lat, expanded_max_lon, expanded_max_lat)
         return expanded_bbox
+    
+    def apply_buffer(bbox, buffer):
+        geom = box(*bbox)
+
+        buffered_geom = geom.buffer(buffer, cap_style=3)
+
+        return buffered_geom.bounds
+    
 
     def generate_tiles_tippecanoe(tiles_df, layer_dict_by_zoom, bbox):
 
@@ -772,7 +797,7 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
             if z['process'] == 'no':
                 continue
                 # return
-            minlon, minlat, maxlon, maxlat = bbox #expand_bbox_to_cover_tiles(bbox, z['level'] )
+            minlon, minlat, maxlon, maxlat = apply_buffer(expand_bbox_to_include_tiles(bbox, z['level']),-0.00001)
 
             if z['level'] >= min_level_ign and z['level'] <= max_level_ign:
                 origen = config["gz_folder_IGN"]
@@ -796,7 +821,7 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
                 layers + \
                 " -z" + str(zoom) + " -Z" + str(zoom) + \
                 " -j '" + str(filter_attr) + "'" + \
-                " --buffer=44" + \
+                " --buffer=0" + \
                 " -t " + tmp + "" + \
                 " --coalesce" + \
                 " --reorder" + \
