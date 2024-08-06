@@ -75,5 +75,6 @@ def generarClaseNacional(clase):
         pass
 Parallel(n_jobs=var_dict["num_threads"], require='sharedmem')(delayed(generarClaseNacional)(clase) for clase in lista_clases)
 
+print("Proceso de unión nacional de municipios terminado")
 
 sheets={}

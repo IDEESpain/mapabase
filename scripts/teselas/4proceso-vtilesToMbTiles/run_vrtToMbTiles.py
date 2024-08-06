@@ -565,7 +565,7 @@ f_config = open("./config.json")
 
 config = json.load(f_config)
 
-if(config["update"] == "municipios" or config["update"] == "comunidades" or config["update"] == "bbox"):
+if(config["update"] != ""):
     print(f"Actualizando teselas de territorios por ", config["update"])
     process = ProcessIGO()
     setup = process.get_setup()
@@ -592,6 +592,16 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
         print(f"Actualizando teselas de territorios por ", config["update"])
         is_bbox = True
         left, bottom, right, top = config["bbox"][0], config["bbox"][1], config["bbox"][2], config["bbox"][3]
+    
+    elif (config["update"] == "nacional"):
+        print(f"Actualizando teselas de territorios por ", config["update"])
+        is_bbox = True
+        left, bottom, right, top = -19.215480397527838, 26.62547835167641, 6.341170645348383, 44.792032154864046
+
+    elif (config["update"] == "peninsula"):
+        print(f"Actualizando teselas de territorios por ", config["update"])
+        is_bbox = True
+        left, bottom, right, top = -9.94,35.01,4.64,44.1
 
     if not is_bbox:
         if lista_comunidades and is_comunidades:
@@ -797,7 +807,7 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
             if z['process'] == 'no':
                 continue
                 # return
-            minlon, minlat, maxlon, maxlat = apply_buffer(expand_bbox_to_include_tiles(bbox, z['level']),-0.00001)
+            minlon, minlat, maxlon, maxlat = apply_buffer(expand_bbox_to_include_tiles(bbox, z['level']),-0.005)
 
             if z['level'] >= min_level_ign and z['level'] <= max_level_ign:
                 origen = config["gz_folder_IGN"]
@@ -975,6 +985,8 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
             print('Moving pbfs folder')
             process.move_temp_files()
 
+        print("Proceso de actualización de teselas por bbox terminado")
+
     else:
 
         for codigo in lista_territorios:
@@ -1001,6 +1013,8 @@ if(config["update"] == "municipios" or config["update"] == "comunidades" or conf
             if setup['move_to_final_folder'] == 'yes':
                 print('Moving pbfs folder')
                 process.move_temp_files()
+
+            print("Proceso de actualización de teselas por territorios terminado")
 
 
 else:
