@@ -46,11 +46,13 @@ class control_calidad_GJSON:
                                         listaDominio = ['*']
                                     print(e,line_n3)
                                     atrNombre = line_n3['td'][0]['code'][0]['_value']
+                                    tipoDato = line_n3['td'][1]['_value']
                                     jsonElementos[e][line_n3['td'][0]['code'][0]['_value']] = listaDominio
                                     
                                 else:
                                     value = line_n3['td'][2]['_value']
-                                    if atrNombre == 'jerarquia':
+                                    
+                                    if tipoDato == "integer":
                                         value = int(value)
                                     if jsonElementos[e][atrNombre] == ['*']:
                                         jsonElementos[e][atrNombre] = []
