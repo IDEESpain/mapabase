@@ -59,7 +59,7 @@ def generarClaseNacional(clase):
 
 
                 
-        cmd=f"ogr2ogr -skipfailures -f \"FlatGeobuf\" -nln {clase} -dialect sqlite -sql \"select geometry,* from {clase}\" {var_dict['path_generados_nacional_com_aut']}00/{clase}.fgb {var_dict['path_generados_nacional_com_aut']}00/{clase}_recorte.vrt >/dev/null 2>&1"
+        cmd=f"ogr2ogr -skipfailures -f \"FlatGeobuf\" -nln {clase} -dialect sqlite -sql \"select geometry,* from {clase}\" {var_dict['path_generados_nacional_com_aut']}00/{clase}.fgb {var_dict['path_generados_nacional_com_aut']}00/{clase}_recorte.vrt 2>> ../logs/union_comunidades_error.log"
 
 
         #Ejecutamos el comando ogr2ogr para generar el geojson
