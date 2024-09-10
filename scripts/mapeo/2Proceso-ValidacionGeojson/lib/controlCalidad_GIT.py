@@ -229,7 +229,6 @@ class control_calidad_GJSON:
         archivoLOG.close()
 
         ### Comprobación Dominios para cada clase de entidad
-        ## TODO CAMBIAR ESTO
         if self.verbose:
             print("##### Comprobación Atributos #####")
         archivoLOG = codecs.open(pathlog, "a","utf-8")
