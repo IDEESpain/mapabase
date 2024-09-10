@@ -461,28 +461,22 @@ class ProcessIGO:
         dic_output_json = {}
 
         # self.check_different_elements(df_final['name'].to_list())
-        dic_output_json['id'] = "mapabase_cnig"
-        dic_output_json['name'] = "mapabase_cnig"
-        dic_output_json['basename'] = "mapabase_cnig"
-        dic_output_json['attribution'] = "url cnig"
-        # self.check_different_elements(df_final['description'].to_list())
-        dic_output_json['description'] = "Mapa Base de Centro Nacional de Información Geográfica"
-        # self.check_different_elements(df_final['type'].to_list())
-        dic_output_json['version'] = 2
-        dic_output_json['minzoom'] = min(lst_minzoom)
-        dic_output_json['maxzoom'] = max(lst_maxzoom)
-        dic_output_json['center'] = """{0},{1},{2}""".format(self.compute_max_min_avg(center_tuple_lst, 'avg', 0), self.compute_max_min_avg(
-            center_tuple_lst, 'avg', 1), self.compute_max_min_avg(center_tuple_lst, 'min', 2))
-        dic_output_json['bounds'] = """{0},{1},{2},{3}""".format(self.compute_max_min_avg(bounds_tuple_lst, 'avg', 0), self.compute_max_min_avg(
-            bounds_tuple_lst, 'avg', 1), self.compute_max_min_avg(bounds_tuple_lst, 'avg', 2), self.compute_max_min_avg(bounds_tuple_lst, 'avg', 3))
-        # self.check_different_elements(df_final['type'].to_list())
+        dic_output_json['tilejson'] = "3.0.0"
+        dic_output_json['name'] = "Mapa Base XYZ del Sistema Cartográfico Nacional"
+        dic_output_json['description'] = "Servicio de visualización (Servicio de Teselas Vectoriales, MVT) del Sistema Cartográfico Nacional. Base de datos multiescala con cobertura completa y continua para España, que combina diferentes fuentes de datos. Teselas desde nivel de zoom 0 hasta nivel de zoom 17"
         dic_output_json['type'] = "overlay"
-        # self.check_different_elements(df_final['format'].to_list())
+        dic_output_json['scheme'] = "xyz"
         dic_output_json['format'] = "pbf"
-        dic_output_json['tiles'] = [
-            "https://www.ign.es/web/resources/mapa-base-xyz/vt/{z}/{x}/{y}.pbf"]
-        dic_output_json['generator'] = self.check_different_elements(
-            df_final['generator'].to_list())
+        dic_output_json['version'] = "1.0.0"
+        dic_output_json['tiles'] = ["https://vt-mapabase.idee.es/1.0.0/mapabase/{z}/{x}/{y}.pbf"]
+        dic_output_json['attribution'] = "<a href='https://www.scne.es//'>CC BY 4.0 scne</a>"
+        dic_output_json['bounds'] = [-180, 90, 180, 90]
+        dic_output_json['center'] = [-11.5, 35.789, 5]
+        dic_output_json['minzoom'] = 0
+        dic_output_json['maxzoom'] = 17
+        dic_output_json['MetadataUrl'] = "https://ideespain.github.io/mapabase/"
+        
+
 
         capas_totales = {}
 
@@ -520,8 +514,8 @@ class ProcessIGO:
 
         dic_output_json['tilestats'] = dict(sorted(tilestats.items()))
 
-        with open(dest_folder+'metadata.json', 'w') as f:
-            f.write(json.dumps(dic_output_json))
+        with open(dest_folder+'metadata.json', 'w',encoding='utf-8') as f:
+            f.write(json.dumps(dic_output_json, ensure_ascii=False, indent=4))
 
     @staticmethod
     def compute_max_min_avg(list, op, coord):
