@@ -366,4 +366,3 @@ class control_calidad_GJSON:
         return 0
         
 
-
