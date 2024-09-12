@@ -409,14 +409,20 @@ class ProcessIGO:
     # Método para combinar los JSON de metadatos
 
     def combine_json(self):
-        teselas_folder = self.config["temp_directory"]
+        teselas_folder = self.config["destination_folder"]
         dest_folder = self.config["destination_folder"]
         lst_json_files_paths = []
 
-        for root, dirs, files in os.walk(teselas_folder, topdown=False):
-            for name in files:
-                if name[-5:] == '.json':
-                    lst_json_files_paths.append(os.path.join(root, name))
+        for subdir in os.listdir(teselas_folder):
+            subdir_path = os.path.join(teselas_folder, subdir)
+            
+            # Verificar si es un directorio
+            if os.path.isdir(subdir_path):
+                # Buscar archivos .json dentro de este subdirectorio
+                for name in os.listdir(subdir_path):
+                    if name.endswith('.json'):
+                        lst_json_files_paths.append(os.path.join(subdir_path, name))
+
 
         # Crea un DataFrame con cada JSON para luego unirlos en un solo DataFrame
         df_list = []
@@ -430,32 +436,45 @@ class ProcessIGO:
 
         # DataFrame con todos los JSON
         df_final = pandas.concat(df_list)
-
-        print(df_final)
-
+    
         # Listas con las columnas de los dataframe
 
         # set_fields = set([x for x in df_final["fields"]])
 
         # set_fields = set([x for x in df_final["fields"]])
 
-        lst_minzoom = [int(x) for x in df_final['minzoom'].to_list()]
-        lst_maxzoom = [int(x) for x in df_final['maxzoom'].to_list()]
 
         lst_center = [(x) for x in df_final['center']]
         lst_bounds = [(x) for x in df_final['bounds'].to_list()]
-        lst_json = [(y, json.loads(x)) for x, y in zip(
-            df_final['json'].to_list(), df_final['minzoom'])]
+        lst_json = [
+            (str(y), json.loads(x) if x and isinstance(x, str) else None)  # Verificamos que x no esté vacío y sea una cadena
+            for x, y in zip(df_final['json'].to_list(), df_final['minzoom'])
+            if x and isinstance(x, str)  # Filtramos valores nulos y no strings
+        ]
+
+        # Filtrar valores None que podrían haberse producido por errores de decodificación
+        lst_json = [(y, j) for y, j in lst_json if j is not None]
+
+        # Imprimir o gestionar errores encontrados
+        errores_json = [
+            (str(y), x) 
+            for x, y in zip(df_final['json'].to_list(), df_final['minzoom'])
+            if not x or not isinstance(x, str) or (isinstance(x, str) and not x.strip())  # Detecta entradas inválidas
+        ]
+
+        # Si quieres ver cuáles JSON fueron problemáticos
+        for error in errores_json:
+            print(f"Error procesando JSON con minzoom {error[0]}: {error[1]}")
 
         center_tuple_lst = []
         bounds_tuple_lst = []
 
-        # Descompone las celdas de los DataFrame para obtener las coordenadas por separado
-        for i in range(len(lst_center)):
-            center_tuple_lst.append(tuple(lst_center[i].split(',')))
+        # # Descompone las celdas de los DataFrame para obtener las coordenadas por separado
+        # for i in range(len(lst_center)):
+        #     center_tuple_lst.append(tuple(lst_center[i].split(',')))
 
-        for i in range(len(lst_bounds)):
-            bounds_tuple_lst.append(tuple(lst_bounds[i].split(',')))
+        # for i in range(len(lst_bounds)):
+        #     bounds_tuple_lst.append(tuple(lst_bounds[i].split(',')))
 
         # Diccionario para el JSON de salida
         dic_output_json = {}
@@ -801,7 +820,7 @@ if(config["update"] != ""):
             if z['process'] == 'no':
                 continue
                 # return
-            minlon, minlat, maxlon, maxlat = apply_buffer(expand_bbox_to_include_tiles(bbox, z['level']),-0.005)
+            minlon, minlat, maxlon, maxlat = apply_buffer(expand_bbox_to_include_tiles(bbox, z['level']),-0.75)
 
             if z['level'] >= min_level_ign and z['level'] <= max_level_ign:
                 origen = config["gz_folder_IGN"]
@@ -825,7 +844,7 @@ if(config["update"] != ""):
                 layers + \
                 " -z" + str(zoom) + " -Z" + str(zoom) + \
                 " -j '" + str(filter_attr) + "'" + \
-                " --buffer=0" + \
+                " --buffer=1" + \
                 " -t " + tmp + "" + \
                 " --coalesce" + \
                 " --reorder" + \
@@ -974,7 +993,9 @@ if(config["update"] != ""):
         if setup['to_folder'] == 'yes':
             log.info('--> MBtiles --> PBF folder')
             mb_util_tiles(files_to_pbf)
-
+        if setup['join_json'] == 'yes':
+                log.info('Joining all json in 1')
+                process.combine_json()
         if setup['move_to_final_folder'] == 'yes':
             print('Moving pbfs folder')
             process.move_temp_files()
@@ -1003,7 +1024,9 @@ if(config["update"] != ""):
             if setup['to_folder'] == 'yes':
                 log.info('--> MBtiles --> PBF folder')
                 mb_util_tiles(files_to_pbf)
-
+            if setup['join_json'] == 'yes':
+                log.info('Joining all json in 1')
+                process.combine_json()
             if setup['move_to_final_folder'] == 'yes':
                 print('Moving pbfs folder')
                 process.move_temp_files()
