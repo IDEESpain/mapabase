@@ -22,7 +22,7 @@ A continuación se detallan los archivos auxiliares necesarios, disponibles en e
 
 - **`comunidades_autonomas.xlsx`** y **`municipios.xlsx`**: Hojas de cálculo que contienen el listado de comunidades autónomas y municipios de España. Incluyen información útil como el código asignado a cada región y su nombre.
   
-- **`matriz_elementos.xlsx`**: Este archivo define el listado de capas del modelo de datos del Mapa Base XYZ, indicando el ámbito de visualización al que pertenecen.
+- **`matriz_elementos.xlsx`**: Este archivo define el listado de capas del modelo de datos del Mapa Ciudadano, indicando el ámbito de visualización al que pertenecen.
 
 - **`aux_comunidad_autonoma_pol.fgb`**: Fichero que contiene las geometrías de las comunidades autónomas de España.
 

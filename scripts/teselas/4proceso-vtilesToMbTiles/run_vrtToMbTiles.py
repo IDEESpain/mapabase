@@ -481,7 +481,7 @@ class ProcessIGO:
 
         # self.check_different_elements(df_final['name'].to_list())
         dic_output_json['tilejson'] = "3.0.0"
-        dic_output_json['name'] = "Mapa Base XYZ del Sistema Cartográfico Nacional"
+        dic_output_json['name'] = "Mapa Ciudadano del Sistema Cartográfico Nacional"
         dic_output_json['description'] = "Servicio de visualización (Servicio de Teselas Vectoriales, MVT) del Sistema Cartográfico Nacional. Base de datos multiescala con cobertura completa y continua para España, que combina diferentes fuentes de datos. Teselas desde nivel de zoom 0 hasta nivel de zoom 17"
         dic_output_json['type'] = "overlay"
         dic_output_json['scheme'] = "xyz"

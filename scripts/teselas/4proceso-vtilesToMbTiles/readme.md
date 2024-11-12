@@ -38,8 +38,8 @@ Una vez organizada la información en estos niveles, las teselas vectoriales pod
 - **`max_zoom_comunidades`**: Zoom máximo para la escala autonómica. Valor por defecto: `16`.
 - **`min_zoom_municipios`**: Zoom mínimo para la escala local. Valor por defecto: `17`.
 - **`max_zoom_municipios`**: Zoom máximo para la escala local. Valor por defecto: `20`.
-- **`min_zoom`**: Zoom mínimo para el Mapa Base. Valor por defecto: `0`.
-- **`max_zoom`**: Zoom máximo para el Mapa Base. Valor por defecto: `20`.
+- **`min_zoom`**: Zoom mínimo para el Mapa Ciudadano. Valor por defecto: `0`.
+- **`max_zoom`**: Zoom máximo para el Mapa Ciudadano. Valor por defecto: `20`.
 - **`bbox`**: Coordenadas que definen el bbox de actualización regional. Ejemplo: `[-19.215480397527838, 26.62547835167641, 6.341170645348383, 44.792032154864046]`, que incluye todo el territorio de España.
 - **`update`**: Modo de actualización regional de teselas. Los posibles valores son: `""`, `"comunidades"`, `"municipios"`, `"bbox"`, `"nacional"` y `"peninsular"`.
 

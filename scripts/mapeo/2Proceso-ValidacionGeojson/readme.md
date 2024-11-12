@@ -11,7 +11,7 @@ Para ejecutar el proceso, se necesitará configurar en primer lugar el archivo c
     
     "fgb_folder_path": "./salida_geojsons_andalucia/fgb/",  #Carpeta para los fgb que se crearán
     
-    "git_carpeta_mapabase_gh_pages" : "./mapabase", #git con el modelo de mapa base, desde el que se crea el json de validación.
+    "git_carpeta_mapabase_gh_pages" : "./mapabase", #git con el modelo de Mapa Ciudadano, desde el que se crea el json de validación.
     
     "JSON_comprobacion" : "./lib/comprobacion.json", #fichero de comprobación/validación creado a partir del gihubt de mapabase.    
     

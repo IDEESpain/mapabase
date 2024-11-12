@@ -372,7 +372,7 @@ class ProcessIGO:
         dic_output_json['name'] = "mapabase_cnig"
         dic_output_json['basename'] = "mapabase_cnig"
         dic_output_json['attribution'] = "url cnig"
-        dic_output_json['description'] = 	"Mapa Base de Centro Nacional de Información Geográfica"#self.check_different_elements(df_final['description'].to_list())
+        dic_output_json['description'] = 	"Mapa Ciudadano de Centro Nacional de Información Geográfica"#self.check_different_elements(df_final['description'].to_list())
         dic_output_json['version'] = 2 #self.check_different_elements(df_final['type'].to_list())
         dic_output_json['minzoom'] = min(lst_minzoom)
         dic_output_json['maxzoom'] = max(lst_maxzoom)
