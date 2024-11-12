@@ -1,6 +1,8 @@
+# Generador de Archivos GeoJSON
 
+Este script está diseñado para generar archivos GeoJSON a partir de datos almacenados en una base de datos PostgreSQL. Permite realizar consultas SQL y transformar los resultados en un formato geoespacial comúnmente utilizado, cumpliendo con las especificaciones del formato GeoJSON.
 
-# Datos de entrada proceso .ods Proveedores de datos
+## Datos de entrada proceso .ods Proveedores de datos
 
 Los datos de entrada al proceso se indican en el fichero de entrada: CNIG_ToGeojson.ods
 
@@ -10,7 +12,7 @@ Este Excel es el fichero que se utilizó en la versión 0 del MapaBaseXYZ. Para 
 
 De forma alternativa, algunos proveedores pueden preferir realizar una transformación de BBDD para realizar el mapeo en lugar de utilizar el fichero .ods. Se ofrece un script _run_generar_sql.py_ (ver más adelante en esta página) para crear una BBDD vacía con la estructura del modelo. A partir de esa estructura del modelo se tendrá que realizar igualmente la correspondencia entre datos del proveedor y modelo XYZ.
 
-***Hoja ProcesoToGeojson***
+**Hoja ProcesoToGeojson**
 
 Mapeo de los datos de entrada al proceso de generación de los geojson de teselas vectoriales.
 
@@ -22,7 +24,7 @@ Mapeo de los datos de entrada al proceso de generación de los geojson de tesela
 
 *Filtro*. Claúsula where del SQL para obtener los datos concretos de ese elemento geográfico. Si está vacío se incluye todos los elementos de la tabla. Para mapeados valor a valor se pueden utilizar los campos ValorOrigen y ValorDestino sin tener que hacer filtros por cada valor.
 
-*ClaseDeEntidad*. Clase de entidad de destino en el modelo de datos de Mapa Base
+*ClaseDeEntidad*. Clase de entidad de destino en el modelo de datos de Mapa Ciudadano
 
 *AtributoOrigen*. Campo de la tabla origen con el valor para el atributo de destino.
 
@@ -60,7 +62,12 @@ Listado de todos los elementos geográficos y niveles del modelo. Como referenci
 
 Actualizada en: https://ideespain.github.io/mapabase/elementos/relacion_tematica/
 
-# run_postGISToGeojson.py
+## Script run_generar_sql.py
+Script que genera una base de datos vacía con la estructura del modelo a partir la página web del modelo. Al ejecutar el script, recorre la web y se genera, cada tabla y campos correspondientes. Se proporciona como alternativa al .ods para transformación de modelos. Puede ser útil a algunos productores que les resulte más sencillo exportar de su modelo de datos al modelo de datos XYZ a través de tabla en lugar del .ods de mapeo.
+
+**IMPORTANTE**: El repositorio local que contiene la carpeta elementos/ debe estar actualizada a la última versión del [repositorio remoto](https://github.com/IDEESpain/mapabase)
+
+## Script run_postGISToGeojson.py
 Script que exporta los datos desde las fuentes originales a .json
 
 En las primeras líneas se configuran los parámetros:
@@ -75,8 +82,7 @@ En las primeras líneas se configuran los parámetros:
     
 Consultar el código de proveedor en https://ideespain.github.io/mapabase/datos/proveedores_de_datos/
 
-
-_Errores controlados:_
+**Errores controlados**
 
 _run_postGISToGeojson.py <class 'MemoryError'> mapeo.py 410_
 
@@ -101,15 +107,57 @@ Descomentar estas líneas y bajar a 50.000:
 
 - Al terminar volver a poner el script a 500.000 y comentar las líneas de paginación para el siguiente proceso.
 
+## Funcionalidad Principal
 
+1. **Construcción de Consultas SQL**:
+   - Se configura y ejecuta una consulta SQL personalizada, en función de los atributos y filtros definidos en la configuración. Se incluyen opciones para:
+     - Paginación de resultados (`offset` y `limit`).
+     - Filtrado dinámico en base a atributos y valores específicos.
 
-# ./lib/conex.json
+2. **Generación de GeoJSON**:
+   - Cada registro resultante de la consulta se convierte en una entidad ("Feature") del archivo GeoJSON, con propiedades (`properties`) y geometría (`geometry`).
+   - La geometría es procesada a partir de datos en formato JSON almacenados en PostgreSQL.
+   - Las propiedades se asignan de acuerdo a mapeos predefinidos, con opciones para concatenación de atributos y asignación condicional de valores.
+
+3. **Gestión de Salida**:
+   - El script permite la creación de archivos GeoJSON particionados según el tamaño o el número de entidades, configurable a través de la variable `tipoPartirClaseEntidad`.
+   - Los logs de procesamiento se guardan en archivos `.log` para facilitar el seguimiento de errores y mapeos realizados.
+
+4. **Control de Errores**:
+   - El script gestiona errores de conexión y ejecución, registrándolos en un archivo log específico. También renombra archivos resultantes en caso de errores en el proceso.
+
+## Requisitos
+
+- Python 3.x
+- Biblioteca `psycopg2` para la conexión a PostgreSQL.
+- Biblioteca `json` para el manejo de datos en formato JSON.
+- Opcionalmente, `gc` para el manejo de memoria en procesos de gran tamaño.
+
+## Configuración
+
+El script requiere un archivo de configuración JSON (`./lib/conex.json`) con la siguiente estructura.
+
+```json
+{
+"NOMBRE_CONEXION": {
+    "ip": "XXX.XXX.XXX.XXX",
+    "puerto": "XXXX",
+    "usuario": "nombre_usuario",
+    "contrasena": "password",
+    "bbdd": "nombre_base_de_datos",
+    "esquema": "nombre_esquema" }
+}
+
+```
 Identificar las fuentes de datos que se utilizan en el archivo .ods de entrada.
 
-# run_generar_sql.py
-Script que genera una base de datos vacía con la estructura del modelo a partir la página web del modelo. Al rodar el script, recorre la web y se genera, cada tabla y campos correspondientes. Se proporciona como alternativa al .ods para transformación de modelos. Puede ser útil a algunos productores que les resulte más sencillo exportar de su modelo de datos al modelo de datos XYZ a través de tabla en lugar del .ods de mapeo.
 
+## Ejecución
 
-# requirements.txt
-Listado de librerías necesarias para el funcionamiento de los scripts tanto del proceso 1 y 2, como 3 y 4.
+Ejecutar el script en el entorno Python configurado:
 
+```bash
+    python run_postGISToGeojson.py
+```
+
+Los archivos GeoJSON generados estarán disponibles en el directorio de salida especificado (path_carpetaSalida).

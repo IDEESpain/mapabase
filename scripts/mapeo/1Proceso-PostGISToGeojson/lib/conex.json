@@ -1,3 +1,9 @@
 {
-"NOMBRE_CONEXION": {"ip": "XXX.XXX.XXX.XXX","puerto": "XXXX","usuario": "nombre_usuario","contrasena": "password","bbdd": "nombre_base_de_datos","esquema": "nombre_esquema" }
+"NOMBRE_CONEXION": {
+    "ip": "XXX.XXX.XXX.XXX",
+    "puerto": "XXXX",
+    "usuario": "nombre_usuario",
+    "contrasena": "password",
+    "bbdd": "nombre_base_de_datos",
+    "esquema": "nombre_esquema" }
 }

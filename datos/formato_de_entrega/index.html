@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Proyecto de Mapa Base XYZ del Sistema Cartográfico Nacional (España): Teselas vectoriales. Comisión Especializada de Normas Geográficas. España">
+    <meta name="description" content="Proyecto de Mapa Ciudadano del Sistema Cartográfico Nacional (España): Teselas vectoriales. Comisión Especializada de Normas Geográficas. España">
     <meta name="author" content="Gonzalo López García @gonzalo_lpgc">
     <link rel="canonical" href="https://cenormasgeograficas.github.io/mapabase/datos/formato_de_entrega/">
-    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <link rel="shortcut icon" href="../../img/logo mapa ciudadano_04transparente.png">
 
     
-    <title>Formato de entrega - Mapa Base SCN</title>
+    <title>Formato de entrega - Mapa Ciudadano</title>
     
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -22,6 +22,7 @@
     <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
     <link href="../../css/base.min.css" rel="stylesheet">
     <link href="../../css/cinder.min.css" rel="stylesheet">
+    <link href="../../css/index.css" rel="stylesheet">
 
     
         
@@ -42,7 +43,7 @@
 
 <body>
 
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-light navbar-fixed-top" role="navigation" style = "background-color: #ffffff;">
     <div class="container">
 
         <!-- Collapsed navigation -->
@@ -59,7 +60,9 @@
             <!-- Main title -->
 
             
-              <a class="navbar-brand" href="../..">Mapa Base SCN</a>
+              <a  href="../..">
+                    <img src="../../img/logo mapa ciudadano_01.png" class="navbar-brand" alt="Logo" style="max-height: 47px; margin-right:40px; padding:1px">
+                </a>
             
         </div>
 
@@ -70,10 +73,12 @@
                 
                 
                     <li >
-                        <a href="../..">Home</a>
+                        <a href="../..">Inicio</a>
                     </li>
                 
-                
+                    <li >
+                        <a href="../../acerca-de">Acerca de</a>
+                    </li>
                 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Elementos <b class="caret"></b></a>
@@ -325,21 +330,21 @@
             <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                            <i class="fas fa-search"></i> Search
+                            <i class="fas fa-search"></i> Buscar
                         </a>
                     </li>
                     <li >
                         <a rel="prev" href="../proveedores_de_datos/">
-                            <i class="fas fa-arrow-left"></i> Previous
+                            <i class="fas fa-arrow-left"></i> Anterior
                         </a>
                     </li>
                     <li class="disabled">
                         <a rel="next" >
-                            Next <i class="fas fa-arrow-right"></i>
+                            Siguiente <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/IDEESpain/mapabase/edit/gh-pages/datos/formato_de_entrega/index.html"><i class="fab fa-github"></i> Edit on GitHub</a>
+                        <a href="https://github.com/IDEESpain/mapabase/edit/gh-pages/datos/formato_de_entrega/index.html"><i class="fab fa-github"></i> Editar en GitHub</a>
                     </li>
             </ul>
         </div>
@@ -375,7 +380,7 @@
 </ul>
 <br>
 <p><b>Recomendaciones para la incorporación de datos al modelo</b></p>
-<p>El modelo de datos del Mapa Base se organiza en áreas temáticas que albergan información de diferentes elementos geográficos relativos a estas.</p>
+<p>El modelo de datos del Mapa Ciudadano se organiza en áreas temáticas que albergan información de diferentes elementos geográficos relativos a estas.</p>
 <p>Dentro de los elementos geográficos, de manera generalizada, se identifica un atributo que suele ser nombre que se emplea para mostrar las etiquetas de estos en el mapa.</p>
 <p>Por tanto, se recomienda ser muy cuidadosos a la hora de informar estos atributos y en la medida de las posibilidades considerar las siguientes pautas:</p>
 <ul>
@@ -386,7 +391,7 @@
         Si el nombre no es significativo (o propio) y/o coincide con la clase en la que se aloja, también es preferible que se reporte como cadena vacía ("")
     </p></li>    
     <li><p>
-        Las clases nombre_* dentro del área temática de los Nombres Geográficos están diseñadas para albergar en ellas información de nombres de elementos que, por alguna razón, no hayan sido incluidos dentro de su área temática concreta. Permitiendo generar para estos objetos etiquetas que se puedan mostrar en el Mapa Base. Por tanto, se debe tener en consideración a la hora de reportar estos objetos que: 
+        Las clases nombre_* dentro del área temática de los Nombres Geográficos están diseñadas para albergar en ellas información de nombres de elementos que, por alguna razón, no hayan sido incluidos dentro de su área temática concreta. Permitiendo generar para estos objetos etiquetas que se puedan mostrar en el Mapa Ciudadano. Por tanto, se debe tener en consideración a la hora de reportar estos objetos que: 
         <ul>
             <li><p>
                 Antes de incluir un objeto en nombres geográficos, es recomendable comprobar si tiene cabida en una categoría más concreta que permita una representación del mismo más ajustada.
@@ -450,7 +455,7 @@
                     <span aria-hidden="true">&times;</span>
                     <span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <h4 class="modal-title" id="searchModalLabel">Buscar</h4>
             </div>
             <div class="modal-body">
                 <p>
@@ -498,7 +503,7 @@
                   </tr>
                   <tr>
                     <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
+                    <td>Buscar</td>
                   </tr>
                 </tbody>
               </table>
