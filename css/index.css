@@ -2,3 +2,35 @@
     color:black; 
     text-decoration: none;
 }
+
+.cont-visor{
+    width: 100%;
+    height:120%;
+    margin-top:-25px;
+    padding:0px;
+    display:flex; 
+    justify-content: center;
+}
+
+.cont-frame-visor{
+    width: 130%; 
+    height: 1000px;
+    margin:0px;
+    padding:0px;
+}
+
+.frame-visor{
+    width: 100%; 
+    height: 100%;
+}
+.logo-mapciu{
+    max-height: 47px; margin-right:40px; padding:1px
+}
+
+.navbar-light{
+    background-color: #ffffff;
+}
+
+.icon-bar{
+    background-color:rgb(161, 161, 161);
+}
