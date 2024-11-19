@@ -1,70 +1,103 @@
+# Procesos de Validación y Transformación de GeoJSON
 
-*run_crearJSONValidacion.py* -  Crea el archivo .json (/lib/comprobacion.json) desde la web (github mapabase) a partir del html (ver Nota). Si hay cambios en el modelo se tiene que actualizar el repositorio en local y volver a lanzar. Si no ha habido cambios en el modelo se puede utilizar el archivo (/lib/comprobacion.json) anterior.
+Esta carpeta incluye scripts para la validación y transformación de datos GeoJSON en el contexto de modelos de datos basados en el repositorio de [mapabase](https://github.com/IDEESpain/mapabase). A continuación, se describen los principales scripts, su funcionalidad y las configuraciones requeridas.
 
-Nota - En el código del script, la variable llamada ProcesoControlCalidad.git_carpeta_mapabase_gh_pages, definida en el archivo config.json, indica la ruta del repositorio mapabase que tengas en el ordenador desde el que se va a lanzar el script. Utiliza la rama en la que esté ese repositorio, no va a utilizar automáticamente gh_pages desde la web. Por ejemplo, si en ese repositorio indicado está la rama desarrollo utilizará desarrollo.
+---
 
-*config.json* - configuración de rutas y archivos
-Para ejecutar el proceso, se necesitará configurar en primer lugar el archivo config.json dónde se van a parametrizar los valores necesarios para la ejecución del proceso. Parámetros obligatorios:
+## **Scripts Principales**
 
+### **1. `run_crearJSONValidacion.py`**
+Genera el archivo `comprobacion.json` en la ruta `/lib/comprobacion.json` utilizando los datos del repositorio `mapabase`.  
 
-    "geojson_folder_path":"./salida_geojsons_andalucia/",  # Carpeta donde se encuentran los geojsons obtenidos en el proceso 1
-    
-    "fgb_folder_path": "./salida_geojsons_andalucia/fgb/",  #Carpeta para los fgb que se crearán
-    
-    "git_carpeta_mapabase_gh_pages" : "./mapabase", #git con el modelo de Mapa Ciudadano, desde el que se crea el json de validación.
-    
-    "JSON_comprobacion" : "./lib/comprobacion.json", #fichero de comprobación/validación creado a partir del gihubt de mapabase.    
-    
-    "fgb_temp_folder" : "./salida_geojsons_andalucia/fgb_temp/" #Carpeta temporal, que se borra al finalizar el proceso.
-    
+#### **Uso:**
+- Se debe ejecutar este script cada vez que haya cambios en el modelo de datos. Para ello:
+  1. Actualiza el repositorio local de `mapabase`.
+  2. Lanza el script.  
+- Si no hay cambios en el modelo, se puede reutilizar el archivo `comprobacion.json` existente.
 
-*run_completeProcess.py* - Ejecuta todos los procesos del proceso 2: validation + transformation. Se recomienda no utilizar este proceso la primera vez y utilizar por separado: run_validationProcess.py y una vez estén los datos sin errores ejecutar run_transformationProcess.py
+#### **Nota Importante:**
+La variable `ProcesoControlCalidad.git_carpeta_mapabase_gh_pages` define la ruta local del repositorio `mapabase`, configurada en `config.json`.  
+- Esta ruta debe apuntar a la rama que contiene el modelo (puede no ser `gh_pages`). Por ejemplo, si la rama activa es `desarrollo`, se utilizará `desarrollo`.
 
-*run_validationProcess.py* -  Pasa la validación del modelo. Recomendado para la primera ejecución para tener más control del proceso, en lugar de run_completeProcess.py.
+---
 
-*run_transformationProcess.py* - Pasa de json a fgb. Recomendado para la primera ejecución para tener más control del proceso, en lugar de run_completeProcess.py.
+### **2. `run_completeProcess.py`**
+Ejecuta todos los procesos del pipeline, combinando validación y transformación.  
 
-*run_2FGB.py* - incluido en transformation process. Se deja aqui por separado
+#### **Recomendación:**
+Para una primera ejecución, se sugiere ejecutar los scripts por separado:  
+1. `run_validationProcess.py` para validar los datos.  
+2. `run_transformationProcess.py` para transformar los datos una vez validados.
 
-*run_2VRT.py* - incluido en transformation process.  Se deja aqui por separado
+---
 
+### **3. `run_validationProcess.py`**
+Valida los datos GeoJSON según el modelo definido en `mapabase`.  
+- Ideal para una primera ejecución, ya que permite mayor control sobre los errores y resultados.
 
-**Fichero log de salida**
+---
 
-El log del proceso de validación se estructura de la siguiente manera:
+### **4. `run_transformationProcess.py`**
+Convierte los archivos GeoJSON validados a formato FGB.  
+- Recomendado tras una validación exitosa.
 
-    
-    1. Cabecera con información general del proceso: fecha de inicio.
-    
-        I. Comprobación de ficheros geojson:
-        
-        II. Geojson existentes en el modelo de datos
-        
-        III. Geojson entregados
-        
-        IV. Geojson entregados que pertenecen al modelo de datos
-        
-        V. Geojson NO entregados del modelo de datos
-        
-        VI. Geojson entregados que NO son del modelo de datos
-        
-    2. Comprobación de atributos en cada geojson:
-    
-        I. Atributos en modelo de datos
-        
-        II. Atributos en Geojson
-        
-        III. Atributos NO encontrados en alguna entidad del Geojson
-        
-        IV. Atributos encontrados del modelo
-        
-        V. Atributos encontrados en alguna entidad que NO son del modelo
-        
-    3. Comprobación de dominio de los atributos:
-    
-        I. Muestra los valores no contemplados en el modelo de datos que existen en un atributo
-        
-    4. Final de fichero con fecha de finalización.
-    
+---
+
+### **5. Scripts Adicionales**
+- **`run_2FGB.py`:** Realiza la transformación a FGB. Parte del proceso de transformación pero también puede ejecutarse de forma independiente.  
+- **`run_2VRT.py`:** Crea archivos VRT. También es parte del proceso de transformación pero puede ejecutarse de forma separada.
+
+---
+
+## **Configuración (`config.json`)**
+
+El archivo `config.json` define las rutas y parámetros necesarios para la ejecución de los scripts. Los campos obligatorios son:
+
+```json
+{
+    "geojson_folder_path": "./salida_geojsons_andalucia/",
+    "fgb_folder_path": "./salida_geojsons_andalucia/fgb/",
+    "git_carpeta_mapabase_gh_pages": "./mapabase",
+    "JSON_comprobacion": "./lib/comprobacion.json",
+    "fgb_temp_folder": "./salida_geojsons_andalucia/fgb_temp/"
+}
+```
+
+### **Descripción de Parámetros:**
+- `geojson_folder_path`: Carpeta que contiene los archivos GeoJSON generados en el proceso anterior.  
+- `fgb_folder_path`: Carpeta de salida para los archivos FGB.  
+- `git_carpeta_mapabase_gh_pages`: Ruta local al repositorio `mapabase`.  
+- `JSON_comprobacion`: Ruta del archivo de comprobación generado.  
+- `fgb_temp_folder`: Carpeta temporal utilizada durante la transformación (se elimina al finalizar).  
+
+---
+
+## **Estructura del Log de Salida**
+
+El log del proceso de validación proporciona un resumen detallado del estado de los datos. Su estructura es la siguiente:
+
+1. **Cabecera:**  
+   - Información general (fecha de inicio).  
+
+2. **Comprobación de Archivos GeoJSON:**  
+   - GeoJSON en el modelo de datos.  
+   - GeoJSON entregados y su correspondencia con el modelo.  
+
+3. **Comprobación de Atributos:**  
+   - Atributos presentes en el modelo y en los GeoJSON.  
+   - Discrepancias entre ambos.  
+
+4. **Validación de Dominios:**  
+   - Valores fuera del dominio esperado.  
+
+5. **Finalización:**  
+   - Fecha y hora de cierre del proceso.  
+
+---
+
+## **Recomendaciones**
+- Asegúrate de mantener actualizadas las dependencias y el repositorio local de `mapabase` antes de ejecutar los scripts.  
+- Valida los datos con `run_validationProcess.py` antes de proceder con la transformación.  
+- Consulta el log de salida para identificar posibles errores o inconsistencias en los datos.
 
 
