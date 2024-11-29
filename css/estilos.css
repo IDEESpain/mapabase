@@ -10,7 +10,10 @@ h1, p, table, th, td, a {
   a:hover {
     text-decoration: underline;
   }
-  
+
+  .thestilos:hover{
+    background-color: #3498db;
+  }
   /* Contenedor Principal */
   .col-md-9[role="main"] {
     padding: 2rem;
