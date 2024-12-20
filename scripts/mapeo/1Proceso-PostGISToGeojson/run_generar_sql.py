@@ -124,7 +124,7 @@ if __name__ == "__main__":
 
                             # print(comentarios)
 
-    archivoSQL =codecs.open("./salida.sql", "w", "utf-8")
+    archivoSQL =codecs.open("./crear_base_de_datos.sql", "w", "utf-8")
     archivoSQL.write(sqlElements)
     archivoSQL.close()
 
