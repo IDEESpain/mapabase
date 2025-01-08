@@ -2,7 +2,12 @@ import json
 import time
 from lib.controlCalidad_GIT import control_calidad_GJSON
 
-with open ("./config.json") as f:
+### Para Windows
+#with open ("scripts\\mapeo\\2Proceso-ValidacionGeojson\\config.json") as f:
+#    var_dict=json.load(f)
+
+### Para Linux	
+with open ("config.json") as f:
     var_dict=json.load(f)
 
 # # # # parámetros del programa
@@ -16,9 +21,15 @@ ProcesoControlCalidad.verbose = True
 # ProcesoControlCalidad.elementosAJSON()
 
 
-# # # # Lanzar proceso
+# # # # Lanzar proceso en Windows
+#start_time = time.time()
+#ProcesoControlCalidad.JSON_comprobacion = 'scripts\\mapeo\\2Proceso-ValidacionGeojson\\lib\\comprobacion.json'
+#ProcesoControlCalidad.procesoControlCalidad()
+
+# # # # Lanzar proceso en Linux
 start_time = time.time()
-ProcesoControlCalidad.JSON_comprobacion = './lib/comprobacion.json'
+ProcesoControlCalidad.JSON_comprobacion = 'lib\comprobacion.json'
 ProcesoControlCalidad.procesoControlCalidad()
 
 print("--- {} min de ejecución ---".format( (time.time() - start_time) /60 ) )
+
