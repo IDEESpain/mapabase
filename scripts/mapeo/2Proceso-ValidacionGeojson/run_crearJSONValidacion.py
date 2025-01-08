@@ -3,6 +3,11 @@ import time
 import json
 from lib.controlCalidad_GIT import control_calidad_GJSON
 
+### Para Windows
+#with open ("scripts\\mapeo\\2Proceso-ValidacionGeojson\\config.json") as f:
+#   var_dict=json.load(f)
+	
+### Para Linux	
 with open ("./config.json") as f:
     var_dict=json.load(f)
 
@@ -40,7 +45,6 @@ ProcesoControlCalidad.elementosAJSON()
 # start_time = time.time()
 # ProcesoControlCalidad.procesoControlCalidad()
 print("--- {} min de ejecución ---".format( (time.time() - start_time) /60 ) )
-
 
 
 

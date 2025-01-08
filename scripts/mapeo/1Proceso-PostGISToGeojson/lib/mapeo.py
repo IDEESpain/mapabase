@@ -155,6 +155,9 @@ class mapeo_PG_GJSON:
         min = ahora.strftime("%M")
         seg = ahora.strftime("%S")
         subNombre = anno+mes+dia+'_'+hora+min+seg
+ ###### Para Windows descomenta la siguiente linea (línea 159) y comenta la línea 161
+ #      archivoLOG = codecs.open(self.path_carpetaSalida+'\\'+subNombre +'_ToGeojson_'+self.proveedor+'.log', "a","utf-8")
+ ###### Para Linux descomenta la siguiente linea (línea 161) y comenta la inmediata anterior (línea 159)
         archivoLOG = codecs.open(self.path_carpetaSalida+'/'+subNombre +'_ToGeojson_'+self.proveedor+'.log', "a","utf-8")
         archivoLOG.write(" ### --- Log del proceso de mapeo y transformación de PG a Geojson --- ### \n")
         archivoLOG.write(" # ----------------------------------------------------------------------- \n") 
@@ -667,5 +670,4 @@ class mapeo_PG_GJSON:
         archivoLOG.write(" # Fin: {}  // tiempo de ejecución total: {} Horas \n".format( ahora.strftime("%m/%d/%Y, %H:%M:%S"), (time.time() - start_time_total)/3600) )
         archivoLOG.close()
         return 0
-
 

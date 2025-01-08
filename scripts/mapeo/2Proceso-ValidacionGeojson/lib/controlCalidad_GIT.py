@@ -12,6 +12,11 @@ class control_calidad_GJSON:
     def __init__(self,path_carpetaEntrada):
         self.path_carpetaEntrada = path_carpetaEntrada
 
+### Para Windows
+#       with open ("C:\\Proyectos\\mapabase-gh-pages\\scripts\\mapeo\\2Proceso-ValidacionGeojson\\config.json") as f:
+#           var_dict=json.load(f)
+
+### Para Linux
         with open ("./config.json") as f:
             var_dict=json.load(f)
 
@@ -46,17 +51,11 @@ class control_calidad_GJSON:
                                         listaDominio = ['*']
                                     print(e,line_n3)
                                     atrNombre = line_n3['td'][0]['code'][0]['_value']
-                                    tipoDato = line_n3['td'][1]['_value']
                                     jsonElementos[e][line_n3['td'][0]['code'][0]['_value']] = listaDominio
-                                    
                                 else:
-                                    value = line_n3['td'][2]['_value']
-                                    
-                                    if tipoDato == "integer":
-                                        value = int(value)
                                     if jsonElementos[e][atrNombre] == ['*']:
                                         jsonElementos[e][atrNombre] = []
-                                    jsonElementos[e][atrNombre].append( value )
+                                    jsonElementos[e][atrNombre].append( line_n3['td'][2]['_value'] )
 
             if jsonElementos[e] == {}:
                 del jsonElementos[e]
@@ -219,7 +218,6 @@ class control_calidad_GJSON:
         archivoLOG.write(" Geojson en el modelo de datos: {} \n".format(totalGJSONModelo)  )
         archivoLOG.write(" Geojson entregados: {} \n".format(totalGeojsonEntregados)  )
         archivoLOG.write(" Geojson entregados del modelo de datos: {} \n".format(totalGJSONEntregadosModelo)  )
-        archivoLOG.write("      {} \n".format( sorted(listaModelosEntregados) ) )
         archivoLOG.write(" Geojson NO entregados del modelo de datos: {} \n".format(len(GJSONNOEntregados))  )
         archivoLOG.write("      {} \n".format( sorted(GJSONNOEntregados) ) )
         archivoLOG.write(" Geojson entregados que NO son del modelo de datos: {} \n".format(totalGJSONEntregadosNoModelo)  )
@@ -290,12 +288,6 @@ class control_calidad_GJSON:
             archivoLOG.write("     {} \n".format(sorted(atributosEntregadosModelo) ) )
             archivoLOG.write(" Atributos encontrados en alguna entidad que NO son del modelo : {} \n".format( len(atributosEntregadosNOModelo) ) )
             archivoLOG.write("     {} \n".format(sorted(atributosEntregadosNOModelo) ) )
-            diferencia_atributos = len(atributosModelo) - len(atributosEntregados)
-            archivoLOG.write(" Diferencia de atributos: {} ".format( diferencia_atributos) )
-            if diferencia_atributos != 0:
-                archivoLOG.write(" ERROR. Número de atributos diferente al esperado")
-
-
             archivoLOG.write(" \n")
         archivoLOG.close()
 
@@ -328,40 +320,55 @@ class control_calidad_GJSON:
             archivoLOG.write(" ------   {}   -------\n".format(geojsonEntregaModelo_nombre))
             archivoLOG.write(" \n")
 
-            valoresNoDominio = {}
+            valoresNoDominio = []
+            atributosConValoresNoDominio = []
             for entidad in jsGJSON['features']:
-                for atr, valor in entidad['properties'].items():
-                    # Si el atributo no está en el modelo, lo ignoramos.
-                    if atr not in jsonC[geojsonEntregadoModelo]:
+                for atr in entidad['properties']:
+                    if not atr in jsonC[geojsonEntregadoModelo]:
                         continue
-
-                    # Si el valor no está dentro de los valores permitidos y no es un comodín ('*'), lo registramos.
-                    if valor not in jsonC[geojsonEntregadoModelo][atr] and jsonC[geojsonEntregadoModelo][atr] != ['*']:
-                        if atr not in valoresNoDominio:
-                            valoresNoDominio[atr] = []
-                        if valor not in valoresNoDominio[atr]:
-                            valoresNoDominio[atr].append(valor)
-
-            # Liberar recursos de memoria
+                    if not entidad['properties'][atr] in jsonC[geojsonEntregadoModelo][atr]:
+                        if not entidad['properties'][atr] in valoresNoDominio:
+                            if jsonC[geojsonEntregadoModelo][atr] == ['*']:
+                                continue
+                            valoresNoDominio.append(entidad['properties'][atr])
+                            atributosConValoresNoDominio.append(atr)
+            
             try:
                 del jsGJSON
                 del jsonGJSON
             except:
                 pass
-            gc.collect()
+            gc.collect() 
 
-            # Escritura de las discrepancias en el archivo de log
-            for atr, valores in valoresNoDominio.items():
-                archivoLOG.write(f" Atributo donde existen discrepancias : {atr} \n")
-                archivoLOG.write(f"     {sorted(valores)} \n")
-                archivoLOG.write(" \n")
-
-            # Liberar recursos adicionales de memoria
-            try:
-                del valoresNoDominio
-            except:
-                pass
-            gc.collect()
+            atrNuevo = ''
+            listaValores= []
+            for i_n, n in enumerate(valoresNoDominio):
+                if i_n == 0:
+                    atrNuevo = atributosConValoresNoDominio[i_n]
+                if i_n +1 == len(valoresNoDominio):
+                    listaValores.append(str(valoresNoDominio[i_n]))
+                    archivoLOG.write(" Atributo donde existen discrepancias : {} \n".format( atrNuevo ) )
+                    archivoLOG.write("     {} \n".format(sorted(listaValores) ) )
+                    archivoLOG.write(" \n")
+                if atrNuevo != atributosConValoresNoDominio[i_n] and i_n > 0:
+                    archivoLOG.write(" Atributo donde existen discrepancias : {} \n".format( atrNuevo ) )
+                    archivoLOG.write("     {} \n".format(sorted(listaValores) ) )
+                    atrNuevo = atributosConValoresNoDominio[i_n]
+                    listaValores= []
+                else:
+                    listaValores.append(str(valoresNoDominio[i_n]))
+        ahora = datetime.now()
+        archivoLOG.write(" # Fin: {}  // tiempo de ejecución total: {} min \n".format( ahora.strftime("%m/%d/%Y, %H:%M:%S"), (time.time() - start_time_total)/60) )      
+        archivoLOG.close() 
+        
+        try:
+            del jsGJSON
+            del valoresNoDominio
+            del listaValores
+            del atributosConValoresNoDominio
+        except:
+            pass
+        gc.collect()
 
         return 0
         
