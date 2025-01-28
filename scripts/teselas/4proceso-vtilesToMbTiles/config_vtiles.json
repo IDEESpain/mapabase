@@ -306,11 +306,16 @@
             "layers_with_labels": [],
             "filter": {
                 "linea_limite_lin": [
-                    "all",
+                    "any",
                     [
                         "==",
                         "clase",
                         "limite_autonomico"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "limite_nacional"
                     ]
                 ],
                 "nombre_division_administrativa_pto": [
@@ -427,17 +432,7 @@
                     [
                         "==",
                         "clase",
-                        "ciudad_autonoma"
-                    ],
-                    [
-                        "==",
-                        "clase",
-                        "comunidad_autonoma"
-                    ],
-                    [
-                        "==",
-                        "clase",
-                        "nacion"
+                        "limite_nacional"
                     ]
                 ],
 				"nombre_division_administrativa_pto": [
@@ -593,6 +588,11 @@
                         "==",
                         "clase",
                         "limite_provincial"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "limite_nacional"
                     ]
                 ],
                 "provincia_pol": [
@@ -870,6 +870,11 @@
                         "==",
                         "clase",
                         "limite_provincial"
+                    ],
+                    [
+                        "==",
+                        "clase",
+                        "limite_nacional"
                     ]
                 ],
                 "espacio_natural_protegido_pol": [
