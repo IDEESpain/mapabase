@@ -617,7 +617,15 @@
                     ]
                 ],
                 "hidrografia_lin": [
-                    "all"
+                    "all",
+                    [
+                        "any",
+                        ["==", "clase", "acequia"],
+                        ["==", "clase", "canal"],
+                        ["==", "clase", "curso_natural"],
+                        ["==", "clase", "tuberia"]
+                    ],
+                    ["==", "orden", "primero"]
                 ],
                 "nombre_division_administrativa_pto": [
                     "any",
@@ -878,7 +886,29 @@
                     ]
                 ],
                 "hidrografia_lin": [
-                    "all"
+                    "any",
+                    [
+                        "all",
+                        [
+                            "any",
+                            ["==", "clase", "acequia"],
+                            ["==", "clase", "canal"],
+                            ["==", "clase", "curso_natural"],
+                            ["==", "clase", "tuberia"]
+                        ],
+                        ["==", "orden", "primero"]
+                    ],
+                    [
+                        "all",
+                        [
+                            "any",
+                            ["==", "clase", "acequia"],
+                            ["==", "clase", "canal"],
+                            ["==", "clase", "curso_natural"],
+                            ["==", "clase", "tuberia"]
+                        ],
+                        ["==", "orden", "segundo"]
+                    ]
                 ],
                 "lamina_agua_pol": [
                     "any",
@@ -1181,7 +1211,40 @@
                     ]
                 ],
                 "hidrografia_lin": [
-                    "all"
+                    "any",
+                    [
+                        "all",
+                        [
+                            "any",
+                            ["==", "clase", "acequia"],
+                            ["==", "clase", "canal"],
+                            ["==", "clase", "curso_natural"],
+                            ["==", "clase", "tuberia"]
+                        ],
+                        ["==", "orden", "primero"]
+                    ],
+                    [
+                        "all",
+                        [
+                            "any",
+                            ["==", "clase", "acequia"],
+                            ["==", "clase", "canal"],
+                            ["==", "clase", "curso_natural"],
+                            ["==", "clase", "tuberia"]
+                        ],
+                        ["==", "orden", "segundo"]
+                    ],
+                    [
+                        "all",
+                        [
+                            "any",
+                            ["==", "clase", "acequia"],
+                            ["==", "clase", "canal"],
+                            ["==", "clase", "curso_natural"],
+                            ["==", "clase", "tuberia"]
+                        ],
+                        ["==", "orden", "tercero_cuarto"]
+                    ]
                 ],
                 "lamina_agua_pol": [
                     "any",
