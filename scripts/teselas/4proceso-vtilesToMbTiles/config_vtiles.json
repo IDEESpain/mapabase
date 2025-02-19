@@ -691,10 +691,6 @@
             "process": "yes",
             "layers": [
                 {
-                    "file": "altimetria_lin.gz",
-                    "name": "altimetria_lin"
-                },
-                {
                     "file": "cubierta_vegetal_bosque_pol.gz",
                     "name": "cubierta_vegetal_bosque_pol"
                 },
@@ -814,51 +810,6 @@
             "layers_no_coalesce": [],
             "layers_with_labels": [],
             "filter": {
-                "altimetria_lin": [
-                    "all",
-                    [
-                        "in",
-                        "altitud",
-                        100,
-                        200,
-                        300,
-                        400,
-                        500,
-                        600,
-                        700,
-                        800,
-                        900,
-                        1000,
-                        1100,
-                        1200,
-                        1300,
-                        1400,
-                        1500,
-                        1600,
-                        1700,
-                        1800,
-                        1900,
-                        2000,
-                        2100,
-                        2200,
-                        2300,
-						2400,
-						2500,
-						2600,
-						2700,
-						2800,
-						2900,
-						3000,
-						3100,
-						3200,
-						3300,
-						3400,
-						3500,
-						3600,
-						3700,
-						3800
-                    ]
-                ],
                 "linea_limite_lin": [
                     "any",
                     [
@@ -997,10 +948,6 @@
             "process": "yes",
             "layers": [
                 {
-                    "file": "altimetria_lin.gz",
-                    "name": "altimetria_lin"
-                },
-                {
                     "file": "cubierta_vegetal_bosque_pol.gz",
                     "name": "cubierta_vegetal_bosque_pol"
                 },
@@ -1132,51 +1079,6 @@
             "layers_no_coalesce": [],
             "layers_with_labels": [],
             "filter": {
-                "altimetria_lin": [
-                    "all",
-                    [
-                        "in",
-                        "altitud",
-                        100,
-                        200,
-                        300,
-                        400,
-                        500,
-                        600,
-                        700,
-                        800,
-                        900,
-                        1000,
-                        1100,
-                        1200,
-                        1300,
-                        1400,
-                        1500,
-                        1600,
-                        1700,
-                        1800,
-                        1900,
-                        2000,
-                        2100,
-                        2200,
-                        2300,
-						2400,
-						2500,
-						2600,
-						2700,
-						2800,
-						2900,
-						3000,
-						3100,
-						3200,
-						3300,
-						3400,
-						3500,
-						3600,
-						3700,
-						3800
-                    ]
-                ],
                 "espacio_natural_protegido_pol": [
                     "any",
                     [
@@ -1343,10 +1245,6 @@
             "process": "yes",
             "layers": [
                 {
-                    "file": "altimetria_lin.gz",
-                    "name": "altimetria_lin"
-                },
-                {
                     "file": "cubierta_vegetal_bosque_pol.gz",
                     "name": "cubierta_vegetal_bosque_pol"
                 },
@@ -1494,51 +1392,6 @@
             "layers_no_coalesce": [],
             "layers_with_labels": [],
             "filter": {
-                "altimetria_lin": [
-                    "all",
-                    [
-                        "in",
-                        "altitud",
-                        100,
-                        200,
-                        300,
-                        400,
-                        500,
-                        600,
-                        700,
-                        800,
-                        900,
-                        1000,
-                        1100,
-                        1200,
-                        1300,
-                        1400,
-                        1500,
-                        1600,
-                        1700,
-                        1800,
-                        1900,
-                        2000,
-                        2100,
-                        2200,
-                        2300,
-						2400,
-						2500,
-						2600,
-						2700,
-						2800,
-						2900,
-						3000,
-						3100,
-						3200,
-						3300,
-						3400,
-						3500,
-						3600,
-						3700,
-						3800
-                    ]
-                ],
                 "espacio_natural_protegido_pol": [
                     "any",
                     [
