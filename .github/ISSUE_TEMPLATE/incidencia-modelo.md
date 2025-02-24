@@ -3,7 +3,7 @@ name: Incidencia Modelo
 about: Sugerencias y propuestas de cambios para el modelo.
 title: "[MODELO]"
 labels: modelo
-assignees: ''
+assignees: 'CeciliaPH'
 
 ---
 
