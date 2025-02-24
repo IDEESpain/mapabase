@@ -3,7 +3,7 @@ name: Incidencia Estilo
 about: Sugerencias y propuestas de cambios para el estilo.
 title: "[ESTILO]"
 labels: estilo
-assignees: ''
+assignees: 'CeciliaPH'
 
 ---
 
