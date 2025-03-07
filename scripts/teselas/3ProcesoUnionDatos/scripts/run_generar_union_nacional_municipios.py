@@ -3,63 +3,61 @@ import os
 from joblib import Parallel, delayed
 from funciones_generales import *
 import json
+import pathlib
 
-f = open ("./config.json")
+# Abrimos y leemos la configuración
+with open("./config.json") as f:
+    var_dict = json.load(f)
 
-var_dict=json.load(f)
+lib_path = var_dict["lib_path"]
 
-lib_path=var_dict["lib_path"]
+# Archivo de la matriz de elementos
+elementos_file = var_dict["elementos_file"]
 
-#archivo de la matriz de elementos
-elementos_file=var_dict["elementos_file"]
+# Archivo de listado de municipios
+municipios_file = var_dict["municipios_file"]
 
-#archivo de listado de municipios
-municipios_file=var_dict["municipios_file"]
+niveles = ["local", "regional", "nacional"]
 
-
-niveles=["local",'regional','nacional']
-
-matriz_niveles= pd.read_excel(f"{lib_path}{elementos_file}",engine='openpyxl')
-
+matriz_niveles = pd.read_excel(f"{lib_path}{elementos_file}", engine='openpyxl')
 lista_clases = matriz_niveles["elementos"]
-
 lista_clases_short = matriz_niveles["elementos_short"]
 
-municipios = pd.read_excel(f"{lib_path}{municipios_file}",engine='openpyxl')
+municipios = pd.read_excel(f"{lib_path}{municipios_file}", engine='openpyxl')
 
+# Creamos la carpeta de salida si no existe
 pathlib.Path(f"{var_dict['path_generados_nacional_municipios']}00").mkdir(parents=True, exist_ok=True)
 
 def generarClaseNacional(clase):
-    lista_comunidades_presentes=[]
-    lista_comunidades_no_presentes=[]
+    lista_comunidades_presentes = []
+    lista_comunidades_no_presentes = []
     
     print(f"Procesando lista de municipios que contienen el elemento {clase}")
-    for index,municipio in municipios.iterrows():
-
+    for index, municipio in municipios.iterrows():
         cod_com = str(municipio["codigo_ine_mun"]).zfill(5)
-        ruta_vrt_mun = check_nivel("local_generados",cod_com,clase)
-
+        ruta_vrt_mun = check_nivel("local_generados", cod_com, clase)
         if ruta_vrt_mun:
-                lista_comunidades_presentes.append((cod_com,ruta_vrt_mun[0]))
+            lista_comunidades_presentes.append((cod_com, ruta_vrt_mun[0]))
         else:
-                lista_comunidades_no_presentes.append((cod_com,None))
+            lista_comunidades_no_presentes.append((cod_com, None))
         
-    #print(lista_comunidades_presentes)
     if lista_comunidades_presentes:
         print(f"Generando vrt nacional para el elemento {clase}")
-        vrt=vrt_nacional(clase,lista_comunidades_presentes, False)
+        vrt = vrt_nacional(clase, lista_comunidades_presentes, False)
 
-        #escribimos el vrt de recorte
-        write_vrt(vrt,"00",clase,is_recorte=True,carpeta="path_generados_nacional_municipios")
+        # Escribimos el vrt de recorte
+        write_vrt(vrt, "00", clase, is_recorte=True, carpeta="path_generados_nacional_municipios")
 
-        cmd=f"ogr2ogr -skipfailures -f \"FlatGeobuf\" -nln {clase} -dialect sqlite -sql \"select ST_MakeValid(geometry),* from {clase}\" {var_dict['path_generados_nacional_municipios']}00/{clase}.fgb {var_dict['path_generados_nacional_municipios']}00/{clase}_recorte.vrt 2>> ../logs/union_municipios_error.log"
-
-
-        #Ejecutamos el comando ogr2ogr para generar el geojson
+        cmd = (
+            f"ogr2ogr -skipfailures -f \"FlatGeobuf\" -nln {clase} -dialect sqlite "
+            f"-sql \"select ST_MakeValid(geometry),* from {clase}\" "
+            f"{var_dict['path_generados_nacional_municipios']}00/{clase}.fgb "
+            f"{var_dict['path_generados_nacional_municipios']}00/{clase}_recorte.vrt 2>> ../logs/union_municipios_error.log"
+        )
         os.system(cmd)
 
-        #escribimos el vrt que hace referencia al geojson municipal
-        vrt_text=f"""
+        # Escribimos el vrt que hace referencia al geojson municipal
+        vrt_text = f"""
             <OGRVRTDataSource>
                 <OGRVRTUnionLayer name="{clase}">
                     <OGRVRTLayer name="{clase}">
@@ -68,13 +66,23 @@ def generarClaseNacional(clase):
                 </OGRVRTUnionLayer>
             </OGRVRTDataSource>
             """
-        
-        write_vrt(vrt_text,"00",clase,carpeta="path_generados_nacional_municipios")
+        write_vrt(vrt_text, "00", clase, carpeta="path_generados_nacional_municipios")
         print(f"Elemento {clase} nacional generado")
     else:
-        pass
-Parallel(n_jobs=var_dict["num_threads"], require='sharedmem')(delayed(generarClaseNacional)(clase) for clase in lista_clases)
+        print(f"No se encontraron municipios con el elemento {clase}")
+
+
+update_layers = var_dict.get("capas_actualizar", [])
+if update_layers:
+    layers_to_update = [clase for clase in lista_clases if clase in update_layers]
+    if not layers_to_update:
+        print("No hay coincidencias entre las capas a actualizar y las existentes.")
+else:
+    layers_to_update = lista_clases
+
+Parallel(n_jobs=var_dict["num_threads"], require='sharedmem')(
+    delayed(generarClaseNacional)(clase) for clase in layers_to_update
+)
 
 print("Proceso de unión nacional de municipios terminado")
-
-sheets={}
+sheets = {}
