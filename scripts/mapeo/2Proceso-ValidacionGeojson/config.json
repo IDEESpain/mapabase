@@ -4,5 +4,7 @@
     "git_carpeta_mapabase_gh_pages" : "./mapabase",
     "JSON_comprobacion" : "./lib/comprobacion.json",
     "JSON_config_Tippecanoe" : "./lib/config_vtiles.json",
-    "fgb_temp_folder" : "./salida_geojsons_andalucia/fgb_temp/"
+    "fgb_temp_folder" : "./salida_geojsons_andalucia/fgb_temp/",
+    "geometrias_corregir": "ruta/a/la/carpeta",
+    "json_corregir_geometrias": "./corregir_geometrias.log"
 }

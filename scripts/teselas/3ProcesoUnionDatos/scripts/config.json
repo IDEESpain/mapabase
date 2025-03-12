@@ -24,5 +24,6 @@
     "comunidades_pol_file":"../lib/voronoi_comunidades.fgb",
     "regenerar_comunidades_pol_file": true,
     "codigo_comunidades":[],
+    "capas_actualizar": ["aparcamiento_pol"],
     "config_proceso_4":"../../4proceso-vtilesToMbTiles/config.json"
 }
