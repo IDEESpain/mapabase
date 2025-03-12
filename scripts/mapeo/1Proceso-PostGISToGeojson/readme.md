@@ -20,13 +20,13 @@ Mapeo de los datos de entrada al proceso de generación de los geojson de tesela
 
 *Conexión*. Identificador de la conexión de base de datos. Las cadenas de conexión están en la hoja BBDD a modo de referencia del nombre de la conexión. El proceso utiliza el archivo ./lib/conex.json donde estarán las contraseñas y datos de conexión.
 
-*TablaOrigen*. Tabla dentro de la BD desde la que se obtienen los datos.
+*TablaOrigen*. Tabla dentro de la BD desde la que se obtienen los datos. Este campo es sensible a las mayúsculas.
 
 *Filtro*. Claúsula where del SQL para obtener los datos concretos de ese elemento geográfico. Si está vacío se incluye todos los elementos de la tabla. Para mapeados valor a valor se pueden utilizar los campos ValorOrigen y ValorDestino sin tener que hacer filtros por cada valor.
 
 *ClaseDeEntidad*. Clase de entidad de destino en el modelo de datos de Mapa Ciudadano
 
-*AtributoOrigen*. Campo de la tabla origen con el valor para el atributo de destino.
+*AtributoOrigen*. Campo de la tabla origen con el valor para el atributo de destino. Este campo es sensible a las mayúsculas.
 
 *ValorOrigen*. Valores del atributo origen.
 
