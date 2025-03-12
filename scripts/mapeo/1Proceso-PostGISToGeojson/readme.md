@@ -2,6 +2,13 @@
 
 Este script está diseñado para generar archivos GeoJSON a partir de datos almacenados en una base de datos PostgreSQL. Permite realizar consultas SQL y transformar los resultados en un formato geoespacial comúnmente utilizado, cumpliendo con las especificaciones del formato GeoJSON.
 
+
+## Ejecución en Windows
+
+Si deseas ejecutar los procesos en Windows, sigue la guía proporcionada en el siguiente enlace:  
+[Guía de lanzamiento en Windows](https://github.com/IDEESpain/mapabase/tree/gh-pages/scripts/mapeo/1Proceso-PostGISToGeojson/MapaCiudadano_Documentacion_Lanzamiento_en_Windows.pdf)
+
+
 ## Datos de entrada proceso .ods Proveedores de datos
 
 Los datos de entrada al proceso se indican en el fichero de entrada: CNIG_ToGeojson.ods
