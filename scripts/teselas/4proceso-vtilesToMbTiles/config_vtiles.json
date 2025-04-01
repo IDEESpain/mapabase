@@ -11,7 +11,7 @@
         "contact_email": "aurelio.aragon@cnig.es"
     },
     "setup": {
-        "compress_geojson": "yes",
+        "compress_geojson": "no",
         "tiling_layers": "yes",
         "to_folder": "yes",
         "move_to_final_folder": "yes",
@@ -22,10 +22,6 @@
             "level": 0,
             "process": "yes",
             "layers": [
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
                 {
                     "file": "contexto_territorios_pol.gz",
                     "name": "contexto_territorios_pol"
@@ -43,10 +39,7 @@
             "level": 1,
             "process": "yes",
             "layers": [
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+
                 {
                     "file": "contexto_territorios_pol.gz",
                     "name": "contexto_territorios_pol"
@@ -64,10 +57,7 @@
             "level": 2,
             "process": "yes",
             "layers": [
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+
                 {
                     "file": "contexto_territorios_pol.gz",
                     "name": "contexto_territorios_pol"
@@ -89,10 +79,7 @@
                     "file": "nombre_division_administrativa_pto.gz",
                     "name": "nombre_division_administrativa_pto"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "contexto_carreteras_lin.gz",
                     "name": "contexto_carreteras_lin"
@@ -163,10 +150,7 @@
                     "file": "nombre_division_administrativa_pto.gz",
                     "name": "nombre_division_administrativa_pto"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "contexto_carreteras_lin.gz",
                     "name": "contexto_carreteras_lin"
@@ -214,11 +198,23 @@
                 {
                     "file": "contexto_territorios_pol.gz",
                     "name": "contexto_territorios_pol"
+                },
+                {
+                    "file": "nombre_toponimo_lin.gz",
+                    "name": "nombre_toponimo_lin"
                 }
             ],
             "layers_no_coalesce": [],
             "layers_with_labels": [],
             "filter": {
+                "nombre_toponimo_lin": [
+                    "all",
+                    [
+                        "==",
+                        "clase",
+                        "sierra"
+                    ]
+                ],
                 "nombre_division_administrativa_pto": [
                     "all",
                     [
@@ -231,7 +227,7 @@
         },
         {
             "level": 5,
-            "process": "yes",
+            "process": "no",
             "layers": [
 				{
                     "file": "cubierta_vegetal_bosque_pol.gz",
@@ -246,24 +242,12 @@
                     "name": "linea_limite_lin"
                 },
                 {
+                    "file": "nombre_toponimo_lin.gz",
+                    "name": "nombre_toponimo_lin"
+                },
+                {
                     "file": "nombre_division_administrativa_pto.gz",
                     "name": "nombre_division_administrativa_pto"
-                },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
-                {
-                    "file": "contexto_carreteras_lin.gz",
-                    "name": "contexto_carreteras_lin"
-                },
-                {
-                    "file": "contexto_ferrocarril_lin.gz",
-                    "name": "contexto_ferrocarril_lin"
-                },
-                {
-                    "file": "contexto_hidrografia_lin.gz",
-                    "name": "contexto_hidrografia_lin"
                 },
                 {
                     "file": "contexto_lamina_agua_pol.gz",
@@ -272,18 +256,6 @@
                 {
                     "file": "contexto_nombre_hidrografia_lin.gz",
                     "name": "contexto_nombre_hidrografia_lin"
-                },
-                {
-                    "file": "contexto_nombre_hidrografia_pol.gz",
-                    "name": "contexto_nombre_hidrografia_pol"
-                },
-                {
-                    "file": "contexto_nombre_orografia_lin.gz",
-                    "name": "contexto_nombre_orografia_lin"
-                },
-                {
-                    "file": "contexto_nombre_orografia_pol.gz",
-                    "name": "contexto_nombre_orografia_pol"
                 },
                 {
                     "file": "contexto_nombre_orografia_pto.gz",
@@ -305,6 +277,22 @@
             "layers_no_coalesce": [],
             "layers_with_labels": [],
             "filter": {
+                "contexto_territorios_pol": [
+                    "all",
+                    [
+                        "==",
+                        "esp",
+                        0
+                    ]
+                ],
+                "nombre_toponimo_lin": [
+                    "all",
+                    [
+                        "==",
+                        "clase",
+                        "sierra"
+                    ]
+                ],
                 "linea_limite_lin": [
                     "any",
                     [
@@ -359,8 +347,8 @@
                     "name": "nombre_division_administrativa_pto"
                 },
                 {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
+                    "file": "nombre_toponimo_lin.gz",
+                    "name": "nombre_toponimo_lin"
                 },
                 {
                     "file": "autopista_lin.gz",
@@ -370,17 +358,13 @@
                     "file": "autovia_lin.gz",
                     "name": "autovia_lin"
                 },
+				{
+                    "file": "carretera_general_lin.gz",
+                    "name": "carretera_general_lin"
+                },
                 {
                     "file": "contexto_carreteras_lin.gz",
                     "name": "contexto_carreteras_lin"
-                },
-                {
-                    "file": "contexto_ferrocarril_lin.gz",
-                    "name": "contexto_ferrocarril_lin"
-                },
-                {
-                    "file": "contexto_hidrografia_lin.gz",
-                    "name": "contexto_hidrografia_lin"
                 },
                 {
                     "file": "contexto_lamina_agua_pol.gz",
@@ -393,10 +377,6 @@
                 {
                     "file": "contexto_nombre_hidrografia_pol.gz",
                     "name": "contexto_nombre_hidrografia_pol"
-                },
-                {
-                    "file": "contexto_nombre_orografia_lin.gz",
-                    "name": "contexto_nombre_orografia_lin"
                 },
                 {
                     "file": "contexto_nombre_orografia_pol.gz",
@@ -422,6 +402,22 @@
             "layers_no_coalesce": [],
             "layers_with_labels": [],
             "filter": {
+                "contexto_carreteras_lin": [
+                    "all",
+                    [
+                        "==",
+                        "esp",
+                        0
+                    ]
+                ],
+                "nombre_toponimo_lin": [
+                    "all",
+                    [
+                        "==",
+                        "clase",
+                        "sierra"
+                    ]
+                ],
                 "linea_limite_lin": [
                     "any",
                     [
@@ -505,10 +501,7 @@
                     "file": "nombre_toponimo_lin.gz",
                     "name": "nombre_toponimo_lin"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "autopista_lin.gz",
                     "name": "autopista_lin"
@@ -577,6 +570,38 @@
             "layers_no_coalesce": [],
             "layers_with_labels": [],
             "filter": {
+                "contexto_carreteras_lin": [
+                    "all",
+                    [
+                        "==",
+                        "esp",
+                        0
+                    ]
+                ],
+                "contexto_ferrocarril_lin": [
+                    "all",
+                    [
+                        "==",
+                        "esp",
+                        0
+                    ]
+                ],
+                "contexto_hidrografia_lin": [
+                    "all",
+                    [
+                        "==",
+                        "esp",
+                        0
+                    ]
+                ],
+                "contexto_nombre_orografia_lin": [
+                    "all",
+                    [
+                        "==",
+                        "esp",
+                        0
+                    ]
+                ],
                 "linea_limite_lin": [
                     "any",
                     [
@@ -594,6 +619,7 @@
                         "clase",
                         "limite_nacional"
                     ]
+                    
                 ],
                 "provincia_pol": [
                     "all",
@@ -734,10 +760,7 @@
                     "file": "nombre_toponimo_lin.gz",
                     "name": "nombre_toponimo_lin"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "autopista_lin.gz",
                     "name": "autopista_lin"
@@ -999,10 +1022,7 @@
                     "file": "nombre_toponimo_lin.gz",
                     "name": "nombre_toponimo_lin"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "autopista_lin.gz",
                     "name": "autopista_lin"
@@ -1300,10 +1320,7 @@
                     "file": "nombre_toponimo_lin.gz",
                     "name": "nombre_toponimo_lin"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "aerodromo_pto.gz",
                     "name": "aerodromo_pto"
@@ -1545,10 +1562,7 @@
                     "file": "nombre_toponimo_lin.gz",
                     "name": "nombre_toponimo_lin"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "aerodromo_pto.gz",
                     "name": "aerodromo_pto"
@@ -1785,10 +1799,7 @@
                     "file": "altimetria_lin.gz",
                     "name": "altimetria_lin"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "zona_industrial_pol.gz",
                     "name": "zona_industrial_pol"
@@ -2041,7 +2052,7 @@
         },
         {
             "level": 13,
-            "process": "yes",
+            "process": "no",
             "layers": [
                 {
                     "file": "cubierta_vegetal_pol.gz",
@@ -2119,10 +2130,7 @@
                     "file": "altimetria_lin.gz",
                     "name": "altimetria_lin"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "zona_dotacional_pol.gz",
                     "name": "zona_dotacional_pol"
@@ -2275,95 +2283,12 @@
                         "clase",
                         "marisma"
                     ]
-                ],
-                "altimetria_lin": [
-                    "all",
-                    [
-                    "in",
-                    "altitud",
-                        50,						
-                        100,
-                        150,
-                        200,
-                        250,
-                        300,
-                        350,
-                        400,
-                        450,
-                        500,
-                        550,
-                        600,
-                        650,
-                        700,
-                        750,
-                        800,
-                        850,
-                        900,
-                        950,
-                        1000,
-                        1050,
-                        1100,
-                        1150,
-                        1200,
-                        1250,
-                        1300,
-                        1350,
-                        1400,
-                        1450,
-                        1500,
-                        1550,
-                        1600,
-                        1650,
-                        1700,
-                        1750,
-                        1800,
-                        1850,
-                        1900,
-                        1950,
-                        2000,
-                        2050,
-                        2100,
-                        2150,
-                        2200,
-                        2250,
-                        2300,
-						2350,
-						2400,
-						2450,
-						2500,
-						2550,
-						2600,
-						2650,
-						2700,
-						2750,
-						2800,
-						2850,
-						2900,
-						2950,
-						3000,
-						3050,
-						3100,
-						3150,
-						3200,
-						3250,
-						3300,
-						3350,
-						3400,
-						3450,
-						3500,
-						3550,
-						3600,
-						3650,
-						3700,
-						3750,
-						3800
-                    ]
                 ]
             }
         },
         {
             "level": 14,
-            "process": "yes",
+            "process": "no",
             "layers": [
                 {
                     "file": "cubierta_vegetal_pol.gz",
@@ -2441,10 +2366,7 @@
                     "file": "altimetria_lin.gz",
                     "name": "altimetria_lin"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "conduccion_lin.gz",
                     "name": "conduccion_lin"
@@ -2675,7 +2597,7 @@
         },
         {
             "level": 15,
-            "process": "yes",
+            "process": "no",
             "layers": [
                 {
                     "file": "cubierta_vegetal_pol.gz",
@@ -2761,10 +2683,7 @@
                     "file": "altimetria_lin.gz",
                     "name": "altimetria_lin"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "conduccion_lin.gz",
                     "name": "conduccion_lin"
@@ -2960,7 +2879,7 @@
         },
         {
             "level": 16,
-            "process": "yes",
+            "process": "no",
             "layers": [
                 {
                     "file": "cubierta_vegetal_pol.gz",
@@ -3042,10 +2961,7 @@
                     "file": "altimetria_lin.gz",
                     "name": "altimetria_lin"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "conduccion_lin.gz",
                     "name": "conduccion_lin"
@@ -3250,7 +3166,7 @@
         },
         {
             "level": 17,
-            "process": "yes",
+            "process": "no",
             "layers": [
                 {
                     "file": "cubierta_vegetal_pol.gz",
@@ -3336,10 +3252,7 @@
                     "file": "altimetria_pto.gz",
                     "name": "altimetria_pto"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "conduccion_lin.gz",
                     "name": "conduccion_lin"
@@ -3634,10 +3547,7 @@
                     "file": "altimetria_pto.gz",
                     "name": "altimetria_pto"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "conduccion_lin.gz",
                     "name": "conduccion_lin"
@@ -3928,10 +3838,7 @@
                     "file": "altimetria_pto.gz",
                     "name": "altimetria_pto"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "conduccion_lin.gz",
                     "name": "conduccion_lin"
@@ -4222,10 +4129,7 @@
                     "file": "altimetria_pto.gz",
                     "name": "altimetria_pto"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "conduccion_lin.gz",
                     "name": "conduccion_lin"
@@ -4516,10 +4420,7 @@
                     "file": "altimetria_pto.gz",
                     "name": "altimetria_pto"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "conduccion_lin.gz",
                     "name": "conduccion_lin"
@@ -4810,10 +4711,7 @@
                     "file": "altimetria_pto.gz",
                     "name": "altimetria_pto"
                 },
-                {
-                    "file": "tierra_firme_pol.gz",
-                    "name": "tierra_firme_pol"
-                },
+                
                 {
                     "file": "conduccion_lin.gz",
                     "name": "conduccion_lin"
