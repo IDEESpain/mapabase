@@ -1861,6 +1861,10 @@
                     "name": "via_servicio_lin"
                 },
                 {
+                    "file": "zona_verde_pol.gz",
+                    "name": "zona_verde_pol"
+                },
+                {
                     "file": "zona_protegida_pto.gz",
                     "name": "zona_protegida_pto"
                 },
