@@ -1,6 +1,7 @@
 import json
 import time
 from lib.controlCalidad_GIT import control_calidad_GJSON
+from lib.fusionar_vrt import fusionar_vrt
 
 ### Para Windows
 #with open ("scripts\\mapeo\\2Proceso-ValidacionGeojson\\config.json") as f:
@@ -28,6 +29,11 @@ ProcesoControlCalidad.verbose = True
 
 # # # # Lanzar proceso en Linux
 start_time = time.time()
+#transformar los n geojson en un vrt
+ProcesoFusion = fusionar_vrt(path_carpetaSalidaGJSON)
+ProcesoFusion.gjson2VRT()
+
+
 ProcesoControlCalidad.JSON_comprobacion = 'lib\comprobacion.json'
 ProcesoControlCalidad.procesoControlCalidad()
 
