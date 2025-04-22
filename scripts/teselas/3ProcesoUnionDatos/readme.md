@@ -93,6 +93,8 @@ Para ejecutar el proceso, se necesitará configurar en primer lugar el archivo c
   
 - **`codigo_comunidades`**: Listado de códigos de dos dígitos de las comunidades autónomas que serán procesadas. Ejemplo: `[1,7]` para Andalucía y Castilla y León.
   
+- **`capas_actualizar`**: Listado de capas que se quieren actualizar, si se deja vacío actualizará todas. (P. e.  "capas_actualizar": ["aparcamiento_pol", "aerodromo_pol"])
+
 - **`config_proceso_4`**: Ruta del fichero de configuración de los procesos de la Fase V, por defecto `'../../4proceso-vtilesToMbTiles/config.json'`.
 
 
