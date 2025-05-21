@@ -34,7 +34,7 @@ ProcesoFusion = fusionar_vrt(path_carpetaSalidaGJSON)
 ProcesoFusion.gjson2VRT()
 
 
-ProcesoControlCalidad.JSON_comprobacion = 'lib\comprobacion.json'
+ProcesoControlCalidad.JSON_comprobacion = './lib/comprobacion.json'
 ProcesoControlCalidad.procesoControlCalidad()
 
 print("--- {} min de ejecución ---".format( (time.time() - start_time) /60 ) )
