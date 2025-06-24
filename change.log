@@ -1,6 +1,26 @@
 Cambios en el Modelo de datos:
 ------------------------------
 
+### 13/06/2025 camino_lin
+*  Se añaden los valores «colada» y «vereda» y «cordel» en el atributo «clase»
+
+### 13/06/2025 estacion_ferrocarril_pto
+*  Se añaden los valores «acceso_estacion_subterranea» y «estacion_tranvia_funicular» y «estacion_metro» en el atributo «clase»
+*  Se añade el valor «otro» en el atributo «estado»
+
+### 13/06/2025 estacion_ferrocarril_pol
+*  Se añaden los valores «estacion_tranvia_funicular» y «estacion_metro» en el atributo «clase»
+*  Se añade el valor «otro» en el atributo «estado»
+
+### 13/06/2025 area_servicio_pto
+*  Se añade el valor «punto_recarga_vehiculo_electrico» en el atributo «clase»
+
+### 13/06/2025 servicio_instalacion_pto
+*  Se añade el valor «area_autocaravanas» en el atributo «clase»
+
+### 13/06/2025 zona_dotacional_pol
+*  Se añade el valor «area_autocaravanas» en el atributo «clase»
+
 ### 09/05/2024 CONTEXTO
 * Añadidas las capas de contexto:
 * contexto_carreteras_lin, contexto_ferrocarril_lin, contexto_hidrografia_lin, contexto_lamina_agua_pol, contexto_nombre_hidrografia_lin, contexto_nombre_hidrografia_pol, contexto_nombre_orografia_lin, contexto_nombre_orografia_pol, contexto_nombre_orografia_pto, contexto_nombre_poblacion_pto, contexto_territorios_lin, contexto_territorios_pol
