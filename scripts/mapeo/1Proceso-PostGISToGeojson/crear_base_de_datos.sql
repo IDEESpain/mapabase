@@ -75,7 +75,7 @@ COMMENT ON COLUMN senda_lin.proveedor IS '[codigo_proveedor]:Proveedor de la inf
 
 CREATE TABLE public.area_servicio_pto (
 	the_geom public.geometry(Point,25830),
-	clase character varying CHECK (clase in ('area_servicio','area_descanso')),
+	clase character varying CHECK (clase in ('area_servicio','area_descanso','punto_recarga_vehiculo_electrico')),
 	nombre character varying,
 	proveedor character varying);
 ALTER TABLE public.area_servicio_pto OWNER TO postgres;
@@ -135,10 +135,10 @@ COMMENT ON COLUMN autopista_lin.estado IS 'en_construcción:Se encuentra en obra
 
 CREATE TABLE public.estacion_ferrocarril_pto (
 	the_geom public.geometry(Point,25830),
-	clase character varying,
+	clase character varying CHECK (clase in ('estacion_ferrocarril','acceso_estacion_subterranea','estacion_tranvia_funicular','estacion_metro')),
 	nombre character varying,
 	proveedor character varying,
-	estado character varying CHECK (estado in ('en_construcción','en_uso','fuera_de_servicio')));
+	estado character varying CHECK (estado in ('en_construcción','en_uso','fuera_de_servicio','otro')));
 ALTER TABLE public.estacion_ferrocarril_pto OWNER TO postgres;
 CREATE INDEX sidx_estacion_ferrocarril_pto_the_geom ON public.estacion_ferrocarril_pto USING gist (the_geom);
 COMMENT ON TABLE estacion_ferrocarril_pto IS 'El elemento «estacion_ferrocarril_pto» comprende los objetos geográficos puntuales que representan las
@@ -148,11 +148,12 @@ COMMENT ON TABLE estacion_ferrocarril_pto IS 'El elemento «estacion_ferrocarril
                         Información Geográfica (CNIG) , así como de la información geográfica de referencia
                 producida por las Comunidades Autónomas u otras administraciones públicas con competencias
                 cartográficas.';
-COMMENT ON COLUMN estacion_ferrocarril_pto.clase IS 'estacion_ferrocarril:Clase de objeto';
+COMMENT ON COLUMN estacion_ferrocarril_pto.clase IS '';
 COMMENT ON COLUMN estacion_ferrocarril_pto.nombre IS '[nombre]:Nombre';
 COMMENT ON COLUMN estacion_ferrocarril_pto.proveedor IS '[codigo_proveedor]:Proveedor de la información (lista controlada)';
 COMMENT ON COLUMN estacion_ferrocarril_pto.estado IS 'en_construcción:Se encuentra en obras para un posterior uso	en_uso:Se encuentra utilizable o en condiciones constructivas aparentes para ser utilizable	fuera_de_servicio:Para los casos en los que el objeto geográfico se encuentra fuera de servicio, 
-                            o se ha destruido en parte, aunque hay restos visibles';
+                            o se ha destruido en parte, aunque hay restos visibles	otro:Valor para los elementos que no se pueden incluir en otro atributo de esta clase.
+                            Por ejemplo, si no se tiene recogido el estado.';
 
 
 CREATE TABLE public.instalacion_tratamiento_aguas_pol (
@@ -339,7 +340,7 @@ COMMENT ON COLUMN instalacion_tratamiento_residuos_pol.proveedor IS '[codigo_pro
 
 CREATE TABLE public.camino_lin (
 	the_geom public.geometry(Linestring,25830),
-	clase character varying,
+	clase character varying CHECK (clase in ('camino','colada','vereda','cordel')),
 	nombre character varying,
 	proveedor character varying,
 	puente character varying CHECK (puente in ('T','F')),
@@ -348,7 +349,7 @@ CREATE TABLE public.camino_lin (
 ALTER TABLE public.camino_lin OWNER TO postgres;
 CREATE INDEX sidx_camino_lin_the_geom ON public.camino_lin USING gist (the_geom);
 COMMENT ON TABLE camino_lin IS 'El elemento «camino_lin» incluye el trazado lineal de los distintos tipos de caminos, así como sus enlaces. Dichos datos pueden proceder de la Información Geográfica de Referencia de Redes de Transporte (IGR-RT) que edita el Instituto Geográfico Nacional (IGN)y distribuye el Centro Nacional de Información Geográfica (CNIG) , así como de la información geográfica de referencia producida por las Comunidades Autónomas u otras administraciones públicas con competencias cartográficas.';
-COMMENT ON COLUMN camino_lin.clase IS 'camino:Clase de objeto';
+COMMENT ON COLUMN camino_lin.clase IS '';
 COMMENT ON COLUMN camino_lin.nombre IS '[denominacion_camino]:Denominación del camino';
 COMMENT ON COLUMN camino_lin.proveedor IS '[codigo_proveedor]:Proveedor de la información (lista controlada)';
 COMMENT ON COLUMN camino_lin.puente IS 'T:Sí	F:No';
@@ -906,7 +907,7 @@ COMMENT ON COLUMN nombre_orografia_pto.proveedor IS '[codigo_proveedor]:Proveedo
 
 CREATE TABLE public.zona_dotacional_pol (
 	the_geom public.geometry(Polygon,25830),
-	clase character varying CHECK (clase in ('camping','cementerio','centro_penitenciario','parque_tecnologico','parque_tematico_ocio','piscifactoría','recinto_ferial','zona_comercial','zona_dotacional','zona_recreativa')),
+	clase character varying CHECK (clase in ('area_autocaravanas','camping','cementerio','centro_penitenciario','parque_tecnologico','parque_tematico_ocio','piscifactoría','recinto_ferial','zona_comercial','zona_dotacional','zona_recreativa')),
 	nombre character varying,
 	proveedor character varying);
 ALTER TABLE public.zona_dotacional_pol OWNER TO postgres;
@@ -1108,7 +1109,7 @@ COMMENT ON COLUMN carretera_autonomica_2do_nivel_lin.estado IS 'en_construcción
 
 CREATE TABLE public.servicio_instalacion_pto (
 	the_geom public.geometry(Point,25830),
-	clase character varying CHECK (clase in ('aerogenerador','antena','ayuntamiento','campo_futbol','camping','campo_golf','captacion','castillo_fortaleza','catedral','cementerio','centro_interpretacion','centro_penitenciario','circuito','convento','emergencias','ermita','estacion_bombeo','estacion_invernal','explotacion_minera','faro','fuente_ornamental','iglesia','instalacion_deportiva','instalacion_educativa','instalacion_energia','instalacion_militar','instalacion_religiosa','instalacion_sanitaria','instalacion_telecomunicacion','instalacion_tratamiento_aguas','instalacion_tratamiento_residuos','jardin','mezquita','monumento','museo','orden_publico_seguridad','otros_servicios_instalaciones','parque','parque_tecnologico','parque_tematico_ocio','piscifactoría','pista_deportiva','poligono_industrial','recinto_ferial','sinagoga','teatro_auditorio','templo','terreno_natural','torre_electrica','torre_transporte','zona_dotacional','zona_comercial','zona_industrial','zona_recreativa','zona_verde')),
+	clase character varying CHECK (clase in ('aerogenerador','antena','area_autocaravanas','ayuntamiento','campo_futbol','camping','campo_golf','captacion','castillo_fortaleza','catedral','cementerio','centro_interpretacion','centro_penitenciario','circuito','convento','emergencias','ermita','estacion_bombeo','estacion_invernal','explotacion_minera','faro','fuente_ornamental','iglesia','instalacion_deportiva','instalacion_educativa','instalacion_energia','instalacion_militar','instalacion_religiosa','instalacion_sanitaria','instalacion_telecomunicacion','instalacion_tratamiento_aguas','instalacion_tratamiento_residuos','jardin','mezquita','monumento','museo','orden_publico_seguridad','otros_servicios_instalaciones','parque','parque_tecnologico','parque_tematico_ocio','piscifactoría','pista_deportiva','poligono_industrial','recinto_ferial','sinagoga','teatro_auditorio','templo','terreno_natural','torre_electrica','torre_transporte','zona_dotacional','zona_comercial','zona_industrial','zona_recreativa','zona_verde')),
 	nombre character varying,
 	proveedor character varying);
 ALTER TABLE public.servicio_instalacion_pto OWNER TO postgres;
@@ -1388,10 +1389,10 @@ COMMENT ON COLUMN contexto_ferrocarril_lin.proveedor IS '[codigo_proveedor]:Prov
 
 CREATE TABLE public.estacion_ferrocarril_pol (
 	the_geom public.geometry(Polygon,25830),
-	clase character varying CHECK (clase in ('apartadero','apartadero-cargadero','apeadero','apeadero-cargadero','cambiador','cargadero','edificio_estacion','estacion_ferrocarril','paso_a_nivel')),
+	clase character varying CHECK (clase in ('apartadero','apartadero-cargadero','apeadero','apeadero-cargadero','cambiador','cargadero','edificio_estacion','estacion_ferrocarril','paso_a_nivel','estacion_tranvia_funicular','estacion_metro')),
 	nombre character varying,
 	proveedor character varying,
-	estado character varying CHECK (estado in ('en_construcción','en_uso','fuera_de_servicio')));
+	estado character varying CHECK (estado in ('en_construcción','en_uso','fuera_de_servicio','otro')));
 ALTER TABLE public.estacion_ferrocarril_pol OWNER TO postgres;
 CREATE INDEX sidx_estacion_ferrocarril_pol_the_geom ON public.estacion_ferrocarril_pol USING gist (the_geom);
 COMMENT ON TABLE estacion_ferrocarril_pol IS 'El elemento «estacion_ferrocarril_pol» comprende los objetos geográficos superficiales que representan
@@ -1403,7 +1404,8 @@ COMMENT ON COLUMN estacion_ferrocarril_pol.clase IS '';
 COMMENT ON COLUMN estacion_ferrocarril_pol.nombre IS '[nombre]:Nombre';
 COMMENT ON COLUMN estacion_ferrocarril_pol.proveedor IS '[codigo_proveedor]:Proveedor de la información (lista controlada)';
 COMMENT ON COLUMN estacion_ferrocarril_pol.estado IS 'en_construcción:Se encuentra en obras para un posterior uso	en_uso:Se encuentra utilizable o en condiciones constructivas aparentes para ser utilizable	fuera_de_servicio:Para los casos en los que el objeto geográfico se encuentra fuera de servicio, 
-                            o se ha destruido en parte, aunque hay restos visibles';
+                            o se ha destruido en parte, aunque hay restos visibles	otro:Valor para los elementos que no se pueden incluir en otro atributo de esta clase.
+                            Por ejemplo, si no se tiene recogido el estado.';
 
 
 CREATE TABLE public.paso_a_nivel_pto (
