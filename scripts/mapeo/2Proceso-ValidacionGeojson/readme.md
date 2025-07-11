@@ -47,6 +47,8 @@ Convierte los archivos GeoJSON validados a formato FGB.
 - **`run_2FGB.py`:** Realiza la transformación a FGB. Parte del proceso de transformación pero también puede ejecutarse de forma independiente.  
 - **`run_2VRT.py`:** Crea archivos VRT. También es parte del proceso de transformación pero puede ejecutarse de forma separada.
 
+- **`run_corregir_geometrias.py`:** Corrige las geometrías de los archivos GEOJSON y/o FlatGeobuf que se encuentren en la carpeta indicada en el config.json en el parámetro geometrias_corregir. Genera un log con el nombre indicado en el parámetro json_corregir_geometrias.
+
 ---
 
 ## **Configuración (`config.json`)**
