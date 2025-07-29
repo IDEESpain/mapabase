@@ -22,20 +22,19 @@ ProcesoControlCalidad.verbose = True
 # ProcesoControlCalidad.elementosAJSON()
 
 
+start_time = time.time()
+#transformar los n geojson en un vrt
+ProcesoFusion = fusionar_vrt(path_carpetaSalidaGJSON)
+ProcesoFusion.gjson2VRT()
+
 # # # # Lanzar proceso en Windows
 #start_time = time.time()
 #ProcesoControlCalidad.JSON_comprobacion = 'scripts\\mapeo\\2Proceso-ValidacionGeojson\\lib\\comprobacion.json'
 #ProcesoControlCalidad.procesoControlCalidad()
 
 # # # # Lanzar proceso en Linux
-start_time = time.time()
-#transformar los n geojson en un vrt
-ProcesoFusion = fusionar_vrt(path_carpetaSalidaGJSON)
-ProcesoFusion.gjson2VRT()
-
 
 ProcesoControlCalidad.JSON_comprobacion = './lib/comprobacion.json'
 ProcesoControlCalidad.procesoControlCalidad()
 
 print("--- {} min de ejecución ---".format( (time.time() - start_time) /60 ) )
-
