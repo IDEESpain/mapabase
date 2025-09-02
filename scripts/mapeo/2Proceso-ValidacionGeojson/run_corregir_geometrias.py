@@ -6,8 +6,13 @@ import gc
 import re
 
 # Cargar configuración desde config.json
-with open("./config.json") as f:
-    var_dict = json.load(f)
+### Para Windows
+#with open ("scripts\\mapeo\\2Proceso-ValidacionGeojson\\config.json") as f:
+#    var_dict=json.load(f)
+
+### Para Linux	
+with open ("config.json") as f:
+    var_dict=json.load(f)
 
 # Ruta de la carpeta con los archivos geoespaciales (definida en config.json)
 input_folder = var_dict["geometrias_corregir"]
@@ -66,8 +71,9 @@ if __name__ == "__main__":
         for root, _, files in os.walk(input_folder)
         for file in files
         if file.endswith(".fgb")
-        or "geojson" in file
-        ]
+        or file.endswith(".geojson")
+        or re.search(r"\.geojson_\d+$", file)
+    ]
 
     print(f"🔎 Encontrados {len(file_list)} archivos a procesar...")
 
@@ -81,3 +87,4 @@ if __name__ == "__main__":
 
     print(f"\n✅ Proceso completado. Se corrigieron geometrías en {len(corrected_files)} archivos.")
     print(f"📂 Resultados guardados en: {output_json}")
+
