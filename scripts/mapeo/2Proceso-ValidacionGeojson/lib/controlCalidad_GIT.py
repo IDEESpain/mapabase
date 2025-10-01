@@ -43,27 +43,36 @@ class control_calidad_GJSON:
                         if 'table' in json.dumps(line_n2):
                             for line_n3 in line_n2['table'][0]['tbody'][0]['tr']:
                                 if 'code' in str(line_n3['td'][0]):
-                                    if line_n3['td'][2] == {}:
+                                    td2_val = line_n3['td'][2]
+                                    if td2_val == {}:
                                         listaDominio = ['*']
-                                    elif not '[' in str(line_n3['td'][2]['_value']):
-                                        listaDominio = [line_n3['td'][2]['_value']]
+                                    elif not '[' in str(td2_val['_value']):
+                                        dominio_val = td2_val['_value']
+                                        if dominio_val.isdigit():
+                                            listaDominio = [int(dominio_val)]
+                                        else:
+                                            listaDominio = [dominio_val]
                                     else:
                                         listaDominio = ['*']
-                                    print(e,line_n3)
+
                                     atrNombre = line_n3['td'][0]['code'][0]['_value']
-                                    jsonElementos[e][line_n3['td'][0]['code'][0]['_value']] = listaDominio
+                                    jsonElementos[e][atrNombre] = listaDominio
                                 else:
+                                    valor = line_n3['td'][2]['_value']
                                     if jsonElementos[e][atrNombre] == ['*']:
                                         jsonElementos[e][atrNombre] = []
-                                    jsonElementos[e][atrNombre].append( line_n3['td'][2]['_value'] )
-
+                                    if valor.isdigit():
+                                        jsonElementos[e][atrNombre].append(int(valor))
+                                    else:
+                                        jsonElementos[e][atrNombre].append(valor)
             if jsonElementos[e] == {}:
                 del jsonElementos[e]
 
-        archivoJSON =codecs.open(self.JSON_comprobacion, "w", "utf-8")
+        archivoJSON = codecs.open(self.JSON_comprobacion, "w", "utf-8")
         archivoJSON.write(json.dumps(jsonElementos, ensure_ascii=False))
         archivoJSON.close()
         return 0
+
 
     def elementosAJSON_Tippecanoe(self,destination_layers_geojson,destination_mbtiles,temp_directory, project:dict, setup:dict):
         json_config= {

@@ -251,6 +251,10 @@ class ProcessIGO:
                       self.get_time() +
                       "---> Tiling layers, zoom " + zoom +
                       BColors.ENDC)
+                reduction = ""
+                if int(zoom) < 8:
+                    reduction =  " --simplification=10"
+                    
                 command_line = "tippecanoe -o " + output_mbtiles+"CNIG_" + zoom + "_layers.mbtiles " + \
                     layers + \
                     " -j '" + filter_attr + "'" + \
@@ -734,61 +738,20 @@ if(config["update"] != ""):
         lat = math.degrees(lat_rad)
         return (lat, lon)
 
-    def expand_bbox_to_include_tiles(bbox, zoom):
-        """
-        Expande el bbox para incluir completamente las teselas que intersectan con él en un nivel de zoom específico.
-        """
-        # Convertir el bbox a coordenadas de tesela
-        bminlon, bminlat, bmaxlon, bmaxlat = bbox
-        min_tile = latlon_to_tile(bminlat, bminlon, zoom)
-        max_tile = latlon_to_tile(bmaxlat, bmaxlon, zoom)
-
-        # Calcular el nuevo bbox que incluye completamente las teselas
-        min_lat, min_lon = tile_to_latlon(min_tile[0], min_tile[1] + 1, zoom)
-        max_lat, max_lon = tile_to_latlon(max_tile[0] + 1, max_tile[1], zoom)
-
-        # Asegurarse de que las coordenadas estén dentro de los límites válidos
-        min_lat = max(min_lat, -85.05112878)  # Límite de latitud mínima en Web Mercator
-        max_lat = min(max_lat, 85.05112878)   # Límite de latitud máxima en Web Mercator
-        min_lon = max(min_lon, -180.0)        # Límite de longitud mínima
-        max_lon = min(max_lon, 180.0)         # Límite de longitud máxima
-        return min_lon,min_lat,max_lon,max_lat
-
-
-        
-    def expand_bbox_to_cover_tiles(bbox, zoom_level):
-        # Función para calcular el tamaño de un tile en grados de latitud y longitud
-        def tile_size(zoom):
-            return 360.0 / (2 ** zoom)
-
-        # Función para calcular las coordenadas de un tile a partir de su índice x, y
-        def tile_to_coords(x, y, zoom):
-            size = tile_size(zoom)
-            min_lon = -180.0 + x * size
-            max_lon = min_lon + size
-            max_lat = 90.0 - y * size
-            min_lat = max_lat - size
-            return (min_lon, min_lat, max_lon, max_lat)
-
-        # Función para obtener el índice x, y del tile que contiene una coordenada dada
-        def coords_to_tile(lon, lat, zoom):
-            size = tile_size(zoom)
-            x = math.floor((lon + 180.0) / size)
-            y = math.floor((90.0 - lat) / size)
-            return (x, y)
-
-        # Expandimos el bbox para asegurarnos de que contenga todos los tiles
+    def expand_bbox_to_tile_boundaries(bbox, zoom):
+   
         min_lon, min_lat, max_lon, max_lat = bbox
-        start_tile_x, start_tile_y = coords_to_tile(min_lon, max_lat, zoom_level)
-        end_tile_x, end_tile_y = coords_to_tile(max_lon, min_lat, zoom_level)
 
-        # Obtenemos las coordenadas de los extremos de los tiles
-        expanded_min_lon, expanded_min_lat, _, _ = tile_to_coords(start_tile_x, start_tile_y, zoom_level)
-        _, _, expanded_max_lon, expanded_max_lat = tile_to_coords(end_tile_x, end_tile_y, zoom_level)
+        x_min_tile, y_min_tile = latlon_to_tile(max_lat, min_lon, zoom)
+        
+        x_max_tile, y_max_tile = latlon_to_tile(min_lat, max_lon, zoom)
 
-        expanded_bbox = (expanded_min_lon, expanded_min_lat, expanded_max_lon, expanded_max_lat)
-        return expanded_bbox
-    
+        new_max_lat, new_min_lon = tile_to_latlon(x_min_tile, y_min_tile, zoom)
+
+        new_min_lat, new_max_lon = tile_to_latlon(x_max_tile + 1, y_max_tile + 1, zoom)
+
+        return new_min_lon, new_min_lat, new_max_lon, new_max_lat
+        
     def apply_buffer(bbox, buffer):
         geom = box(*bbox)
 
@@ -820,7 +783,7 @@ if(config["update"] != ""):
             if z['process'] == 'no':
                 continue
                 # return
-            minlon, minlat, maxlon, maxlat = apply_buffer(expand_bbox_to_include_tiles(bbox, z['level']),-0.75)
+            minlon, minlat, maxlon, maxlat = expand_bbox_to_tile_boundaries(bbox, z['level'])
 
             if z['level'] >= min_level_ign and z['level'] <= max_level_ign:
                 origen = config["gz_folder_IGN"]
