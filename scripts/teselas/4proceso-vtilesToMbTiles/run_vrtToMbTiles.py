@@ -1,1050 +1,644 @@
+import argparse
+import logging
+import time
 import json
-import math
 import os
-import signal
 import shlex
+import shutil
+import signal
 import subprocess
 import sys
-import datetime
-import time
-import logging
-import pandas
-import shutil
+from pathlib import Path
+from typing import Dict, List, Any
+
 import geopandas as gpd
 import mercantile as me
 import pandas as pd
+from joblib import Parallel, delayed
 from shapely.geometry import box
 
-
-import warnings
-
-from joblib import Parallel, delayed
-
-log = logging.getLogger("mylog")
-log.setLevel(logging.DEBUG)
-
-formatter = logging.Formatter(
-    "%(asctime)s %(threadName)-11s %(levelname)-10s %(message)s")
-
-# Log to file
-filehandler = logging.FileHandler("log-vtiles.txt", "w")
-filehandler.setLevel(logging.INFO)
-filehandler.setFormatter(formatter)
-log.addHandler(filehandler)
-
-
-# Log colors
-class BColors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-
-
-# Núcleos
-nucleos = 2
-
-# Clase principal
-
-
-class ProcessIGO:
-    def __init__(self):
-        self.config = None
-        self.overpass_db = None
-
-        if 'LD_LIBRARY_PATH' not in os.environ:
-            os.environ['LD_LIBRARY_PATH'] = '/usr/local/lib' + \
-                ':' + '/usr/local/boost/1.60.0/lib64'
-            print("Updating... LD_LIBRARY_PATH")
-
-        with open('config_vtiles.json') as data_file:
-            self.config_vtiles = json.load(data_file)
-
-        with open('config.json') as data_file:
-            self.config = json.load(data_file)
-
-        signal.signal(signal.SIGINT, self.signal_handler)
-
-    @staticmethod
-    def signal_handler(sig, frame):
-        print(BColors.FAIL + '\nIGO process ABORTED!' + BColors.ENDC)
-        sys.exit(0)
-
-    @staticmethod
-    def get_time():
-        return "[" + datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S') + "] "
-
-    @staticmethod
-    def sizeof_fmt(num, suffix='B'):
-        for unit in ['', 'Ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei', 'Zi']:
-            if abs(num) < 1024.0:
-                return "%3.1f%s%s" % (num, unit, suffix)
-            num /= 1024.0
-        return "%.1f%s%s" % (num, 'Yi', suffix)
-
-    @staticmethod
-    def chunks(l, n):
-        return [l[i:i + n] for i in range(0, len(l), n)]
-
-    def get_setup(self):
-        return self.config['setup']
-
-    # Convertimos con GDAL de VRT a GeoJSONSeq comprimido
-    def compress_geojson(self):
-        print(BColors.OKGREEN +
-              self.get_time() +
-              "---> Ejecutando: compress_geojson" +
-              BColors.ENDC)
-
-        input_directories = [self.config["input_vrt_IGN"],
-                             self.config["input_vrt_comunidades"], self.config["input_vrt_municipios"]]
-        output_directories = [self.config["gz_folder_IGN"],
-                              self.config["gz_folder_comunidades"], self.config["gz_folder_municipios"]]
-
-        for i in range(len(input_directories)):
-            for subdir, dirs, files in os.walk(input_directories[i]):
-
-                # for file_0 in files:
-                def VRT2GZ(file_0):
-
-                    # Cambiando geojson por vrt
-                    fichero_geojson = input_directories[i] + file_0
-                    # fichero_ndjson_zip = output_directory + file.replace(".geojson", ".gz")
-                    fichero_ndjson_zip = output_directories[i] + \
-                        file_0.replace(".vrt", ".gz")
-
-                    # Modifico 08/06/2021 // cambio por vrt
-                    if ".vrt" in file_0 and not "recorte" in file_0:
-                        print(BColors.OKGREEN +
-                              self.get_time() +
-                              "---> Exportando a NDJSON (gzipped) [" + fichero_ndjson_zip + "]..." +
-                              BColors.ENDC)
-                        command_line = "ogr2ogr -f GeoJSONSeq " + \
-                            fichero_ndjson_zip + " " + fichero_geojson
-                        print(BColors.OKBLUE + command_line)
-                        args = shlex.split(command_line)
-                        subprocess.call(args)
-
-                Parallel(n_jobs=nucleos)(delayed(VRT2GZ)(file_0)
-                                         for file_0 in files)
-
-    # Tippecanoe
-
-    def tiling_pbf(self):
-        print(BColors.OKGREEN +
-              self.get_time() +
-              "---> Ejecutando: tiling_layers" +
-              BColors.ENDC)
-        print(len(self.config_vtiles["zoom_levels"]))
-
-        min_level_ign = config["min_zoom_IGN"]
-        max_level_ign = config["max_zoom_IGN"]
-
-        min_level_comunidades = config["min_zoom_comunidades"]
-        max_level_comunidades = config["max_zoom_comunidades"]
-
-        for z in self.config_vtiles["zoom_levels"]:
-            # def teselacion(z):
-            if z['process'] == 'no':
-                continue
-                # return
-
-            if z['level'] >= min_level_ign and z['level'] <= max_level_ign:
-                input_layers = self.config["gz_folder_IGN"]
-            elif z['level'] >= min_level_comunidades and z['level'] <= max_level_comunidades:
-                input_layers = self.config["gz_folder_comunidades"]
-            else:
-                input_layers = self.config["gz_folder_municipios"]
-
-            output_mbtiles = self.config["destination_mbtiles"]
-            temp = self.config["temp_directory"]
-            if not os.path.exists(temp):
-                os.makedirs(temp)
-                print(f'Creada carpeta temp: {temp}')
-            # Nivel de zoom
-            zoom = str(z["level"])
-
-            # Filter
-            filter_attr = json.dumps(z["filter"])
-
-            # Layers to Join
-            layers_to_join = []
-
-            # Etiquetas
-            if 'layers_with_labels' in z and len(z['layers_with_labels']) > 0:
-                layers_with_labels = ''
-                layers_to_join.append('layers_with_labels')
-                for l in z["layers_with_labels"]:
-                    layers_with_labels += " --named-layer='" + \
-                        l["name"] + "':" + input_layers + l["file"]
-
-                print(BColors.OKGREEN +
-                      self.get_time() +
-                      "---> Tiling layers with labels, zoom " + zoom +
-                      BColors.ENDC)
-                command_line = "tippecanoe -P -o " + \
-                               output_mbtiles+"CNIG_" + zoom + "_layers_with_labels.mbtiles " + \
-                               layers_with_labels + \
-                               " -j '" + filter_attr + "'" + \
-                               " -z" + zoom + " -Z" + zoom + \
-                               " --no-feature-limit" + \
-                               " --force" + \
-                               " --no-tile-size-limit" + \
-                               " --buffer=127" + \
-                               " --convert-stringified-ids-to-numbers" + \
-                               " --attribute-type=population:int" + \
-                               " --attribute-type=sqkm:int -pC" +\
-                               " -t " + temp
-
-                print(BColors.OKBLUE + command_line + BColors.ENDC)
-                args = shlex.split(command_line)
-                subprocess.call(args)
-
-            # Layer que no tiene que unir (dissolve) EDIFICIOS
-            if 'layers_no_coalesce' in z and len(z['layers_no_coalesce']) > 0:
-                layers_no_coalesce = ''
-                layers_to_join.append('layers_no_coalesce')
-                for l in z["layers_no_coalesce"]:
-                    layers_no_coalesce += " --named-layer='" + \
-                        l["name"] + "':" + input_layers + l["file"]
-
-                print(BColors.OKGREEN +
-                      self.get_time() +
-                      "---> Tiling layers with no coalesce, zoom " + zoom +
-                      BColors.ENDC)
-                command_line = "tippecanoe -P -o " + \
-                               output_mbtiles+"CNIG_" + zoom + "_layers_no_coalesce.mbtiles " + \
-                               layers_no_coalesce + \
-                               " -j '" + filter_attr + "'" + \
-                               " -z" + zoom + " -Z" + zoom + \
-                               " --buffer=44" + \
-                               " -t " + temp + \
-                               " --reorder" + \
-                               " --no-feature-limit" + \
-                               " --force" + \
-                               " --no-tile-size-limit" + \
-                               " --convert-stringified-ids-to-numbers" + \
-                               " --attribute-type=population:int" + \
-                               " --attribute-type=sqkm:int -pC"
-
-                print(BColors.OKBLUE + command_line + BColors.ENDC)
-
-                # print(command_line)
-                args = shlex.split(command_line)
-                subprocess.call(args)
-
-            # Capas normales
-            if 'layers' in z and len(z['layers']) > 0:
-                layers = ''
-                layers_to_join.append('layers')
-                for l in z["layers"]:
-                    layers += " --named-layer='" + \
-                        l["name"] + "':" + input_layers + l["file"]
-                print(layers_to_join)
-
-                # Tippecanoe command
-                print(BColors.OKGREEN +
-                      self.get_time() +
-                      "---> Tiling layers, zoom " + zoom +
-                      BColors.ENDC)
-                reduction = ""
-                if int(zoom) < 8:
-                    reduction =  " --simplification=10"
-                    
-                command_line = "tippecanoe -o " + output_mbtiles+"CNIG_" + zoom + "_layers.mbtiles " + \
-                    layers + \
-                    " -j '" + filter_attr + "'" + \
-                    " -z" + zoom + " -Z" + zoom + \
-                    " --buffer=44" + \
-                    " -t " + temp + \
-                    " --coalesce" + \
-                    " --reorder" + \
-                    " --no-feature-limit" + \
-                    " --force" + \
-                    " --no-tile-size-limit" + \
-                    " --convert-stringified-ids-to-numbers" + \
-                    " --attribute-type=population:int" + \
-                    " --attribute-type=sqkm:int -pC"
-                print(BColors.OKBLUE + command_line + BColors.ENDC)
-                print(command_line)
-                args = shlex.split(command_line)
-                subprocess.call(args)
-
-            #  Join de los MBTiles layers, layers_with_labels, layers_no_coalesce
-            print(BColors.OKGREEN +
-                  self.get_time() +
-                  "---> Joining MBTiles, zoom " + zoom +
-                  BColors.ENDC)
-
-            if len(layers_to_join) <= 1:
-                # Se cambia el nombre al archivo
-                os.rename(output_mbtiles+"CNIG_" + zoom + "_layers.mbtiles",
-                          output_mbtiles+"CNIG_" + zoom + ".mbtiles")
-
-            else:
-                command_line = "tile-join -pk -pC --force -o " + \
-                    output_mbtiles+"CNIG_" + zoom + ".mbtiles "
-                for layer_type in layers_to_join:
-                    command_line += output_mbtiles+"CNIG_" + zoom + "_" + layer_type + ".mbtiles "
-
-                print(command_line)
-                args = shlex.split(command_line)
-                subprocess.call(args)
-
-                # Borramos archivos originales de capa
-                for layer_type in layers_to_join:
-                    os.remove(output_mbtiles + "CNIG_" + zoom +
-                              "_" + layer_type + ".mbtiles")
-
-        # Parallel(n_jobs=nucleos)(delayed(teselacion)(z) for z in self.config["zoom_levels"])
-
-    # mb-util
-
-    def MBtiles2Folder(self):
-        output_mbtiles = self.config["destination_mbtiles"]
-        temp = self.config["temp_directory"]
-
-        MBtilesFiles = [x for x in os.listdir(
-            output_mbtiles) if "mbtiles" in x]
-
-        # for mbtile in MBtilesFiles:
-        def MBtilesFiles2folder(mbtile):
-            # Tippecanoe command
-            print(BColors.OKGREEN +
-                  self.get_time() +
-                  "---> MBtile file  " + mbtile +
-                  BColors.ENDC)
-            pathMBtile = output_mbtiles + mbtile + " "
-            pathFolder = temp + mbtile.split(".")[0] + " "
-            command_line = "mb-util " + \
-                " --image_format=pbf " + \
-                pathMBtile + \
-                pathFolder
-
-            print(command_line)
-            args = shlex.split(command_line)
-            subprocess.call(args)
-
-        Parallel(n_jobs=nucleos)(delayed(MBtilesFiles2folder)(mbtile)
-                                 for mbtile in MBtilesFiles)
-
-    # Método para copiar carpetas del directorio temporal al final
-    def move_temp_files(self):
-
-        temp_path = self.config["temp_directory"]
-        father_dest_path = self.config["destination_folder"]
-        temp_path_children = os.listdir(temp_path)
-        
-        # def mover_nivel(i, temp_path, temp_path_children, father_dest_path):
-        #     cnig_folder_path = temp_path+temp_path_children[i] + '/'
-        #     shutil.copytree(cnig_folder_path, father_dest_path,
-        #                     dirs_exist_ok=True)
-        # Parallel(n_jobs=12, require='sharedmem')(delayed(mover_nivel)(
-        #     i, temp_path, temp_path_children, father_dest_path) for i in range(len(temp_path_children)))
-
-
-        def mover_archivos_pbf(origen, destino):
-            for dirpath, dirnames, filenames in os.walk(origen):
-                for file in filenames:
-                        # Construir la ruta completa del archivo origen
-                        origen_completo = os.path.join(dirpath, file)
-                        
-                        # Construir la ruta destino manteniendo la estructura
-                        # Obtiene la subruta relativa desde el directorio base de origen
-                        subruta_relativa = os.path.relpath(dirpath, origen)
-                        subruta_relativa = "/".join(subruta_relativa.split("/")[1:])
-                        if file.endswith('.json'):
-                            print("dirpath: " + dirpath)
-                            print("subruta" + subruta_relativa)
-                            if "CNIG" in dirpath:
-                                subruta_relativa= (dirpath.split("/")[-1].split("_")[1]+ "/"+ subruta_relativa)
-                            else:
-                                subruta_relativa= (dirpath.split("/")[-1]+ "/"+ subruta_relativa)
-                        print("SUBRUTA FINAL: "+ subruta_relativa)
-                        # Construir la ruta completa del destino
-                        destino_completo = os.path.join(destino, subruta_relativa, file)
-                    
-                        # Crear los directorios destino si no existen
-                        os.makedirs(os.path.dirname(destino_completo), exist_ok=True)
-                        
-                        # Mover el archivo al destino
-                        shutil.move(origen_completo, destino_completo)
-                        print(f'Movido: {origen_completo} -> {destino_completo}')
-        
-        mover_archivos_pbf(temp_path, father_dest_path)
-
-        def limpiar_carpeta(ruta_carpeta):
-            """
-            Elimina todo el contenido (archivos y subdirectorios) de la carpeta especificada.
-            
-            Parámetros:
-            - ruta_carpeta: Ruta absoluta o relativa de la carpeta a limpiar.
-            """
-            try:
-                for nombre_archivo in os.listdir(ruta_carpeta):
-                    ruta_completa = os.path.join(ruta_carpeta, nombre_archivo)
-                    if os.path.isfile(ruta_completa):
-                        os.remove(ruta_completa)
-                    elif os.path.isdir(ruta_completa):
-                        shutil.rmtree(ruta_completa)
-                print(f"Contenido de '{ruta_carpeta}' eliminado correctamente.")
-            except Exception as e:
-                print(f"Error al limpiar '{ruta_carpeta}': {e}")
-
-        def eliminar_carpetas_vacias(directorio):
-            # Recorre el directorio desde las subcarpetas más profundas hacia arriba
-            for dirpath, dirnames, filenames in os.walk(directorio, topdown=False):
-                # Si una carpeta está vacía, se elimina
-                if not dirnames and not filenames:
-                    os.rmdir(dirpath)
-                    print(f'Eliminada carpeta vacía: {dirpath}')
-                try:
-                    os.rmdir(dirpath)
-                    print(f'Eliminada carpeta: {dirpath}')
-                except OSError as e:
-                    continue
-
-        eliminar_carpetas_vacias(temp_path)
-        limpiar_carpeta(config["destination_mbtiles"])
-    # Método para combinar los JSON de metadatos
-
-    def combine_json(self):
-        teselas_folder = self.config["destination_folder"]
-        dest_folder = self.config["destination_folder"]
-        lst_json_files_paths = []
-
-        for subdir in os.listdir(teselas_folder):
-            subdir_path = os.path.join(teselas_folder, subdir)
-            
-            # Verificar si es un directorio
-            if os.path.isdir(subdir_path):
-                # Buscar archivos .json dentro de este subdirectorio
-                for name in os.listdir(subdir_path):
-                    if name.endswith('.json'):
-                        lst_json_files_paths.append(os.path.join(subdir_path, name))
-
-
-        # Crea un DataFrame con cada JSON para luego unirlos en un solo DataFrame
-        df_list = []
-        for json_file_path in lst_json_files_paths:
-            with open(json_file_path) as f:
-                json_dict = json.load(f)
-
-                df = pandas.DataFrame.from_dict(
-                    pandas.json_normalize(json_dict), orient='columns')
-                df_list.append(df)
-
-        # DataFrame con todos los JSON
-        df_final = pandas.concat(df_list)
+# --- Global Configuration ---
+LOG_FORMAT = "%(asctime)s - %(levelname)-8s - %(message)s"
+DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+
+# --- Utility Functions ---
+
+def setup_logging(log_file="log-vtiles.txt"):
+    """Configures logging to both console and file."""
+    logging.basicConfig(level=logging.INFO, format=LOG_FORMAT, datefmt=DATE_FORMAT)
     
-        # Listas con las columnas de los dataframe
+    # File handler
+    file_handler = logging.FileHandler(log_file, "w")
+    file_handler.setLevel(logging.INFO)
+    file_handler.setFormatter(logging.Formatter(LOG_FORMAT, datefmt=DATE_FORMAT))
+    
+    # Add handler to root logger
+    logging.getLogger().addHandler(file_handler)
+    logging.info("Logging configured.")
 
-        # set_fields = set([x for x in df_final["fields"]])
+def handle_interrupt(sig, frame):
+    """Gracefully exits on SIGINT."""
+    logging.warning("Process interrupted by user. Exiting.")
+    sys.exit(0)
 
-        # set_fields = set([x for x in df_final["fields"]])
+# --- Configuration Management ---
 
+class Config:
+    """Handles loading and accessing configuration from JSON files."""
+    def __init__(self, config_path: str, vtiles_config_path: str):
+        self.config_path = Path(config_path)
+        self.vtiles_config_path = Path(vtiles_config_path)
+        self.data = self._load_config()
+        self.vtiles_data = self._load_vtiles_config()
 
-        lst_center = [(x) for x in df_final['center']]
-        lst_bounds = [(x) for x in df_final['bounds'].to_list()]
-        lst_json = [
-            (str(y), json.loads(x) if x and isinstance(x, str) else None)  # Verificamos que x no esté vacío y sea una cadena
-            for x, y in zip(df_final['json'].to_list(), df_final['minzoom'])
-            if x and isinstance(x, str)  # Filtramos valores nulos y no strings
-        ]
+    def _load_json(self, path: Path) -> Dict[str, Any]:
+        """Loads a JSON file with error handling."""
+        if not path.is_file():
+            logging.error(f"Configuration file not found: {path}")
+            raise FileNotFoundError(f"Configuration file not found: {path}")
+        with open(path, 'r', encoding='utf-8') as f:
+            return json.load(f)
 
-        # Filtrar valores None que podrían haberse producido por errores de decodificación
-        lst_json = [(y, j) for y, j in lst_json if j is not None]
+    def _load_config(self) -> Dict[str, Any]:
+        return self._load_json(self.config_path)
 
-        # Imprimir o gestionar errores encontrados
-        errores_json = [
-            (str(y), x) 
-            for x, y in zip(df_final['json'].to_list(), df_final['minzoom'])
-            if not x or not isinstance(x, str) or (isinstance(x, str) and not x.strip())  # Detecta entradas inválidas
-        ]
+    def _load_vtiles_config(self) -> Dict[str, Any]:
+        return self._load_json(self.vtiles_config_path)
 
-        # Si quieres ver cuáles JSON fueron problemáticos
-        for error in errores_json:
-            print(f"Error procesando JSON con minzoom {error[0]}: {error[1]}")
+    def __getitem__(self, key: str) -> Any:
+        """Allows dictionary-style access to config data."""
+        return self.data.get(key)
+    
+    def get(self, key: str, default: Any = None) -> Any:
+        """Allows dictionary-style .get() access to config data."""
+        return self.data.get(key, default)
+    
+    @property
+    def zoom_levels(self) -> List[Dict[str, Any]]:
+        return self.vtiles_data.get("zoom_levels", [])
 
-        center_tuple_lst = []
-        bounds_tuple_lst = []
+# --- Core Pipeline Logic ---
 
-        # # Descompone las celdas de los DataFrame para obtener las coordenadas por separado
-        # for i in range(len(lst_center)):
-        #     center_tuple_lst.append(tuple(lst_center[i].split(',')))
+class VectorTilePipeline:
+    """Orchestrates the entire vector tile generation process."""
 
-        # for i in range(len(lst_bounds)):
-        #     bounds_tuple_lst.append(tuple(lst_bounds[i].split(',')))
-
-        # Diccionario para el JSON de salida
-        dic_output_json = {}
-
-        # self.check_different_elements(df_final['name'].to_list())
-        dic_output_json['tilejson'] = "3.0.0"
-        dic_output_json['name'] = "Mapa Ciudadano del Sistema Cartográfico Nacional"
-        dic_output_json['description'] = "Servicio de visualización (Servicio de Teselas Vectoriales, MVT) del Sistema Cartográfico Nacional. Base de datos multiescala con cobertura completa y continua para España, que combina diferentes fuentes de datos. Teselas desde nivel de zoom 0 hasta nivel de zoom 17"
-        dic_output_json['type'] = "overlay"
-        dic_output_json['scheme'] = "xyz"
-        dic_output_json['format'] = "pbf"
-        dic_output_json['version'] = "1.0.0"
-        dic_output_json['tiles'] = ["https://vt-mapabase.idee.es/1.0.0/mapabase/{z}/{x}/{y}.pbf"]
-        dic_output_json['attribution'] = "<a href='https://www.scne.es//'>CC BY 4.0 scne</a>"
-        dic_output_json['bounds'] = [-180, 90, 180, 90]
-        dic_output_json['center'] = [-11.5, 35.789, 5]
-        dic_output_json['minzoom'] = 0
-        dic_output_json['maxzoom'] = 17
-        dic_output_json['MetadataUrl'] = "https://ideespain.github.io/mapabase/"
+    
+    def __init__(self, config: Config):
+        self.config = config
+        self.num_cores = config.get('num_cores') or os.cpu_count() or 2
         
+        # Ensure environment is set up if needed
+        if 'LD_LIBRARY_PATH' not in os.environ:
+            os.environ['LD_LIBRARY_PATH'] = '/usr/local/lib:/usr/local/boost/1.60.0/lib64'
+            logging.info("Updated LD_LIBRARY_PATH environment variable.")
 
+    def _run_command(self, command: List[str], cwd: str = None):
+        """Executes a shell command with robust logging and error handling."""
+        command_str = " ".join(map(shlex.quote, command))
+        logging.info(f"Executing command: {command_str}")
+        try:
+            result = subprocess.run(command, check=True, capture_output=True, text=True, cwd=cwd)
+            logging.debug(f"Command successful: {command_str}")
+            return result
+        except subprocess.CalledProcessError as e:
+            logging.error(f"Command failed: {command_str}")
+            logging.error(f"Return code: {e.returncode}")
+            # The stdout/stderr might not be available on Popen object in the same way
+            if hasattr(e, 'stdout') and e.stdout: logging.error(f"STDOUT: {e.stdout.strip()}")
+            if hasattr(e, 'stderr') and e.stderr: logging.error(f"STDERR: {e.stderr.strip()}")
+            raise
 
-        capas_totales = {}
+    def compress_geospatial_files(self):
+        """Converts VRT files to gzipped GeoJSONSeq using ogr2ogr."""
+        logging.info("Starting conversion from VRT to gzipped GeoJSONSeq.")
+        
+        source_map = {
+            "input_vrt_IGN": "gz_folder_IGN",
+            "input_vrt_comunidades": "gz_folder_comunidades",
+            "input_vrt_municipios": "gz_folder_municipios"
+        }
 
+        for input_key, output_key in source_map.items():
+            input_dir = Path(self.config[input_key])
+            output_dir = Path(self.config[output_key])
+            output_dir.mkdir(parents=True, exist_ok=True)
+
+            if not input_dir.is_dir():
+                logging.warning(f"Input directory not found, skipping: {input_dir}")
+                continue
+
+            vrt_files = list(input_dir.glob("*.vrt"))
+            
+            def process_file(vrt_file: Path):
+                output_file = output_dir / f"{vrt_file.stem}.gz"
+                command = [
+                    "ogr2ogr",
+                    "-f", "GeoJSONSeq",
+                    "-skipfailures",
+                    str(output_file),
+                    str(vrt_file)
+                ]
+                self._run_command(command)
+
+            Parallel(n_jobs=self.num_cores)(delayed(process_file)(f) for f in vrt_files)
+        logging.info("Finished VRT to GeoJSONSeq conversion.")
+
+    def _build_tippecanoe_command(self, zoom_config: Dict, output_file: Path, input_data_path: Path = None) -> Dict[str, List[str]]:
+        """Builds the tippecanoe command arguments for different layer types."""
+        zoom = str(zoom_config['level'])
+        
+        if not input_data_path:
+            if self.config['min_zoom_IGN'] <= int(zoom) <= self.config['max_zoom_IGN']:
+                input_data_path = Path(self.config['gz_folder_IGN'])
+            elif self.config['min_zoom_comunidades'] <= int(zoom) <= self.config['max_zoom_comunidades']:
+                input_data_path = Path(self.config['gz_folder_comunidades'])
+            else:
+                input_data_path = Path(self.config['gz_folder_municipios'])
+
+        base_args = [
+            "--force",
+            f"-z{zoom}", f"-Z{zoom}",
+            "-j", json.dumps(zoom_config["filter"]),
+            "-t", self.config["temp_directory"],
+            "--no-feature-limit",
+            "--no-tile-size-limit",
+            "--convert-stringified-ids-to-numbers",
+            "--attribute-type=population:int",
+            "--attribute-type=sqkm:int",
+            "-pC"
+        ]
+
+        commands = {}
+
+        def create_layer_args(layers):
+            args = []
+            for layer in layers:
+                source_file = input_data_path / layer['file']
+                if source_file.exists():
+                    args.extend([f"--named-layer={layer['name']}:{source_file}"])
+                else:
+                    logging.warning(f"Source file for layer '{layer['name']}' not found, skipping: {source_file}")
+            return args
+
+        if zoom_config.get('layers'):
+            layer_args = create_layer_args(zoom_config['layers'])
+            if layer_args:
+                cmd = ["tippecanoe", "-o", str(output_file.with_name(f"{output_file.stem}_layers.mbtiles"))]
+                cmd.extend(layer_args)
+                cmd.extend(base_args)
+                cmd.extend(["--buffer=44", "--coalesce", "--reorder"])
+                if int(zoom) < 11:
+                    cmd.append("--simplification=12")
+                commands['layers'] = cmd
+
+        if zoom_config.get('layers_with_labels'):
+            layer_args = create_layer_args(zoom_config['layers_with_labels'])
+            if layer_args:
+                cmd = ["tippecanoe", "-P", "-o", str(output_file.with_name(f"{output_file.stem}_labels.mbtiles"))]
+                cmd.extend(layer_args)
+                cmd.extend(base_args)
+                cmd.append("--buffer=127")
+                commands['labels'] = cmd
+            
+        if zoom_config.get('layers_no_coalesce'):
+            layer_args = create_layer_args(zoom_config['layers_no_coalesce'])
+            if layer_args:
+                cmd = ["tippecanoe", "-P", "-o", str(output_file.with_name(f"{output_file.stem}_no_coalesce.mbtiles"))]
+                cmd.extend(layer_args)
+                cmd.extend(base_args)
+                cmd.extend(["--buffer=44", "--reorder"])
+                commands['no_coalesce'] = cmd
+            
+        return commands
+
+    def generate_tiles(self, mbtiles_dir: Path, temp_dir: Path, input_data_path: Path = None, zoom_configs: List[Dict[str, Any]] = None):
+        """Generates MBTiles for specified zoom levels using Tippecanoe."""
+        if zoom_configs is None:
+            zoom_configs = self.config.zoom_levels
+
+        logging.info(f"Starting MBTiles generation for {len(zoom_configs)} zoom level(s). Output directory: {mbtiles_dir}")
+        mbtiles_dir.mkdir(parents=True, exist_ok=True)
+        temp_dir.mkdir(parents=True, exist_ok=True)
+        
+        for zoom_config in zoom_configs:
+            if zoom_config.get('process', 'yes') == 'no':
+                continue
+            
+            zoom_level = zoom_config['level']
+            logging.info(f"Processing zoom level: {zoom_level}")
+            
+            output_basename = f"CNIG_{zoom_level}"
+            final_mbtile = mbtiles_dir / f"{output_basename}.mbtiles"
+
+            tippecanoe_commands = self._build_tippecanoe_command(zoom_config, final_mbtile, input_data_path)
+            
+            if not tippecanoe_commands:
+                logging.warning(f"No layers to process for zoom {zoom_level}. Skipping.")
+                continue
+
+            for layer_type, command in tippecanoe_commands.items():
+                logging.info(f"Generating '{layer_type}' tiles for zoom {zoom_level}...")
+                self._run_command(command)
+            
+            layer_types = list(tippecanoe_commands.keys())
+            intermediate_files = [mbtiles_dir / f"{output_basename}_{suffix}.mbtiles" for suffix in ['layers', 'labels', 'no_coalesce'] if suffix in layer_types]
+
+            if len(intermediate_files) > 1:
+                logging.info(f"Joining MBTiles for zoom {zoom_level}...")
+                join_command = ["tile-join", "-pk", "-pC", "--force", "-o", str(final_mbtile)]
+                join_command.extend(map(str, intermediate_files))
+                self._run_command(join_command)
+                
+                for f in intermediate_files:
+                    f.unlink(missing_ok=True)
+            elif len(intermediate_files) == 1:
+                intermediate_files[0].rename(final_mbtile)
+
+        logging.info("Finished MBTiles generation.")
+
+    def flatten_pbf_extraction_folder(self, source_base: Path):
+
+        logging.info(f"Restructuring tiles from {source_base}")
+        for cnig_folder in source_base.glob("CNIG_*"):
+            if not cnig_folder.is_dir():
+                continue
+            for zoom_folder in cnig_folder.glob("[0-9]*"):
+                if not zoom_folder.is_dir():
+                    continue
+                target_folder = source_base / zoom_folder.name
+                if target_folder.exists():
+                    shutil.rmtree(target_folder)
+                shutil.move(str(zoom_folder), str(target_folder))
+
+            metadata_file = cnig_folder / "metadata.json"
+            if metadata_file.exists():
+                zoom_folders = [f for f in cnig_folder.iterdir() if f.is_dir() and f.name.isdigit()]
+                for target_folder in zoom_folders:
+                    shutil.move(str(metadata_file), str(target_folder / "metadata.json"))
+
+            shutil.rmtree(cnig_folder)
+        logging.info("Tiles restructuring finished.")
+
+    def extract_pbf_from_mbtiles(self, mbtiles_dir: Path, output_pbf_dir: Path):
+        logging.info(f"Extracting PBF tiles from {mbtiles_dir} to {output_pbf_dir}.")
+        mbtiles_files = list(mbtiles_dir.glob("*.mbtiles"))
+        output_pbf_dir.mkdir(parents=True, exist_ok=True)
+
+        def extract_file(mbtile_path: Path):
+            output_folder = output_pbf_dir / mbtile_path.stem
+            if output_folder.exists():
+                shutil.rmtree(output_folder)
+            command = ["mb-util", "--image_format=pbf", str(mbtile_path), str(output_folder)]
+            self._run_command(command)
+
+        Parallel(n_jobs=self.num_cores)(delayed(extract_file)(f) for f in mbtiles_files)
+
+        self.flatten_pbf_extraction_folder(output_pbf_dir)
+        logging.info("Finished PBF extraction.")
+
+    def organize_final_tiles(self, pbf_source_dir: Path, final_dest_dir: Path):
+        logging.info(f"Organizing final tiles from {pbf_source_dir} to {final_dest_dir} using rsync.")
+        final_dest_dir.mkdir(exist_ok=True)
+        command = [
+            "rsync",
+            "-a",
+            "--info=progress2",
+            "--include=*/",
+            "--include=*.pbf",
+            "--include=metadata.json",
+            "--exclude=*",
+            str(pbf_source_dir.resolve()) + "/",
+            str(final_dest_dir.resolve())
+        ]
+        self._run_command(command)
+        logging.info("Final tiles organized.")
+    
+    def _merge_updated_tiles(self, update_pbf_dir: Path, final_dest_dir: Path, tiles_to_replace: set):
+        """Merges new tiles into the final destination by overwriting."""
+        logging.info(f"Merging {len(tiles_to_replace)} updated tiles into {final_dest_dir}.")
+        for z, x, y in tiles_to_replace:
+            zoom_str = str(z)
+            source_file = update_pbf_dir / zoom_str / str(x) / f"{y}.pbf"
+            if source_file.exists():
+                dest_dir = final_dest_dir / zoom_str / str(x)
+                dest_dir.mkdir(parents=True, exist_ok=True)
+                dest_file = dest_dir / f"{y}.pbf"
+                shutil.copy2(source_file, dest_file)
+            
+    def generate_master_metadata(self):
+        """Generates a master metadata.json using config_vtiles without parsing all tile JSONs."""
+        logging.info("Generating master metadata.json based on config_vtiles.")
+
+        dest_folder = Path(self.config["destination_folder"])
+        vector_layers = {}
         tilestats = {}
 
-        for zoom, element in lst_json:
-            for vector_layer in element["vector_layers"]:
-                if vector_layer["id"] not in capas_totales.keys():
-                    # añadir los atributos de la capa(solo 1 vez ya que son siempre los mismos?)
-                    elemento = {"id": vector_layer['id'], "minzoom": vector_layer['minzoom'], "maxzoom": vector_layer['maxzoom'],
-                                "description": vector_layer['description'], "atributos": vector_layer['fields']}
-                    capas_totales[vector_layer["id"]] = elemento
-                else:
-                    if vector_layer["minzoom"] < capas_totales[vector_layer["id"]]["minzoom"]:
-                        capas_totales[vector_layer["id"]
-                                      ]["minzoom"] = vector_layer["minzoom"]
-                    if vector_layer["maxzoom"] > capas_totales[vector_layer["id"]]["maxzoom"]:
-                        capas_totales[vector_layer["id"]
-                                      ]["maxzoom"] = vector_layer["maxzoom"]
-                lista_atributos_zoom = vector_layer["fields"]
-                lista_atributos_completa = capas_totales[vector_layer["id"]]["atributos"]
-                capas_totales[vector_layer["id"]]["atributos"] = {
-                    **lista_atributos_completa, **lista_atributos_zoom}
+        for zoom_level_conf in self.config.vtiles_data.get("zoom_levels", []):
+            for layer_type in ['layers', 'layers_with_labels', 'layers_no_coalesce']:
+                for layer in zoom_level_conf.get(layer_type, []):
+                    layer_id = layer['name']
+                    if layer_id not in vector_layers:
+                        vector_layers[layer_id] = {
+                            "id": layer_id,
+                            "minzoom": zoom_level_conf['level'],
+                            "maxzoom": zoom_level_conf['level'],
+                            "description": layer.get('description', ''),
+                            "fields": {}
+                        }
+                    else:
+                        vec_layer = vector_layers[layer_id]
+                        vec_layer['minzoom'] = min(vec_layer['minzoom'], zoom_level_conf['level'])
+                        vec_layer['maxzoom'] = max(vec_layer['maxzoom'], zoom_level_conf['level'])
 
-            tilestats[zoom] = element["tilestats"]
+        if not vector_layers:
+            logging.warning("No vector layers found in config_vtiles. Skipping master metadata generation.")
+            return
 
-        # print(capas_totales)
+        output_json = {
+            "tilejson": "3.0.0",
+            "name": "Mapa Ciudadano del Sistema Cartográfico Nacional",
+            "description": "Servicio de visualización (Servicio de Teselas Vectoriales, MVT) del Sistema Cartográfico Nacional. Base de datos multiescala con cobertura completa y continua para España, que combina diferentes fuentes de datos. Teselas desde nivel de zoom 0 hasta nivel de zoom 17",
+            "type": "overlay",
+            "scheme": "xyz",
+            "format": "pbf",
+            "version": "1.0.0",
+            "tiles": ["https://vt-mapabase.idee.es/1.0.0/mapabase/{z}/{x}/{y}.pbf"],
+            "attribution": "<a href='https://www.scne.es//'>CC BY 4.0 scne</a>",
+            "bounds": [-180, -90, 180, 90],
+            "center": [-11.5, 35.789, 5],
+            "minzoom": 0,
+            "maxzoom": 18,
+            "MetadataUrl": "https://ideespain.github.io/mapabase/",
+            "vector_layers": sorted(list(vector_layers.values()), key=lambda x: x['id']),
+            "tilestats": tilestats,
+        }
 
-        list_capas_totales = []
+        output_path = dest_folder / 'metadata.json'
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(output_json, f, ensure_ascii=False, indent=4)
 
-        for key, value in capas_totales.items():
-            list_capas_totales.append(value)
+        logging.info(f"Master metadata.json successfully created at {output_path}")
 
-        dic_output_json['vector_layers'] = list_capas_totales
 
-        dic_output_json['tilestats'] = dict(sorted(tilestats.items()))
 
-        with open(dest_folder+'metadata.json', 'w',encoding='utf-8') as f:
-            f.write(json.dumps(dic_output_json, ensure_ascii=False, indent=4))
+    def run_full_process(self):
+        """Executes the entire pipeline for all data."""
+        setup = self.config.get('setup', {})
+        
+        if setup.get('compress_geojson') == 'yes':
+            self.compress_geospatial_files()
+        
+        mbtiles_dir = Path(self.config['destination_mbtiles'])
+        temp_dir = Path(self.config['temp_directory'])
+        final_dest = Path(self.config['destination_folder'])
+        
+        pbf_output_dir = temp_dir / "pbfs_extracted"
+        if pbf_output_dir.exists():
+            shutil.rmtree(pbf_output_dir)
 
-    @staticmethod
-    def compute_max_min_avg(list, op, coord):
+        if setup.get('tiling_layers') == 'yes':
+            self.generate_tiles(mbtiles_dir, temp_dir)
+        
+        if setup.get('to_folder') == 'yes':
+            self.extract_pbf_from_mbtiles(mbtiles_dir, pbf_output_dir)
+        
+        if setup.get('move_to_final_folder') == 'yes':
+            self.organize_final_tiles(pbf_output_dir, final_dest)
+            
+        if setup.get('join_json') == 'yes':
+            self.generate_master_metadata()
 
-        df = pandas.DataFrame(list)
+        logging.info("Cleaning up temporary directories...")
+        shutil.rmtree(temp_dir)
+        if mbtiles_dir.exists():
+            shutil.rmtree(mbtiles_dir)
 
-        try:
-            data = [int(n) for n in df[coord].to_list()]
-        except:
-            data = [float(n) for n in df[coord].to_list()]
 
-        if op == 'max':
-            res = max(data)
-        elif op == 'min':
-            res = min(data)
-        elif op == 'avg':
-            res = sum(data)/len(data)
-
-        return res
-
-    @staticmethod
-    def check_different_elements(lst):
-
-        if len(set(lst)) == 1:
-            return lst[0]
+    def _get_bbox_for_region(self, region_code: int, mode: str) -> List[float]:
+        """Reads a feature file, finds a region by its code, and returns its bounding box."""
+        if mode == 'comunidades':
+            file_path = self.config.get('aux_comunidades_file')
+            code_str = str(region_code).zfill(2)
+            filter_logic = lambda gdf: gdf[gdf["codigo"].str.slice(2, 4) == code_str]
+        elif mode == 'municipios':
+            file_path = self.config.get('aux_municipios_file')
+            code_str = str(region_code).zfill(5)
+            filter_logic = lambda gdf: gdf[gdf["codigo"].str.slice(-5) == code_str]
         else:
-            return list(set(lst))
+            raise ValueError(f"Invalid region mode: {mode}")
 
-
-'''
-PROCESO DEL FICHERO IGO
-'''
-
-# TODO INCLUIR TIEMPOS EN EL PROCESO DE ACTUALIZACIÓN
-
-f = open("./config_vtiles.json")
-
-config_vtiles = json.load(f)
-
-f_config = open("./config.json")
-
-config = json.load(f_config)
-
-if(config["update"] != ""):
-    print(f"Actualizando teselas de territorios por ", config["update"])
-    process = ProcessIGO()
-    setup = process.get_setup()
-    print(process.get_time())
-    # Exporting Layers to GeoJSON
-    if setup['compress_geojson'] == 'yes':
-        print('--> Compress layers GeoJSON to NDJson.GZ')
-        process.compress_geojson()
-    lista_comunidades = config["lista_comunidades"]
-    lista_municipios = config["lista_municipios"]
-
-    territorio_cod = ""
-
-    ruta_carpeta = ""
-
-    is_comunidades = False
-    is_bbox = False
-    # python3 run_vrtToMbTiles.py update comunidades
-    if(config["update"] == "comunidades"):
-        is_comunidades = True
-
-    # python3 run_vrtToMbTiles.py update bbox -10 40 -20 60
-    elif (config["update"] == "bbox"):
-        print(f"Actualizando teselas de territorios por ", config["update"])
-        is_bbox = True
-        left, bottom, right, top = config["bbox"][0], config["bbox"][1], config["bbox"][2], config["bbox"][3]
-    
-    elif (config["update"] == "nacional"):
-        print(f"Actualizando teselas de territorios por ", config["update"])
-        is_bbox = True
-        left, bottom, right, top = -19.215480397527838, 26.62547835167641, 6.341170645348383, 44.792032154864046
-
-    elif (config["update"] == "peninsula"):
-        print(f"Actualizando teselas de territorios por ", config["update"])
-        is_bbox = True
-        left, bottom, right, top = -9.94,35.01,4.64,44.1
-
-    if not is_bbox:
-        if lista_comunidades and is_comunidades:
-            is_comunidades = True
-            lista_territorios = lista_comunidades
-        else:
-            # solo municipios
-            lista_territorios = lista_municipios
-        print(lista_territorios)
-
-    def get_territorio(is_comunidades, var_dict, codigo):
-        if is_comunidades:
-            file = f"{var_dict['aux_comunidades_file']}"
-            comunidades_file = gpd.read_file(file)
-            territorio = comunidades_file[comunidades_file["codigo"].str.slice(
-                2, 4) == str(codigo).zfill(2)]
-
-        else:
-
-            file = f"{var_dict['aux_municipios_file']}"
-            municipios_file = gpd.read_file(file)
-            territorio = municipios_file[municipios_file["codigo"].str.slice(
-                -5) == str(codigo).zfill(5)]
-
-        return territorio.reset_index(drop=True)
-
-    def get_bbox(territorio):
-        left, bottom, right, top = territorio.bounds.loc[0, :].to_list()
-
-        print(left, bottom, right, top)
-
-        return left, bottom, right, top
-
-    def get_tiles(left, bottom, right, top, var_dict):
-        # me.Bbox(left,bottom,right,top)
-        # if is_comunidades:
-        #     zooms = [x for x in range(var_dict["min_zoom_comunidades"],var_dict["max_zoom_comunidades"] + 1)]
-        # else:
-        #     zooms = [x for x in range(var_dict["min_zoom_municipios"],var_dict["max_zoom_municipios"] + 1)]
-        zooms = []
-        for z in config_vtiles["zoom_levels"]:
-            if z['process'] == 'yes':
-                zooms.append(z["level"])
-        print("Zooms: ")
-        print(zooms)
-        tiles = me.tiles(left, bottom, right, top, zooms)
-        tiles_matrix = [(t.x, t.y, t.z) for t in tiles]
-
-        # las teselas contiguas se incluyen o no?
-
-        neigbour_tiles = []
-
-        for t in tiles:
-            neigbour_tiles.append(me.neighbors(t))
-
-        neigbour_tiles_matrix = [(t.x, t.y, t.z)
-                                 for l in neigbour_tiles for t in l]
-
-        # total_tiles_matrix=tiles_matrix+neigbour_tiles_matrix
-
-        total_tiles_matrix = tiles_matrix
-
-        total_tiles_matrix_set = set(total_tiles_matrix)
+        if not file_path or not Path(file_path).exists():
+            raise FileNotFoundError(f"Auxiliary file for '{mode}' not found at path: {file_path}")
         
-        total_tiles_matrix_set_sorted_by_zoom = sorted(
-            total_tiles_matrix_set, key=lambda tup: tup[2])
-
-        total_tiles_dict = {i: {"x": t[0], "y": t[1], "z": t[2]} for i, t in enumerate(
-            total_tiles_matrix_set_sorted_by_zoom)}
-
-        tiles_df = pd.DataFrame.from_dict(total_tiles_dict, orient="index")
-
-        return tiles_df
-
-    def parse_json_v_tiles():
-        layers = ''
-
-        layer_dict_by_zoom = {}
-
-        # print(json_file["zoom_levels"])
-
-        for l in config_vtiles["zoom_levels"]:
-            # print(l)
-            layers = [layer["file"] for layer in l["layers"]]
-            layers_no_coalesce = [layer["file"]
-                                  for layer in l["layers_no_coalesce"]]
-            layers_with_labels = [layer["file"]
-                                  for layer in l["layers_with_labels"]]
-            filters = l["filter"]
-            # print(layers)
-            layer_dict_by_zoom[l["level"]] = {
-                "layers": layers, "layers_no_coalesce": layers_no_coalesce, "layers_with_labels": layers_with_labels, "filter": filters}
-
-        return layer_dict_by_zoom
-
-
-
-
-
-    def latlon_to_tile(lat, lon, zoom):
-        """
-        Convierte coordenadas geográficas (latitud y longitud) a coordenadas de tesela (tile) en un nivel de zoom específico.
-        """
-        lat_rad = math.radians(lat)
-        n = 2.0 ** zoom
-        x_tile = int((lon + 180.0) / 360.0 * n)
-        y_tile = int((1.0 - math.log(math.tan(lat_rad) + (1 / math.cos(lat_rad))) / math.pi) / 2.0 * n)
-        return (x_tile, y_tile)
-
-    def tile_to_latlon(x_tile, y_tile, zoom):
-        """
-        Convierte coordenadas de tesela (tile) a coordenadas geográficas (latitud y longitud) en un nivel de zoom específico.
-        """
-        n = 2.0 ** zoom
-        lon = x_tile / n * 360.0 - 180.0
-        lat_rad = math.atan(math.sinh(math.pi * (1 - 2 * y_tile / n)))
-        lat = math.degrees(lat_rad)
-        return (lat, lon)
-
-    def expand_bbox_to_tile_boundaries(bbox, zoom):
-   
-        min_lon, min_lat, max_lon, max_lat = bbox
-
-        x_min_tile, y_min_tile = latlon_to_tile(max_lat, min_lon, zoom)
+        logging.info(f"Reading regions from {file_path} to find code '{code_str}'")
+        gdf = gpd.read_file(file_path)
         
-        x_max_tile, y_max_tile = latlon_to_tile(min_lat, max_lon, zoom)
-
-        new_max_lat, new_min_lon = tile_to_latlon(x_min_tile, y_min_tile, zoom)
-
-        new_min_lat, new_max_lon = tile_to_latlon(x_max_tile + 1, y_max_tile + 1, zoom)
-
-        return new_min_lon, new_min_lat, new_max_lon, new_max_lat
+        region_gdf = filter_logic(gdf)
         
-    def apply_buffer(bbox, buffer):
-        geom = box(*bbox)
+        if region_gdf.empty:
+            logging.warning(f"No region found for code '{region_code}' in mode '{mode}'.")
+            return None
+            
+        bounds = region_gdf.iloc[0].geometry.bounds
+        bbox = [bounds[0], bounds[1], bounds[2], bounds[3]]
+        logging.info(f"Found BBOX for code '{region_code}': {bbox}")
+        return bbox
 
-        buffered_geom = geom.buffer(buffer, cap_style=3)
-
-        return buffered_geom.bounds
-    
-
-    def generate_tiles_tippecanoe(tiles_df, layer_dict_by_zoom, bbox):
-
-        # preconfigurar
-
-        destination_mbtiles = config["destination_mbtiles"]
-        tmp = config["temp_directory"]
-
-        min_level_ign = config["min_zoom_IGN"]
-        max_level_ign = config["max_zoom_IGN"]
-
-        min_level_comunidades = config["min_zoom_comunidades"]
-        max_level_comunidades = config["max_zoom_comunidades"]
+    def _get_tile_aligned_bbox(self, bbox: List[float], zooms: List[int]) -> List[float]:
+        """Calculates a bounding box that snaps to the outer boundaries of all tiles intersecting the given bbox."""
+        logging.info(f"Calculating tile-aligned BBOX for {bbox} at zooms {zooms}")
         
+        intersecting_tiles = list(me.tiles(*bbox, zooms=zooms))
+        
+        if not intersecting_tiles:
+            logging.warning("No intersecting tiles found for the given BBOX. Returning original BBOX.")
+            return bbox
 
-        if not os.path.exists(tmp):
-            os.makedirs(tmp)
-            print(f'Creada carpeta temp: {tmp}')
-        for z in config_vtiles["zoom_levels"]:
+        first_bounds = me.bounds(intersecting_tiles[0])
+        min_lon, min_lat, max_lon, max_lat = first_bounds.west, first_bounds.south, first_bounds.east, first_bounds.north
 
-            # def teselacion(z):
-            if z['process'] == 'no':
-                continue
-                # return
-            minlon, minlat, maxlon, maxlat = expand_bbox_to_tile_boundaries(bbox, z['level'])
+        for tile in intersecting_tiles[1:]:
+            bounds = me.bounds(tile)
+            min_lon = min(min_lon, bounds.west)
+            min_lat = min(min_lat, bounds.south)
+            max_lon = max(max_lon, bounds.east)
+            max_lat = max(max_lat, bounds.north)
+            
+        aligned_bbox = [min_lon, min_lat, max_lon, max_lat]
+        logging.info(f"Original BBOX: {bbox} -> Tile-aligned BBOX: {aligned_bbox}")
+        return aligned_bbox
 
-            if z['level'] >= min_level_ign and z['level'] <= max_level_ign:
-                origen = config["gz_folder_IGN"]
-            elif z['level'] >= min_level_comunidades and z['level'] <= max_level_comunidades:
-                origen = config["gz_folder_comunidades"]
+    def _prepare_clipped_sources(self, bbox: List[float], clipped_gz_dir: Path, zoom_configs: List[Dict[str, Any]]) -> Path:
+        """Clips VRT sources to a given BBOX using ogr2ogr for a specific set of zoom levels."""
+        logging.info(f"Preparing clipped data sources for BBOX {bbox} into {clipped_gz_dir}")
+        clipped_gz_dir.mkdir(parents=True, exist_ok=True)
+        
+        required_files = set()
+        source_map = {}
+        for zc in zoom_configs:
+            zoom = zc['level']
+            if self.config['min_zoom_IGN'] <= zoom <= self.config['max_zoom_IGN']:
+                vrt_base = Path(self.config['input_vrt_IGN'])
+            elif self.config['min_zoom_comunidades'] <= zoom <= self.config['max_zoom_comunidades']:
+                vrt_base = Path(self.config['input_vrt_comunidades'])
             else:
-                origen = config["gz_folder_municipios"]
+                vrt_base = Path(self.config['input_vrt_municipios'])
 
-            zoom = z['level']
-            layers = ["--named-layer="+layer[:-3]+":"+origen +
-                      layer for layer in layer_dict_by_zoom[zoom]["layers"]]
-            layers_no_coalesce = ["--named-layer="+layer[:-3]+":"+origen +
-                                  layer for layer in layer_dict_by_zoom[zoom]["layers_no_coalesce"]]
-            layers_with_labels = ["--named-layer="+layer[:-3]+":"+origen +
-                                  layer for layer in layer_dict_by_zoom[zoom]["layers_with_labels"]]
-            filter_attr = json.dumps(layer_dict_by_zoom[zoom]["filter"])
-            
-            layers = " ".join(layers)
+            for layer_type in ['layers', 'layers_with_labels', 'layers_no_coalesce']:
+                for layer in zc.get(layer_type, []):
+                    file_name = layer['file']
+                    if file_name not in required_files:
+                        required_files.add(file_name)
+                        source_map[file_name] = vrt_base / file_name.replace('.gz', '.vrt')
 
-            command_line = f"tippecanoe --force -o " + destination_mbtiles+"CNIG_" + str(zoom) + "_"+str(int(round(minlon, 3) * 1000))+"_"+str(int(round(minlat, 3) * 1000))+"_layers.mbtiles " + \
-                layers + \
-                " -z" + str(zoom) + " -Z" + str(zoom) + \
-                " -j '" + str(filter_attr) + "'" + \
-                " --buffer=1" + \
-                " -t " + tmp + "" + \
-                " --coalesce" + \
-                " --reorder" + \
-                " --no-feature-limit" + \
-                " --no-tile-size-limit" + \
-                " --convert-stringified-ids-to-numbers" + \
-                " --attribute-type=population:int" + \
-                " --attribute-type=sqkm:int -pC" +\
-                " --clip-bounding-box="+str(minlon)+","+str(minlat)+","+ str(maxlon)+","+ str(maxlat)
+        bbox_str = [str(c) for c in bbox]
 
-            print(command_line)
-            args = shlex.split(command_line)
-            subprocess.call(args)
-
-            if len(layers_no_coalesce) > 0:
-                layers_nc = " ".join(layers_no_coalesce)
-                command_line = f"tippecanoe --force -o " + str(destination_mbtiles) +"CNIG_" + str(zoom) + "_"+str(int(round(minlon, 3) * 1000))+"_"+str(int(round(minlat, 3) * 1000))+"_layers_no_coalesce.mbtiles " + \
-                    layers_nc + \
-                    " -z" + str(zoom) + " -Z" + str(zoom) + \
-                    " -j '" + str(filter_attr) + "'" + \
-                    " --buffer=44" + \
-                    " -t " + tmp + "" + \
-                    " --reorder" + \
-                    " --no-feature-limit" + \
-                    " --no-tile-size-limit" + \
-                    " --drop-densest-as-needed" + \
-                    " --convert-stringified-ids-to-numbers" + \
-                    " --attribute-type=population:int" + \
-                    " --attribute-type=sqkm:int -pC" +\
-                    " --clip-bounding-box="+str(minlon)+","+str(minlat)+","+ str(maxlon)+","+ str(maxlat)
-
-                args = shlex.split(command_line)
-                subprocess.call(args)
-
-            if len(layers_with_labels) > 0:
-                layers_wl = " ".join(layers_with_labels)
-                command_line = f"tippecanoe --force  -o " + destination_mbtiles+"CNIG_" + str(zoom) + "_"+str(int(round(minlon, 3) * 1000))+"_"+str(int(round(minlat, 3) * 1000))+"_layers_with_labels.mbtiles " + \
-                    layers_wl + \
-                    " -z" + str(zoom) + " -Z" + str(zoom) + \
-                    " -j '" + str(filter_attr) + "'" + \
-                    " --buffer=127" + \
-                    " -t " + tmp + "" + \
-                    " --no-feature-limit" + \
-                    " --no-tile-size-limit" + \
-                    " --convert-stringified-ids-to-numbers" + \
-                    " --attribute-type=population:int" + \
-                    " --attribute-type=sqkm:int -pC" +\
-                    " --clip-bounding-box="+str(minlon)+","+str(minlat)+","+ str(maxlon)+","+ str(maxlat)
-
-                args = shlex.split(command_line)
-                subprocess.call(args)
-
-    def grouped_mbtiles_by_zoom(mbtiles_path):
-        try:
-
-            mbtiles_files_dict = {}
-            for i, f in enumerate(os.listdir(mbtiles_path)):
-                zoom = f.split("_")[1].replace(".mbtiles", "")
-                if config_vtiles["zoom_levels"][int(zoom)]["process"] == "no":
-                    continue
-              
-                try:
-                    layer_type = "_".join(f.split("_")[4:]).replace(".mbtiles","")
-                    mbtiles_files_dict[i] = {"CNIG": f.split("_")[0],
-                                            "zoom": f.split("_")[1],
-                                            "x": f.split("_")[2],
-                                            "y": f.split("_")[3],
-                                            "layer_type": layer_type,
-                                            "file_type": ".mbtiles"} 
-                                        
-                except:
-                    continue
-
-            df_mbtiles_files = pd.DataFrame.from_dict(
-                mbtiles_files_dict, orient="index").sort_values(["zoom", "x", "y"])
-
-            grouped_by_zoom = df_mbtiles_files.groupby("zoom")
-        except Exception as e:
-            print(e)
-            return ""
-        return grouped_by_zoom
-
-    def tile_join():
-        print("Joining tiles")
-        path_mbtiles = config["destination_mbtiles"]
-        grouped = grouped_mbtiles_by_zoom(path_mbtiles)
-        files_to_delete = []
-
-        files_to_pbf = []
-        for zoom, group in grouped:
-            print("Joinin z "+ zoom)
-            command_line = "tile-join -pk -pC --force -o " + \
-                path_mbtiles+"CNIG_" + zoom + ".mbtiles "
-
-            files_to_pbf.append(path_mbtiles+"CNIG_" + zoom + ".mbtiles")
-
-            for file in group.itertuples():
-                file_name = f"{path_mbtiles}CNIG_{zoom}_{file.x}_{file.y}_{file.layer_type}.mbtiles"
-                command_line += f"{file_name} "
-                files_to_delete.append(file_name)
-
-            # print(command_line)
-            args = shlex.split(command_line)
-            subprocess.call(args)
-
-        return files_to_pbf
-
-            # Borramos archivos originales de capa
-            # for layer_type in layers_to_join:
-            #     os.remove(output_mbtiles + "CNIG_" + zoom + "_" + layer_type + ".mbtiles")
-            # print(group)
-
-    def mb_util_tiles(files_to_pbf):
-
-        dest_folder = config["temp_directory"]
+        def clip_file(file_name: str):
+            source_vrt = source_map[file_name]
+            output_gz = clipped_gz_dir / file_name
+            if source_vrt.exists():
+                command = [
+                    "ogr2ogr",
+                    "-f", "GeoJSONSeq",
+                    "-clipdst", *bbox_str,
+                    str(output_gz),
+                    str(source_vrt)
+                ]
+                self._run_command(command)
         
-        for file in files_to_pbf:
+        Parallel(n_jobs=self.num_cores)(delayed(clip_file)(f) for f in required_files)
         
-            print(dest_folder+file.split("/")[-1].replace("CNIG_","").split(".")[0]+"/")
-            command_line = "mb-util " + \
-                " --image_format=pbf " + \
-                file + " " +\
-                dest_folder+file.split("/")[-1].replace("CNIG_","").split(".")[0]+"/"
+        logging.info("Finished clipping data sources.")
+        return clipped_gz_dir
 
-            print(command_line)
-            args = shlex.split(command_line)
-            subprocess.call(args)
+    def run_update_process(self, mode: str, bbox: List[float] = None):
+        """Runs a seamless and performant update by processing each zoom level individually."""
+        if not bbox or len(bbox) != 4:
+            raise ValueError("A valid BBOX is required for update operations.")
 
-        # for file in files_to_delete:
-        #     #print(file)
-        #     os.remove(file)
-
-    if is_bbox:
-
-        tiles_df = get_tiles(left, bottom, right, top, config)
-
-        layer_dict_by_zoom = parse_json_v_tiles()
-
-        bbox = left, bottom, right, top
-        if setup['tiling_layers'] == 'yes':
-            log.info('--> Tiling layers with Tippecanoe')
-            generate_tiles_tippecanoe(tiles_df, layer_dict_by_zoom, bbox)
-            files_to_pbf = tile_join()
-
-        # MBtiles --> PBF folder
-        if setup['to_folder'] == 'yes':
-            log.info('--> MBtiles --> PBF folder')
-            mb_util_tiles(files_to_pbf)
-        if setup['join_json'] == 'yes':
-                log.info('Joining all json in 1')
-                process.combine_json()
-        if setup['move_to_final_folder'] == 'yes':
-            print('Moving pbfs folder')
-            process.move_temp_files()
-
-        print("Proceso de actualización de teselas por bbox terminado")
-
-    else:
-
-        for codigo in lista_territorios:
-
-            territorio = get_territorio(is_comunidades, config, codigo)
-
-            left, bottom, right, top = get_bbox(territorio)
-            print("BBOX:")
-            print(left, bottom, right, top)
-            tiles_df = get_tiles(left, bottom, right, top, config)
-
-            layer_dict_by_zoom = parse_json_v_tiles()
+        logging.info(f"Starting seamless update for BBOX: {bbox}")
+        setup = self.config.get('setup', {})
+        
+        if setup.get('compress_geojson') == 'yes':
+            self.compress_geospatial_files()
             
-            if setup['tiling_layers'] == 'yes':
-                log.info('--> Tiling layers with Tippecanoe')
-                generate_tiles_tippecanoe(tiles_df, layer_dict_by_zoom, get_bbox(territorio))
-                files_to_pbf = tile_join()
+        base_temp_dir = Path(self.config["temp_directory"])
+        update_mbtiles_dir = base_temp_dir / "update_mbtiles"
+        update_pbf_dir = base_temp_dir / "update_pbfs"
+        final_dest_dir = Path(self.config["destination_folder"])
+        
+        if update_mbtiles_dir.exists(): shutil.rmtree(update_mbtiles_dir)
+        if update_pbf_dir.exists(): shutil.rmtree(update_pbf_dir)
 
-            # MBtiles --> PBF folder
-            if setup['to_folder'] == 'yes':
-                log.info('--> MBtiles --> PBF folder')
-                mb_util_tiles(files_to_pbf)
-            if setup['join_json'] == 'yes':
-                log.info('Joining all json in 1')
-                process.combine_json()
-            if setup['move_to_final_folder'] == 'yes':
-                print('Moving pbfs folder')
-                process.move_temp_files()
+        active_zoom_configs = [z for z in self.config.zoom_levels if z.get('process', 'yes') == 'yes']
+        active_zoom_levels = [z['level'] for z in active_zoom_configs]
+        
+        tiles_to_replace = set((t.z, t.x, t.y) for t in me.tiles(*bbox, zooms=active_zoom_levels))
+        
+        for zoom_config in active_zoom_configs:
+            zoom_level = zoom_config['level']
+            logging.info(f"--- Starting update process for zoom level {zoom_level} ---")
 
-            print("Proceso de actualización de teselas por territorios terminado")
+            clipped_gz_dir_zoom = base_temp_dir / f"clipped_gz_z{zoom_level}"
+            if clipped_gz_dir_zoom.exists(): shutil.rmtree(clipped_gz_dir_zoom)
 
+            tile_aligned_bbox = self._get_tile_aligned_bbox(bbox, [zoom_level])
+            
+            buffer = 0.01
+            buffered_tile_aligned_bbox = [
+                tile_aligned_bbox[0] - buffer, 
+                tile_aligned_bbox[1] - buffer, 
+                tile_aligned_bbox[2] + buffer, 
+                tile_aligned_bbox[3] + buffer
+            ]
+            
+            clipped_data_path = self._prepare_clipped_sources(buffered_tile_aligned_bbox, clipped_gz_dir_zoom, [zoom_config])
+            
+            if setup.get('tiling_layers') == 'yes':
+                self.generate_tiles(
+                    mbtiles_dir=update_mbtiles_dir,
+                    temp_dir=base_temp_dir,
+                    input_data_path=clipped_data_path,
+                    zoom_configs=[zoom_config]
+                )
 
-else:
+            shutil.rmtree(clipped_gz_dir_zoom)
+            logging.info(f"--- Finished update process for zoom level {zoom_level} ---")
 
-    print(f"Generando teselas de territorios al completo ")
+        if setup.get('to_folder') == 'yes':
+            self.extract_pbf_from_mbtiles(update_mbtiles_dir, update_pbf_dir)
 
-    tiempo_inicio = time.time()
+        if setup.get('move_to_final_folder') == 'yes':
+            self._merge_updated_tiles(update_pbf_dir, final_dest_dir, tiles_to_replace)
 
-    process = ProcessIGO()
-    setup = process.get_setup()
-    log.info(process.get_time())
+        if setup.get('join_json') == 'yes':
+            self.generate_master_metadata()
 
-    # Exporting Layers to GeoJSON
-    if setup['compress_geojson'] == 'yes':
-        log.info('--> Compress layers GeoJSON to NDJson.GZ')
-        process.compress_geojson()
+        logging.info("Cleaning up main temporary update directories...")
+        shutil.rmtree(update_mbtiles_dir)
+        if update_pbf_dir.exists(): shutil.rmtree(update_pbf_dir)
+        logging.info("Seamless update process complete.")
 
-    # Tiling with Tippecanoe into PBF
-    if setup['tiling_layers'] == 'yes':
-        log.info('--> Tiling layers with Tippecanoe')
-        process.tiling_pbf()
+# --- Main Execution ---
 
-    # MBtiles --> PBF folder
-    if setup['to_folder'] == 'yes':
-        log.info('--> MBtiles --> PBF folder')
-        process.MBtiles2Folder()
+def main():
+    """Main entry point controlled by config file."""
+    start_time = time.time()
+    setup_logging()
+    signal.signal(signal.SIGINT, handle_interrupt)
+    
+    try:
+        config = Config('config.json', 'config_vtiles.json')
+        pipeline = VectorTilePipeline(config)
+        
+        update_mode = config.get('update', "").strip()
 
-    # m jsons -> 1 json
-    if setup['join_json'] == 'yes':
-        log.info('Joining all json in 1')
-        process.combine_json()
+        if update_mode:
+            logging.info(f"Starting update run with mode: {update_mode}")
+            
+            if update_mode in ['bbox', 'nacional', 'peninsula']:
+                update_bbox = None
+                if update_mode == 'bbox':
+                    update_bbox = config.get('bbox')
+                elif update_mode == 'nacional':
+                    update_bbox = [-19.22, 26.62, 6.35, 44.80]
+                elif update_mode == 'peninsula':
+                    update_bbox = [-9.94, 35.01, 4.64, 44.1]
+                
+                if not update_bbox:
+                    raise ValueError(f"BBOX not found in config for update mode '{update_mode}'")
+                
+                pipeline.run_update_process(mode=update_mode, bbox=update_bbox)
 
-    # MBtiles --> PBF folder
-    if setup['move_to_final_folder'] == 'yes':
-        log.info('Moving pbfs folder')
-        process.move_temp_files()
+            elif update_mode in ['comunidades', 'municipios']:
+                key = 'lista_comunidades' if update_mode == 'comunidades' else 'lista_municipios'
+                region_codes = config.get(key)
+                
+                if not region_codes:
+                    raise ValueError(f"List of region codes ('{key}') not found in config for update mode '{update_mode}'")
+                    
+                for code in region_codes:
+                    logging.info(f"--- Processing region code: {code} for {update_mode} ---")
+                    update_bbox = pipeline._get_bbox_for_region(region_code=code, mode=update_mode)
+                    if update_bbox:
+                        pipeline.run_update_process(mode=update_mode, bbox=update_bbox)
+                    else:
+                        logging.error(f"Could not find BBOX for region code {code}. Skipping.")
+            else:
+                raise ValueError(f"Update mode '{update_mode}' is not recognized.")
 
-    print(BColors.OKGREEN +
-          "[" + datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S') + "] " +
-          "Fecha inicio: " +
-          time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(tiempo_inicio)) +
-          BColors.ENDC)
+        else:
+            logging.info("Starting full pipeline run.")
+            pipeline.run_full_process()
+            
+    except Exception as e:
+        logging.critical(f"A critical error occurred: {e}", exc_info=True)
+        sys.exit(1)
+        
+    end_time = time.time()
+    duration = end_time - start_time
+    logging.info(f"Pipeline finished successfully in {time.strftime('%H:%M:%S', time.gmtime(duration))}.")
 
-    print(BColors.OKGREEN +
-          "[" + datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S') + "] " +
-          "Tiempo total: " +
-          time.strftime('%d:%H:%M:%S', time.localtime(time.time() - tiempo_inicio)) +
-          BColors.ENDC)
+if __name__ == "__main__":
+    main()
 
-    print(BColors.OKGREEN +
-          "[" + datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S') + "] " +
-          "END" +
-          BColors.ENDC)
