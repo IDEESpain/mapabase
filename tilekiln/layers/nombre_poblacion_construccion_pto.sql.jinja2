@@ -1,0 +1,27 @@
+-- Capa nombre_poblacion_construccion_pto (Tilekiln / Mapa Ciudadano)
+-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+SELECT
+    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    clase,
+    nombre,
+    nombre_alt,
+    jerarquia,
+    proveedor
+{% if zoom <= 13 %}
+  FROM mc_servicio_nacional.nombre_poblacion_construccion_pto
+{% elif zoom <= 16 %}
+  FROM mc_servicio_regional.nombre_poblacion_construccion_pto
+{% else %}
+  FROM mc_servicio_local.nombre_poblacion_construccion_pto
+{% endif %}
+  WHERE the_geom && {{bbox}}
+{% if zoom == 7 %}
+  AND clase IN ('capital_comunidad_autonoma_ciudad_autonoma', 'capital_estado')
+{% elif zoom == 8 %}
+  AND clase IN ('capital_comunidad_autonoma_ciudad_autonoma', 'capital_estado', 'capital_provincia')
+{% elif zoom == 9 %}
+  AND clase IN ('capital_comunidad_autonoma_ciudad_autonoma', 'capital_estado', 'capital_municipio', 'capital_provincia')
+{% elif (zoom >= 10 and zoom <= 22) %}
+  -- sin filtro tippecanoe en este zoom
+{% endif %}
+;

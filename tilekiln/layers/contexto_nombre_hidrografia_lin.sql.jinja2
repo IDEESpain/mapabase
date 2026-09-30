@@ -1,0 +1,17 @@
+-- Capa contexto_nombre_hidrografia_lin (Tilekiln / Mapa Ciudadano)
+-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+SELECT
+    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    clase,
+    esp,
+    nombre,
+    proveedor
+{% if zoom <= 13 %}
+  FROM mc_servicio_nacional.contexto_nombre_hidrografia_lin
+{% elif zoom <= 16 %}
+  FROM mc_servicio_regional.contexto_nombre_hidrografia_lin
+{% else %}
+  FROM mc_servicio_local.contexto_nombre_hidrografia_lin
+{% endif %}
+  WHERE the_geom && {{bbox}}
+;

@@ -1,0 +1,28 @@
+-- Capa hidrografia_lin (Tilekiln / Mapa Ciudadano)
+-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+SELECT
+    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    clase,
+    nombre,
+    orden,
+    persistencia,
+    situacion,
+    proveedor
+{% if zoom <= 13 %}
+  FROM mc_servicio_nacional.hidrografia_lin
+{% elif zoom <= 16 %}
+  FROM mc_servicio_regional.hidrografia_lin
+{% else %}
+  FROM mc_servicio_local.hidrografia_lin
+{% endif %}
+  WHERE the_geom && {{bbox}}
+{% if zoom == 7 %}
+  AND (clase IN ('acequia', 'canal', 'curso_natural', 'tuberia') AND orden = 'primero')
+{% elif zoom == 8 %}
+  AND ((clase IN ('acequia', 'canal', 'curso_natural', 'tuberia') AND orden = 'primero') OR (clase IN ('acequia', 'canal', 'curso_natural', 'tuberia') AND orden = 'segundo'))
+{% elif zoom == 9 %}
+  AND ((clase IN ('acequia', 'canal', 'curso_natural', 'tuberia') AND orden = 'primero') OR (clase IN ('acequia', 'canal', 'curso_natural', 'tuberia') AND orden = 'segundo') OR (clase IN ('acequia', 'canal', 'curso_natural', 'tuberia') AND orden = 'tercero_cuarto'))
+{% elif (zoom >= 10 and zoom <= 22) %}
+  -- sin filtro tippecanoe en este zoom
+{% endif %}
+;

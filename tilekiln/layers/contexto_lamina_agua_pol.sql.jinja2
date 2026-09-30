@@ -1,0 +1,19 @@
+-- Capa contexto_lamina_agua_pol (Tilekiln / Mapa Ciudadano)
+-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+SELECT
+    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    clase,
+    esp,
+    nombre,
+    orden,
+    persistencia,
+    proveedor
+{% if zoom <= 13 %}
+  FROM mc_servicio_nacional.contexto_lamina_agua_pol
+{% elif zoom <= 16 %}
+  FROM mc_servicio_regional.contexto_lamina_agua_pol
+{% else %}
+  FROM mc_servicio_local.contexto_lamina_agua_pol
+{% endif %}
+  WHERE the_geom && {{bbox}}
+;

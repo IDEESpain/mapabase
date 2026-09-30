@@ -1,0 +1,16 @@
+-- Capa zona_protegida_pto (Tilekiln / Mapa Ciudadano)
+-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+SELECT
+    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    clase,
+    nombre,
+    proveedor
+{% if zoom <= 13 %}
+  FROM mc_servicio_nacional.zona_protegida_pto
+{% elif zoom <= 16 %}
+  FROM mc_servicio_regional.zona_protegida_pto
+{% else %}
+  FROM mc_servicio_local.zona_protegida_pto
+{% endif %}
+  WHERE the_geom && {{bbox}}
+;

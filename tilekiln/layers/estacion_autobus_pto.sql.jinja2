@@ -1,0 +1,16 @@
+-- Capa estacion_autobus_pto (Tilekiln / Mapa Ciudadano)
+-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+SELECT
+    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    clase,
+    nombre,
+    proveedor
+{% if zoom <= 13 %}
+  FROM mc_servicio_nacional.estacion_autobus_pto
+{% elif zoom <= 16 %}
+  FROM mc_servicio_regional.estacion_autobus_pto
+{% else %}
+  FROM mc_servicio_local.estacion_autobus_pto
+{% endif %}
+  WHERE the_geom && {{bbox}}
+;

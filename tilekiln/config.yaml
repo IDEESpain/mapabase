@@ -1,0 +1,1113 @@
+metadata:
+  id: mapa_ciudadano_v1
+  name: Mapa Ciudadano
+  description: Teselas vectoriales Mapa Ciudadano (migración Tippecanoe → Tilekiln)
+  version: 1.0.0
+  attribution: IGN / CNIG y administraciones colaboradoras
+  center:
+    - -3.7
+    - 40.4
+    - 6
+  bounds:
+    - -19.0
+    - 27.0
+    - 5.5
+    - 44.5
+vector_layers:
+  aerodromo_pol:
+    description: El elemento «aerodromo_pol» comprende los objetos geográficos poligonales relativos a las instalaciones y los servicios de aviación civil, militar y recreativa. Los datos pueden provenir de la Informa
+    fields:
+      clase: Atributo clase
+      estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      ref: "[designador]:Referencia o nombre abreviado. Si no se conoce o no es aplicable dejarlo en blanco"
+    sql:
+      - minzoom: 12
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/aerodromo_pol.sql.jinja2
+  aerodromo_pto:
+    description: El elemento «aerodromo_pto» comprende los objetos geográficos puntuales relativos a las instalaciones y los servicios de aviación civil, militar y recreativa. Los datos pueden provenir de la Informaci
+    fields:
+      clase: Atributo clase
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      ref: "[designador]:Referencia o nombre abreviado. Si no se conoce o no es aplicable dejarlo en blanco"
+      tipo: Atributo tipo
+      uso: "otro:Este valor puede utilizarse en el caso de que no aplique indicar el uso, "
+      estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
+    sql:
+      - minzoom: 10
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/aerodromo_pto.sql.jinja2
+  altimetria_lin:
+    description: "El elemento «altimetria_lin» incluye la información lineal relativa a curvas de nivel. Los datos pueden provenir de la Base Topográfica Nacional 1:25.000 (BTN25) que edita el Instituto Geográfico Naci"
+    fields:
+      altitud: "[altitud]:Altitud"
+      clase: Atributo clase
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 11
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/altimetria_lin.sql.jinja2
+  altimetria_pto:
+    description: "El elemento «altimetria_pto» incluye la información puntual relativa a puntos acotados sobre el terreno. Los datos pueden provenir de la Base Topográfica Nacional 1:25.000 (BTN25) que edita el Institu"
+    fields:
+      altitud: "[altitud]:Altitud"
+      clase: Atributo clase
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 17
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/altimetria_pto.sql.jinja2
+  aparcamiento_pol:
+    description: El elemento «aparcamiento_pol» comprende los objetos geográficos superficiales que representan las instalaciones de aparcamiento de vehículos. Los datos pueden provenir de la Información Geográfica de
+    fields:
+      clase: "aparcamiento:Área en superficie destinada habitualmente a aparcar vehículos. No se consideran los aparcamientos en línea"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/aparcamiento_pol.sql.jinja2
+  aparcamiento_pto:
+    description: El elemento «aparcamiento_pto» comprende los objetos geográficos puntuales que representan las instalaciones de aparcamiento de vehículos. Los datos pueden provenir de la Información Geográfica de Ref
+    fields:
+      clase: "aparcamiento:Área en superficie destinada habitualmente a aparcar vehículos. No se consideran los aparcamientos en línea"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 13
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/aparcamiento_pto.sql.jinja2
+  area_servicio_pol:
+    description: El elemento «area_servicio_pol» incluye los elementos geográficos superficiales que representan las áreas de servicio.. Los datos pueden provenir de la Información Geográfica de Referencia de Redes de
+    fields:
+      clase: Atributo clase
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/area_servicio_pol.sql.jinja2
+  area_servicio_pto:
+    description: El elemento «area_servicio_pto» incluye los elementos geográficos puntuales que representan las áreas de servicio.. Los datos pueden provenir de la Información Geográfica de Referencia de Redes de Tra
+    fields:
+      clase: Atributo clase
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 13
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/area_servicio_pto.sql.jinja2
+  autopista_lin:
+    description: El elemento «autopista_lin» recoge la información lineal de los tramos de carretera clasificados como «Autopista», así como sus enlaces. Los datos pueden provenir de la Información Geográfica de Refer
+    fields:
+      clase: Atributo clase
+      nombre: "[denominacion_autopista]:Denominación"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      puente: "T:Sí\tF:No"
+      ref: "[referencia]:Identificador de la carretera o vía compuesto por un primera parte de texto según su competencial, un guion"
+      tunel: "T:Sí\tF:No"
+      estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
+    sql:
+      - minzoom: 6
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/autopista_lin.sql.jinja2
+  autovia_lin:
+    description: El elemento «autovia_lin» recoge la información lineal de los tramos de carretera clasificados como «Autovía», así como sus enlaces. Los datos pueden provenir de la Información Geográfica de Referenci
+    fields:
+      clase: Atributo clase
+      nombre: "[denominacion_autovia]:Denominación"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      puente: "T:Sí\tF:No"
+      ref: "[referencia]:Identificador de la carretera o vía compuesto por un primera parte de texto según su competencial, un guion"
+      tunel: "T:Sí\tF:No"
+      estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
+    sql:
+      - minzoom: 6
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/autovia_lin.sql.jinja2
+  camino_lin:
+    description: El elemento «camino_lin» incluye el trazado lineal de los distintos tipos de caminos, así como sus enlaces. Dichos datos pueden proceder de la Información Geográfica de Referencia de Redes de Transpor
+    fields:
+      clase: Atributo clase
+      nombre: "[denominacion_camino]:Denominación del camino"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      puente: "T:Sí\tF:No"
+      ref: "[referencia]:Referencia o código del camino. Si no se conoce o no es aplicable dejarlo en blanco"
+      tunel: "T:Sí\tF:No"
+    sql:
+      - minzoom: 13
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/camino_lin.sql.jinja2
+  carretera_autonomica_1er_nivel_lin:
+    description: El elemento «carretera_autonomica_1er_nivel_lin» incluye la información geográfica lineal de los tramos que componen la red autonómica de primer nivel, así como sus enlaces. Dichos datos pueden proced
+    fields:
+      clase: Atributo clase
+      nombre: "[denominacion_carretera]:Denominación"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      puente: "T:Sí\tF:No"
+      ref: "[referencia]:Identificador de la carretera o vía compuesto por un primera parte de texto según su competencial, un guion"
+      tunel: "T:Sí\tF:No"
+      estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
+    sql:
+      - minzoom: 8
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/carretera_autonomica_1er_nivel_lin.sql.jinja2
+  carretera_autonomica_2do_nivel_lin:
+    description: El elemento «carretera_autonomica_2do_nivel_lin» incluye la información geográfica lineal de los tramos que componen la red autonómica de segundo nivel, así como sus enlaces. Dichos datos pueden proce
+    fields:
+      clase: Atributo clase
+      nombre: "[denominacion_carretera]:Denominación"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      puente: "T:Sí\tF:No"
+      ref: "[referencia]:Identificador de la carretera o vía compuesto por un primera parte de texto según su competencial, un guion"
+      tunel: "T:Sí\tF:No"
+      estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
+    sql:
+      - minzoom: 9
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/carretera_autonomica_2do_nivel_lin.sql.jinja2
+  carretera_autonomica_3er_nivel_lin:
+    description: El elemento «carretera_autonomica_3er_nivel_lin» incluye la información geográfica lineal de los tramos que componen la red autonómica de tercer nivel, así como sus enlaces. Dichos datos pueden proced
+    fields:
+      clase: Atributo clase
+      nombre: "[denominacion_carretera]:Denominación"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      puente: "T:Sí\tF:No"
+      ref: "[referencia]:Identificador de la carretera o vía compuesto por un primera parte de texto según su competencial, un guion"
+      tunel: "T:Sí\tF:No"
+      estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
+    sql:
+      - minzoom: 10
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/carretera_autonomica_3er_nivel_lin.sql.jinja2
+  carretera_general_lin:
+    description: El elemento «carretera_general_lin» incluye la información geográfica lineal de los tramos que conforman las carreteras pertenecientes a la Red General de Carreteras. Dichos datos pueden proceder de l
+    fields:
+      clase: Atributo clase
+      nombre: "[denominacion_carretera]:Denominación"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      puente: "T:Sí\tF:No"
+      ref: "[referencia]:Identificador de la carretera o vía compuesto por un primera parte de texto según su competencial, un guion"
+      tunel: "T:Sí\tF:No"
+      estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
+    sql:
+      - minzoom: 6
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/carretera_general_lin.sql.jinja2
+  carretera_otros_lin:
+    description: El elemento «carretera_otros_lin» comprende la información geográfica lineal de los trazados viarios que atendiendo a las características técnicas propias de una carretera, no tienen una clasificación
+    fields:
+      clase: Atributo clase
+      nombre: "[denominacion_carretera]:Denominación de la carretera"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      puente: "T:Sí\tF:No"
+      ref: "[referencia]:Identificador de la carretera o vía compuesto por un primera parte de texto según su competencial, un guion"
+      tunel: "T:Sí\tF:No"
+      estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
+    sql:
+      - minzoom: 11
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/carretera_otros_lin.sql.jinja2
+  carretera_pk_pto:
+    description: El elemento «carretera_pk_pto» incluye los elementos geográficos puntuales que representan los puntos kilométricos de los distintos tipos de carretera. Los datos pueden provenir de la Información Geog
+    fields:
+      clase: "pk_carretera:Clase de objeto"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      ref: "[referencia]:Identificador del PK. Si no se conoce o no es aplicable dejarlo en blanco"
+    sql:
+      - minzoom: 15
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/carretera_pk_pto.sql.jinja2
+  comunidad_autonoma_pol:
+    description: Capa comunidad_autonoma_pol
+    fields:
+      clase: "comunidad_autonoma:Clase de objeto"
+      codigo: "[codigo]:Nationalcode según las especificaciones de datos INSPIRE para unidades administrativas. Código del país + Códig"
+      nombre: "[denominación_comunidad_autonoma]:Denominación oficial de la comunidad autónoma"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 5
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/comunidad_autonoma_pol.sql.jinja2
+  conduccion_lin:
+    description: Capa conduccion_lin
+    fields:
+      clase: Atributo clase
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/conduccion_lin.sql.jinja2
+  construccion_lin:
+    description: Capa construccion_lin
+    fields:
+      clase: "auxiliar_construido:Otros elementos construidos, que pueden formar parte de otras construcciones. Su objetivo es servir "
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/construccion_lin.sql.jinja2
+  construccion_pol:
+    description: Capa construccion_pol
+    fields:
+      clase: "construccion:Construcción con entidad propia, por tanto no es un elemento de otra construcción. Clase para los objetos q"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 15
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/construccion_pol.sql.jinja2
+  contexto_carreteras_lin:
+    description: Capa contexto_carreteras_lin
+    fields:
+      clase: Atributo clase
+      esp: "[esp]:Indica si los datos se superponen con el territorio español o son exclusivamente del contexto con propósitos de re"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 3
+        maxzoom: 12
+        extent: 2048
+        buffer: 4
+        file: layers/contexto_carreteras_lin.sql.jinja2
+  contexto_ferrocarril_lin:
+    description: Capa contexto_ferrocarril_lin
+    fields:
+      clase: Atributo clase
+      esp: "[esp]:Indica si los datos se superponen con el territorio español o son exclusivamente del contexto con propósitos de re"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 3
+        maxzoom: 12
+        extent: 2048
+        buffer: 4
+        file: layers/contexto_ferrocarril_lin.sql.jinja2
+  contexto_hidrografia_lin:
+    description: Capa contexto_hidrografia_lin
+    fields:
+      clase: Atributo clase
+      esp: "[esp]:Indica si los datos se superponen con el territorio español o son exclusivamente del contexto con propósitos de re"
+      nombre: "[nombre]:Nombre"
+      orden: Atributo orden
+      persistencia: Atributo persistencia
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 3
+        maxzoom: 12
+        extent: 2048
+        buffer: 4
+        file: layers/contexto_hidrografia_lin.sql.jinja2
+  contexto_lamina_agua_pol:
+    description: Capa contexto_lamina_agua_pol
+    fields:
+      clase: Atributo clase
+      esp: "[esp]:Indica si los datos se superponen con el territorio español o son exclusivamente del contexto con propósitos de re"
+      nombre: "[nombre]:Nombre"
+      orden: Atributo orden
+      persistencia: Atributo persistencia
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 3
+        maxzoom: 12
+        extent: 2048
+        buffer: 2
+        file: layers/contexto_lamina_agua_pol.sql.jinja2
+  contexto_nombre_hidrografia_lin:
+    description: Capa contexto_nombre_hidrografia_lin
+    fields:
+      clase: Atributo clase
+      esp: "[esp]:Indica si los datos se superponen con el territorio español o son exclusivamente del contexto con propósitos de re"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 3
+        maxzoom: 12
+        extent: 2048
+        buffer: 4
+        file: layers/contexto_nombre_hidrografia_lin.sql.jinja2
+  contexto_nombre_hidrografia_pol:
+    description: Capa contexto_nombre_hidrografia_pol
+    fields:
+      clase: Atributo clase
+      esp: "[esp]:Indica si los datos se superponen con el territorio español o son exclusivamente del contexto con propósitos de re"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 3
+        maxzoom: 12
+        extent: 2048
+        buffer: 2
+        file: layers/contexto_nombre_hidrografia_pol.sql.jinja2
+  contexto_nombre_orografia_lin:
+    description: Capa contexto_nombre_orografia_lin
+    fields:
+      clase: Atributo clase
+      esp: "[esp]:Indica si los datos se superponen con el territorio español o son exclusivamente del contexto con propósitos de re"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 3
+        maxzoom: 12
+        extent: 2048
+        buffer: 4
+        file: layers/contexto_nombre_orografia_lin.sql.jinja2
+  contexto_nombre_orografia_pol:
+    description: Capa contexto_nombre_orografia_pol
+    fields:
+      clase: Atributo clase
+      esp: "[esp]:Indica si los datos se superponen con el territorio español o son exclusivamente del contexto con propósitos de re"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 3
+        maxzoom: 12
+        extent: 2048
+        buffer: 2
+        file: layers/contexto_nombre_orografia_pol.sql.jinja2
+  contexto_nombre_orografia_pto:
+    description: Capa contexto_nombre_orografia_pto
+    fields:
+      clase: Atributo clase
+      esp: "[esp]:Indica si los datos se superponen con el territorio español o son exclusivamente del contexto con propósitos de re"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 3
+        maxzoom: 12
+        extent: 2048
+        buffer: 8
+        file: layers/contexto_nombre_orografia_pto.sql.jinja2
+  contexto_nombre_poblacion_pto:
+    description: Capa contexto_nombre_poblacion_pto
+    fields:
+      clase: Atributo clase
+      esp: "[esp]:Indica si los datos se superponen con el territorio español o son exclusivamente del contexto con propósitos de re"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 3
+        maxzoom: 12
+        extent: 2048
+        buffer: 8
+        file: layers/contexto_nombre_poblacion_pto.sql.jinja2
+  contexto_territorios_lin:
+    description: Capa contexto_territorios_lin
+    fields:
+      clase: Atributo clase
+      esp: "[esp]:Indica si los datos se superponen con el territorio español o son exclusivamente del contexto con propósitos de re"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 0
+        maxzoom: 12
+        extent: 2048
+        buffer: 4
+        file: layers/contexto_territorios_lin.sql.jinja2
+  contexto_territorios_pol:
+    description: Capa contexto_territorios_pol
+    fields:
+      clase: Atributo clase
+      esp: "[esp]:Indica si los datos se superponen con el territorio español o son exclusivamente del contexto con propósitos de re"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 0
+        maxzoom: 12
+        extent: 2048
+        buffer: 2
+        file: layers/contexto_territorios_pol.sql.jinja2
+  cubierta_vegetal_bosque_pol:
+    description: Capa cubierta_vegetal_bosque_pol
+    fields:
+      clase: Atributo clase
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 5
+        maxzoom: 12
+        extent: 2048
+        buffer: 2
+        file: layers/cubierta_vegetal_bosque_pol.sql.jinja2
+  cubierta_vegetal_pol:
+    description: Capa cubierta_vegetal_pol
+    fields:
+      clase: Atributo clase
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 13
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/cubierta_vegetal_pol.sql.jinja2
+  edificio_pol:
+    description: Capa edificio_pol
+    fields:
+      clase: "edificio:Clase de objeto"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      tipo: "generico:Clase para los elementos que no se pueden incluir en otro atributo de esta clase. Por ejemplo: comercial, cultu"
+    sql:
+      - minzoom: 15
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/edificio_pol.sql.jinja2
+  espacio_natural_protegido_pol:
+    description: Capa espacio_natural_protegido_pol
+    fields:
+      clase: Atributo clase
+      nombre: "[denominacion]:Denominación oficial"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 7
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/espacio_natural_protegido_pol.sql.jinja2
+  estacion_autobus_pol:
+    description: "El elemento «estacion_autobus_pol» comprende los objetos geográficos superficiales que representan las estaciones de autobuses. Los datos pueden provenir de la Información Geográfica de Referencia de "
+    fields:
+      clase: "estacion_autobus:Clase de objeto"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/estacion_autobus_pol.sql.jinja2
+  estacion_autobus_pto:
+    description: El elemento «estacion_autobus_pto» comprende los objetos geográficos puntuales que representan las estaciones de autobuses. Los datos pueden provenir de la Información Geográfica de Referencia de Rede
+    fields:
+      clase: "estacion_autobus:Clase de objeto"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 13
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/estacion_autobus_pto.sql.jinja2
+  estacion_ferrocarril_pol:
+    description: El elemento «estacion_ferrocarril_pol» comprende los objetos geográficos superficiales que representan los distintos espacios de las estaciones de ferrocarril. Los datos pueden provenir de la Informac
+    fields:
+      clase: Atributo clase
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/estacion_ferrocarril_pol.sql.jinja2
+  estacion_ferrocarril_pto:
+    description: El elemento «estacion_ferrocarril_pto» comprende los objetos geográficos puntuales que representan las estaciones de ferrocarril. Los datos pueden provenir de la Información Geográfica de Referencia d
+    fields:
+      clase: Atributo clase
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
+    sql:
+      - minzoom: 13
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/estacion_ferrocarril_pto.sql.jinja2
+  ferrocarril_lin:
+    description: Capa ferrocarril_lin
+    fields:
+      clase: Atributo clase
+      estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
+      nombre: "[denominacion_linea_ferrocarril]:Denominación"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      puente: "T:Sí\tF:No"
+      tipo_tramo: Atributo tipo_tramo
+      tunel: "T:Sí\tF:No"
+    sql:
+      - minzoom: 7
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/ferrocarril_lin.sql.jinja2
+  ferrocarril_pk_pto:
+    description: El elemento «ferrocarril_pk_pto» incluye los elementos geográficos puntuales que representan los puntos kilométricos de la red de ferrocarril. Los datos pueden provenir de la Información Geográfica de
+    fields:
+      clase: "pk_ferrocarril:Clase de objeto"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      ref: "[referencia]:Identificador del PK. Si no se conoce o no es aplicable dejarlo en blanco"
+    sql:
+      - minzoom: 15
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/ferrocarril_pk_pto.sql.jinja2
+  ferrocarril_pol:
+    description: El elemento «ferrocarril_pol» comprende los objetos geográficos poligonales relativos a las instalaciones e infraestructuras de ferrocarril. Elementos poligonales constructivos de un ferrocarril que n
+    fields:
+      clase: Atributo clase
+      estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 13
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/ferrocarril_pol.sql.jinja2
+  hidrografia_lin:
+    description: El elemento «hidrografia_lin» comprende los objetos geográficos lineales de carácter natural y artificial que forman la red hidrográfica de España. Los datos pueden provenir de la Información Geográfi
+    fields:
+      clase: Atributo clase
+      nombre: "[denominacion]:Denominación oficial"
+      orden: "otro:Este valor puede utilizarse en el caso de que no aplique indicar el nivel jerárquico"
+      persistencia: "otro:Este valor puede utilizarse en el caso de que no aplique indicar persistencia"
+      situacion: Atributo situacion
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 7
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/hidrografia_lin.sql.jinja2
+  hidrografia_pol:
+    description: El elemento «hidrografia_pol» comprende los objetos geográficos poligonales de carácter natural y artificial que forman la red hidrográfica de España Los datos pueden provenir de la Información Geográ
+    fields:
+      clase: Atributo clase
+      persistencia: "otro:Este valor puede utilizarse en el caso de que no aplique indicar persistencia"
+      nombre: "[denominacion]:Denominación oficial"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 9
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/hidrografia_pol.sql.jinja2
+  instalacion_deportiva_pol:
+    description: Capa instalacion_deportiva_pol
+    fields:
+      clase: Atributo clase
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/instalacion_deportiva_pol.sql.jinja2
+  instalacion_educativa_pol:
+    description: Capa instalacion_educativa_pol
+    fields:
+      clase: "instalacion_educativa:Clase de objeto"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/instalacion_educativa_pol.sql.jinja2
+  instalacion_energia_pol:
+    description: Capa instalacion_energia_pol
+    fields:
+      clase: "instalacion_energia:Otras instalaciones de energía que no se pueden clasificar en el resto de clases"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/instalacion_energia_pol.sql.jinja2
+  instalacion_militar_pol:
+    description: Capa instalacion_militar_pol
+    fields:
+      clase: "instalacion_militar:Clase de objeto"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/instalacion_militar_pol.sql.jinja2
+  instalacion_sanitaria_pol:
+    description: Capa instalacion_sanitaria_pol
+    fields:
+      clase: "instalacion_sanitaria:Clase de objeto"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/instalacion_sanitaria_pol.sql.jinja2
+  instalacion_telecomunicacion_pol:
+    description: Capa instalacion_telecomunicacion_pol
+    fields:
+      clase: "instalacion_telecomunicacion:Clase de objeto"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/instalacion_telecomunicacion_pol.sql.jinja2
+  instalacion_tratamiento_aguas_pol:
+    description: Capa instalacion_tratamiento_aguas_pol
+    fields:
+      clase: "instalacion_tratamiento_aguas:Clase de objeto"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/instalacion_tratamiento_aguas_pol.sql.jinja2
+  instalacion_tratamiento_residuos_pol:
+    description: Capa instalacion_tratamiento_residuos_pol
+    fields:
+      clase: "instalacion_tratamiento_residuos:Clase de objeto"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/instalacion_tratamiento_residuos_pol.sql.jinja2
+  lamina_agua_pol:
+    description: El elemento «lamina_agua_pol» comprende los objetos geográficos que representan las superficies de agua de carácter natural o artificial. Los datos pueden provenir de la Información Geográfica de Refe
+    fields:
+      clase: Atributo clase
+      persistencia: "otro:Este valor puede utilizarse en el caso de que no aplique indicar persistencia"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 8
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/lamina_agua_pol.sql.jinja2
+  linea_limite_lin:
+    description: Capa linea_limite_lin
+    fields:
+      clase: Atributo clase
+      nombre: "[NAME_BOUND]:Denominación"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      ref: "[NATIONALCODE]:Atributo nationalcode de líneas límite"
+    sql:
+      - minzoom: 5
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/linea_limite_lin.sql.jinja2
+  manzana_pol:
+    description: Capa manzana_pol
+    fields:
+      clase: "manzana:Clase de objeto"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 12
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/manzana_pol.sql.jinja2
+  municipio_pol:
+    description: Capa municipio_pol
+    fields:
+      clase: "municipio:Clase de objeto"
+      codigo: "[codigo]:Nationalcode según las especificaciones de datos INSPIRE para unidades administrativas."
+      nombre: "[denominación_municipio]:Denominación oficial del municipio"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 9
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/municipio_pol.sql.jinja2
+  nombre_division_administrativa_pto:
+    description: El elemento «nombre_división_Administrativa_pto» contiene las referencias puntuales de los nombres geográficos relativos a divisiones administrativas que se encuentran recogidos en el Nomenclátor Geog
+    fields:
+      clase: Atributo clase
+      nombre: "[nombre]:Nombre"
+      nombre_alt: "[nombre_alternativo]:Nombre alternativo"
+      jerarquia: "1:Recomendado para visualizarse a partir del nivel 0\t2:Recomendado para visualizarse a partir del nivel 5\t3:Recomendado "
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 3
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/nombre_division_administrativa_pto.sql.jinja2
+  nombre_hidrografia_pto:
+    description: El elemento «nombre_hidrografia_pto» contiene las referencias puntuales de los nombres geográficos de los distintos elementos de naturaleza hidrográfica continental y orográfica marítima y costera que
+    fields:
+      clase: "sifon_sumidero:Sifones, sumideros o bocas hidrográficas entre otros lugares característicos en el curso de una corriente"
+      nombre: "[nombre]:Nombre"
+      nombre_alt: "[nombre_alternativo]:Nombre alternativo"
+      jerarquia: "1:Recomendado para visualizarse a partir del nivel 0\t2:Recomendado para visualizarse a partir del nivel 5\t3:Recomendado "
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 7
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/nombre_hidrografia_pto.sql.jinja2
+  nombre_orografia_pto:
+    description: El elemento «nombre_orografia_pto» contiene las referencias puntuales de los nombres de las entidades orográficas continentales y áreas geográficas que se encuentran incluidas en el Nomenclátor Geográ
+    fields:
+      clase: "otros_nombre_orografia:Atributo para nombres que no se pueden clasificar en otro."
+      nombre: "[nombre]:Nombre"
+      nombre_alt: "[nombre_alternativo]:Nombre alternativo"
+      jerarquia: "1:Recomendado para visualizarse a partir del nivel 0\t2:Recomendado para visualizarse a partir del nivel 5\t3:Recomendado "
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 12
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/nombre_orografia_pto.sql.jinja2
+  nombre_poblacion_construccion_pto:
+    description: El elemento «nombre_poblacion_construccion_pto» contiene las referencias puntuales de los nombres geográficos de poblaciones y construcciones incluidos en el Nomenclátor Geográfico Básico de España (N
+    fields:
+      clase: Atributo clase
+      nombre: "[nombre]:Nombre"
+      nombre_alt: "[nombre_alternativo]:Nombre alternativo"
+      jerarquia: "1:Recomendado para visualizarse a partir del nivel 0\t2:Recomendado para visualizarse a partir del nivel 5\t3:Recomendado "
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 7
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/nombre_poblacion_construccion_pto.sql.jinja2
+  nombre_toponimo_lin:
+    description: Capa nombre_toponimo_lin
+    fields:
+      clase: "Otros:Clase de objeto no contemplada en el listado de valores. "
+      jerarquia: "1:Recomendado para visualizarse a partir del nivel 0\t2:Recomendado para visualizarse a partir del nivel 5\t3:Recomendado "
+      nombre: "[nombre]:Nombre"
+      nombre_alt: "[nombre_alternativo]:Nombre alternativo"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 4
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/nombre_toponimo_lin.sql.jinja2
+  nombre_transporte_pto:
+    description: El elemento «nombre_transporte_pto» contiene las referencias puntuales de los nombres geográficos relativos al transporte recogidos en el Nomenclátor Geográfico Básico de España (NGBE) , mantenido por
+    fields:
+      clase: Atributo clase
+      nombre: "[nombre]:Nombre"
+      nombre_alt: "[nombre_alternativo]:Nombre alternativo"
+      jerarquia: "1:Recomendado para visualizarse a partir del nivel 0\t2:Recomendado para visualizarse a partir del nivel 5\t3:Recomendado "
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 13
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/nombre_transporte_pto.sql.jinja2
+  nucleo_urbano_pol:
+    description: Capa nucleo_urbano_pol
+    fields:
+      clase: "nucleo_urbano:Clase de objeto"
+      cod_ine: "[codigo_ine]:Código INE del núcleo urbano"
+      municipio: "[denominacion_municipio]:Denominación oficial del municipio"
+      nombre: "[denominacion_nucleo_urbano]:Denominación oficial del núcleo urbano"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 10
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/nucleo_urbano_pol.sql.jinja2
+  paso_a_nivel_pto:
+    description: "El elemento «paso_a_nivel_pto» incluye los elementos geográficos puntuales que representan los pasos a nivel existentes en la red de carreteras. Los datos pueden provenir de la Información Geográfica "
+    fields:
+      clase: "paso_a_nivel:Clase de objeto"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/paso_a_nivel_pto.sql.jinja2
+  peaje_pol:
+    description: El elemento «peaje_pol» incluye los elementos geográficos superficiales relativos a las zonas de acceso a las vías de comunicación mediante peaje. Los datos pueden provenir de la Información Geográfic
+    fields:
+      clase: "peaje:Clase de objeto"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/peaje_pol.sql.jinja2
+  peaje_pto:
+    description: El elemento «peaje_pto» incluye los elementos geográficos puntuales que representan los puntos de acceso a las vías de comunicación mediante peaje. Los datos pueden provenir de la Información Geográfi
+    fields:
+      clase: "peaje:Clase de objeto"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 13
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/peaje_pto.sql.jinja2
+  portal_pto:
+    description: Capa portal_pto
+    fields:
+      clase: "portal:Clase de objeto"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      ref: "[numero]+\" \"+[extension]:Número y extensión"
+    sql:
+      - minzoom: 16
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/portal_pto.sql.jinja2
+  provincia_pol:
+    description: Capa provincia_pol
+    fields:
+      clase: "provincia:Clase de objeto"
+      codigo: "[codigo]:Nationalcode según las especificaciones de datos INSPIRE para unidades administrativas. Código del país + Códig"
+      nombre: "[denominación_provincia]:Denominación oficial de la provincia"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 7
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/provincia_pol.sql.jinja2
+  puerto_pol:
+    description: El elemento «puerto_pol» comprende los objetos geográficos poligonales que configuran las instalaciones y las zonas de los servicios portuarios de cualquier tipo. Los datos pueden provenir de la Infor
+    fields:
+      clase: Atributo clase
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
+    sql:
+      - minzoom: 12
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/puerto_pol.sql.jinja2
+  puerto_pto:
+    description: El elemento «puerto_pto» comprende los objetos geográficos puntuales de referencia relativos a las instalaciones y los servicios portuarios de cualquier naturaleza. Los datos pueden provenir de la Inf
+    fields:
+      clase: Atributo clase
+      nombre: "[denominación_puerto]:Denominación oficial del puerto"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      ref: "[designador]:Referencia o nombre abreviado. Si no se conoce o no es aplicable dejarlo en blanco"
+      estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
+    sql:
+      - minzoom: 10
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/puerto_pto.sql.jinja2
+  ruta_lin:
+    description: "El elemento «ruta_lin» identifica los elementos lineales que representan los itinerarios correspondientes a las rutas, caminos y senderos de distinta naturaleza independientemente de la tipología del "
+    fields:
+      clase: Atributo clase
+      nombre: "[tipo_vial]+\" \"+[denominacion]:Denominación de la vía urbana"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/ruta_lin.sql.jinja2
+  senda_lin:
+    description: El elemento «senda_lin» comprende los objetos geográficos lineales por los que puede circular ganado y personas, cuya anchura es inferior a la de un camino. Estos datos pueden proceder de la Informaci
+    fields:
+      clase: "senda:Clase de objeto"
+      nombre: "[denominacion_camino]:Denominación del camino"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 14
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/senda_lin.sql.jinja2
+  servicio_instalacion_pto:
+    description: Capa servicio_instalacion_pto
+    fields:
+      clase: "captacion:Lugar donde se capta o extrae agua de forma artificial mediante diversos procedimientos para su posterior apro"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 13
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/servicio_instalacion_pto.sql.jinja2
+  via_servicio_lin:
+    description: El elemento «via_servicio_lin» identifica los elementos lineales que representan los viales de las vías de servicio. Dichos datos pueden proceder de la Información Geográfica de Referencia de Redes de
+    fields:
+      clase: Atributo clase
+      nombre: "[denominacion_carretera]:Denominación de la carretera"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      puente: "T:Sí\tF:No"
+      ref: "[referencia]:Identificador de la carretera o vía compuesto por un primera parte de texto según su"
+      tunel: "T:Sí\tF:No"
+    sql:
+      - minzoom: 12
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/via_servicio_lin.sql.jinja2
+  via_urbana_lin:
+    description: El elemento «via_urbana_lin» identifica los elementos lineales que representan los ejes de los viales que existen en un entorno urbano y que suelen estar identificados por una tipología de vial y un n
+    fields:
+      clase: Atributo clase
+      nombre: "[tipo_vial]+\" \"+[denominacion]:Denominación de la vía urbana"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      puente: "T:Sí\tF:No"
+      ref: "[referencia]:Identificador de la carretera o vía compuesto por un primera parte de texto según su competencial, un guion"
+      tunel: "T:Sí\tF:No"
+      estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
+    sql:
+      - minzoom: 13
+        maxzoom: 22
+        extent: 4096
+        buffer: 4
+        file: layers/via_urbana_lin.sql.jinja2
+  zona_dotacional_pol:
+    description: Capa zona_dotacional_pol
+    fields:
+      clase: "zona_dotacional:Otras zonas dotacionales que no se pueden clasificar en el resto de clases"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 13
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/zona_dotacional_pol.sql.jinja2
+  zona_industrial_pol:
+    description: Capa zona_industrial_pol
+    fields:
+      clase: Atributo clase
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 12
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/zona_industrial_pol.sql.jinja2
+  zona_militar_pol:
+    description: Capa zona_militar_pol
+    fields:
+      clase: "zona_militar:Clase de objeto"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 12
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/zona_militar_pol.sql.jinja2
+  zona_protegida_pol:
+    description: Capa zona_protegida_pol
+    fields:
+      clase: "zona_protegida:Otras zonas protegidas que no se pueden clasificar en el resto de clases"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 12
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/zona_protegida_pol.sql.jinja2
+  zona_protegida_pto:
+    description: Capa zona_protegida_pto
+    fields:
+      clase: "zona_protegida:Otras zonas protegidas que no se pueden clasificar en el resto de clases"
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 12
+        maxzoom: 22
+        extent: 4096
+        buffer: 8
+        file: layers/zona_protegida_pto.sql.jinja2
+  zona_verde_pol:
+    description: Capa zona_verde_pol
+    fields:
+      clase: Atributo clase
+      nombre: "[nombre]:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+    sql:
+      - minzoom: 12
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/zona_verde_pol.sql.jinja2
+  tierra_firme_pol:
+    description: Capa tierra_firme_pol (sin zooms tippecanoe; incluir bajo demanda)
+    fields:
+      clase: "[tierra_firme]:Clase de objeto"
+      codigo: "[codigo]:Nationalcode según las especificaciones de datos INSPIRE para unidades administrativas."
+      nombre: "España:Nombre"
+      proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
+      ref: "[designador]:Atributo previsto por si hay que distinguir o etiquetar distintintos tipos de polígonos de tierra."
+    sql:
+      - minzoom: 0
+        maxzoom: 22
+        extent: 4096
+        buffer: 2
+        file: layers/tierra_firme_pol.sql.jinja2

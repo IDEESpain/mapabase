@@ -1,0 +1,20 @@
+-- Capa aerodromo_pto (Tilekiln / Mapa Ciudadano)
+-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+SELECT
+    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    clase,
+    nombre,
+    proveedor,
+    ref,
+    tipo,
+    uso,
+    estado
+{% if zoom <= 13 %}
+  FROM mc_servicio_nacional.aerodromo_pto
+{% elif zoom <= 16 %}
+  FROM mc_servicio_regional.aerodromo_pto
+{% else %}
+  FROM mc_servicio_local.aerodromo_pto
+{% endif %}
+  WHERE the_geom && {{bbox}}
+;

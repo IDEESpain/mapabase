@@ -1,0 +1,16 @@
+-- Capa zona_dotacional_pol (Tilekiln / Mapa Ciudadano)
+-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+SELECT
+    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    clase,
+    nombre,
+    proveedor
+{% if zoom <= 13 %}
+  FROM mc_servicio_nacional.zona_dotacional_pol
+{% elif zoom <= 16 %}
+  FROM mc_servicio_regional.zona_dotacional_pol
+{% else %}
+  FROM mc_servicio_local.zona_dotacional_pol
+{% endif %}
+  WHERE the_geom && {{bbox}}
+;

@@ -1,0 +1,21 @@
+# Equivalencia Proceso 3 (FGB) → PostGIS / Tilekiln  (remodelado capas pesadas)
+#
+# FGB                                      PostGIS
+# -----                                    -------
+# productores/{mun,com_aut,nacional}/      mc_productores.{capa}
+#                                          PARTITION BY LIST (ambito):
+#                                            {capa}_local | _regional | _nacional
+# voronoi_*.fgb                            mc_mascaras.voronoi_*
+# generados/municipios|comunidades/        mc_generados.{capa}  (staging)
+# generados/nacional/comunidades/00/       mc_servicio_regional.{capa}  → z14–16
+# generados/nacional/municipios/00/        mc_servicio_local.{capa}     → z17+
+# productores/nacional/00/                 mc_servicio_nacional.{capa}  → z0–13
+#
+# Perfiles (mc_meta.capas.perfil): ligera | normal | pesada
+# Bandas zoom: nacional 0–13 | regional 14–16 | local 17+
+#
+# Carga y pipeline:
+#   cd tilekiln/tools
+#   python run_pipeline_sql.py --db mapabasexyz \
+#     --datos-base /var/MVT_MapaBaseXYZ/DatosProcesados \
+#     --capas cubierta_vegetal_pol,edificio_pol

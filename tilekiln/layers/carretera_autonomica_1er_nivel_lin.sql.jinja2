@@ -1,0 +1,20 @@
+-- Capa carretera_autonomica_1er_nivel_lin (Tilekiln / Mapa Ciudadano)
+-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+SELECT
+    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    clase,
+    nombre,
+    proveedor,
+    puente,
+    ref,
+    tunel,
+    estado
+{% if zoom <= 13 %}
+  FROM mc_servicio_nacional.carretera_autonomica_1er_nivel_lin
+{% elif zoom <= 16 %}
+  FROM mc_servicio_regional.carretera_autonomica_1er_nivel_lin
+{% else %}
+  FROM mc_servicio_local.carretera_autonomica_1er_nivel_lin
+{% endif %}
+  WHERE the_geom && {{bbox}}
+;

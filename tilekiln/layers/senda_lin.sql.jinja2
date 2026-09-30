@@ -1,0 +1,16 @@
+-- Capa senda_lin (Tilekiln / Mapa Ciudadano)
+-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+SELECT
+    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    clase,
+    nombre,
+    proveedor
+{% if zoom <= 13 %}
+  FROM mc_servicio_nacional.senda_lin
+{% elif zoom <= 16 %}
+  FROM mc_servicio_regional.senda_lin
+{% else %}
+  FROM mc_servicio_local.senda_lin
+{% endif %}
+  WHERE the_geom && {{bbox}}
+;

@@ -1,0 +1,20 @@
+-- Capa cubierta_vegetal_pol (Tilekiln / Mapa Ciudadano)
+-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+SELECT
+    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    clase,
+    proveedor
+{% if zoom <= 13 %}
+  FROM mc_servicio_nacional.cubierta_vegetal_pol
+{% elif zoom <= 16 %}
+  FROM mc_servicio_regional.cubierta_vegetal_pol
+{% else %}
+  FROM mc_servicio_local.cubierta_vegetal_pol
+{% endif %}
+  WHERE the_geom && {{bbox}}
+{% if zoom >= 13 and zoom <= 14 %}
+  AND clase IN ('bosque_coniferas', 'bosque_frondosas', 'bosque_mixto')
+{% elif (zoom >= 15 and zoom <= 22) %}
+  -- sin filtro tippecanoe en este zoom
+{% endif %}
+;

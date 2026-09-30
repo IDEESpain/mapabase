@@ -1,0 +1,18 @@
+-- Capa tierra_firme_pol (Tilekiln / Mapa Ciudadano)
+-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+SELECT
+    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    clase,
+    codigo,
+    nombre,
+    proveedor,
+    ref
+{% if zoom <= 13 %}
+  FROM mc_servicio_nacional.tierra_firme_pol
+{% elif zoom <= 16 %}
+  FROM mc_servicio_regional.tierra_firme_pol
+{% else %}
+  FROM mc_servicio_local.tierra_firme_pol
+{% endif %}
+  WHERE the_geom && {{bbox}}
+;

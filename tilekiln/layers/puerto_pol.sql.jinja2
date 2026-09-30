@@ -1,0 +1,17 @@
+-- Capa puerto_pol (Tilekiln / Mapa Ciudadano)
+-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+SELECT
+    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    clase,
+    nombre,
+    proveedor,
+    estado
+{% if zoom <= 13 %}
+  FROM mc_servicio_nacional.puerto_pol
+{% elif zoom <= 16 %}
+  FROM mc_servicio_regional.puerto_pol
+{% else %}
+  FROM mc_servicio_local.puerto_pol
+{% endif %}
+  WHERE the_geom && {{bbox}}
+;

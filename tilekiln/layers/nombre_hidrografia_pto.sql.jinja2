@@ -1,0 +1,27 @@
+-- Capa nombre_hidrografia_pto (Tilekiln / Mapa Ciudadano)
+-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+SELECT
+    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    clase,
+    nombre,
+    nombre_alt,
+    jerarquia,
+    proveedor
+{% if zoom <= 13 %}
+  FROM mc_servicio_nacional.nombre_hidrografia_pto
+{% elif zoom <= 16 %}
+  FROM mc_servicio_regional.nombre_hidrografia_pto
+{% else %}
+  FROM mc_servicio_local.nombre_hidrografia_pto
+{% endif %}
+  WHERE the_geom && {{bbox}}
+{% if zoom == 7 %}
+  AND clase IN ('mar', 'isla')
+{% elif zoom >= 8 and zoom <= 9 %}
+  AND clase IN ('isla', 'mar')
+{% elif zoom == 10 %}
+  AND clase IN ('embalse', 'entrante_costero_estrecho_maritimo', 'isla', 'mar', 'saliente_costero')
+{% elif (zoom >= 11 and zoom <= 22) %}
+  -- sin filtro tippecanoe en este zoom
+{% endif %}
+;

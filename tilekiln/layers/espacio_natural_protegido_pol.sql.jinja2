@@ -1,0 +1,23 @@
+-- Capa espacio_natural_protegido_pol (Tilekiln / Mapa Ciudadano)
+-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+SELECT
+    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    clase,
+    nombre,
+    proveedor
+{% if zoom <= 13 %}
+  FROM mc_servicio_nacional.espacio_natural_protegido_pol
+{% elif zoom <= 16 %}
+  FROM mc_servicio_regional.espacio_natural_protegido_pol
+{% else %}
+  FROM mc_servicio_local.espacio_natural_protegido_pol
+{% endif %}
+  WHERE the_geom && {{bbox}}
+{% if zoom >= 7 and zoom <= 8 %}
+  AND clase IN ('parque_nacional', 'reserva_de_la_biosfera')
+{% elif zoom >= 9 and zoom <= 10 %}
+  AND clase IN ('humedal_protegido', 'parque_nacional', 'parque_natural', 'reserva_de_la_biosfera', 'zona_de_especial_conservacion_de_importancia_comunitaria', 'zona_de_importancia_comunitaria_lic', 'zona_de_la_red_ecologica_europea_natura_2000')
+{% elif (zoom >= 11 and zoom <= 22) %}
+  -- sin filtro tippecanoe en este zoom
+{% endif %}
+;

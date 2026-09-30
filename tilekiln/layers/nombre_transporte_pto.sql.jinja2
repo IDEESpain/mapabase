@@ -1,0 +1,18 @@
+-- Capa nombre_transporte_pto (Tilekiln / Mapa Ciudadano)
+-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+SELECT
+    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    clase,
+    nombre,
+    nombre_alt,
+    jerarquia,
+    proveedor
+{% if zoom <= 13 %}
+  FROM mc_servicio_nacional.nombre_transporte_pto
+{% elif zoom <= 16 %}
+  FROM mc_servicio_regional.nombre_transporte_pto
+{% else %}
+  FROM mc_servicio_local.nombre_transporte_pto
+{% endif %}
+  WHERE the_geom && {{bbox}}
+;
