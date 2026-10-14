@@ -21,8 +21,10 @@ DROP FUNCTION IF EXISTS mc_meta.procesar_capa_regional(text);
 DROP FUNCTION IF EXISTS mc_meta.procesar_capa_local(text);
 DROP FUNCTION IF EXISTS mc_meta.build_servicio(text, text, text);
 
--- ST_Covers(mask, geom) y ST_Intersects reutilizan la máscara "preparada" entre filas;
--- ST_CoveredBy(geom, mask) no, y con máscaras de miles de vértices es ~100 veces más lento.
+-- Covers(mask, geom) e Intersects reutilizan la máscara "preparada" entre filas;
+-- CoveredBy(geom, mask) no, y con máscaras de miles de vértices es ~100 veces más lento.
+-- Se usan _ST_Intersects/_ST_Covers (C) con && explícito: los envoltorios SQL de PostGIS
+-- en CNIG apuntan a OPERATOR(public.&&), que dejó de existir al renombrar public.
 CREATE OR REPLACE FUNCTION mc_meta.clip_geom(
 	geom geometry,
 	mask geometry,
@@ -35,12 +37,12 @@ AS $$
 	SELECT CASE
 		WHEN geom IS NULL OR mask IS NULL THEN NULL
 		WHEN es_punto THEN
-			CASE WHEN geom && mask AND ST_Intersects(geom, mask) THEN geom ELSE NULL END
+			CASE WHEN geom && mask AND _ST_Intersects(geom, mask) THEN geom ELSE NULL END
 		ELSE
 			CASE
 				WHEN NOT (geom && mask) THEN NULL
-				WHEN ST_Covers(mask, geom) THEN geom
-				WHEN ST_Intersects(geom, mask) THEN
+				WHEN _ST_Covers(mask, geom) THEN geom
+				WHEN _ST_Intersects(geom, mask) THEN
 					ST_CollectionExtract(
 						ST_MakeValid(ST_Intersection(geom, mask)),
 						GREATEST(ST_Dimension(geom), 0) + 1
@@ -637,7 +639,7 @@ BEGIN
 			SELECT CASE
 				WHEN NOT EXISTS (
 					SELECT 1 FROM pg_temp._mc_mask k
-					 WHERE k.g && s.the_geom AND ST_Intersects(k.g, s.the_geom)
+					 WHERE k.g && s.the_geom AND _ST_Intersects(k.g, s.the_geom)
 				) THEN s.the_geom
 				WHEN %7$L::boolean THEN NULL
 				ELSE (

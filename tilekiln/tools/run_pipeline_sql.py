@@ -258,16 +258,20 @@ def ogr2ogr_staging(db: str, fgb: Path, destino: str, s_srs: str | None) -> None
         "-lco", "GEOMETRY_NAME=the_geom", "-lco", "FID=ogc_fid",
         "-lco", "SPATIAL_INDEX=NO", "-lco", "UNLOGGED=ON", "-lco", "PRECISION=NO",
     ]
+    # Primero con el SRS que declara el fichero; si no declara (o falla), con s_srs forzado.
+    # -skipfailures obliga a una transacción por elemento: solo como último recurso.
+    intentos = [["-gt", "65536"]]
     if s_srs:
-        cmd += ["-s_srs", s_srs]
-    r = subprocess.run(cmd + ["-gt", "65536"], capture_output=True, text=True, env=os.environ.copy())
-    if r.returncode == 0:
-        return
-    # -skipfailures obliga a una transacción por elemento: solo como último recurso
-    log(f"aviso: ogr2ogr falló con {fgb} ({r.stderr.strip()[-300:]}); reintento con -skipfailures")
-    r = subprocess.run(cmd + ["-skipfailures"], capture_output=True, text=True, env=os.environ.copy())
-    if r.returncode != 0:
-        raise RuntimeError(f"ogr2ogr {fgb}: {r.stderr.strip()[-500:]}")
+        intentos.append(["-s_srs", s_srs, "-gt", "65536"])
+    intentos.append((["-s_srs", s_srs] if s_srs else []) + ["-skipfailures"])
+    for i, extra in enumerate(intentos):
+        r = subprocess.run(cmd + extra, capture_output=True, text=True, env=os.environ.copy())
+        if r.returncode == 0:
+            if i:
+                log(f"aviso: {fgb} cargado con {' '.join(extra)}")
+            return
+        error = r.stderr.strip()[-300:]
+    raise RuntimeError(f"ogr2ogr {fgb}: {error}")
 
 
 def cargar_fgb(pool: ConnPool, db: str, capa: str, attrs: list[str], fgb: Path,
@@ -313,6 +317,10 @@ def cargar_fgb(pool: ConnPool, db: str, capa: str, attrs: list[str], fgb: Path,
     return n
 
 
+CARPETA_VALIDA = {"regional": re.compile(r"^\d{2}$"), "local": re.compile(r"^\d{5}$")}
+_carpetas_avisadas: set[Path] = set()
+
+
 def fuentes_capa(datos_base: Path, capa: str) -> list[tuple[Path, str, str]]:
     prod = datos_base / "productores"
     fuentes = []
@@ -321,8 +329,16 @@ def fuentes_capa(datos_base: Path, capa: str) -> list[tuple[Path, str, str]]:
         fuentes.append((fgb, "nacional", "00"))
     for nivel, carpeta in (("regional", "com_aut"), ("local", "municipios")):
         for d in sorted((prod / carpeta).glob("*")):
+            if not d.is_dir():
+                continue
+            # copias tipo 17_202407 o 16_completo no son un territorio
+            if not CARPETA_VALIDA[nivel].match(d.name):
+                if d not in _carpetas_avisadas:
+                    _carpetas_avisadas.add(d)
+                    log(f"aviso: se ignora la carpeta {carpeta}/{d.name} (no es un código de territorio)")
+                continue
             fgb = d / f"{capa}.fgb"
-            if d.is_dir() and fgb.exists():
+            if fgb.exists():
                 fuentes.append((fgb, nivel, d.name))
     return fuentes
 
@@ -356,6 +372,8 @@ def cargar_capa(pool: ConnPool, db: str, capa: str, attrs: list[str], generaliza
             continue
         total += n
         hechos += 1
+        if n == 0:
+            log(f"  aviso: {f} no aportó ningún elemento (¿vacío o SRS erróneo? revisa con ogrinfo -so)")
         log(f"  {capa} {amb}/{cod}: {n:,} elementos ({hechos}/{len(fuentes)}, {fmt_dur(time.monotonic() - t0)})")
     if errores:
         raise RuntimeError(f"{len(errores)} FGB con error: {'; '.join(errores[:5])}")
