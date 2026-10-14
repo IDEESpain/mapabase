@@ -1,11 +1,13 @@
 -- Capa altimetria_lin (Tilekiln / Mapa Ciudadano)
--- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+-- Fuente por zoom: g11 z<=11 | nacional z0-13 | regional z14-16 | local z17+
 SELECT
     ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
     altitud,
     clase,
     proveedor
-{% if zoom <= 13 %}
+{% if zoom <= 11 %}
+  FROM mc_servicio_nacional.altimetria_lin_g11
+{% elif zoom <= 13 %}
   FROM mc_servicio_nacional.altimetria_lin
 {% elif zoom <= 16 %}
   FROM mc_servicio_regional.altimetria_lin
@@ -20,4 +22,3 @@ SELECT
 {% elif (zoom >= 13 and zoom <= 22) %}
   -- sin filtro tippecanoe en este zoom
 {% endif %}
-;

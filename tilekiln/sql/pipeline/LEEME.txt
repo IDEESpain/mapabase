@@ -1,4 +1,4 @@
-# Equivalencia Proceso 3 (FGB) → PostGIS / Tilekiln  (remodelado capas pesadas)
+# Equivalencia Proceso 3 (FGB) → PostGIS / Tilekiln
 #
 # FGB                                      PostGIS
 # -----                                    -------
@@ -6,16 +6,38 @@
 #                                          PARTITION BY LIST (ambito):
 #                                            {capa}_local | _regional | _nacional
 # voronoi_*.fgb                            mc_mascaras.voronoi_*
-# generados/municipios|comunidades/        mc_generados.{capa}  (staging)
+# generados/municipios|comunidades/        mc_generados.{capa}  (UNLOGGED, intermedio)
 # generados/nacional/comunidades/00/       mc_servicio_regional.{capa}  → z14–16
 # generados/nacional/municipios/00/        mc_servicio_local.{capa}     → z17+
 # productores/nacional/00/                 mc_servicio_nacional.{capa}  → z0–13
+#                                          mc_servicio_nacional.{capa}_g8 / _g11
+#                                            (generalizadas para zooms bajos)
 #
-# Perfiles (mc_meta.capas.perfil): ligera | normal | pesada
-# Bandas zoom: nacional 0–13 | regional 14–16 | local 17+
+# Ficheros:
+#   00_schemas.sql    esquemas y catálogo. Idempotente: no borra nada.
+#   00_reset.sql      borra todos los mc_* (solo con --reset o a mano).
+#   01_funciones.sql  funciones del pipeline (se puede reaplicar siempre).
 #
-# Carga y pipeline:
+# Solo se recortan los territorios que tienen productor propio. El resto del
+# mosaico regional/local se rellena con el nivel superior sin recortar, y si
+# ningún territorio tiene productor el nivel es una VIEW del superior.
+#
+# Lanzar SIEMPRE dentro de tmux (o nohup): cada territorio se confirma por
+# separado y --resume continúa donde se quedó.
+#   tmux new -s pipeline
 #   cd tilekiln/tools
-#   python run_pipeline_sql.py --db mapabasexyz \
+#   ../.venv/bin/python run_pipeline_sql.py --db mapabasexyz \
 #     --datos-base /var/MVT_MapaBaseXYZ/DatosProcesados \
-#     --capas cubierta_vegetal_pol,edificio_pol
+#     --capas aerodromo_pto,edificio_pol --workers 6 2>&1 | tee -a pipeline.log
+#   (Ctrl+b d para salir sin pararlo; tmux attach -t pipeline para volver)
+#
+# Seguimiento desde otra sesión:
+#   SELECT capa, fase, ok, finished_at, left(detalle, 120) FROM mc_meta.run_log ORDER BY id DESC LIMIT 20;
+#   SELECT pid, now() - query_start AS dura, left(query, 100) FROM pg_stat_activity
+#    WHERE application_name = 'mc_pipeline' AND state = 'active';
+#
+# Tilekiln necesita PostGIS en el search_path (sin tocar public_modelo_2025):
+#   export PGOPTIONS="-c search_path=public,public_modelo_2025"
+#
+# Si se cambia el modelo o config_vtiles.json: python tools/generate_tilekiln.py
+# (regenera config.yaml, layers/*.sql.jinja2 y capas_modelo.json).

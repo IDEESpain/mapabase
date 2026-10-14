@@ -1,10 +1,14 @@
 -- Capa cubierta_vegetal_bosque_pol (Tilekiln / Mapa Ciudadano)
--- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+-- Fuente por zoom: g8 z<=8 | g11 z<=11 | nacional z0-13 | regional z14-16 | local z17+
 SELECT
     ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
     clase,
     proveedor
-{% if zoom <= 13 %}
+{% if zoom <= 8 %}
+  FROM mc_servicio_nacional.cubierta_vegetal_bosque_pol_g8
+{% elif zoom <= 11 %}
+  FROM mc_servicio_nacional.cubierta_vegetal_bosque_pol_g11
+{% elif zoom <= 13 %}
   FROM mc_servicio_nacional.cubierta_vegetal_bosque_pol
 {% elif zoom <= 16 %}
   FROM mc_servicio_regional.cubierta_vegetal_bosque_pol
@@ -12,4 +16,3 @@ SELECT
   FROM mc_servicio_local.cubierta_vegetal_bosque_pol
 {% endif %}
   WHERE the_geom && {{bbox}}
-;

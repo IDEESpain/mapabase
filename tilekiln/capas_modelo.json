@@ -1,0 +1,1017 @@
+{
+ "aerodromo_pol": {
+  "attrs": [
+   "clase",
+   "estado",
+   "nombre",
+   "proveedor",
+   "ref"
+  ],
+  "minzoom": 12,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "aerodromo_pto": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor",
+   "ref",
+   "tipo",
+   "uso",
+   "estado"
+  ],
+  "minzoom": 10,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "altimetria_lin": {
+  "attrs": [
+   "altitud",
+   "clase",
+   "proveedor"
+  ],
+  "minzoom": 11,
+  "maxzoom": 22,
+  "generalizar": [
+   11
+  ]
+ },
+ "altimetria_pto": {
+  "attrs": [
+   "altitud",
+   "clase",
+   "proveedor"
+  ],
+  "minzoom": 17,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "aparcamiento_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "aparcamiento_pto": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 13,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "area_servicio_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "area_servicio_pto": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 13,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "autopista_lin": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor",
+   "puente",
+   "ref",
+   "tunel",
+   "estado"
+  ],
+  "minzoom": 6,
+  "maxzoom": 22,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "autovia_lin": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor",
+   "puente",
+   "ref",
+   "tunel",
+   "estado"
+  ],
+  "minzoom": 6,
+  "maxzoom": 22,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "camino_lin": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor",
+   "puente",
+   "ref",
+   "tunel"
+  ],
+  "minzoom": 13,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "carretera_autonomica_1er_nivel_lin": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor",
+   "puente",
+   "ref",
+   "tunel",
+   "estado"
+  ],
+  "minzoom": 8,
+  "maxzoom": 22,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "carretera_autonomica_2do_nivel_lin": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor",
+   "puente",
+   "ref",
+   "tunel",
+   "estado"
+  ],
+  "minzoom": 9,
+  "maxzoom": 22,
+  "generalizar": [
+   11
+  ]
+ },
+ "carretera_autonomica_3er_nivel_lin": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor",
+   "puente",
+   "ref",
+   "tunel",
+   "estado"
+  ],
+  "minzoom": 10,
+  "maxzoom": 22,
+  "generalizar": [
+   11
+  ]
+ },
+ "carretera_general_lin": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor",
+   "puente",
+   "ref",
+   "tunel",
+   "estado"
+  ],
+  "minzoom": 6,
+  "maxzoom": 22,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "carretera_otros_lin": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor",
+   "puente",
+   "ref",
+   "tunel",
+   "estado"
+  ],
+  "minzoom": 11,
+  "maxzoom": 22,
+  "generalizar": [
+   11
+  ]
+ },
+ "carretera_pk_pto": {
+  "attrs": [
+   "clase",
+   "proveedor",
+   "ref"
+  ],
+  "minzoom": 15,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "comunidad_autonoma_pol": {
+  "attrs": [
+   "clase",
+   "codigo",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 5,
+  "maxzoom": 22,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "conduccion_lin": {
+  "attrs": [
+   "clase",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "construccion_lin": {
+  "attrs": [
+   "clase",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "construccion_pol": {
+  "attrs": [
+   "clase",
+   "proveedor"
+  ],
+  "minzoom": 15,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "contexto_carreteras_lin": {
+  "attrs": [
+   "clase",
+   "esp",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 3,
+  "maxzoom": 12,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "contexto_ferrocarril_lin": {
+  "attrs": [
+   "clase",
+   "esp",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 3,
+  "maxzoom": 12,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "contexto_hidrografia_lin": {
+  "attrs": [
+   "clase",
+   "esp",
+   "nombre",
+   "orden",
+   "persistencia",
+   "proveedor"
+  ],
+  "minzoom": 3,
+  "maxzoom": 12,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "contexto_lamina_agua_pol": {
+  "attrs": [
+   "clase",
+   "esp",
+   "nombre",
+   "orden",
+   "persistencia",
+   "proveedor"
+  ],
+  "minzoom": 3,
+  "maxzoom": 12,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "contexto_nombre_hidrografia_lin": {
+  "attrs": [
+   "clase",
+   "esp",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 3,
+  "maxzoom": 12,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "contexto_nombre_hidrografia_pol": {
+  "attrs": [
+   "clase",
+   "esp",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 3,
+  "maxzoom": 12,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "contexto_nombre_orografia_lin": {
+  "attrs": [
+   "clase",
+   "esp",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 3,
+  "maxzoom": 12,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "contexto_nombre_orografia_pol": {
+  "attrs": [
+   "clase",
+   "esp",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 3,
+  "maxzoom": 12,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "contexto_nombre_orografia_pto": {
+  "attrs": [
+   "clase",
+   "esp",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 3,
+  "maxzoom": 12,
+  "generalizar": []
+ },
+ "contexto_nombre_poblacion_pto": {
+  "attrs": [
+   "clase",
+   "esp",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 3,
+  "maxzoom": 12,
+  "generalizar": []
+ },
+ "contexto_territorios_lin": {
+  "attrs": [
+   "clase",
+   "esp",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 0,
+  "maxzoom": 12,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "contexto_territorios_pol": {
+  "attrs": [
+   "clase",
+   "esp",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 0,
+  "maxzoom": 12,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "cubierta_vegetal_bosque_pol": {
+  "attrs": [
+   "clase",
+   "proveedor"
+  ],
+  "minzoom": 5,
+  "maxzoom": 12,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "cubierta_vegetal_pol": {
+  "attrs": [
+   "clase",
+   "proveedor"
+  ],
+  "minzoom": 13,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "edificio_pol": {
+  "attrs": [
+   "clase",
+   "proveedor",
+   "tipo"
+  ],
+  "minzoom": 15,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "espacio_natural_protegido_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 7,
+  "maxzoom": 22,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "estacion_autobus_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "estacion_autobus_pto": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 13,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "estacion_ferrocarril_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor",
+   "estado"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "estacion_ferrocarril_pto": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor",
+   "estado"
+  ],
+  "minzoom": 13,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "ferrocarril_lin": {
+  "attrs": [
+   "clase",
+   "estado",
+   "nombre",
+   "proveedor",
+   "puente",
+   "tipo_tramo",
+   "tunel"
+  ],
+  "minzoom": 7,
+  "maxzoom": 22,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "ferrocarril_pk_pto": {
+  "attrs": [
+   "clase",
+   "proveedor",
+   "ref"
+  ],
+  "minzoom": 15,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "ferrocarril_pol": {
+  "attrs": [
+   "clase",
+   "estado",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 13,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "hidrografia_lin": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "orden",
+   "persistencia",
+   "situacion",
+   "proveedor"
+  ],
+  "minzoom": 7,
+  "maxzoom": 22,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "hidrografia_pol": {
+  "attrs": [
+   "clase",
+   "persistencia",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 9,
+  "maxzoom": 22,
+  "generalizar": [
+   11
+  ]
+ },
+ "instalacion_deportiva_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "instalacion_educativa_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "instalacion_energia_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "instalacion_militar_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "instalacion_sanitaria_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "instalacion_telecomunicacion_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "instalacion_tratamiento_aguas_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "instalacion_tratamiento_residuos_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "lamina_agua_pol": {
+  "attrs": [
+   "clase",
+   "persistencia",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 8,
+  "maxzoom": 22,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "linea_limite_lin": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor",
+   "ref"
+  ],
+  "minzoom": 5,
+  "maxzoom": 22,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "manzana_pol": {
+  "attrs": [
+   "clase",
+   "proveedor"
+  ],
+  "minzoom": 12,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "municipio_pol": {
+  "attrs": [
+   "clase",
+   "codigo",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 9,
+  "maxzoom": 22,
+  "generalizar": [
+   11
+  ]
+ },
+ "nombre_division_administrativa_pto": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "nombre_alt",
+   "jerarquia",
+   "proveedor"
+  ],
+  "minzoom": 3,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "nombre_hidrografia_pto": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "nombre_alt",
+   "jerarquia",
+   "proveedor"
+  ],
+  "minzoom": 7,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "nombre_orografia_pto": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "nombre_alt",
+   "jerarquia",
+   "proveedor"
+  ],
+  "minzoom": 12,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "nombre_poblacion_construccion_pto": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "nombre_alt",
+   "jerarquia",
+   "proveedor"
+  ],
+  "minzoom": 7,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "nombre_toponimo_lin": {
+  "attrs": [
+   "clase",
+   "jerarquia",
+   "nombre",
+   "nombre_alt",
+   "proveedor"
+  ],
+  "minzoom": 4,
+  "maxzoom": 22,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "nombre_transporte_pto": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "nombre_alt",
+   "jerarquia",
+   "proveedor"
+  ],
+  "minzoom": 13,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "nucleo_urbano_pol": {
+  "attrs": [
+   "clase",
+   "cod_ine",
+   "municipio",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 10,
+  "maxzoom": 22,
+  "generalizar": [
+   11
+  ]
+ },
+ "paso_a_nivel_pto": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "peaje_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "peaje_pto": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 13,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "portal_pto": {
+  "attrs": [
+   "clase",
+   "proveedor",
+   "ref"
+  ],
+  "minzoom": 16,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "provincia_pol": {
+  "attrs": [
+   "clase",
+   "codigo",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 7,
+  "maxzoom": 22,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "puerto_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor",
+   "estado"
+  ],
+  "minzoom": 12,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "puerto_pto": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor",
+   "ref",
+   "estado"
+  ],
+  "minzoom": 10,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "ruta_lin": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "senda_lin": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 14,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "servicio_instalacion_pto": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 13,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "tierra_firme_pol": {
+  "attrs": [
+   "clase",
+   "codigo",
+   "nombre",
+   "proveedor",
+   "ref"
+  ],
+  "minzoom": 0,
+  "maxzoom": 22,
+  "generalizar": [
+   8,
+   11
+  ]
+ },
+ "via_servicio_lin": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor",
+   "puente",
+   "ref",
+   "tunel"
+  ],
+  "minzoom": 12,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "via_urbana_lin": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor",
+   "puente",
+   "ref",
+   "tunel",
+   "estado"
+  ],
+  "minzoom": 13,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "zona_dotacional_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 13,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "zona_industrial_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 12,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "zona_militar_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 12,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "zona_protegida_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 12,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "zona_protegida_pto": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 12,
+  "maxzoom": 22,
+  "generalizar": []
+ },
+ "zona_verde_pol": {
+  "attrs": [
+   "clase",
+   "nombre",
+   "proveedor"
+  ],
+  "minzoom": 12,
+  "maxzoom": 22,
+  "generalizar": []
+ }
+}

@@ -24,6 +24,11 @@ vector_layers:
       ref: "[designador]:Referencia o nombre abreviado. Si no se conoce o no es aplicable dejarlo en blanco"
     sql:
       - minzoom: 12
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/aerodromo_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -40,6 +45,16 @@ vector_layers:
       estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
     sql:
       - minzoom: 10
+        maxzoom: 10
+        extent: 1024
+        buffer: 8
+        file: layers/aerodromo_pto.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 8
+        file: layers/aerodromo_pto.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 8
@@ -52,6 +67,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/altimetria_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -76,6 +96,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/aparcamiento_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -88,6 +113,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 13
+        maxzoom: 14
+        extent: 2048
+        buffer: 8
+        file: layers/aparcamiento_pto.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 8
@@ -100,6 +130,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/area_servicio_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -112,6 +147,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 13
+        maxzoom: 14
+        extent: 2048
+        buffer: 8
+        file: layers/area_servicio_pto.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 8
@@ -128,6 +168,16 @@ vector_layers:
       estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
     sql:
       - minzoom: 6
+        maxzoom: 10
+        extent: 1024
+        buffer: 4
+        file: layers/autopista_lin.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/autopista_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -144,6 +194,16 @@ vector_layers:
       estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
     sql:
       - minzoom: 6
+        maxzoom: 10
+        extent: 1024
+        buffer: 4
+        file: layers/autovia_lin.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/autovia_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -159,6 +219,11 @@ vector_layers:
       tunel: "T:Sí\tF:No"
     sql:
       - minzoom: 13
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/camino_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -175,6 +240,16 @@ vector_layers:
       estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
     sql:
       - minzoom: 8
+        maxzoom: 10
+        extent: 1024
+        buffer: 4
+        file: layers/carretera_autonomica_1er_nivel_lin.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/carretera_autonomica_1er_nivel_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -191,6 +266,16 @@ vector_layers:
       estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
     sql:
       - minzoom: 9
+        maxzoom: 10
+        extent: 1024
+        buffer: 4
+        file: layers/carretera_autonomica_2do_nivel_lin.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/carretera_autonomica_2do_nivel_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -207,6 +292,16 @@ vector_layers:
       estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
     sql:
       - minzoom: 10
+        maxzoom: 10
+        extent: 1024
+        buffer: 4
+        file: layers/carretera_autonomica_3er_nivel_lin.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/carretera_autonomica_3er_nivel_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -223,6 +318,16 @@ vector_layers:
       estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
     sql:
       - minzoom: 6
+        maxzoom: 10
+        extent: 1024
+        buffer: 4
+        file: layers/carretera_general_lin.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/carretera_general_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -239,6 +344,11 @@ vector_layers:
       estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
     sql:
       - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/carretera_otros_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -264,6 +374,16 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 5
+        maxzoom: 10
+        extent: 1024
+        buffer: 2
+        file: layers/comunidad_autonoma_pol.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/comunidad_autonoma_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -275,6 +395,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/conduccion_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -286,6 +411,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/construccion_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -310,6 +440,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 3
+        maxzoom: 10
+        extent: 1024
+        buffer: 4
+        file: layers/contexto_carreteras_lin.sql.jinja2
+      - minzoom: 11
         maxzoom: 12
         extent: 2048
         buffer: 4
@@ -323,6 +458,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 3
+        maxzoom: 10
+        extent: 1024
+        buffer: 4
+        file: layers/contexto_ferrocarril_lin.sql.jinja2
+      - minzoom: 11
         maxzoom: 12
         extent: 2048
         buffer: 4
@@ -338,6 +478,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 3
+        maxzoom: 10
+        extent: 1024
+        buffer: 4
+        file: layers/contexto_hidrografia_lin.sql.jinja2
+      - minzoom: 11
         maxzoom: 12
         extent: 2048
         buffer: 4
@@ -353,6 +498,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 3
+        maxzoom: 10
+        extent: 1024
+        buffer: 2
+        file: layers/contexto_lamina_agua_pol.sql.jinja2
+      - minzoom: 11
         maxzoom: 12
         extent: 2048
         buffer: 2
@@ -366,6 +516,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 3
+        maxzoom: 10
+        extent: 1024
+        buffer: 4
+        file: layers/contexto_nombre_hidrografia_lin.sql.jinja2
+      - minzoom: 11
         maxzoom: 12
         extent: 2048
         buffer: 4
@@ -379,6 +534,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 3
+        maxzoom: 10
+        extent: 1024
+        buffer: 2
+        file: layers/contexto_nombre_hidrografia_pol.sql.jinja2
+      - minzoom: 11
         maxzoom: 12
         extent: 2048
         buffer: 2
@@ -392,6 +552,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 3
+        maxzoom: 10
+        extent: 1024
+        buffer: 4
+        file: layers/contexto_nombre_orografia_lin.sql.jinja2
+      - minzoom: 11
         maxzoom: 12
         extent: 2048
         buffer: 4
@@ -405,6 +570,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 3
+        maxzoom: 10
+        extent: 1024
+        buffer: 2
+        file: layers/contexto_nombre_orografia_pol.sql.jinja2
+      - minzoom: 11
         maxzoom: 12
         extent: 2048
         buffer: 2
@@ -418,6 +588,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 3
+        maxzoom: 10
+        extent: 1024
+        buffer: 8
+        file: layers/contexto_nombre_orografia_pto.sql.jinja2
+      - minzoom: 11
         maxzoom: 12
         extent: 2048
         buffer: 8
@@ -431,6 +606,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 3
+        maxzoom: 10
+        extent: 1024
+        buffer: 8
+        file: layers/contexto_nombre_poblacion_pto.sql.jinja2
+      - minzoom: 11
         maxzoom: 12
         extent: 2048
         buffer: 8
@@ -444,6 +624,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 0
+        maxzoom: 10
+        extent: 1024
+        buffer: 4
+        file: layers/contexto_territorios_lin.sql.jinja2
+      - minzoom: 11
         maxzoom: 12
         extent: 2048
         buffer: 4
@@ -457,6 +642,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 0
+        maxzoom: 10
+        extent: 1024
+        buffer: 2
+        file: layers/contexto_territorios_pol.sql.jinja2
+      - minzoom: 11
         maxzoom: 12
         extent: 2048
         buffer: 2
@@ -468,6 +658,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 5
+        maxzoom: 10
+        extent: 1024
+        buffer: 2
+        file: layers/cubierta_vegetal_bosque_pol.sql.jinja2
+      - minzoom: 11
         maxzoom: 12
         extent: 2048
         buffer: 2
@@ -479,6 +674,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 13
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/cubierta_vegetal_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -503,6 +703,16 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 7
+        maxzoom: 10
+        extent: 1024
+        buffer: 2
+        file: layers/espacio_natural_protegido_pol.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/espacio_natural_protegido_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -515,6 +725,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/estacion_autobus_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -527,6 +742,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 13
+        maxzoom: 14
+        extent: 2048
+        buffer: 8
+        file: layers/estacion_autobus_pto.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 8
@@ -540,6 +760,11 @@ vector_layers:
       estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/estacion_ferrocarril_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -553,6 +778,11 @@ vector_layers:
       estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
     sql:
       - minzoom: 13
+        maxzoom: 14
+        extent: 2048
+        buffer: 8
+        file: layers/estacion_ferrocarril_pto.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 8
@@ -569,6 +799,16 @@ vector_layers:
       tunel: "T:Sí\tF:No"
     sql:
       - minzoom: 7
+        maxzoom: 10
+        extent: 1024
+        buffer: 4
+        file: layers/ferrocarril_lin.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/ferrocarril_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -594,6 +834,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 13
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/ferrocarril_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -609,6 +854,16 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 7
+        maxzoom: 10
+        extent: 1024
+        buffer: 4
+        file: layers/hidrografia_lin.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/hidrografia_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -622,6 +877,16 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 9
+        maxzoom: 10
+        extent: 1024
+        buffer: 2
+        file: layers/hidrografia_pol.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/hidrografia_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -634,6 +899,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/instalacion_deportiva_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -646,6 +916,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/instalacion_educativa_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -658,6 +933,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/instalacion_energia_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -670,6 +950,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/instalacion_militar_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -682,6 +967,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/instalacion_sanitaria_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -694,6 +984,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/instalacion_telecomunicacion_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -706,6 +1001,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/instalacion_tratamiento_aguas_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -718,6 +1018,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/instalacion_tratamiento_residuos_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -731,6 +1036,16 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 8
+        maxzoom: 10
+        extent: 1024
+        buffer: 2
+        file: layers/lamina_agua_pol.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/lamina_agua_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -744,6 +1059,16 @@ vector_layers:
       ref: "[NATIONALCODE]:Atributo nationalcode de líneas límite"
     sql:
       - minzoom: 5
+        maxzoom: 10
+        extent: 1024
+        buffer: 4
+        file: layers/linea_limite_lin.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/linea_limite_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -755,6 +1080,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 12
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/manzana_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -768,6 +1098,16 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 9
+        maxzoom: 10
+        extent: 1024
+        buffer: 2
+        file: layers/municipio_pol.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/municipio_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -782,6 +1122,16 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 3
+        maxzoom: 10
+        extent: 1024
+        buffer: 8
+        file: layers/nombre_division_administrativa_pto.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 8
+        file: layers/nombre_division_administrativa_pto.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 8
@@ -796,6 +1146,16 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 7
+        maxzoom: 10
+        extent: 1024
+        buffer: 8
+        file: layers/nombre_hidrografia_pto.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 8
+        file: layers/nombre_hidrografia_pto.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 8
@@ -810,6 +1170,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 12
+        maxzoom: 14
+        extent: 2048
+        buffer: 8
+        file: layers/nombre_orografia_pto.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 8
@@ -824,6 +1189,16 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 7
+        maxzoom: 10
+        extent: 1024
+        buffer: 8
+        file: layers/nombre_poblacion_construccion_pto.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 8
+        file: layers/nombre_poblacion_construccion_pto.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 8
@@ -838,6 +1213,16 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 4
+        maxzoom: 10
+        extent: 1024
+        buffer: 4
+        file: layers/nombre_toponimo_lin.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/nombre_toponimo_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -852,6 +1237,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 13
+        maxzoom: 14
+        extent: 2048
+        buffer: 8
+        file: layers/nombre_transporte_pto.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 8
@@ -866,6 +1256,16 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 10
+        maxzoom: 10
+        extent: 1024
+        buffer: 2
+        file: layers/nucleo_urbano_pol.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/nucleo_urbano_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -878,6 +1278,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 8
+        file: layers/paso_a_nivel_pto.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 8
@@ -890,6 +1295,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/peaje_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -902,6 +1312,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 13
+        maxzoom: 14
+        extent: 2048
+        buffer: 8
+        file: layers/peaje_pto.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 8
@@ -927,6 +1342,16 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 7
+        maxzoom: 10
+        extent: 1024
+        buffer: 2
+        file: layers/provincia_pol.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/provincia_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -940,6 +1365,11 @@ vector_layers:
       estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
     sql:
       - minzoom: 12
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/puerto_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -954,6 +1384,16 @@ vector_layers:
       estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
     sql:
       - minzoom: 10
+        maxzoom: 10
+        extent: 1024
+        buffer: 8
+        file: layers/puerto_pto.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 8
+        file: layers/puerto_pto.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 8
@@ -966,6 +1406,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/ruta_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -978,6 +1423,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 14
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/senda_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -990,6 +1440,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 13
+        maxzoom: 14
+        extent: 2048
+        buffer: 8
+        file: layers/servicio_instalacion_pto.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 8
@@ -1005,6 +1460,11 @@ vector_layers:
       tunel: "T:Sí\tF:No"
     sql:
       - minzoom: 12
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/via_servicio_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -1021,6 +1481,11 @@ vector_layers:
       estado: "en_construcción:Se encuentra en obras para un posterior uso\ten_uso:Se encuentra utilizable o en condiciones constructiva"
     sql:
       - minzoom: 13
+        maxzoom: 14
+        extent: 2048
+        buffer: 4
+        file: layers/via_urbana_lin.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 4
@@ -1033,6 +1498,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 13
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/zona_dotacional_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -1045,6 +1515,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 12
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/zona_industrial_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -1057,6 +1532,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 12
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/zona_militar_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -1069,6 +1549,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 12
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/zona_protegida_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -1081,6 +1566,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 12
+        maxzoom: 14
+        extent: 2048
+        buffer: 8
+        file: layers/zona_protegida_pto.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 8
@@ -1093,6 +1583,11 @@ vector_layers:
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
       - minzoom: 12
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/zona_verde_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2
@@ -1107,6 +1602,16 @@ vector_layers:
       ref: "[designador]:Atributo previsto por si hay que distinguir o etiquetar distintintos tipos de polígonos de tierra."
     sql:
       - minzoom: 0
+        maxzoom: 10
+        extent: 1024
+        buffer: 2
+        file: layers/tierra_firme_pol.sql.jinja2
+      - minzoom: 11
+        maxzoom: 14
+        extent: 2048
+        buffer: 2
+        file: layers/tierra_firme_pol.sql.jinja2
+      - minzoom: 15
         maxzoom: 22
         extent: 4096
         buffer: 2

@@ -210,19 +210,38 @@ ZOOM_NACIONAL_MAX = 13   # IGN — proceso 4 max_zoom_IGN
 ZOOM_REGIONAL_MAX = 16   # CCAA — proceso 4 max_zoom_comunidades
 # z >= 17 → municipios (proceso 4 min_zoom_municipios)
 
+# Tablas generalizadas mc_servicio_nacional.{capa}_g{z}: sirven los zooms <= z
+# (y > que el anterior). Las crea mc_meta.generalizar_capa.
+GENERALIZACION_ZOOMS = (8, 11)
 
-def render_jinja(layer: str, cols: list[str], ranges) -> str:
-    """Jinja con 3 fuentes (nacional/regional/local) + filtros tippecanoe por zoom."""
+
+def zooms_generalizacion(layer: str, zmin: int) -> list[int]:
+    if layer.endswith("_pto"):
+        return []
+    return [z for z in GENERALIZACION_ZOOMS if zmin <= z]
+
+
+def render_jinja(layer: str, cols: list[str], ranges, gens: list[int]) -> str:
+    """Jinja con fuentes por zoom (generalizadas/nacional/regional/local) + filtros tippecanoe."""
     select_cols = ",\n    ".join(["ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way"] + cols)
+    fuentes = [(z, f"mc_servicio_nacional.{layer}_g{z}") for z in sorted(gens)]
+    fuentes += [
+        (ZOOM_NACIONAL_MAX, f"mc_servicio_nacional.{layer}"),
+        (ZOOM_REGIONAL_MAX, f"mc_servicio_regional.{layer}"),
+    ]
+    bandas = " | ".join(f"g{z} z<={z}" for z in sorted(gens))
     lines = [
         f"-- Capa {layer} (Tilekiln / Mapa Ciudadano)",
-        "-- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+",
+        "-- Fuente por zoom: " + (bandas + " | " if bandas else "")
+        + "nacional z0-13 | regional z14-16 | local z17+",
         "SELECT",
         f"    {select_cols}",
-        "{% if zoom <= " + str(ZOOM_NACIONAL_MAX) + " %}",
-        f"  FROM mc_servicio_nacional.{layer}",
-        "{% elif zoom <= " + str(ZOOM_REGIONAL_MAX) + " %}",
-        f"  FROM mc_servicio_regional.{layer}",
+    ]
+    for i, (zmax, tabla) in enumerate(fuentes):
+        tag = "if" if i == 0 else "elif"
+        lines.append(f"{{% {tag} zoom <= {zmax} %}}")
+        lines.append(f"  FROM {tabla}")
+    lines += [
         "{% else %}",
         f"  FROM mc_servicio_local.{layer}",
         "{% endif %}",
@@ -267,13 +286,25 @@ def field_descriptions(layer: str, cols: list[str], comments: dict, comp: dict) 
     return fields
 
 
-def extent_for_zoom(zmin: int, zmax: int) -> int:
-    # Alineado con tippecanoe: más detalle en zooms altos
-    if zmax <= 10:
-        return 1024
-    if zmax <= 14:
-        return 2048
-    return 4096
+# Resolución de la tesela por tramo de zoom: menos unidades en zooms bajos = menos
+# vértices tras cuantizar = teselas más ligeras (1024 sigue siendo 4 unidades por píxel).
+EXTENT_TRAMOS = ((0, 10, 1024), (11, 14, 2048), (15, 22, 4096))
+
+
+def sql_entries(layer: str, zmin: int, zmax: int) -> list[dict]:
+    entries = []
+    for a, b, extent in EXTENT_TRAMOS:
+        lo, hi = max(zmin, a), min(zmax, b)
+        if lo > hi:
+            continue
+        entries.append({
+            "minzoom": lo,
+            "maxzoom": hi,
+            "extent": extent,
+            "buffer": buffer_for_layer(layer),
+            "file": f"layers/{layer}.sql.jinja2",
+        })
+    return entries
 
 
 def buffer_for_layer(layer: str) -> int:
@@ -298,15 +329,7 @@ def build_config(tables, presence, filters, comments, comp) -> dict:
         vector_layers[layer] = {
             "description": desc,
             "fields": fields,
-            "sql": [
-                {
-                    "minzoom": zmin,
-                    "maxzoom": zmax,
-                    "extent": extent_for_zoom(zmin, zmax),
-                    "buffer": buffer_for_layer(layer),
-                    "file": f"layers/{layer}.sql.jinja2",
-                }
-            ],
+            "sql": sql_entries(layer, zmin, zmax),
         }
     # Capas del modelo sin presencia en tippecanoe (p.ej. tierra_firme_pol)
     for layer in sorted(tables):
@@ -319,15 +342,7 @@ def build_config(tables, presence, filters, comments, comp) -> dict:
         vector_layers[layer] = {
             "description": desc + " (sin zooms tippecanoe; incluir bajo demanda)",
             "fields": fields,
-            "sql": [
-                {
-                    "minzoom": 0,
-                    "maxzoom": 22,
-                    "extent": 4096,
-                    "buffer": buffer_for_layer(layer),
-                    "file": f"layers/{layer}.sql.jinja2",
-                }
-            ],
+            "sql": sql_entries(layer, 0, 22),
         }
     return {
         "metadata": {
@@ -422,17 +437,21 @@ def main():
     (OUT / "config.yaml").write_text(dump_yaml(config), encoding="utf-8")
 
     # Jinjas: capas con presencia tippecanoe + resto del modelo
-    all_layers = sorted(set(tables) | set(presence))
-    for layer in all_layers:
-        if layer not in tables:
-            continue
+    # capas_modelo.json: atributos y generalización que usa run_pipeline_sql.py
+    modelo = {}
+    for layer in sorted(tables):
         cols = attr_columns(tables[layer])
         zs = presence.get(layer) or list(range(0, 23))
         ranges = filter_ranges(filters.get(layer, {}), zs)
         if not ranges:
             ranges = [(min(zs), max(zs), None)]
-        text = render_jinja(layer, cols, ranges)
+        gens = zooms_generalizacion(layer, min(zs))
+        text = render_jinja(layer, cols, ranges, gens)
         (OUT / "layers" / f"{layer}.sql.jinja2").write_text(text, encoding="utf-8")
+        modelo[layer] = {"attrs": cols, "minzoom": min(zs), "maxzoom": max(zs), "generalizar": gens}
+    (OUT / "capas_modelo.json").write_text(
+        json.dumps(modelo, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
+    )
 
     print(f"Tablas schema: {len(tables)}")
     print(f"Capas config: {len(config['vector_layers'])}")

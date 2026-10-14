@@ -1,5 +1,5 @@
 -- Capa ferrocarril_lin (Tilekiln / Mapa Ciudadano)
--- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+-- Fuente por zoom: g8 z<=8 | g11 z<=11 | nacional z0-13 | regional z14-16 | local z17+
 SELECT
     ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
     clase,
@@ -9,7 +9,11 @@ SELECT
     puente,
     tipo_tramo,
     tunel
-{% if zoom <= 13 %}
+{% if zoom <= 8 %}
+  FROM mc_servicio_nacional.ferrocarril_lin_g8
+{% elif zoom <= 11 %}
+  FROM mc_servicio_nacional.ferrocarril_lin_g11
+{% elif zoom <= 13 %}
   FROM mc_servicio_nacional.ferrocarril_lin
 {% elif zoom <= 16 %}
   FROM mc_servicio_regional.ferrocarril_lin
@@ -22,4 +26,3 @@ SELECT
 {% elif (zoom >= 12 and zoom <= 22) %}
   -- sin filtro tippecanoe en este zoom
 {% endif %}
-;

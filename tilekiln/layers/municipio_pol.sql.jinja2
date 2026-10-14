@@ -1,12 +1,14 @@
 -- Capa municipio_pol (Tilekiln / Mapa Ciudadano)
--- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+-- Fuente por zoom: g11 z<=11 | nacional z0-13 | regional z14-16 | local z17+
 SELECT
     ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
     clase,
     codigo,
     nombre,
     proveedor
-{% if zoom <= 13 %}
+{% if zoom <= 11 %}
+  FROM mc_servicio_nacional.municipio_pol_g11
+{% elif zoom <= 13 %}
   FROM mc_servicio_nacional.municipio_pol
 {% elif zoom <= 16 %}
   FROM mc_servicio_regional.municipio_pol
@@ -14,4 +16,3 @@ SELECT
   FROM mc_servicio_local.municipio_pol
 {% endif %}
   WHERE the_geom && {{bbox}}
-;

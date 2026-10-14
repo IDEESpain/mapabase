@@ -1,11 +1,15 @@
 -- Capa espacio_natural_protegido_pol (Tilekiln / Mapa Ciudadano)
--- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
+-- Fuente por zoom: g8 z<=8 | g11 z<=11 | nacional z0-13 | regional z14-16 | local z17+
 SELECT
     ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
     clase,
     nombre,
     proveedor
-{% if zoom <= 13 %}
+{% if zoom <= 8 %}
+  FROM mc_servicio_nacional.espacio_natural_protegido_pol_g8
+{% elif zoom <= 11 %}
+  FROM mc_servicio_nacional.espacio_natural_protegido_pol_g11
+{% elif zoom <= 13 %}
   FROM mc_servicio_nacional.espacio_natural_protegido_pol
 {% elif zoom <= 16 %}
   FROM mc_servicio_regional.espacio_natural_protegido_pol
@@ -20,4 +24,3 @@ SELECT
 {% elif (zoom >= 11 and zoom <= 22) %}
   -- sin filtro tippecanoe en este zoom
 {% endif %}
-;
