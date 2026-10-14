@@ -11,7 +11,10 @@
 --   productores/nacional/00             → mc_servicio_nacional   → Tilekiln z0–13
 -- =============================================================================
 
-CREATE EXTENSION IF NOT EXISTS postgis;
+-- PostGIS ya instalado por CNIG (p. ej. en public_modelo_2025). No tocar ese esquema:
+-- solo incluirlo en search_path para resolver el tipo geometry (lectura de tipos, sin DDL ahí).
+-- Tablas y funciones del pipeline van en mc_*; public queda libre para uso acordado.
+SET search_path TO public, public_modelo_2025, pg_catalog;
 
 -- Limpieza controlada de schemas del pipeline (no toca tilekiln/public OSM)
 DROP SCHEMA IF EXISTS mc_generados CASCADE;

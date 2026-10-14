@@ -2,6 +2,8 @@
 -- Funciones ETL: clip / mezcla / unión / perfiles pesados
 -- =============================================================================
 
+SET search_path TO public, public_modelo_2025, pg_catalog, mc_meta, mc_productores, mc_mascaras, mc_generados;
+
 CREATE OR REPLACE FUNCTION mc_meta.clip_geom(
 	geom geometry,
 	mask geometry,

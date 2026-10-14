@@ -1,0 +1,11 @@
+-- Ejemplo de carga FGB (EPSG:4258) → tabla Tilekiln (EPSG:3857).
+-- Ajustar rutas y capa. Requiere GDAL/OGR con soporte FlatGeobuf.
+--
+-- ogr2ogr -f PostgreSQL PG:"dbname=mapa_ciudadano" \
+--   cubierta_vegetal_pol.fgb \
+--   -nln cubierta_vegetal_pol -append \
+--   -t_srs EPSG:3857 -s_srs EPSG:4258 \
+--   -lco GEOMETRY_NAME=the_geom -nlt PROMOTE_TO_MULTI
+--
+-- Alternativa in-DB si ya hay geometría en 4258/25830:
+-- UPDATE cubierta_vegetal_pol SET the_geom = ST_Transform(the_geom, 3857);

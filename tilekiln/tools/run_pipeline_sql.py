@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -24,15 +25,48 @@ SQL_DIR = TILEKILN_ROOT / "sql" / "pipeline"
 REPO = Path(__file__).resolve().parents[2]
 
 
+def _load_dotenv() -> None:
+	"""Carga tilekiln/.env si existe (PGHOST, PGUSER, etc.)."""
+	env_file = TILEKILN_ROOT / ".env"
+	if not env_file.is_file():
+		return
+	for line in env_file.read_text(encoding="utf-8").splitlines():
+		line = line.strip()
+		if not line or line.startswith("#") or "=" not in line:
+			continue
+		key, _, val = line.partition("=")
+		key = key.strip()
+		val = val.strip().strip("'\"")
+		if key and key not in os.environ:
+			os.environ[key] = val
+
+
+_load_dotenv()
+
+# PostGIS en CNIG suele estar en public_modelo_2025 (solo tipos; sin DDL en ese esquema)
+MC_SEARCH_PATH = "public, public_modelo_2025, pg_catalog"
+
+
 def psql_file(db: str, path: Path) -> None:
     subprocess.run(
-        ["psql", "-d", db, "-v", "ON_ERROR_STOP=1", "-f", str(path)],
+        [
+            "psql",
+            "-d",
+            db,
+            "-v",
+            "ON_ERROR_STOP=1",
+            "-c",
+            f"SET search_path TO {MC_SEARCH_PATH};",
+            "-f",
+            str(path),
+        ],
         check=True,
+        env=os.environ.copy(),
     )
 
 
 def connect(db: str):
-    return psycopg2.connect(f"dbname={db}")
+    return psycopg2.connect("")
 
 
 def ogr_load(db: str, fgb: Path, schema: str, table: str, s_srs: str, extras: dict | None = None):
