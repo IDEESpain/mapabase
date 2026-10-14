@@ -66,30 +66,34 @@ def psql_file(db: str, path: Path) -> None:
 
 
 def connect(db: str):
-	"""Usa PGHOST, PGPORT, PGDATABASE, PGUSER, PGPASSWORD (o tilekiln/.env)."""
-	kw = {}
-	if db:
-		kw["dbname"] = db
-	for key, env in (
-		("host", "PGHOST"),
-		("port", "PGPORT"),
-		("user", "PGUSER"),
-		("password", "PGPASSWORD"),
-	):
-		val = os.environ.get(env)
-		if val:
-			kw[key] = val
-	if not kw.get("dbname"):
-		kw["dbname"] = os.environ.get("PGDATABASE", db)
-	try:
-		return psycopg2.connect(**kw)
-	except psycopg2.OperationalError as e:
-		if "no password supplied" in str(e).lower() or "password" in str(e).lower():
-			raise SystemExit(
-				"Sin contraseña PostgreSQL. Exporta PGPASSWORD, usa ~/.pgpass "
-				"o añade PGPASSWORD en tilekiln/.env (no subir a git)."
-			) from e
-		raise
+    """Usa PGHOST, PGPORT, PGDATABASE, PGUSER, PGPASSWORD (o tilekiln/.env)."""
+    kw = {}
+    if db:
+        kw["dbname"] = db
+    for key, env in (
+        ("host", "PGHOST"),
+        ("port", "PGPORT"),
+        ("user", "PGUSER"),
+        ("password", "PGPASSWORD"),
+    ):
+        val = os.environ.get(env)
+        if val:
+            kw[key] = val
+    if not kw.get("dbname"):
+        kw["dbname"] = os.environ.get("PGDATABASE", db)
+    try:
+        conn = psycopg2.connect(**kw)
+    except psycopg2.OperationalError as e:
+        if "no password supplied" in str(e).lower() or "password" in str(e).lower():
+            raise SystemExit(
+                "Sin contraseña PostgreSQL. Exporta PGPASSWORD, usa ~/.pgpass "
+                "o añade PGPASSWORD en tilekiln/.env (no subir a git)."
+            ) from e
+        raise
+    with conn.cursor() as cur:
+        cur.execute(f"SET search_path TO {MC_SEARCH_PATH}")
+    conn.commit()
+    return conn
 
 
 def ogr_load(db: str, fgb: Path, schema: str, table: str, s_srs: str, extras: dict | None = None):
