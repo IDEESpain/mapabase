@@ -116,6 +116,8 @@ def ogr_load(db: str, fgb: Path, schema: str, table: str, s_srs: str, extras: di
             s_srs,
             "-nlt",
             "PROMOTE_TO_MULTI",
+            "-dim",
+            "2",
             "-lco",
             "GEOMETRY_NAME=the_geom",
             "-lco",
@@ -123,6 +125,7 @@ def ogr_load(db: str, fgb: Path, schema: str, table: str, s_srs: str, extras: di
             "-skipfailures",
         ],
         check=False,
+        env=os.environ.copy(),
     )
     extras = extras or {}
     with connect(db) as conn:
@@ -162,7 +165,7 @@ def ogr_load(db: str, fgb: Path, schema: str, table: str, s_srs: str, extras: di
             col_list = ["the_geom"] + list(extras.keys()) + common
             select_parts = [f"t.{geom}"] + [f"%({k})s" for k in extras] + [f"t.{a}" for a in common]
             # Use literal extras via format
-            select_sql = f"t.{geom}"
+            select_sql = f"ST_Force2D(t.{geom})"
             for k, v in extras.items():
                 select_sql += f", '{v}'"
             for a in common:
@@ -223,11 +226,14 @@ def load_mask_from_fgb(db: str, fgb: Path, kind: str, codigo_filter: set[str] | 
             "EPSG:4258",
             "-nlt",
             "PROMOTE_TO_MULTI",
+            "-dim",
+            "2",
             "-lco",
             "GEOMETRY_NAME=the_geom",
             "-skipfailures",
         ],
         check=False,
+        env=os.environ.copy(),
     )
     with connect(db) as conn:
         with conn.cursor() as cur:
@@ -256,7 +262,7 @@ def load_mask_from_fgb(db: str, fgb: Path, kind: str, codigo_filter: set[str] | 
                         WHEN length(trim(codigo::text)) >= 4 THEN substring(trim(codigo::text) from 3 for 2)
                         ELSE lpad(trim(codigo::text), 2, '0')
                       END,
-                      ST_Multi(ST_MakeValid({geom}))
+                      ST_Multi(ST_MakeValid(ST_Force2D({geom})))
                     FROM public.{tmp}
                     WHERE {geom} IS NOT NULL
                     """
@@ -279,7 +285,7 @@ def load_mask_from_fgb(db: str, fgb: Path, kind: str, codigo_filter: set[str] | 
                           THEN left(right(regexp_replace(trim(codigo::text), '[^0-9]', '', 'g'), 5), 2)
                         ELSE NULL
                       END,
-                      ST_Multi(ST_MakeValid({geom}))
+                      ST_Multi(ST_MakeValid(ST_Force2D({geom})))
                     FROM public.{tmp}
                     WHERE {geom} IS NOT NULL
                     """
