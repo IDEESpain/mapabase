@@ -229,7 +229,7 @@
  "comunidad_autonoma_pol": {
   "attrs": [
    "clase",
-   "codigo",
+   "codigo_elemento",
    "nombre",
    "proveedor"
   ],
@@ -706,7 +706,7 @@
  "municipio_pol": {
   "attrs": [
    "clase",
-   "codigo",
+   "codigo_elemento",
    "nombre",
    "proveedor"
   ],
@@ -848,7 +848,7 @@
  "provincia_pol": {
   "attrs": [
    "clase",
-   "codigo",
+   "codigo_elemento",
    "nombre",
    "proveedor"
   ],
@@ -915,7 +915,7 @@
  "tierra_firme_pol": {
   "attrs": [
    "clase",
-   "codigo",
+   "codigo_elemento",
    "nombre",
    "proveedor",
    "ref"

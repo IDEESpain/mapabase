@@ -3,7 +3,7 @@
 SELECT
     ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
     clase,
-    codigo,
+    codigo_elemento,
     nombre,
     proveedor
 {% if zoom <= 8 %}

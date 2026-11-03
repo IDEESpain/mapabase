@@ -201,8 +201,18 @@ def filter_ranges(filt_by_z: dict, all_zs: list[int]):
     return ranges
 
 
+# En el pipeline PostGIS, «codigo» es el territorio (00/CCAA/INE). Si el modelo
+# IGN trae un atributo codigo, en servicio/jinja se llama codigo_elemento.
+ATTR_RENOMBRE_PIPELINE = {"codigo": "codigo_elemento"}
+
+
 def attr_columns(cols: list[tuple[str, str]]) -> list[str]:
-    return [c for c, _ in cols if c != "the_geom"]
+    out = []
+    for c, _ in cols:
+        if c == "the_geom":
+            continue
+        out.append(ATTR_RENOMBRE_PIPELINE.get(c, c))
+    return out
 
 
 # Bandas de servicio (= proceso 4 / mosaicos FGB nacionales)

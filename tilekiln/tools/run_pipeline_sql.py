@@ -207,13 +207,31 @@ def cargar_modelo() -> dict:
     return json.loads(MODELO_FILE.read_text(encoding="utf-8"))
 
 
+# Columnas reservadas de mc_productores / mc_generados (no pueden ir en attrs)
+ATTRS_RESERVADOS = frozenset({"the_geom", "ambito", "codigo", "nivel_origen", "ogc_fid", "fid"})
+# Si el FGB trae un atributo con ese nombre, se guarda con otro alias
+ATTRS_RENOMBRE = {"codigo": "codigo_elemento"}
+
+
 def info_capa(modelo: dict, capa: str) -> tuple[list[str], list[int]]:
     info = modelo.get(capa)
     if not info:
         if modelo:
             log(f"aviso: {capa} no está en {MODELO_FILE.name}; atributos clase/proveedor")
         return ["clase", "proveedor"], []
-    return list(info["attrs"]), list(info.get("generalizar") or [])
+    attrs = []
+    for a in info["attrs"]:
+        if a in ATTRS_RESERVADOS:
+            alias = ATTRS_RENOMBRE.get(a)
+            if alias:
+                attrs.append(alias)
+                log(f"aviso: {capa}: atributo «{a}» del modelo → columna «{alias}» "
+                    f"(«{a}» es clave de territorio en productores)")
+            else:
+                log(f"aviso: {capa}: atributo omitido (reservado): {a}")
+        else:
+            attrs.append(a)
+    return attrs, list(info.get("generalizar") or [])
 
 
 # ---------------------------------------------------------------------------
@@ -291,21 +309,41 @@ def cargar_fgb(pool: ConnPool, db: str, capa: str, attrs: list[str], fgb: Path,
         if geom is None:
             cur.execute(sql.SQL("DROP TABLE IF EXISTS mc_staging.{}").format(sql.Identifier(tabla_stg)))
             return 0
-        comunes = [a for a in attrs if a in cols]
-        faltan = [a for a in attrs if a not in cols]
+        # attrs pedidas ↔ columnas del FGB (p.ej. codigo_elemento ← codigo)
+        src_de_attr = {}
+        for a in attrs:
+            if a in cols:
+                src_de_attr[a] = a
+            else:
+                origen = next((k for k, v in ATTRS_RENOMBRE.items() if v == a and k in cols), None)
+                if origen:
+                    src_de_attr[a] = origen
+        faltan = [a for a in attrs if a not in src_de_attr]
         if faltan and ambito == "nacional":
             log(f"  {capa}: el FGB nacional no trae {faltan} (quedan a NULL)")
 
         destino = sql.Identifier("mc_productores", f"{capa}_{ambito}")
         col_dest = sql.SQL(", ").join(
             [sql.Identifier("the_geom"), sql.Identifier("ambito"), sql.Identifier("codigo")]
-            + [sql.Identifier(a) for a in comunes]
+            + [sql.Identifier(a) for a in attrs]
         )
-        col_src = sql.SQL(", ").join(
-            [sql.SQL("mc_meta.geom_carga(t.{}) AS g").format(sql.Identifier(geom)),
-             sql.Literal(ambito), sql.Literal(codigo)]
-            + [sql.SQL("t.{}::text").format(sql.Identifier(a)) for a in comunes]
-        )
+        col_src_parts = [
+            sql.SQL("mc_meta.geom_carga(t.{}) AS g").format(sql.Identifier(geom)),
+            sql.Literal(ambito),
+            sql.Literal(codigo),
+        ]
+        for a in attrs:
+            if a in src_de_attr:
+                col_src_parts.append(
+                    sql.SQL("t.{}::text AS {}").format(
+                        sql.Identifier(src_de_attr[a]), sql.Identifier(a)
+                    )
+                )
+            else:
+                col_src_parts.append(
+                    sql.SQL("NULL::text AS {}").format(sql.Identifier(a))
+                )
+        col_src = sql.SQL(", ").join(col_src_parts)
         cur.execute(
             sql.SQL(
                 "INSERT INTO {dest} ({cols}) SELECT * FROM (SELECT {src} FROM mc_staging.{stg} t) q "
