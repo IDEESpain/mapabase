@@ -21,10 +21,24 @@ DROP FUNCTION IF EXISTS mc_meta.procesar_capa_regional(text);
 DROP FUNCTION IF EXISTS mc_meta.procesar_capa_local(text);
 DROP FUNCTION IF EXISTS mc_meta.build_servicio(text, text, text);
 
--- Covers(mask, geom) e Intersects reutilizan la máscara "preparada" entre filas;
--- CoveredBy(geom, mask) no, y con máscaras de miles de vértices es ~100 veces más lento.
--- Se usan _ST_Intersects/_ST_Covers (C) con && explícito: los envoltorios SQL de PostGIS
--- en CNIG apuntan a OPERATOR(public.&&), que dejó de existir al renombrar public.
+-- GeometryCollection no admite Relate (Intersects/Covers) en PostGIS 2.5
+-- ("Relate Operation called with a LWGEOMCOLLECTION type").
+CREATE OR REPLACE FUNCTION mc_meta.homogeneizar_geom(g geometry)
+RETURNS geometry
+LANGUAGE sql
+IMMUTABLE
+PARALLEL SAFE
+AS $$
+	SELECT CASE
+		WHEN g IS NULL OR ST_IsEmpty(g) THEN NULL
+		WHEN GeometryType(g) LIKE 'GEOMETRYCOLLECTION%' THEN
+			ST_CollectionExtract(g, GREATEST(ST_Dimension(g), 0) + 1)
+		ELSE g
+	END;
+$$;
+
+-- _ST_Intersects/_ST_Covers (C) + && explícito: envoltorios SQL rotos tras
+-- renombrar public. Covers(mask, geom) reutiliza máscara preparada.
 CREATE OR REPLACE FUNCTION mc_meta.clip_geom(
 	geom geometry,
 	mask geometry,
@@ -35,25 +49,24 @@ IMMUTABLE
 PARALLEL SAFE
 AS $$
 	SELECT CASE
-		WHEN geom IS NULL OR mask IS NULL THEN NULL
+		WHEN g IS NULL OR m IS NULL THEN NULL
 		WHEN es_punto THEN
-			CASE WHEN geom && mask AND _ST_Intersects(geom, mask) THEN geom ELSE NULL END
+			CASE WHEN g && m AND _ST_Intersects(g, m) THEN g ELSE NULL END
 		ELSE
 			CASE
-				WHEN NOT (geom && mask) THEN NULL
-				WHEN _ST_Covers(mask, geom) THEN geom
-				WHEN _ST_Intersects(geom, mask) THEN
-					ST_CollectionExtract(
-						ST_MakeValid(ST_Intersection(geom, mask)),
-						GREATEST(ST_Dimension(geom), 0) + 1
-					)
+				WHEN NOT (g && m) THEN NULL
+				WHEN _ST_Covers(m, g) THEN g
+				WHEN _ST_Intersects(g, m) THEN
+					mc_meta.homogeneizar_geom(ST_MakeValid(ST_Intersection(g, m)))
 				ELSE NULL
 			END
-	END;
+	END
+	FROM (
+		SELECT mc_meta.homogeneizar_geom(geom) AS g,
+		       mc_meta.homogeneizar_geom(mask) AS m
+	) s;
 $$;
 
--- Las geometrías ya llegan válidas (geom_carga) y los recortes pasan por ST_MakeValid
--- en clip_geom, así que aquí solo se homogeneiza a Multi.
 CREATE OR REPLACE FUNCTION mc_meta.normalize_geom(geom geometry)
 RETURNS geometry
 LANGUAGE sql
@@ -61,26 +74,26 @@ IMMUTABLE
 PARALLEL SAFE
 AS $$
 	SELECT CASE
-		WHEN geom IS NULL OR ST_IsEmpty(geom) THEN NULL
-		ELSE ST_Multi(geom)
-	END;
+		WHEN h IS NULL OR ST_IsEmpty(h) THEN NULL
+		ELSE ST_Multi(h)
+	END
+	FROM (SELECT mc_meta.homogeneizar_geom(geom) AS h) s;
 $$;
 
--- Geometría de entrada desde ogr2ogr: 2D, Multi y válida (MakeValid solo si hace falta)
+-- Entrada ogr2ogr: 2D, Multi, sin GeometryCollection
 CREATE OR REPLACE FUNCTION mc_meta.geom_carga(g geometry)
 RETURNS geometry
 LANGUAGE sql
 IMMUTABLE
 PARALLEL SAFE
 AS $$
-	SELECT CASE
-		WHEN g IS NULL OR ST_IsEmpty(g) THEN NULL
-		WHEN ST_IsValid(g) THEN ST_Multi(ST_Force2D(g))
-		ELSE mc_meta.normalize_geom(ST_CollectionExtract(
-			ST_MakeValid(ST_Force2D(g)),
-			GREATEST(ST_Dimension(g), 0) + 1
-		))
-	END;
+	SELECT mc_meta.normalize_geom(
+		CASE
+			WHEN g IS NULL OR ST_IsEmpty(g) THEN NULL
+			WHEN ST_IsValid(ST_Force2D(g)) THEN ST_Force2D(g)
+			ELSE ST_MakeValid(ST_Force2D(g))
+		END
+	);
 $$;
 
 CREATE OR REPLACE FUNCTION mc_meta.attr_columns(p_capa text)
