@@ -369,7 +369,7 @@ vector_layers:
     description: Capa comunidad_autonoma_pol
     fields:
       clase: "comunidad_autonoma:Clase de objeto"
-      codigo: "[codigo]:Nationalcode según las especificaciones de datos INSPIRE para unidades administrativas. Código del país + Códig"
+      codigo_elemento: "[codigo]:Nationalcode según las especificaciones de datos INSPIRE para unidades administrativas. Código del país + Códig"
       nombre: "[denominación_comunidad_autonoma]:Denominación oficial de la comunidad autónoma"
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
@@ -1093,7 +1093,7 @@ vector_layers:
     description: Capa municipio_pol
     fields:
       clase: "municipio:Clase de objeto"
-      codigo: "[codigo]:Nationalcode según las especificaciones de datos INSPIRE para unidades administrativas."
+      codigo_elemento: "[codigo]:Nationalcode según las especificaciones de datos INSPIRE para unidades administrativas."
       nombre: "[denominación_municipio]:Denominación oficial del municipio"
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
@@ -1337,7 +1337,7 @@ vector_layers:
     description: Capa provincia_pol
     fields:
       clase: "provincia:Clase de objeto"
-      codigo: "[codigo]:Nationalcode según las especificaciones de datos INSPIRE para unidades administrativas. Código del país + Códig"
+      codigo_elemento: "[codigo]:Nationalcode según las especificaciones de datos INSPIRE para unidades administrativas. Código del país + Códig"
       nombre: "[denominación_provincia]:Denominación oficial de la provincia"
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
     sql:
@@ -1596,7 +1596,7 @@ vector_layers:
     description: Capa tierra_firme_pol (sin zooms tippecanoe; incluir bajo demanda)
     fields:
       clase: "[tierra_firme]:Clase de objeto"
-      codigo: "[codigo]:Nationalcode según las especificaciones de datos INSPIRE para unidades administrativas."
+      codigo_elemento: "[codigo]:Nationalcode según las especificaciones de datos INSPIRE para unidades administrativas."
       nombre: "España:Nombre"
       proveedor: "[codigo_proveedor]:Proveedor de la información (lista controlada)"
       ref: "[designador]:Atributo previsto por si hay que distinguir o etiquetar distintintos tipos de polígonos de tierra."

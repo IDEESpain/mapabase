@@ -1,7 +1,7 @@
 -- Capa manzana_pol (Tilekiln / Mapa Ciudadano)
 -- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
 SELECT
-    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    ST_AsMVTGeom(the_geom, {{unbuffered_bbox}}, {{extent}}, {{buffer}}, true) AS way,
     clase,
     proveedor
 {% if zoom <= 13 %}
@@ -12,3 +12,6 @@ SELECT
   FROM mc_servicio_local.manzana_pol
 {% endif %}
   WHERE the_geom && {{bbox}}
+{% if zoom <= 13 %}
+  AND ST_Area(the_geom) >= {{coordinate_area}}
+{% endif %}

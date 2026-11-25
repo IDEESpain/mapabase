@@ -233,7 +233,12 @@ def zooms_generalizacion(layer: str, zmin: int) -> list[int]:
 
 def render_jinja(layer: str, cols: list[str], ranges, gens: list[int]) -> str:
     """Jinja con fuentes por zoom (generalizadas/nacional/regional/local) + filtros tippecanoe."""
-    select_cols = ",\n    ".join(["ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way"] + cols)
+    # Límites SIN buffer + buffer en unidades de tesela (Tilekiln: unbuffered_bbox/buffer).
+    # Con {{bbox}} (con margen) como límites, las coordenadas se escalan y las
+    # geometrías no casan en los bordes de tesela.
+    select_cols = ",\n    ".join(
+        ["ST_AsMVTGeom(the_geom, {{unbuffered_bbox}}, {{extent}}, {{buffer}}, true) AS way"] + cols
+    )
     fuentes = [(z, f"mc_servicio_nacional.{layer}_g{z}") for z in sorted(gens)]
     fuentes += [
         (ZOOM_NACIONAL_MAX, f"mc_servicio_nacional.{layer}"),
@@ -257,6 +262,14 @@ def render_jinja(layer: str, cols: list[str], ranges, gens: list[int]) -> str:
         "{% endif %}",
         "  WHERE the_geom && {{bbox}}",
     ]
+    if layer.endswith("_pol"):
+        # Polígonos menores que una unidad de tesela desaparecen en ST_AsMVTGeom:
+        # se descartan antes para no recortarlos/codificarlos.
+        lines += [
+            f"{{% if zoom <= {ZOOM_NACIONAL_MAX} %}}",
+            "  AND ST_Area(the_geom) >= {{coordinate_area}}",
+            "{% endif %}",
+        ]
     conditional = [(a, b, f) for a, b, f in ranges if f is not None]
     if conditional:
         for i, (zmin, zmax, filt) in enumerate(conditional):
@@ -285,8 +298,11 @@ def render_jinja(layer: str, cols: list[str], ranges, gens: list[int]) -> str:
 
 def field_descriptions(layer: str, cols: list[str], comments: dict, comp: dict) -> dict:
     fields = {}
+    origen = {v: k for k, v in ATTR_RENOMBRE_PIPELINE.items()}
     for col in cols:
         c = comments.get(layer, {}).get(col)
+        if not c and col in origen:
+            c = comments.get(layer, {}).get(origen[col])
         if c and c.strip():
             fields[col] = c.strip().split("\n")[0][:120]
         elif col in (comp.get(layer) or {}):

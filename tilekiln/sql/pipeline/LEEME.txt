@@ -15,8 +15,20 @@
 #
 # Ficheros:
 #   00_schemas.sql    esquemas y catálogo. Idempotente: no borra nada.
-#   00_reset.sql      borra todos los mc_* (solo con --reset o a mano).
-#   01_funciones.sql  funciones del pipeline (se puede reaplicar siempre).
+#   00_reset.sql      borra todos los mc_* (solo con --reset --confirmar-reset o a mano).
+#   01_funciones.sql  funciones del pipeline, PostgreSQL 18 + PostGIS >= 3.1
+#                     (se puede reaplicar siempre; no toca datos).
+#   03_post_migracion_pg18.sql  una vez tras copiar la BD: limpieza staging, GiST
+#                     que falten y VACUUM ANALYZE de mc_*. Al final, pasos para el DBA.
+#   legacy_pg11_postgis25/01_funciones.sql  versión para PostgreSQL 11 + PostGIS 2.5.
+#   run_pipeline_sql.py elige la versión según postgis_lib_version().
+#   ../diagnostico_pg18.sql  diagnóstico de solo lectura (versiones, capas, índices...).
+#
+# AÑADIR CAPAS: nunca --reset (borra TODAS las capas). Cada capa se recrea sola:
+#   ../.venv/bin/python run_pipeline_sql.py --db mapabasexyz \
+#     --datos-base /var/MVT_MapaBaseXYZ/DatosProcesados \
+#     --capas "$(../.venv/bin/python tandas.py capas 1)" --workers 6 2>&1 | tee -a pipeline.log
+#   python tandas.py --db mapabasexyz   → estado de las 84 capas por tandas
 #
 # Solo se recortan los territorios que tienen productor propio. El resto del
 # mosaico regional/local se rellena con el nivel superior sin recortar, y si

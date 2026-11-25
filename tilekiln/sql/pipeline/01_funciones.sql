@@ -14,15 +14,31 @@
 -- procesar_capa_completa hace lo mismo en serie, para usarlo solo desde SQL.
 -- =============================================================================
 
+-- Versión para PostgreSQL 18 + PostGIS 3.6 (GEOS con OverlayNG/RelateNG).
+-- La de PostgreSQL 11 + PostGIS 2.5 está en legacy_pg11_postgis25/.
+-- =============================================================================
+
 SET search_path TO public, public_modelo_2025, pg_catalog, mc_meta, mc_productores, mc_mascaras, mc_generados;
+
+-- Esta versión no funciona en PostGIS < 3.1 (sin ST_TileEnvelope ni ST_Intersects indexado en C)
+DO $$
+DECLARE
+	v int[] := (regexp_match(postgis_lib_version(), '^(\d+)\.(\d+)'))::int[];
+BEGIN
+	IF v < ARRAY[3, 1] THEN
+		RAISE EXCEPTION 'PostGIS % detectado: usa sql/pipeline/legacy_pg11_postgis25/01_funciones.sql',
+			postgis_lib_version();
+	END IF;
+END;
+$$;
 
 DROP FUNCTION IF EXISTS mc_meta.ensure_capa_tables(text, text[], text);
 DROP FUNCTION IF EXISTS mc_meta.procesar_capa_regional(text);
 DROP FUNCTION IF EXISTS mc_meta.procesar_capa_local(text);
 DROP FUNCTION IF EXISTS mc_meta.build_servicio(text, text, text);
 
--- GeometryCollection no admite Relate (Intersects/Covers) en PostGIS 2.5
--- ("Relate Operation called with a LWGEOMCOLLECTION type").
+-- Las capas del modelo son de un solo tipo (pto/lin/pol): de una GeometryCollection
+-- (p.ej. resultado de un recorte) se queda la parte de mayor dimensión.
 CREATE OR REPLACE FUNCTION mc_meta.homogeneizar_geom(g geometry)
 RETURNS geometry
 LANGUAGE sql
@@ -37,8 +53,9 @@ AS $$
 	END;
 $$;
 
--- _ST_Intersects/_ST_Covers (C) + && explícito: envoltorios SQL rotos tras
--- renombrar public. Covers(mask, geom) reutiliza máscara preparada.
+-- PostGIS 3: ST_Intersects/ST_Covers son funciones C (filtro por bbox interno y
+-- caché de la máscara preparada entre filas). ST_Intersection usa OverlayNG, que
+-- devuelve geometría válida: ya no hace falta ST_MakeValid tras el recorte.
 CREATE OR REPLACE FUNCTION mc_meta.clip_geom(
 	geom geometry,
 	mask geometry,
@@ -51,13 +68,12 @@ AS $$
 	SELECT CASE
 		WHEN g IS NULL OR m IS NULL THEN NULL
 		WHEN es_punto THEN
-			CASE WHEN g && m AND _ST_Intersects(g, m) THEN g ELSE NULL END
+			CASE WHEN ST_Intersects(g, m) THEN g ELSE NULL END
 		ELSE
 			CASE
-				WHEN NOT (g && m) THEN NULL
-				WHEN _ST_Covers(m, g) THEN g
-				WHEN _ST_Intersects(g, m) THEN
-					mc_meta.homogeneizar_geom(ST_MakeValid(ST_Intersection(g, m)))
+				WHEN ST_Covers(m, g) THEN g
+				WHEN ST_Intersects(g, m) THEN
+					mc_meta.homogeneizar_geom(ST_Intersection(g, m))
 				ELSE NULL
 			END
 	END
@@ -652,12 +668,12 @@ BEGIN
 			SELECT CASE
 				WHEN NOT EXISTS (
 					SELECT 1 FROM pg_temp._mc_mask k
-					 WHERE k.g && s.the_geom AND _ST_Intersects(k.g, s.the_geom)
+					 WHERE ST_Intersects(k.g, s.the_geom)
 				) THEN s.the_geom
 				WHEN %7$L::boolean THEN NULL
 				ELSE (
 					SELECT mc_meta.normalize_geom(ST_CollectionExtract(
-						ST_MakeValid(ST_Difference(s.the_geom, ST_Union(k.g))),
+						ST_Difference(s.the_geom, ST_Union(k.g)),
 						GREATEST(ST_Dimension(s.the_geom), 0) + 1
 					))
 					  FROM pg_temp._mc_mask k

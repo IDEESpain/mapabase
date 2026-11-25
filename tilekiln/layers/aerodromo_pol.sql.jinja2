@@ -1,7 +1,7 @@
 -- Capa aerodromo_pol (Tilekiln / Mapa Ciudadano)
 -- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
 SELECT
-    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    ST_AsMVTGeom(the_geom, {{unbuffered_bbox}}, {{extent}}, {{buffer}}, true) AS way,
     clase,
     estado,
     nombre,
@@ -15,3 +15,6 @@ SELECT
   FROM mc_servicio_local.aerodromo_pol
 {% endif %}
   WHERE the_geom && {{bbox}}
+{% if zoom <= 13 %}
+  AND ST_Area(the_geom) >= {{coordinate_area}}
+{% endif %}

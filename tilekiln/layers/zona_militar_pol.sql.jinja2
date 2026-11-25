@@ -1,7 +1,7 @@
 -- Capa zona_militar_pol (Tilekiln / Mapa Ciudadano)
 -- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
 SELECT
-    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    ST_AsMVTGeom(the_geom, {{unbuffered_bbox}}, {{extent}}, {{buffer}}, true) AS way,
     clase,
     nombre,
     proveedor
@@ -13,6 +13,9 @@ SELECT
   FROM mc_servicio_local.zona_militar_pol
 {% endif %}
   WHERE the_geom && {{bbox}}
+{% if zoom <= 13 %}
+  AND ST_Area(the_geom) >= {{coordinate_area}}
+{% endif %}
 {% if zoom == 12 %}
   AND clase = 'zona_militar'
 {% elif (zoom >= 13 and zoom <= 22) %}

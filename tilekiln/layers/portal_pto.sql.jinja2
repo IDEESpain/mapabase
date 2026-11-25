@@ -1,7 +1,7 @@
 -- Capa portal_pto (Tilekiln / Mapa Ciudadano)
 -- Fuente por zoom: nacional z0-13 | regional z14-16 | local z17+
 SELECT
-    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    ST_AsMVTGeom(the_geom, {{unbuffered_bbox}}, {{extent}}, {{buffer}}, true) AS way,
     clase,
     proveedor,
     ref

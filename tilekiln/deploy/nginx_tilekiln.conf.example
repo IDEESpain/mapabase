@@ -1,0 +1,56 @@
+# =============================================================================
+# PROPUESTA (no desplegada): nginx delante de Tilekiln
+#   - URL estable en el puerto 80/443 para visores (Iberpix/API-CNIG, ArcGIS, QGIS)
+#   - .pbf como alias de .mvt (es el mismo fichero: MVT = Protocol Buffers)
+#   - Caché HTTP en disco + cabeceras Cache-Control para navegador/CDN
+#   - CORS (Tilekiln ya lo envía; se repite por si se cachea)
+# Copiar a /etc/nginx/conf.d/tilekiln.conf, ajustar server_name/rutas y `nginx -t && systemctl reload nginx`.
+# Vaciar caché tras recargar capas:  rm -rf /var/cache/nginx/tilekiln/* (o esperar la caducidad)
+# =============================================================================
+
+proxy_cache_path /var/cache/nginx/tilekiln levels=1:2 keys_zone=tilekiln:100m
+                 max_size=20g inactive=7d use_temp_path=off;
+
+upstream tilekiln_backend {
+    server 127.0.0.1:8099;
+    keepalive 16;
+}
+
+server {
+    listen 80;
+    server_name _;   # p.ej. teselas-mapaciudadano.cnig.es
+
+    # TileJSON: corto, cambia al añadir capas
+    location = /mapa-ciudadano/tilejson.json {
+        proxy_pass http://tilekiln_backend/tilejson.json;
+        # Tilekiln pone en "tiles" su propio host:puerto → reescribir a la URL pública
+        sub_filter_types application/json;
+        sub_filter 'http://0.0.0.0:8099/tiles' '$scheme://$host/mapa-ciudadano/tiles';
+        sub_filter_once off;
+        proxy_set_header Accept-Encoding "";
+        add_header Cache-Control "public, max-age=300" always;
+    }
+
+    # Teselas: /mapa-ciudadano/tiles/{z}/{x}/{y}.mvt  o  .pbf
+    location ~ ^/mapa-ciudadano/tiles/(\d+)/(\d+)/(\d+)\.(mvt|pbf)$ {
+        proxy_pass http://tilekiln_backend/tiles/$1/$2/$3.mvt;
+        proxy_http_version 1.1;
+        proxy_set_header Connection "";
+
+        proxy_cache tilekiln;
+        proxy_cache_key "$1/$2/$3";
+        proxy_cache_valid 200 7d;
+        proxy_cache_valid 404 500 1m;
+        proxy_cache_lock on;                 # 1 sola generación por tesela aunque lleguen 10 peticiones
+        proxy_cache_use_stale error timeout updating;
+        proxy_ignore_headers Cache-Control;  # «tilekiln dev» manda no-cache
+
+        gzip on;
+        gzip_types application/vnd.mapbox-vector-tile application/x-protobuf;
+        types { }
+        default_type application/vnd.mapbox-vector-tile;
+        add_header Cache-Control "public, max-age=86400" always;
+        add_header X-Cache $upstream_cache_status always;   # HIT / MISS para comprobar la caché
+        add_header Access-Control-Allow-Origin "*" always;
+    }
+}

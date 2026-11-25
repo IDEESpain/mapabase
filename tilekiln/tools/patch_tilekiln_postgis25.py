@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+# OBSOLETO desde la migración a PostgreSQL 18 + PostGIS 3.6 (nov-2026): PostGIS >= 3.1
+# trae ST_TileEnvelope y ST_AsMVT con 5 argumentos, Tilekiln funciona sin tocar.
+# Para quitar los parches: pip install --force-reinstall --no-deps 'tilekiln==0.2.1'
+# (o --revert de este script, que solo deshace el de bbox). Se conserva por si hay
+# que volver a una BD PostGIS 2.5.
+#
 # Parchea Tilekiln para PostGIS 2.5 (sin ST_TileEnvelope).
 #
 # Tilekiln genera el bbox con ST_TileEnvelope(..., margin=>...), PostGIS >= 3.1.

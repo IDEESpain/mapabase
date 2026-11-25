@@ -1,7 +1,7 @@
 -- Capa espacio_natural_protegido_pol (Tilekiln / Mapa Ciudadano)
 -- Fuente por zoom: g8 z<=8 | g11 z<=11 | nacional z0-13 | regional z14-16 | local z17+
 SELECT
-    ST_AsMVTGeom(the_geom, {{bbox}}, {{extent}}) AS way,
+    ST_AsMVTGeom(the_geom, {{unbuffered_bbox}}, {{extent}}, {{buffer}}, true) AS way,
     clase,
     nombre,
     proveedor
@@ -17,6 +17,9 @@ SELECT
   FROM mc_servicio_local.espacio_natural_protegido_pol
 {% endif %}
   WHERE the_geom && {{bbox}}
+{% if zoom <= 13 %}
+  AND ST_Area(the_geom) >= {{coordinate_area}}
+{% endif %}
 {% if zoom >= 7 and zoom <= 8 %}
   AND clase IN ('parque_nacional', 'reserva_de_la_biosfera')
 {% elif zoom >= 9 and zoom <= 10 %}

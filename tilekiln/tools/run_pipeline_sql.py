@@ -20,6 +20,10 @@ Uso (lanzar dentro de tmux o con nohup):
 
   --resume   continúa una ejecución interrumpida (salta lo ya terminado)
   --reset    borra y recrea todos los esquemas mc_* antes de empezar
+             (si ya hay capas procesadas exige además --confirmar-reset)
+
+Para AÑADIR capas no se usa --reset: cada capa se recrea por separado y el
+resto de capas ya cargadas no se toca.
 """
 from __future__ import annotations
 
@@ -64,12 +68,14 @@ def _load_dotenv() -> None:
 
 _load_dotenv()
 
-# PostGIS en CNIG está en public_modelo_2025 (solo tipos; sin DDL en ese esquema)
-MC_SEARCH_PATH = "public, public_modelo_2025, pg_catalog"
+# PostGIS puede estar en public (PG18) o en public_modelo_2025 (BD antigua):
+# un esquema inexistente en el search_path se ignora, así que vale para ambas.
+MC_SEARCH_PATH = os.environ.get("MC_SEARCH_PATH", "public, public_modelo_2025, pg_catalog")
 
 SESSION_SETTINGS = (
     f"SET work_mem = '{os.environ.get('MC_WORK_MEM', '256MB')}'",
     f"SET maintenance_work_mem = '{os.environ.get('MC_MAINTENANCE_WORK_MEM', '1GB')}'",
+    f"SET max_parallel_maintenance_workers = {os.environ.get('MC_PARALLEL_MAINT', '4')}",
     "SET synchronous_commit = off",
     "SET jit = off",
     "SET client_min_messages = warning",
@@ -109,6 +115,42 @@ def psql_file(db: str, path: Path) -> None:
         check=True,
         env=os.environ.copy(),
     )
+
+
+def version_postgis(db: str) -> tuple[int, int, str]:
+    """(mayor, menor, texto) de la librería PostGIS de la BD."""
+    conn = connect(db)
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SELECT postgis_lib_version(), current_setting('server_version')")
+            lib, pg = cur.fetchone()
+    finally:
+        conn.close()
+    m = re.match(r"(\d+)\.(\d+)", lib)
+    return int(m.group(1)), int(m.group(2)), f"PostgreSQL {pg} + PostGIS {lib}"
+
+
+def fichero_funciones(db: str) -> Path:
+    """01_funciones.sql para PostGIS >= 3.1; la versión legacy para 2.5."""
+    mayor, menor, texto = version_postgis(db)
+    if (mayor, menor) >= (3, 1):
+        log(f"BD: {texto}")
+        return SQL_DIR / "01_funciones.sql"
+    log(f"BD: {texto} → funciones legacy (PostGIS 2.5)")
+    return SQL_DIR / "legacy_pg11_postgis25" / "01_funciones.sql"
+
+
+def hay_capas_procesadas(db: str) -> int:
+    conn = connect(db)
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SELECT to_regclass('mc_meta.run_log') IS NOT NULL")
+            if not cur.fetchone()[0]:
+                return 0
+            cur.execute("SELECT count(DISTINCT capa) FROM mc_meta.run_log WHERE fase = 'completa' AND ok")
+            return cur.fetchone()[0]
+    finally:
+        conn.close()
 
 
 def connect(db: str):
@@ -656,6 +698,8 @@ def main():
                     help="SRS de los FGB de productores; 'auto' para leerlo del fichero")
     ap.add_argument("--resume", action="store_true", help="salta capas/territorios ya terminados")
     ap.add_argument("--reset", action="store_true", help="BORRA todos los esquemas mc_* antes de empezar")
+    ap.add_argument("--confirmar-reset", action="store_true",
+                    help="necesario junto a --reset si ya hay capas procesadas")
     ap.add_argument("--recargar-mascaras", action="store_true", help="vuelve a cargar las Voronoi")
     ap.add_argument("--skip-load", action="store_true")
     ap.add_argument("--skip-process", action="store_true")
@@ -664,11 +708,17 @@ def main():
     t_inicio = time.monotonic()
 
     if args.reset:
+        n = hay_capas_procesadas(args.db)
+        if n and not args.confirmar_reset:
+            sys.exit(f"--reset borraría {n} capas ya procesadas (todas las mc_*). "
+                     "Para añadir capas quita --reset. Si de verdad quieres empezar de cero, "
+                     "añade --confirmar-reset.")
         log("RESET: borrando esquemas mc_*")
         psql_file(args.db, SQL_DIR / "00_reset.sql")
-    log("aplicando 00_schemas.sql y 01_funciones.sql")
+    funciones = fichero_funciones(args.db)
+    log(f"aplicando 00_schemas.sql y {funciones.relative_to(SQL_DIR)}")
     psql_file(args.db, SQL_DIR / "00_schemas.sql")
-    psql_file(args.db, SQL_DIR / "01_funciones.sql")
+    psql_file(args.db, funciones)
 
     pool = ConnPool(args.db, args.workers)
     modelo = cargar_modelo()
