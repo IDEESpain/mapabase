@@ -17,8 +17,13 @@
 #         tools/tilekiln_servicio.sh cache-init
 #         y cache-clear después de recargar capas (si no, sirve teselas viejas).
 #
+# Formatos: cada tesela se sirve como .mvt y como .pbf (mismo contenido; ver tilekiln_pbf.py)
+#   /tilejson.json      → teselas .mvt      /tilejson-pbf.json → teselas .pbf
+#
 # Variables (o en .env): TK_CONFIG (config_rapido.yaml si existe, si no config.yaml),
-#   TK_PORT (8099), TK_HOST (0.0.0.0), TK_WORKERS (4), TK_LOG (/tmp/tilekiln_serve.log)
+#   TK_PORT (8099), TK_HOST (0.0.0.0), TK_WORKERS (4), TK_LOG (/tmp/tilekiln_serve.log),
+#   TK_PUBLIC_URL: base que aparece en el TileJSON (por defecto http://<IP de la máquina>:<puerto>;
+#   por túnel desde el PC: TK_PUBLIC_URL=http://127.0.0.1:9000)
 # =============================================================================
 set -euo pipefail
 
@@ -36,23 +41,32 @@ TK_HOST="${TK_HOST:-0.0.0.0}"
 TK_WORKERS="${TK_WORKERS:-4}"
 TK_LOG="${TK_LOG:-/tmp/tilekiln_serve.log}"
 TK_BIN="${TK_BIN:-$DIR/.venv/bin/tilekiln}"
+TK_PY="$(dirname "$TK_BIN")/python"
+if [[ -z "${TK_PUBLIC_URL:-}" ]]; then
+	if [[ "$TK_HOST" == "0.0.0.0" ]]; then
+		TK_PUBLIC_URL="http://$(hostname -I 2>/dev/null | awk '{print $1}'):${TK_PORT}"
+	else
+		TK_PUBLIC_URL="http://${TK_HOST}:${TK_PORT}"
+	fi
+fi
 URL="http://127.0.0.1:${TK_PORT}"
 CURL=(curl -s --noproxy '*' --max-time 120)   # sin --noproxy el proxy del entorno da 403
 
-pids() { pgrep -f "tilekiln (dev|live|serve) .*--bind-port ${TK_PORT}" || true; }
+pids() { pgrep -f "(tilekiln (dev|live|serve) .*--bind-port|uvicorn tilekiln_pbf:(dev|live) .*--port) ${TK_PORT}" || true; }
 
 start() {
 	local modo="${1:-dev}"
 	if [[ -n "$(pids)" ]]; then echo "Ya está arrancado (PID $(pids | tr '\n' ' '))"; return 0; fi
 	[[ -x "$TK_BIN" ]] || { echo "No existe $TK_BIN (crear el venv: ver COMANDOS_PG18.txt)"; exit 1; }
 	"$TK_BIN" config test "$TK_CONFIG" >/dev/null
+	[[ "$modo" == dev || "$modo" == live ]] || { echo "modo desconocido: $modo (dev|live)"; exit 1; }
 	echo "Arrancando tilekiln $modo · config=$TK_CONFIG · ${TK_HOST}:${TK_PORT} · workers=$TK_WORKERS · BD=${PGDATABASE:-?}@${PGHOST:-?}"
-	case "$modo" in
-		# OJO: a «live» no se le pasa -d (bug de 0.2.1); usa PGDATABASE/PGHOST del entorno
-		dev)  nohup "$TK_BIN" dev  "$TK_CONFIG" --bind-host "$TK_HOST" --bind-port "$TK_PORT" -n "$TK_WORKERS" >"$TK_LOG" 2>&1 & ;;
-		live) nohup "$TK_BIN" live "$TK_CONFIG" --bind-host "$TK_HOST" --bind-port "$TK_PORT" -n "$TK_WORKERS" >"$TK_LOG" 2>&1 & ;;
-		*) echo "modo desconocido: $modo (dev|live)"; exit 1 ;;
-	esac
+	echo "URL pública en TileJSON: $TK_PUBLIC_URL"
+	# Mismas apps que «tilekiln dev/live» + rutas .pbf. La BD sale de PG* (.env).
+	TILEKILN_CONFIG="$TK_CONFIG" TILEKILN_URL="${TK_PUBLIC_URL}/tiles" TILEKILN_THREADS="$TK_WORKERS" \
+	PYTHONPATH="$DIR/tools${PYTHONPATH:+:$PYTHONPATH}" \
+		nohup "$TK_PY" -m uvicorn "tilekiln_pbf:$modo" --host "$TK_HOST" --port "$TK_PORT" \
+		--workers "$TK_WORKERS" >"$TK_LOG" 2>&1 &
 	for _ in $(seq 1 20); do
 		sleep 1
 		if "${CURL[@]}" -o /dev/null "$URL/tilejson.json"; then echo "OK: $URL/tilejson.json"; return 0; fi
@@ -81,10 +95,13 @@ status() {
 			print(f"   {d.get('name')} · z{d.get('minzoom')}-{d.get('maxzoom')} · {len(d.get('vector_layers', []))} capas")
 		EOF
 	fi
+	"${CURL[@]}" -o /dev/null -w "   tilejson-pbf HTTP %{http_code}\n" "$URL/tilejson-pbf.json" || true
+	echo "   URL en TileJSON: $("${CURL[@]}" "$URL/tilejson.json" | grep -o '"http[^"]*{z}[^"]*"' | head -1)"
 	echo "== Teselas de prueba (Madrid)"
 	for t in 6/31/24 10/501/386 14/8023/6177 17/64187/49422; do
-		"${CURL[@]}" -o /dev/null -w "   $t  HTTP %{http_code}  %{size_download} B  %{time_total}s\n" "$URL/tiles/$t.mvt" || echo "   $t  sin respuesta"
+		"${CURL[@]}" -o /dev/null -w "   $t.mvt  HTTP %{http_code}  %{size_download} B  %{time_total}s\n" "$URL/tiles/$t.mvt" || echo "   $t  sin respuesta"
 	done
+	"${CURL[@]}" -o /dev/null -w "   10/501/386.pbf  HTTP %{http_code}  %{size_download} B  %{content_type}\n" "$URL/tiles/10/501/386.pbf" || true
 	echo "== BD"
 	psql -X -qAt -c "SELECT 'PostgreSQL ' || current_setting('server_version') || ' · PostGIS ' || postgis_lib_version()" 2>&1 | sed 's/^/   /'
 	psql -X -qAt -c "SELECT '   conexiones tilekiln activas: ' || count(*) FROM pg_stat_activity WHERE datname = current_database() AND application_name NOT IN ('psql', 'mc_pipeline') AND state = 'active'" 2>/dev/null || true
@@ -109,5 +126,5 @@ case "${1:-status}" in
 	# con que se creó; si el rango cambia, live da 500 en los zooms nuevos.
 	cache-reset) "$TK_BIN" storage destroy "$TK_CONFIG" 2>/dev/null || true
 		"$TK_BIN" storage init "$TK_CONFIG" && echo "Caché recreada para $TK_CONFIG" ;;
-	*) sed -n '2,23p' "$0"; exit 1 ;;
+	*) sed -n '2,29p' "$0"; exit 1 ;;
 esac
