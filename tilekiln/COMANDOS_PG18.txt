@@ -1,0 +1,127 @@
+# =============================================================================
+# Mapa Ciudadano · Tilekiln sobre PostgreSQL 18.6 + PostGIS 3.6.1
+# Sustituye a COMANDOS_DEMO_AHORA.txt (PostGIS 2.5 + parches): ya no hay que parchear nada.
+# Máquina app: cr55cnig019 (10.67.33.105) · Repo: /var/proyectos/mapaBaseXYZ/tilekiln/mapabase
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 0. Entorno (en cada sesión)
+# -----------------------------------------------------------------------------
+cd /var/proyectos/mapaBaseXYZ/tilekiln/mapabase
+git pull                                   # trae estos cambios
+cd tilekiln
+set -a; source .env; set +a                # PGHOST/PGPORT/PGDATABASE/PGUSER/PGPASSWORD
+# BD nueva: 10.67.33.159 (antes 10.67.33.69). En .env: PGHOST=10.67.33.159 (PGPORT=5432)
+grep PGHOST .env                           # debe dar 10.67.33.159
+psql -X -c "select inet_server_addr(), version()"   # comprueba que conecta a la nueva
+# Añadir a .env (ver .env.example):
+#   PGOPTIONS="-c search_path=public,public_modelo_2025 -c jit=off"
+
+# -----------------------------------------------------------------------------
+# 1. Diagnóstico (solo lectura) → guardar la salida para la reunión
+# -----------------------------------------------------------------------------
+psql -X -f sql/diagnostico_pg18.sql 2>&1 | tee diagnostico_$(date +%F).txt
+#  Mirar:  1) versiones   3) todo «t»   4) funciones_version_pg11 (>0 = viejas)
+#          7) capas con datos           8a) tablas sin ANALYZE (normal tras copiar)
+
+# -----------------------------------------------------------------------------
+# 2. Poner al día los esquemas mc_* (NO borra datos; no hace falta borrar esquemas)
+# -----------------------------------------------------------------------------
+psql -X -v ON_ERROR_STOP=1 -f sql/pipeline/00_schemas.sql
+psql -X -v ON_ERROR_STOP=1 -f sql/pipeline/01_funciones.sql      # versión PostGIS 3
+psql -X -f sql/pipeline/03_post_migracion_pg18.sql 2>&1 | tee post_migracion.log
+psql -X -f sql/diagnostico_pg18.sql | sed -n '/=== 4/,/=== 5/p;/8a/,/8b/p'   # comprobar
+# Pasos de DBA (ALTER EXTENSION, jit por rol, postgresql.conf): al final de 03_post_migracion_pg18.sql
+
+# -----------------------------------------------------------------------------
+# 3. Tilekiln limpio (sin los parches de PostGIS 2.5)
+# -----------------------------------------------------------------------------
+pkill -f "tilekiln (dev|live)" || true
+.venv/bin/pip install --force-reinstall --no-deps 'tilekiln==0.2.1'
+.venv/bin/python tools/patch_tilekiln_postgis25.py --check   # ahora DEBE decir «SIN PARCHE» (exit 2)
+grep -c "'way', NULL" .venv/lib/python3.9/site-packages/tilekiln/definition.py   # 1 = ST_AsMVT original (5 args)
+.venv/bin/tilekiln config test config.yaml && echo CONFIG_OK
+# Prueba directa de una capa (SQL que genera Tilekiln, sin servidor):
+.venv/bin/tilekiln sql config.yaml --layer aerodromo_pto -z 10 -x 501 -y 386 | psql -X -qAt | wc -c
+
+# -----------------------------------------------------------------------------
+# 4. Levantar el servicio y comprobar su estado
+# -----------------------------------------------------------------------------
+.venv/bin/python tools/make_config_rapido.py       # config_rapido.yaml solo con capas con datos
+tools/tilekiln_servicio.sh start dev               # puerto 8099, 4 workers, log /tmp/tilekiln_serve.log
+tools/tilekiln_servicio.sh status                  # proceso, puerto, TileJSON, 4 teselas Madrid, BD
+tools/tilekiln_servicio.sh logs                    # tail -f del log (Ctrl+C para salir)
+tools/tilekiln_servicio.sh stop | restart
+
+# Comprobaciones manuales equivalentes:
+pgrep -af "tilekiln (dev|live)"
+ss -ltnp | grep 8099
+curl -s --noproxy '*' http://127.0.0.1:8099/tilejson.json | head -c 400; echo
+curl -s --noproxy '*' -o /dev/null -w "HTTP %{http_code} %{size_download}B %{time_total}s\n" \
+     http://127.0.0.1:8099/tiles/10/501/386.mvt
+# Endpoints (misma tesela en .mvt y .pbf):
+#   http://10.67.33.105:8099/tilejson.json          → teselas .mvt
+#   http://10.67.33.105:8099/tilejson-pbf.json      → teselas .pbf
+#   http://10.67.33.105:8099/tiles/{z}/{x}/{y}.mvt
+#   http://10.67.33.105:8099/tiles/{z}/{x}/{y}.pbf  (Content-Type application/x-protobuf)
+curl -s --noproxy '*' -o /dev/null -w "pbf HTTP %{http_code} %{size_download}B %{content_type}\n" \
+     http://127.0.0.1:8099/tiles/10/501/386.pbf
+# El TileJSON publica http://<IP de la 105>:8099 (TK_PUBLIC_URL para cambiarlo).
+# Desde el PC (túnel): ssh -p 1331 ... -L 9000:127.0.0.1:8099 y arrancar con
+#   TK_PUBLIC_URL=http://127.0.0.1:9000 tools/tilekiln_servicio.sh restart dev
+#   → http://127.0.0.1:9000/tilejson.json
+
+# --- Modo con caché en BD (tilekiln live): 2ª visita a una tesela sin consultar capas
+tools/tilekiln_servicio.sh cache-init              # una vez (crea esquema tilekiln; necesita CREATE en la BD)
+tools/tilekiln_servicio.sh restart live
+tools/tilekiln_servicio.sh cache-clear             # tras recargar capas (si no, sirve teselas viejas)
+tools/tilekiln_servicio.sh cache-reset             # tras regenerar config_rapido.yaml (cambia el rango de zooms)
+
+# -----------------------------------------------------------------------------
+# 5. Medir (números para la reunión)
+# -----------------------------------------------------------------------------
+cd tools
+# Coste por capa y por zoom ejecutando el SQL de Tilekiln (Madrid, Sevilla, Teruel rural):
+../.venv/bin/python bench_teselas.py --config ../config_rapido.yaml --csv bench_sql_$(date +%F).csv
+# De punta a punta contra el servicio:
+../.venv/bin/python bench_teselas.py --http http://127.0.0.1:8099 --zonas todas --csv bench_http_$(date +%F).csv
+# Plan de una capa lenta:
+../.venv/bin/python bench_teselas.py --config ../config_rapido.yaml --explain altimetria_pto --tile 17/64187/49422
+cd ..
+
+# -----------------------------------------------------------------------------
+# 6. Añadir capas (por tandas). NUNCA --reset: borra TODAS las capas ya cargadas
+#    (ahora el script se niega si no se añade además --confirmar-reset).
+# -----------------------------------------------------------------------------
+cd tools
+../.venv/bin/python tandas.py --db "$PGDATABASE"                 # tandas y estado de cada capa
+df -h /var /var/MVT_MapaBaseXYZ                                  # disco antes de capas pesadas
+
+# Lanzar dentro de tmux o con nohup (cada territorio se confirma; --resume continúa)
+nohup ../.venv/bin/python run_pipeline_sql.py --db "$PGDATABASE" \
+  --datos-base /var/MVT_MapaBaseXYZ/DatosProcesados \
+  --capas "$(../.venv/bin/python tandas.py capas 1)" --workers 6 >> pipeline.log 2>&1 &
+tail -f pipeline.log
+
+# Tandas: 1 base/límites · 2 transporte · 3 agua · 4 urbano · 5 rótulos · 6 pesadas · resto
+#   --capas "$(../.venv/bin/python tandas.py capas 2)"
+#   --capas edificio_pol                       # pesadas: de una en una
+#   --capas "$(../.venv/bin/python tandas.py capas pendientes --db $PGDATABASE)"
+# Si se corta o falla alguna capa: misma orden + --resume
+# Reprocesar sin recargar FGB (p.ej. tras cambiar funciones): --skip-load --capas X
+
+# Seguimiento desde otra sesión:
+psql -X -c "SELECT capa, fase, ok, finished_at::timestamp(0), left(detalle,100) FROM mc_meta.run_log ORDER BY id DESC LIMIT 15"
+psql -X -c "SELECT pid, now()-query_start AS dura, left(query,90) FROM pg_stat_activity WHERE application_name='mc_pipeline' AND state='active'"
+
+# Tras cada tanda: publicar las capas nuevas en el servicio
+cd ..
+.venv/bin/python tools/make_config_rapido.py
+tools/tilekiln_servicio.sh cache-reset             # solo si se usa modo live
+tools/tilekiln_servicio.sh restart dev             # o live
+tools/tilekiln_servicio.sh status
+
+# -----------------------------------------------------------------------------
+# 7. Si cambia el modelo o config_vtiles.json (en el PC, y subir al repo)
+# -----------------------------------------------------------------------------
+python3 tools/generate_tilekiln.py                 # config.yaml + layers/*.jinja2 + capas_modelo.json

@@ -1,7 +1,7 @@
 # =============================================================================
 # PROPUESTA (no desplegada): nginx delante de Tilekiln
 #   - URL estable en el puerto 80/443 para visores (Iberpix/API-CNIG, ArcGIS, QGIS)
-#   - .pbf como alias de .mvt (es el mismo fichero: MVT = Protocol Buffers)
+#   - .mvt y .pbf (el servicio ya sirve ambas; aquí se unifican en una sola caché)
 #   - Caché HTTP en disco + cabeceras Cache-Control para navegador/CDN
 #   - CORS (Tilekiln ya lo envía; se repite por si se cachea)
 # Copiar a /etc/nginx/conf.d/tilekiln.conf, ajustar server_name/rutas y `nginx -t && systemctl reload nginx`.
@@ -25,7 +25,9 @@ server {
         proxy_pass http://tilekiln_backend/tilejson.json;
         # Tilekiln pone en "tiles" su propio host:puerto → reescribir a la URL pública
         sub_filter_types application/json;
-        sub_filter 'http://0.0.0.0:8099/tiles' '$scheme://$host/mapa-ciudadano/tiles';
+        # TileJSON publica TK_PUBLIC_URL (por defecto http://<IP de la 105>:8099): arrancar el
+        # servicio con TK_PUBLIC_URL=http://127.0.0.1:8099 para que case con este sub_filter
+        sub_filter 'http://127.0.0.1:8099/tiles' '$scheme://$host/mapa-ciudadano/tiles';
         sub_filter_once off;
         proxy_set_header Accept-Encoding "";
         add_header Cache-Control "public, max-age=300" always;
